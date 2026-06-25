@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算数ビジュアル学習</title>
+    <style>
+        :root {
+            --std-primary: #1976D2;
+            --std-dark: #0D47A1;
+            --std-light: #E3F2FD;
+            --exam-primary: #E64A19;
+            --exam-dark: #BF360C;
+            --exam-light: #FBE9E7;
+            --green: #388E3C;
+            --purple: #6C63FF;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, sans-serif;
+            background: #F5F7FA;
+            min-height: 100vh;
+        }
+        .screen { display: none; min-height: 100vh; flex-direction: column; }
+        .screen.active { display: flex; }
+
+        /* ══ COURSE SELECTION ══ */
+        #home-screen {
+            background: linear-gradient(160deg, #667eea 0%, #764ba2 100%);
+            align-items: center;
+            padding: 48px 20px 40px;
+        }
+        .home-logo { font-size: 3rem; margin-bottom: 10px; }
+        .home-title { color: #fff; font-size: 1.75rem; font-weight: bold; text-align: center; text-shadow: 0 2px 8px rgba(0,0,0,.2); margin-bottom: 6px; }
+        .home-sub { color: rgba(255,255,255,.8); font-size: .92rem; text-align: center; margin-bottom: 36px; }
+        .home-sub b { color: #fff; }
+        .course-cards { display: flex; flex-direction: column; gap: 16px; max-width: 440px; width: 100%; }
+        .course-card {
+            border-radius: 20px; padding: 24px 22px; cursor: pointer;
+            transition: transform .18s, box-shadow .18s; user-select: none;
+            display: flex; align-items: center; gap: 18px;
+            box-shadow: 0 6px 24px rgba(0,0,0,.18);
+        }
+        .course-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.22); }
+        .course-card:active { transform: translateY(-1px); }
+        .course-card.std { background: #fff; }
+        .course-card.exam { background: linear-gradient(135deg, #FF9A56, #E64A19); }
+        .cc-icon { font-size: 2.8rem; flex-shrink: 0; }
+        .cc-body { flex: 1; }
+        .cc-label { font-size: .72rem; font-weight: bold; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+        .cc-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 4px; }
+        .cc-desc { font-size: .78rem; line-height: 1.6; }
+        .course-card.std .cc-label { color: var(--std-primary); }
+        .course-card.std .cc-title { color: #1a1a2e; }
+        .course-card.std .cc-desc { color: #777; }
+        .course-card.exam .cc-label { color: rgba(255,255,255,.75); }
+        .course-card.exam .cc-title { color: #fff; }
+        .course-card.exam .cc-desc { color: rgba(255,255,255,.88); }
+        .cc-arrow { font-size: 1.4rem; color: rgba(0,0,0,.2); flex-shrink: 0; }
+        .course-card.exam .cc-arrow { color: rgba(255,255,255,.5); }
+
+        /* ══ SHARED HEADER ══ */
+        .screen-header {
+            padding: 14px 18px; display: flex; align-items: center;
+            gap: 12px; flex-shrink: 0; color: #fff;
+        }
+        .screen-header.std-header { background: linear-gradient(90deg, #1976D2, #0D47A1); }
+        .screen-header.exam-header { background: linear-gradient(90deg, #FF9A56, #E64A19); }
+        .back-btn {
+            background: rgba(255,255,255,.22); border: none; color: #fff;
+            padding: 6px 13px; border-radius: 8px; cursor: pointer;
+            font-size: .82rem; font-family: inherit; transition: background .15s;
+        }
+        .back-btn:hover { background: rgba(255,255,255,.32); }
+        .screen-title { font-size: 1.1rem; font-weight: bold; }
+
+        /* ══ STANDARD COURSE ══ */
+        #standard-screen { background: #F0F5FF; }
+        .std-hero {
+            background: linear-gradient(135deg, #1976D2, #0D47A1);
+            padding: 20px 20px 28px; color: #fff;
+        }
+        .std-hero-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 4px; }
+        .std-hero-sub { font-size: .8rem; color: rgba(255,255,255,.8); margin-bottom: 16px; }
+        .std-progress-bar {
+            height: 8px; background: rgba(255,255,255,.25);
+            border-radius: 4px; overflow: hidden;
+        }
+        .std-progress-fill { height: 100%; background: #69F0AE; border-radius: 4px; transition: width .4s; }
+        .std-progress-label { font-size: .72rem; color: rgba(255,255,255,.7); margin-top: 5px; }
+
+        .std-chapter-list { padding: 16px; flex: 1; overflow-y: auto; }
+        .std-section-label { font-size: .72rem; font-weight: bold; color: #999; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; margin-top: 4px; }
+
+        .chapter-card {
+            background: #fff; border-radius: 14px; margin-bottom: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,.07);
+            overflow: hidden; transition: transform .15s, box-shadow .15s;
+        }
+        .chapter-card.available { cursor: pointer; }
+        .chapter-card.available:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.12); }
+        .chapter-card.locked { opacity: .6; }
+
+        .chapter-card-inner { display: flex; align-items: center; padding: 16px; gap: 14px; }
+        .chapter-num-badge {
+            width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; font-weight: bold;
+        }
+        .chapter-card.available .chapter-num-badge { background: var(--std-light); }
+        .chapter-card.locked .chapter-num-badge { background: #f0f0f0; }
+        .chapter-num-label { font-size: .58rem; color: var(--std-primary); }
+        .chapter-num-val { font-size: 1.1rem; color: var(--std-primary); }
+        .chapter-card.locked .chapter-num-label,
+        .chapter-card.locked .chapter-num-val { color: #aaa; }
+
+        .chapter-body { flex: 1; min-width: 0; }
+        .chapter-title { font-size: .98rem; font-weight: bold; color: #1a1a2e; margin-bottom: 3px; }
+        .chapter-sub { font-size: .75rem; color: #888; margin-bottom: 7px; }
+        .chapter-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+        .chapter-tag {
+            font-size: .65rem; padding: 2px 8px; border-radius: 10px;
+            background: var(--std-light); color: var(--std-primary); font-weight: bold;
+        }
+        .chapter-card.locked .chapter-tag { background: #f0f0f0; color: #aaa; }
+        .chapter-arrow { color: #bbb; font-size: 1.2rem; flex-shrink: 0; }
+        .chapter-coming-badge {
+            font-size: .62rem; background: #eee; color: #aaa;
+            padding: 3px 8px; border-radius: 8px; font-weight: bold;
+        }
+        .chapter-card-footer {
+            border-top: 1px solid #f5f5f5;
+            padding: 8px 16px;
+            display: flex; gap: 8px;
+        }
+        .chapter-action-btn {
+            flex: 1; padding: 8px; border: none; border-radius: 8px;
+            font-size: .78rem; font-weight: bold; cursor: pointer;
+            font-family: inherit; transition: opacity .15s;
+        }
+        .chapter-action-btn:hover { opacity: .85; }
+        .btn-learn { background: var(--std-light); color: var(--std-primary); }
+        .btn-practice { background: var(--std-primary); color: #fff; }
+
+        /* ══ EXAM COURSE ══ */
+        #exam-screen { background: #FFF8F5; }
+        .exam-hero {
+            background: linear-gradient(135deg, #FF9A56, #E64A19);
+            padding: 20px 20px 28px; color: #fff;
+        }
+        .exam-hero-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 4px; }
+        .exam-hero-sub { font-size: .8rem; color: rgba(255,255,255,.85); margin-bottom: 12px; }
+        .exam-stats { display: flex; gap: 12px; }
+        .exam-stat {
+            background: rgba(255,255,255,.2); border-radius: 10px;
+            padding: 8px 14px; text-align: center;
+        }
+        .exam-stat-num { font-size: 1.3rem; font-weight: bold; }
+        .exam-stat-label { font-size: .65rem; color: rgba(255,255,255,.8); }
+
+        .exam-unit-list { padding: 16px; flex: 1; overflow-y: auto; }
+
+        .unit-card {
+            background: #fff; border-radius: 14px; margin-bottom: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,.07); overflow: hidden;
+            border-left: 4px solid #ddd; transition: transform .15s, box-shadow .15s;
+        }
+        .unit-card.available { cursor: pointer; border-left-color: var(--exam-primary); }
+        .unit-card.available:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.12); }
+        .unit-card.locked { opacity: .55; }
+
+        .unit-card-inner { display: flex; align-items: center; padding: 14px 16px; gap: 14px; }
+        .unit-num-badge {
+            background: var(--exam-light); color: var(--exam-primary);
+            font-size: .7rem; font-weight: bold; padding: 4px 8px;
+            border-radius: 8px; white-space: nowrap; flex-shrink: 0;
+        }
+        .unit-card.locked .unit-num-badge { background: #f0f0f0; color: #aaa; }
+        .unit-body { flex: 1; min-width: 0; }
+        .unit-title { font-size: .98rem; font-weight: bold; color: #1a1a2e; margin-bottom: 3px; }
+        .unit-sub { font-size: .75rem; color: #999; margin-bottom: 5px; }
+        .unit-meta { display: flex; align-items: center; gap: 10px; }
+        .unit-stars { color: #FFB300; font-size: .78rem; }
+        .unit-count { font-size: .7rem; color: #888; background: #f5f5f5; padding: 2px 7px; border-radius: 8px; }
+        .unit-arrow { color: #bbb; font-size: 1.2rem; flex-shrink: 0; }
+        .unit-coming { font-size: .62rem; background: #eee; color: #aaa; padding: 3px 8px; border-radius: 8px; font-weight: bold; }
+
+        /* ══ WATER TANK SCREEN ══ */
+        #watertank-screen { background: #F0F5FF; }
+        .tab-bar { display: flex; background: #fff; border-bottom: 2px solid #e4e8f0; flex-shrink: 0; }
+        .tab {
+            flex: 1; padding: 13px 8px; text-align: center; cursor: pointer;
+            font-size: .85rem; color: #999; border-bottom: 3px solid transparent;
+            margin-bottom: -2px; transition: all .18s; font-family: inherit;
+            background: none; border-top: none; border-left: none; border-right: none;
+        }
+        .tab.active { color: var(--std-primary); border-bottom-color: var(--std-primary); font-weight: bold; }
+        .tab-content { display: none; padding: 18px 16px; flex: 1; overflow-y: auto; }
+        .tab-content.active { display: block; }
+
+        /* Learn mode */
+        .learn-layout { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 18px; flex-wrap: wrap; justify-content: center; }
+        .tank-outer { position: relative; width: 130px; flex-shrink: 0; margin-top: 30px; }
+        .pipe-top { position: absolute; top: -32px; left: 28px; width: 22px; height: 36px; background: #29B6F6; border-radius: 5px 5px 0 0; z-index: 1; }
+        .pipe-top::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.5); animation: drip-in 1.2s ease-in infinite; }
+        .pipe-bottom { position: absolute; bottom: -32px; right: 18px; width: 22px; height: 36px; background: #FF7043; border-radius: 0 0 5px 5px; z-index: 1; }
+        .pipe-bottom::after { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.5); animation: drip-out 1.2s ease-in infinite; }
+        @keyframes drip-in { 0% { top: -20px; opacity: 0; } 30% { opacity: 1; } 100% { top: 36px; opacity: 0; } }
+        @keyframes drip-out { 0% { top: 0; opacity: 0; } 30% { opacity: 1; } 100% { top: 36px; opacity: 0; } }
+        .tank-body { width: 130px; height: 200px; border: 4px solid #546E7A; border-radius: 4px 4px 10px 10px; background: rgba(227,242,253,.35); position: relative; overflow: hidden; }
+        .tank-body::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(to top, transparent 0px, transparent 38px, rgba(84,110,122,.15) 38px, rgba(84,110,122,.15) 39px); }
+        .water-fill { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, #1565C0 0%, #42A5F5 80%, #90CAF9 100%); transition: height .4s ease; }
+        .water-surface { position: absolute; top: 0; left: 0; right: 0; height: 10px; background: rgba(255,255,255,.3); animation: wave 2.5s ease-in-out infinite; }
+        @keyframes wave { 0%, 100% { transform: scaleY(1) translateX(0); } 50% { transform: scaleY(1.4) translateX(3px); } }
+        .tank-capacity-label { position: absolute; top: 2px; right: 4px; font-size: .6rem; color: #546E7A; font-weight: bold; }
+        .flow-info { display: flex; flex-direction: column; gap: 10px; flex: 1; min-width: 160px; }
+        .flow-card { background: #fff; border-radius: 12px; padding: 10px 14px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+        .flow-card-label { font-size: .7rem; color: #999; margin-bottom: 2px; }
+        .flow-card-value { font-size: 1.4rem; font-weight: bold; }
+        .flow-card.card-in .flow-card-value { color: #0288D1; }
+        .flow-card.card-out .flow-card-value { color: #BF360C; }
+        .flow-card.card-net .flow-card-value { color: #2E7D32; }
+        .flow-card.card-net.negative .flow-card-value { color: #B71C1C; }
+        .flow-card.card-current .flow-card-value { color: #4527A0; }
+        .net-bar-section { background: #fff; border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+        .net-bar-label { font-size: .8rem; color: #666; margin-bottom: 8px; }
+        .net-bar-track { height: 22px; background: #ECEFF1; border-radius: 11px; position: relative; overflow: hidden; }
+        .net-bar-fill { position: absolute; top: 0; height: 100%; border-radius: 11px; transition: width .3s; }
+        .net-bar-fill.pos { background: linear-gradient(to right, #43E97B, #38F9D7); left: 50%; }
+        .net-bar-fill.neg { background: linear-gradient(to left, #FF6B6B, #FF8E53); right: 50%; }
+        .net-bar-center { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: #78909C; }
+        .net-bar-text { text-align: center; margin-top: 7px; font-weight: bold; font-size: .9rem; }
+        .slider-card { background: #fff; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+        .slider-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: .85rem; }
+        .slider-name { color: #555; }
+        .slider-val { font-weight: bold; }
+        input[type=range] { width: 100%; height: 6px; border-radius: 3px; outline: none; -webkit-appearance: none; appearance: none; cursor: pointer; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 3px solid currentColor; cursor: pointer; }
+        .slider-in input { accent-color: #0288D1; background: #B3E5FC; color: #0288D1; }
+        .slider-out input { accent-color: #E64A19; background: #FFCCBC; color: #E64A19; }
+        .slider-init input { accent-color: #7B1FA2; background: #E1BEE7; color: #7B1FA2; }
+        .sim-card { background: #fff; border-radius: 12px; padding: 14px 16px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+        .sim-label { font-size: .82rem; color: #666; margin-bottom: 10px; }
+        .sim-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .sim-btn { padding: 8px 18px; border: none; border-radius: 8px; cursor: pointer; font-size: .85rem; font-family: inherit; font-weight: bold; transition: opacity .15s; }
+        .sim-btn:hover { opacity: .85; }
+        .btn-start { background: linear-gradient(135deg, #1976D2, #0D47A1); color: #fff; }
+        .btn-reset { background: #ECEFF1; color: #546E7A; }
+        .sim-time-display { font-size: .85rem; color: #555; margin-left: auto; }
+        .sim-time-display strong { font-size: 1.1rem; color: var(--std-primary); }
+
+        /* Quiz mode */
+        .quiz-wrap { max-width: 500px; margin: 0 auto; }
+        .score-row { display: flex; gap: 10px; justify-content: flex-end; margin-bottom: 14px; }
+        .score-chip { background: #fff; border-radius: 10px; padding: 8px 16px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+        .score-num { font-size: 1.5rem; font-weight: bold; }
+        .score-chip.ok .score-num { color: #388E3C; }
+        .score-chip.ng .score-num { color: #D32F2F; }
+        .score-chip-label { font-size: .65rem; color: #999; }
+        .level-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+        .level-btn { padding: 6px 16px; border: 2px solid #ddd; border-radius: 20px; background: #fff; cursor: pointer; font-size: .8rem; font-family: inherit; transition: all .18s; }
+        .level-btn.active { background: var(--std-primary); color: #fff; border-color: var(--std-primary); }
+        .problem-card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+        .problem-badge { display: inline-block; background: var(--std-primary); color: #fff; font-size: .68rem; font-weight: bold; padding: 2px 10px; border-radius: 10px; margin-bottom: 12px; }
+        .problem-text { font-size: 1rem; line-height: 1.8; color: #333; margin-bottom: 16px; white-space: pre-line; }
+        .mini-tank-wrap { display: flex; justify-content: center; margin: 12px 0 18px; gap: 16px; align-items: center; }
+        .mini-tank-col { text-align: center; }
+        .mini-tank-label { font-size: .72rem; font-weight: bold; margin-bottom: 5px; }
+        .mini-tank { width: 70px; height: 90px; border: 3px solid #546E7A; border-radius: 3px 3px 8px 8px; background: rgba(227,242,253,.35); position: relative; overflow: hidden; display: inline-block; }
+        .mini-water { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, #1565C0, #42A5F5); transition: height .4s; }
+        .mini-flow-info { display: flex; flex-direction: column; gap: 6px; }
+        .mini-flow-chip { font-size: .78rem; padding: 5px 12px; border-radius: 8px; font-weight: bold; }
+        .mini-flow-chip.in { background: #E3F2FD; color: #0277BD; }
+        .mini-flow-chip.out { background: #FBE9E7; color: #BF360C; }
+        .answer-row { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
+        .answer-input { flex: 1; padding: 12px; border: 2px solid #ddd; border-radius: 10px; font-size: 1.15rem; text-align: center; outline: none; font-family: inherit; transition: border-color .2s; }
+        .answer-input:focus { border-color: var(--std-primary); }
+        .answer-input.correct { border-color: #43A047; background: #E8F5E9; }
+        .answer-input.wrong { border-color: #E53935; background: #FFEBEE; }
+        .answer-unit { font-size: 1rem; color: #666; white-space: nowrap; }
+        .submit-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #1976D2, #0D47A1); color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: bold; cursor: pointer; font-family: inherit; transition: opacity .15s; }
+        .submit-btn:hover { opacity: .9; }
+        .result-box { margin-top: 12px; padding: 14px; border-radius: 10px; display: none; }
+        .result-box.ok { background: #E8F5E9; color: #1B5E20; display: block; }
+        .result-box.ng { background: #FFEBEE; color: #B71C1C; display: block; }
+        .result-headline { font-size: 1.1rem; font-weight: bold; margin-bottom: 6px; }
+        .result-exp { font-size: .85rem; line-height: 1.7; white-space: pre-line; margin-top: 8px; }
+        .next-btn { display: none; width: 100%; margin-top: 12px; padding: 12px; background: linear-gradient(135deg, #43E97B, #38F9D7); color: #1B5E20; border: none; border-radius: 10px; font-size: .9rem; font-weight: bold; cursor: pointer; font-family: inherit; transition: opacity .15s; }
+        .next-btn:hover { opacity: .88; }
+        .hint-btn { background: none; border: 1px solid #bbb; border-radius: 8px; padding: 6px 14px; font-size: .78rem; cursor: pointer; color: #666; font-family: inherit; margin-top: 10px; transition: background .15s; }
+        .hint-btn:hover { background: #f5f5f5; }
+        .hint-box { background: #FFF8E1; border-left: 4px solid #FFB300; border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: .82rem; color: #555; line-height: 1.6; margin-top: 8px; display: none; white-space: pre-line; }
+
+        /* ══ CHALLENGES SCREEN ══ */
+        #challenges-screen { background: #FFF8F5; }
+        #challenges-screen .screen-header { background: linear-gradient(90deg, #FF9A56, #E64A19); }
+        .ch-list-view { flex: 1; overflow-y: auto; padding: 16px; }
+        .ch-detail-view { flex: 1; overflow-y: auto; display: none; flex-direction: column; }
+        .ch-detail-view.active { display: flex; }
+        .ch-filter-row { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 2px; -webkit-overflow-scrolling: touch; }
+        .ch-filter-row::-webkit-scrollbar { display: none; }
+        .ch-filter-btn { padding: 6px 14px; border: 2px solid #ddd; border-radius: 20px; background: #fff; cursor: pointer; font-size: .78rem; white-space: nowrap; font-family: inherit; transition: all .15s; flex-shrink: 0; }
+        .ch-filter-btn.active { background: #E64A19; color: #fff; border-color: #E64A19; }
+        .ch-card { background: #fff; border-radius: 14px; padding: 15px; margin-bottom: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.07); cursor: pointer; transition: transform .15s, box-shadow .15s; border-left: 4px solid transparent; }
+        .ch-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.12); }
+        .ch-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        .ch-cat-badge { font-size: .68rem; font-weight: bold; padding: 2px 9px; border-radius: 8px; }
+        .ch-stars { color: #FFB300; font-size: .82rem; letter-spacing: 1px; }
+        .ch-card-title { font-size: .95rem; font-weight: bold; color: #222; margin-bottom: 4px; }
+        .ch-card-preview { font-size: .76rem; color: #aaa; line-height: 1.5; }
+        .ch-detail-top { background: #fff; padding: 12px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #f0e8e0; flex-shrink: 0; }
+        .ch-back-list-btn { background: none; border: 1px solid #ccc; padding: 5px 12px; border-radius: 8px; cursor: pointer; font-size: .8rem; font-family: inherit; color: #666; transition: background .15s; }
+        .ch-back-list-btn:hover { background: #f5f5f5; }
+        .ch-detail-title-sm { font-size: .95rem; font-weight: bold; color: #333; }
+        .ch-detail-inner { padding: 16px; }
+        .ch-prob-card { background: #fff; border-radius: 14px; padding: 18px; margin-bottom: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+        .ch-prob-header { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+        .ch-prob-text { font-size: .95rem; line-height: 1.9; color: #333; white-space: pre-line; }
+        .ch-ans-card { background: #fff; border-radius: 14px; padding: 16px; margin-bottom: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+        .ch-ans-label { font-size: .82rem; font-weight: bold; color: #666; margin-bottom: 10px; }
+        .ch-ans-row { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+        .ch-ans-input { flex: 1; padding: 11px; border: 2px solid #ddd; border-radius: 10px; font-size: 1.1rem; text-align: center; font-family: inherit; outline: none; transition: border-color .2s; }
+        .ch-ans-input:focus { border-color: #E64A19; }
+        .ch-ans-input.correct { border-color: #43A047; background: #E8F5E9; }
+        .ch-ans-input.wrong { border-color: #E53935; background: #FFEBEE; }
+        .ch-ans-unit { font-size: 1rem; color: #666; white-space: nowrap; }
+        .ch-submit-btn { width: 100%; padding: 13px; background: linear-gradient(135deg, #FF9A56, #E64A19); color: #fff; border: none; border-radius: 10px; font-size: .95rem; font-weight: bold; cursor: pointer; font-family: inherit; transition: opacity .15s; }
+        .ch-submit-btn:hover { opacity: .9; }
+        .ch-result-box { margin-top: 10px; padding: 12px; border-radius: 8px; display: none; }
+        .ch-result-box.ok { background: #E8F5E9; color: #1B5E20; display: block; }
+        .ch-result-box.ng { background: #FFEBEE; color: #B71C1C; display: block; }
+        .ch-result-hl { font-size: 1rem; font-weight: bold; margin-bottom: 4px; }
+        .ch-result-msg { font-size: .85rem; }
+        .ch-hint-btn { background: none; border: 1px solid #bbb; border-radius: 8px; padding: 6px 14px; font-size: .78rem; cursor: pointer; color: #666; font-family: inherit; margin-top: 10px; transition: background .15s; }
+        .ch-hint-btn:hover { background: #f5f5f5; }
+        .ch-hint-box { background: #FFF8E1; border-left: 4px solid #FFB300; border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: .82rem; color: #555; line-height: 1.7; margin-top: 8px; display: none; white-space: pre-line; }
+        .ch-steps-card { background: #fff; border-radius: 14px; padding: 16px; box-shadow: 0 2px 10px rgba(0,0,0,.07); margin-bottom: 20px; }
+        .ch-steps-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .ch-steps-title { font-size: .95rem; font-weight: bold; color: #333; }
+        .ch-expand-btn { background: none; border: 1px solid #E64A19; color: #E64A19; padding: 4px 12px; border-radius: 8px; font-size: .75rem; cursor: pointer; font-family: inherit; transition: all .15s; }
+        .ch-expand-btn:hover { background: #E64A19; color: #fff; }
+        .ch-step { border: 1px solid #f0e8e0; border-radius: 10px; margin-bottom: 8px; overflow: hidden; }
+        .ch-step-hd { display: flex; align-items: center; gap: 10px; padding: 10px 12px; cursor: pointer; background: #FFF8F0; transition: background .15s; }
+        .ch-step-hd:hover { background: #FDEEE6; }
+        .ch-step-num { width: 22px; height: 22px; border-radius: 50%; background: #E64A19; color: #fff; font-size: .72rem; font-weight: bold; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .ch-step-name { font-size: .88rem; font-weight: bold; color: #333; flex: 1; }
+        .ch-step-chevron { color: #bbb; font-size: .8rem; transition: transform .2s; }
+        .ch-step-chevron.open { transform: rotate(90deg); }
+        .ch-step-bd { padding: 14px; border-top: 1px solid #f0e8e0; display: none; }
+        .ch-step-bd.open { display: block; }
+        .ch-step-text { font-size: .88rem; line-height: 1.85; color: #444; white-space: pre-line; margin-bottom: 10px; }
+
+        /* ══ SHARED VISUALS ══ */
+        .vis-formula { background: #EDE7F6; border-radius: 8px; padding: 10px 14px; font-weight: bold; color: #311B92; text-align: center; font-size: .9rem; margin: 8px 0; white-space: pre-line; line-height: 1.7; }
+        .vis-tank-row { display: flex; align-items: flex-end; gap: 16px; justify-content: center; padding: 8px 0; }
+        .vis-tank { width: 60px; height: 80px; border: 3px solid #546E7A; border-radius: 2px 2px 6px 6px; background: rgba(227,242,253,.3); position: relative; overflow: hidden; }
+        .vis-water { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, #1565C0, #42A5F5); }
+        .vis-tank-label { font-size: .7rem; color: #555; text-align: center; margin-top: 4px; }
+        .vis-timeline { display: flex; height: 36px; border-radius: 8px; overflow: hidden; margin: 8px 0; }
+        .vis-phase { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: bold; color: #fff; padding: 4px; text-align: center; line-height: 1.4; }
+        .vis-numline { margin: 8px 0; position: relative; height: 56px; }
+        .vis-numline-bar { height: 4px; background: #bbb; position: absolute; top: 20px; left: 8%; right: 8%; }
+        .vis-numline-dot { width: 13px; height: 13px; border-radius: 50%; position: absolute; top: 14px; }
+        .vis-numline-lbl { position: absolute; top: 32px; font-size: .68rem; text-align: center; transform: translateX(-50%); color: #555; line-height: 1.4; }
+        .vis-beakers { display: flex; align-items: flex-end; justify-content: center; gap: 20px; padding: 8px 0; }
+        .vis-beaker { width: 50px; height: 70px; border: 3px solid #546E7A; border-top: none; border-radius: 0 0 8px 8px; position: relative; overflow: hidden; background: #f5f5f5; }
+        .vis-beaker-liq { position: absolute; bottom: 0; left: 0; right: 0; }
+        .vis-beaker-lbl { font-size: .68rem; text-align: center; margin-top: 4px; color: #555; line-height: 1.5; }
+        .vis-fraction { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 8px 0; font-size: .9rem; flex-wrap: wrap; }
+        .vis-frac { display: flex; flex-direction: column; align-items: center; font-weight: bold; color: #311B92; }
+        .vis-frac-n { border-bottom: 2px solid #311B92; padding: 0 4px; }
+        .vis-frac-d { padding: 0 4px; }
+        .vis-animals { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 0; justify-content: center; }
+        .vis-animal { text-align: center; font-size: .7rem; }
+        .vis-animal-ico { font-size: 1.3rem; }
+        .vis-animal-legs { color: #E64A19; font-weight: bold; }
+        .vis-trees { display: flex; align-items: center; padding: 8px 0; flex-wrap: wrap; gap: 2px; }
+        .vis-tree-sp { font-size: .6rem; color: #E64A19; padding: 0 2px; white-space: nowrap; }
+    </style>
+</head>
+<body>
+
+<!-- ════════ COURSE SELECTION ════════ -->
+<div id="home-screen" class="screen active">
+    <div class="home-logo">📚</div>
+    <div class="home-title">算数ビジュアル学習</div>
+    <div class="home-sub">コースを選んで学ぼう</div>
+    <div class="course-cards">
+        <div class="course-card std" onclick="showScreen('standard')">
+            <span class="cc-icon">📘</span>
+            <div class="cc-body">
+                <div class="cc-label">Standard Course</div>
+                <div class="cc-title">標準コース</div>
+                <div class="cc-desc">教科書の章立てで<br>基礎からしっかり学ぶ</div>
+            </div>
+            <span class="cc-arrow">›</span>
+        </div>
+        <div class="course-card exam" onclick="showScreen('exam')">
+            <span class="cc-icon">🔥</span>
+            <div class="cc-body">
+                <div class="cc-label">Exam Course</div>
+                <div class="cc-title">受験コース</div>
+                <div class="cc-desc">中学受験レベルの難問を<br>単元別・ステップ解説で攻略</div>
+            </div>
+            <span class="cc-arrow">›</span>
+        </div>
+    </div>
+</div>
+
+<!-- ════════ STANDARD COURSE ════════ -->
+<div id="standard-screen" class="screen">
+    <div class="screen-header std-header">
+        <button class="back-btn" onclick="showScreen('home')">← もどる</button>
+        <span class="screen-title">📘 標準コース</span>
+    </div>
+    <div class="std-hero">
+        <div class="std-hero-title">章立てで学ぶ算数</div>
+        <div class="std-hero-sub">基礎概念をビジュアルで理解しよう</div>
+        <div class="std-progress-bar">
+            <div class="std-progress-fill" style="width:20%"></div>
+        </div>
+        <div class="std-progress-label">第1章 公開中 — 残り4章準備中</div>
+    </div>
+    <div class="std-chapter-list" id="std-chapter-list">
+        <!-- populated by JS -->
+    </div>
+</div>
+
+<!-- ════════ EXAM COURSE ════════ -->
+<div id="exam-screen" class="screen">
+    <div class="screen-header exam-header">
+        <button class="back-btn" onclick="showScreen('home')">← もどる</button>
+        <span class="screen-title">🔥 受験コース</span>
+    </div>
+    <div class="exam-hero">
+        <div class="exam-hero-title">単元別 難問チャレンジ</div>
+        <div class="exam-hero-sub">図解・ステップ解説で本質から理解する</div>
+        <div class="exam-stats">
+            <div class="exam-stat">
+                <div class="exam-stat-num">6</div>
+                <div class="exam-stat-label">単元</div>
+            </div>
+            <div class="exam-stat">
+                <div class="exam-stat-num">8</div>
+                <div class="exam-stat-label">問題</div>
+            </div>
+            <div class="exam-stat">
+                <div class="exam-stat-num">★★★</div>
+                <div class="exam-stat-label">平均難易度</div>
+            </div>
+        </div>
+    </div>
+    <div class="exam-unit-list" id="exam-unit-list">
+        <!-- populated by JS -->
+    </div>
+</div>
+
+<!-- ════════ WATER TANK ════════ -->
+<div id="watertank-screen" class="screen">
+    <div class="screen-header std-header">
+        <button class="back-btn" onclick="showScreen('standard')">← もどる</button>
+        <span class="screen-title">🚰 第1章：水と量の問題</span>
+    </div>
+    <div class="tab-bar">
+        <button class="tab active" onclick="switchTab('learn')">📖 学ぶモード</button>
+        <button class="tab" onclick="switchTab('quiz')">✏️ 練習問題</button>
+    </div>
+
+    <!-- LEARN TAB -->
+    <div id="tab-learn" class="tab-content active">
+        <div class="learn-layout">
+            <div class="tank-outer">
+                <div class="pipe-top"></div>
+                <div class="tank-body">
+                    <div class="water-fill" id="water-fill" style="height:50%">
+                        <div class="water-surface"></div>
+                    </div>
+                    <div class="tank-capacity-label">100L</div>
+                </div>
+                <div class="pipe-bottom"></div>
+            </div>
+            <div class="flow-info">
+                <div class="flow-card card-in">
+                    <div class="flow-card-label">⬇️ 入ってくる水</div>
+                    <div class="flow-card-value" id="info-inflow">3 L/分</div>
+                </div>
+                <div class="flow-card card-out">
+                    <div class="flow-card-label">⬆️ 出ていく水</div>
+                    <div class="flow-card-value" id="info-outflow">1 L/分</div>
+                </div>
+                <div class="flow-card card-net" id="flow-net-card">
+                    <div class="flow-card-label">📊 1分あたり</div>
+                    <div class="flow-card-value" id="info-net">+2 L</div>
+                </div>
+                <div class="flow-card card-current">
+                    <div class="flow-card-label">💧 現在の水量</div>
+                    <div class="flow-card-value" id="info-current">50 L</div>
+                </div>
+            </div>
+        </div>
+        <div class="net-bar-section">
+            <div class="net-bar-label">水量の変化（1分ごと）</div>
+            <div class="net-bar-track">
+                <div class="net-bar-fill pos" id="net-bar" style="width:10%"></div>
+                <div class="net-bar-center"></div>
+            </div>
+            <div class="net-bar-text" id="net-bar-text">毎分 +2L 増えています</div>
+        </div>
+        <div class="slider-card slider-in">
+            <div class="slider-row"><span class="slider-name">⬇️ 入ってくる水（L/分）</span><span class="slider-val" id="val-inflow">3</span></div>
+            <input type="range" min="0" max="10" value="3" id="slider-inflow" oninput="updateLearn()">
+        </div>
+        <div class="slider-card slider-out">
+            <div class="slider-row"><span class="slider-name">⬆️ 出ていく水（L/分）</span><span class="slider-val" id="val-outflow">1</span></div>
+            <input type="range" min="0" max="10" value="1" id="slider-outflow" oninput="updateLearn()">
+        </div>
+        <div class="slider-card slider-init">
+            <div class="slider-row"><span class="slider-name">💧 最初の水量（L）</span><span class="slider-val" id="val-initial">50</span></div>
+            <input type="range" min="0" max="100" value="50" id="slider-initial" oninput="updateLearn()">
+        </div>
+        <div class="sim-card">
+            <div class="sim-label">⏱️ 時間を動かしてみよう</div>
+            <div class="sim-controls">
+                <button class="sim-btn btn-start" onclick="startSim()">▶ スタート</button>
+                <button class="sim-btn btn-reset" onclick="resetSim()">↺ リセット</button>
+                <div class="sim-time-display">経過: <strong id="sim-time">0.0</strong> 分</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUIZ TAB -->
+    <div id="tab-quiz" class="tab-content">
+        <div class="quiz-wrap">
+            <div class="score-row">
+                <div class="score-chip ok"><div class="score-num" id="score-ok">0</div><div class="score-chip-label">正解</div></div>
+                <div class="score-chip ng"><div class="score-num" id="score-ng">0</div><div class="score-chip-label">まちがい</div></div>
+            </div>
+            <div class="level-row">
+                <button class="level-btn active" onclick="setLevel(1)">レベル1<br><span style="font-size:.65rem;font-weight:normal">差し引きを求める</span></button>
+                <button class="level-btn" onclick="setLevel(2)">レベル2<br><span style="font-size:.65rem;font-weight:normal">○分後の水量</span></button>
+                <button class="level-btn" onclick="setLevel(3)">レベル3<br><span style="font-size:.65rem;font-weight:normal">満水・空になる時間</span></button>
+            </div>
+            <div class="problem-card">
+                <div class="problem-badge" id="prob-badge">レベル1</div>
+                <div class="problem-text" id="prob-text">読み込み中…</div>
+                <div class="mini-tank-wrap">
+                    <div class="mini-tank-col">
+                        <div class="mini-tank-label" style="color:#0277BD" id="mini-in-label">⬇️ 毎分○L</div>
+                        <div class="mini-tank"><div class="mini-water" id="mini-water" style="height:40%"></div></div>
+                        <div class="mini-tank-label" style="color:#BF360C;margin-top:5px" id="mini-out-label">⬆️ 毎分○L</div>
+                    </div>
+                    <div class="mini-flow-info">
+                        <div class="mini-flow-chip in" id="mini-chip-in">入る: ○L/分</div>
+                        <div class="mini-flow-chip out" id="mini-chip-out">出る: ○L/分</div>
+                    </div>
+                </div>
+                <div class="answer-row">
+                    <input type="number" class="answer-input" id="ans-input" placeholder="答えを入力">
+                    <span class="answer-unit" id="ans-unit">L</span>
+                </div>
+                <button class="submit-btn" onclick="checkAnswer()">答え合わせ ✔</button>
+                <button class="hint-btn" onclick="toggleHint()">💡 ヒントを見る</button>
+                <div class="hint-box" id="hint-box"></div>
+                <div class="result-box" id="result-box">
+                    <div class="result-headline" id="result-headline"></div>
+                    <div id="result-msg"></div>
+                    <div class="result-exp" id="result-exp"></div>
+                </div>
+                <button class="next-btn" id="next-btn" onclick="nextQuestion()">次の問題へ →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ════════ CHALLENGES SCREEN ════════ -->
+<div id="challenges-screen" class="screen">
+    <div class="screen-header" id="ch-screen-header">
+        <button class="back-btn" id="ch-back-btn" onclick="showScreen('exam')">← もどる</button>
+        <span class="screen-title" id="ch-screen-title">難問チャレンジ</span>
+    </div>
+    <div id="ch-list-view" class="ch-list-view">
+        <div class="ch-filter-row" id="ch-filter-row"></div>
+        <div id="ch-cards-container"></div>
+    </div>
+    <div id="ch-detail-view" class="ch-detail-view">
+        <div class="ch-detail-top">
+            <button class="ch-back-list-btn" onclick="closeChallenge()">← 一覧へ</button>
+            <span class="ch-detail-title-sm" id="ch-detail-title-sm"></span>
+        </div>
+        <div class="ch-detail-inner">
+            <div class="ch-prob-card">
+                <div class="ch-prob-header">
+                    <span class="ch-cat-badge" id="ch-prob-cat-badge"></span>
+                    <span class="ch-stars" id="ch-prob-stars"></span>
+                </div>
+                <div class="ch-prob-text" id="ch-prob-text"></div>
+            </div>
+            <div class="ch-ans-card">
+                <div class="ch-ans-label">✏️ あなたの答えを入力しよう</div>
+                <div class="ch-ans-row">
+                    <input type="number" class="ch-ans-input" id="ch-ans-input" placeholder="答え">
+                    <span class="ch-ans-unit" id="ch-ans-unit">L</span>
+                </div>
+                <button class="ch-submit-btn" onclick="chSubmitAnswer()">答え合わせ ✔</button>
+                <button class="ch-hint-btn" id="ch-hint-btn" onclick="chToggleHint()">💡 ヒントを見る</button>
+                <div class="ch-hint-box" id="ch-hint-box"></div>
+                <div class="ch-result-box" id="ch-result-box">
+                    <div class="ch-result-hl" id="ch-result-hl"></div>
+                    <div class="ch-result-msg" id="ch-result-msg"></div>
+                </div>
+            </div>
+            <div class="ch-steps-card">
+                <div class="ch-steps-hd">
+                    <div class="ch-steps-title">📋 ステップ別 解き方</div>
+                    <button class="ch-expand-btn" onclick="chExpandAll()">すべて開く</button>
+                </div>
+                <div id="ch-steps-container"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════
+   STANDARD COURSE DATA
+════════════════════════════════════════ */
+const STANDARD_CHAPTERS = [
+    { id: 'watertank', num: '第1章', title: '水と量の問題', sub: '水槽・流量・仕事算の基礎', tags: ['水槽問題', '流量計算'], available: true },
+    { id: 'speed',    num: '第2章', title: '速さと時間',   sub: '速さ・時間・距離の関係',  tags: ['速さ計算', 'ダイヤグラム'], available: false },
+    { id: 'ratio',    num: '第3章', title: '割合と比',     sub: '割合・面積図・比の利用',  tags: ['割合', '面積図', '比'], available: false },
+    { id: 'cases',    num: '第4章', title: '場合の数',     sub: '順列・組み合わせ・樹形図', tags: ['樹形図', '組み合わせ'], available: false },
+    { id: 'figures',  num: '第5章', title: '図形の面積',   sub: '補助線・分割・移動',      tags: ['面積', '補助線'], available: false },
+];
+
+/* ════════════════════════════════════════
+   EXAM COURSE DATA
+════════════════════════════════════════ */
+const EXAM_UNITS = [
+    { id: 'unit-water',   num: 'Unit 01', title: '水槽・仕事算',    sub: '複数の管・途中で条件が変わる問題', difficulty: 3, category: '水槽',     count: 2, available: true },
+    { id: 'unit-speed',   num: 'Unit 02', title: '速さ算',          sub: '出会い算・追いかけ算',           difficulty: 3, category: '速さ',     count: 2, available: true },
+    { id: 'unit-ratio',   num: 'Unit 03', title: '割合・食塩水',    sub: '濃度計算・混合問題',             difficulty: 4, category: '割合',     count: 1, available: true },
+    { id: 'unit-plant',   num: 'Unit 04', title: '植木算',          sub: '間隔と本数の関係',               difficulty: 2, category: '植木算',   count: 1, available: true },
+    { id: 'unit-crane',   num: 'Unit 05', title: 'つるかめ算',      sub: '仮定して差し引く解法',           difficulty: 3, category: 'つるかめ算', count: 1, available: true },
+    { id: 'unit-surplus', num: 'Unit 06', title: '過不足算',        sub: '余りと不足から求める',           difficulty: 4, category: '過不足算', count: 1, available: true },
+    { id: 'unit-age',     num: 'Unit 07', title: '年齢算・和差算',  sub: '準備中',                         difficulty: 3, category: null,       count: 0, available: false },
+    { id: 'unit-ratio2',  num: 'Unit 08', title: '比の文章題',      sub: '準備中',                         difficulty: 4, category: null,       count: 0, available: false },
+];
+
+/* ════════════════════════════════════════
+   CHALLENGES DATA
+════════════════════════════════════════ */
+const CHALLENGES = [
+  { id:'c1', category:'水槽', catColor:'#0277BD', catBg:'#E3F2FD', borderColor:'#0288D1', title:'途中で条件が変わる水槽', difficulty:3,
+    text:`容量100Lの水槽に最初20Lの水があります。\n毎分3Lの水を入れ始めました。\n5分後に、さらに毎分2Lの管を追加しました。\n\n最初から何分後に水槽の水が50Lになりますか？`,
+    answer:8, unit:'分', hint:`「5分後」を境に前半・後半に分けて考えよう。\n前半（5分間）で水は何Lになる？\n後半は毎分何L増える？`,
+    steps:[
+      { title:'前半・後半に分ける', text:`「5分後に管が追加される」ので\n2つの場面に分けます。\n\n【前半】0〜5分：毎分3L入る\n【後半】5分以降：3＋2＝毎分5L入る`,
+        visual:`<div class="vis-timeline"><div class="vis-phase" style="flex:5;background:#0288D1">前半<br>毎分3L</div><div class="vis-phase" style="flex:3;background:#E64A19">後半<br>毎分5L</div></div>` },
+      { title:'前半（5分間）の水量を計算', text:`増えた水：3L × 5分 ＝ 15L\n5分後の水量：20 ＋ 15 ＝ 35L`,
+        visual:`<div class="vis-tank-row"><div><div class="vis-tank"><div class="vis-water" style="height:20%"></div></div><div class="vis-tank-label">最初 20L</div></div><div style="font-size:1.4rem;color:#ccc;padding-bottom:16px">→</div><div><div class="vis-tank"><div class="vis-water" style="height:35%"></div></div><div class="vis-tank-label">5分後 35L</div></div></div><div class="vis-formula">20 ＋ 3×5 ＝ 35L</div>` },
+      { title:'後半の必要時間を求める', text:`35Lから50Lまで残り：50－35＝15L\n後半の速さ：毎分5L\n15 ÷ 5 ＝ 3分`,
+        visual:`<div class="vis-tank-row"><div><div class="vis-tank"><div class="vis-water" style="height:35%"></div></div><div class="vis-tank-label">35L</div></div><div style="font-size:1.4rem;color:#ccc;padding-bottom:16px">→</div><div><div class="vis-tank"><div class="vis-water" style="height:50%"></div></div><div class="vis-tank-label">50L 目標</div></div></div><div class="vis-formula">15 ÷ 5 ＝ 3分</div>` },
+      { title:'合計する（答え）', text:`前半：5分\n後半：3分\n合計：5 ＋ 3 ＝ 8分`,
+        visual:`<div class="vis-timeline"><div class="vis-phase" style="flex:5;background:#0288D1">前半 5分</div><div class="vis-phase" style="flex:3;background:#E64A19">後半 3分</div></div><div class="vis-formula">答え：8分後</div>` },
+    ]
+  },
+  { id:'c2', category:'水槽', catColor:'#0277BD', catBg:'#E3F2FD', borderColor:'#0288D1', title:'2つの管で満水にする', difficulty:3,
+    text:`空の水槽をA管だけで満水にすると30分、\nB管だけで満水にすると20分かかります。\n\nA管とB管を同時に使うと何分で満水になりますか？`,
+    answer:12, unit:'分', hint:`1分間にA管は全体の何分の1入れる？\n合わせた速さ＝A管＋B管`,
+    steps:[
+      { title:'1分間に入る量を分数で表す', text:`A管：30分で満水 → 1分で全体の 1/30\nB管：20分で満水 → 1分で全体の 1/20`,
+        visual:`<div class="vis-fraction"><div class="vis-frac"><span class="vis-frac-n">1</span><span class="vis-frac-d">30</span></div><span style="color:#666;padding:0 4px">と</span><div class="vis-frac"><span class="vis-frac-n">1</span><span class="vis-frac-d">20</span></div></div>` },
+      { title:'2つ合わせた速さを通分', text:`1/30 ＋ 1/20 ＝ 2/60 ＋ 3/60 ＝ 5/60 ＝ 1/12`,
+        visual:`<div class="vis-fraction" style="flex-wrap:wrap;gap:6px"><div class="vis-frac"><span class="vis-frac-n">1</span><span class="vis-frac-d">30</span></div><span>+</span><div class="vis-frac"><span class="vis-frac-n">1</span><span class="vis-frac-d">20</span></div><span>=</span><div class="vis-frac"><span class="vis-frac-n">5</span><span class="vis-frac-d">60</span></div><span>=</span><div class="vis-frac"><span class="vis-frac-n">1</span><span class="vis-frac-d">12</span></div></div>` },
+      { title:'満水までの時間を求める', text:`1分で 1/12 ずつ入る\n全体(1) ÷ 1/12 ＝ 12分`,
+        visual:`<div class="vis-formula">1 ÷ (1/12) ＝ 12分</div>` },
+    ]
+  },
+  { id:'c3', category:'速さ', catColor:'#2E7D32', catBg:'#E8F5E9', borderColor:'#43A047', title:'出会い算', difficulty:2,
+    text:`A地点とB地点は2000m離れています。\n太郎くんはA地点から分速60mで、\n花子さんはB地点から分速40mで\n同時に向かい合って歩きます。\n\n何分後に2人は出会いますか？`,
+    answer:20, unit:'分', hint:`2人が1分間に縮める距離の合計は？\n合わせた速さ＝太郎の速さ＋花子の速さ`,
+    steps:[
+      { title:'状況を図にする', text:`2000mを2人が向き合って歩く\n→ 1分ごとに距離が縮まる`,
+        visual:`<div class="vis-numline"><div class="vis-numline-bar"></div><div class="vis-numline-dot" style="background:#0288D1;left:8%"></div><div class="vis-numline-dot" style="background:#E64A19;left:92%"></div><div class="vis-numline-lbl" style="left:8%">太郎<br>60m/分→</div><div class="vis-numline-lbl" style="left:92%">←花子<br>40m/分</div><div style="position:absolute;top:2px;left:50%;transform:translateX(-50%);font-size:.7rem;color:#555;font-weight:bold">2000m</div></div>` },
+      { title:'合わせた速さを求める', text:`1分間に縮まる距離\n＝60＋40＝100m/分`,
+        visual:`<div class="vis-formula">合わせた速さ ＝ 60＋40 ＝ 100m/分</div>` },
+      { title:'出会うまでの時間を求める', text:`2000 ÷ 100 ＝ 20分`,
+        visual:`<div class="vis-formula">2000 ÷ 100 ＝ 20分</div>` },
+    ]
+  },
+  { id:'c4', category:'速さ', catColor:'#2E7D32', catBg:'#E8F5E9', borderColor:'#43A047', title:'追いかけ算', difficulty:3,
+    text:`太郎くんは7時ちょうどに家を出て、\n分速60mで学校へ歩きます。\nお母さんは7時10分に自転車で追いかけ、\n分速180mで走ります。\n\nお母さんが太郎くんに追いつくのは7時何分ですか？`,
+    answer:15, unit:'分（7時）', hint:`お母さんが出発したとき、太郎くんは何m先？\n1分間に縮まる距離は？（差の速さ）`,
+    steps:[
+      { title:'お母さん出発時の差を求める', text:`太郎くんは10分先に出発\n10分間に：60×10＝600m 先にいる`,
+        visual:`<div class="vis-numline"><div class="vis-numline-bar"></div><div class="vis-numline-dot" style="background:#E64A19;left:8%"></div><div class="vis-numline-dot" style="background:#0288D1;left:55%"></div><div class="vis-numline-lbl" style="left:8%">お母さん<br>（7:10）</div><div class="vis-numline-lbl" style="left:55%">太郎<br>600m先</div></div><div class="vis-formula">60×10 ＝ 600m</div>` },
+      { title:'縮まる速さを求める', text:`1分間に縮まる距離（差の速さ）：\n180－60＝120m/分`,
+        visual:`<div class="vis-formula">180－60 ＝ 120m/分（差の速さ）</div>` },
+      { title:'追いつく時間を求める', text:`600m ÷ 120m/分 ＝ 5分\nお母さん出発（7:10）から5分後\n→ 7時15分`,
+        visual:`<div class="vis-formula">600 ÷ 120 ＝ 5分後 → 7時15分</div>` },
+    ]
+  },
+  { id:'c5', category:'割合', catColor:'#6A1B9A', catBg:'#F3E5F5', borderColor:'#8E24AA', title:'食塩水の混合', difficulty:4,
+    text:`10%の食塩水200gと\n5%の食塩水300gを混ぜました。\n\n混ぜた後の食塩水は何%ですか？`,
+    answer:7, unit:'%', hint:`まず「塩の量(g)」を先に求めよう。\n塩の量 ＝ 食塩水の量 × 濃度（÷100）`,
+    steps:[
+      { title:'それぞれの塩の量を求める', text:`10%食塩水200g → 塩：200×0.1＝20g\n5%食塩水300g  → 塩：300×0.05＝15g`,
+        visual:`<div class="vis-beakers"><div><div class="vis-beaker"><div class="vis-beaker-liq" style="height:70%;background:rgba(3,169,244,.45)"></div></div><div class="vis-beaker-lbl">10%<br>200g<br><b>塩20g</b></div></div><span style="font-size:1.5rem;color:#ccc;padding-bottom:20px">+</span><div><div class="vis-beaker"><div class="vis-beaker-liq" style="height:70%;background:rgba(3,169,244,.2)"></div></div><div class="vis-beaker-lbl">5%<br>300g<br><b>塩15g</b></div></div></div>` },
+      { title:'混ぜた後の量を合計', text:`塩の合計：20＋15＝35g\n食塩水の合計：200＋300＝500g`,
+        visual:`<div class="vis-beakers"><div><div class="vis-beaker" style="width:65px;height:80px"><div class="vis-beaker-liq" style="height:70%;background:rgba(3,169,244,.32)"></div></div><div class="vis-beaker-lbl">合計<br>500g<br><b>塩35g</b></div></div></div>` },
+      { title:'濃度を計算する', text:`濃度＝塩の量÷食塩水の量×100\n＝35÷500×100＝7%`,
+        visual:`<div class="vis-formula">35 ÷ 500 × 100 ＝ 7%</div>` },
+    ]
+  },
+  { id:'c6', category:'植木算', catColor:'#E65100', catBg:'#FFF3E0', borderColor:'#FB8C00', title:'道に木を植える（両端あり）', difficulty:2,
+    text:`100mの道の両端に木を植えます。\n木と木の間隔を10mにするとき、\n木は全部で何本必要ですか？`,
+    answer:11, unit:'本', hint:`まず「間隔の数」を求めよう。\n両端に植えるとき：木の本数 ＝ 間隔の数 ＋ 1`,
+    steps:[
+      { title:'間隔の数を求める', text:`道の長さ ÷ 間隔 ＝ 間隔の数\n100 ÷ 10 ＝ 10（個の間隔）`,
+        visual:`<div class="vis-trees"><span style="font-size:1.2rem">🌲</span>${Array(10).fill(0).map(()=>'<span class="vis-tree-sp">10m</span><span style="font-size:1.2rem">🌲</span>').join('')}</div>` },
+      { title:'木の本数を求める', text:`両端に植えるので\n木の本数 ＝ 間隔の数 ＋ 1 ＝ 10 ＋ 1 ＝ 11本`,
+        visual:`<div class="vis-formula">間隔10個 → 木は11本</div>` },
+    ]
+  },
+  { id:'c7', category:'つるかめ算', catColor:'#00695C', catBg:'#E0F2F1', borderColor:'#00897B', title:'ツルとカメの足の数', difficulty:3,
+    text:`ツルとカメが合わせて10匹います。\n足の本数の合計は28本でした。\n\nツルは何匹いますか？`,
+    answer:6, unit:'匹', hint:`「全部ツルだったら足は何本？」から考えよう。\nカメ1匹に替えると足は何本増える？`,
+    steps:[
+      { title:'全部ツルと仮定する', text:`10匹すべてツルとすると\n足の合計：2×10＝20本\n実際は28本 → 28－20＝8本 多い`,
+        visual:`<div class="vis-animals">${Array(10).fill(0).map(()=>'<div class="vis-animal"><div class="vis-animal-ico">🦢</div><div class="vis-animal-legs">2本</div></div>').join('')}</div><div class="vis-formula">2×10 ＝ 20本（実際より8本少ない）</div>` },
+      { title:'ツル→カメに替えると', text:`ツル1匹をカメ1匹に替えると\n4－2＝2本 増える\n8本増やすには：8÷2＝4匹 カメにする`,
+        visual:`<div style="display:flex;gap:10px;justify-content:center;align-items:center;padding:8px 0"><div class="vis-animal"><div class="vis-animal-ico">🦢</div><div class="vis-animal-legs">2本</div></div><span style="font-size:1.2rem">→</span><div class="vis-animal"><div class="vis-animal-ico">🐢</div><div class="vis-animal-legs">4本</div></div><span style="font-size:.82rem;color:#E64A19;font-weight:bold">＋2本</span></div><div class="vis-formula">8 ÷ 2 ＝ 4匹がカメ</div>` },
+      { title:'答えを求める（確認）', text:`カメ：4匹\nツル：10－4＝6匹\n確認：6×2＋4×4＝12＋16＝28本 ✓`,
+        visual:`<div class="vis-animals">${Array(6).fill(0).map(()=>'<div class="vis-animal"><div class="vis-animal-ico">🦢</div><div class="vis-animal-legs">2本</div></div>').join('')}${Array(4).fill(0).map(()=>'<div class="vis-animal"><div class="vis-animal-ico">🐢</div><div class="vis-animal-legs">4本</div></div>').join('')}</div><div class="vis-formula">答え：ツル 6匹</div>` },
+    ]
+  },
+  { id:'c8', category:'過不足算', catColor:'#AD1457', catBg:'#FCE4EC', borderColor:'#E91E63', title:'余りと不足（机と生徒）', difficulty:4,
+    text:`生徒を机に座らせます。\n1つの机に4人ずつ座ると8人余ります。\n1つの机に6人ずつ座ると2人足りません。\n\n生徒は何人いますか？`,
+    answer:28, unit:'人', hint:`机の台数を□として2つの式を立てよう。\n4×□＋8 ＝ 6×□－2`,
+    steps:[
+      { title:'机の台数を□とおく', text:`机の台数を□台とすると：\n4人ずつ・余り8人 → 生徒数 ＝ 4×□＋8\n6人ずつ・2人不足 → 生徒数 ＝ 6×□－2`,
+        visual:`<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:6px 0"><div style="background:#E3F2FD;border:2px solid #0288D1;border-radius:8px;padding:6px 12px;font-size:.82rem;text-align:center">4人ずつ<br>→ 4□＋8</div><div style="background:#FCE4EC;border:2px solid #E91E63;border-radius:8px;padding:6px 12px;font-size:.82rem;text-align:center">6人ずつ<br>→ 6□－2</div></div>` },
+      { title:'2つの式を等しくおいて解く', text:`4×□＋8 ＝ 6×□－2\n8＋2 ＝ 6×□－4×□\n10 ＝ 2×□\n□ ＝ 5（机は5台）`,
+        visual:`<div class="vis-formula">4□＋8 ＝ 6□－2\n→ 2□ ＝ 10 → □ ＝ 5台</div>` },
+      { title:'生徒数を求める（確認）', text:`□＝5を代入：4×5＋8＝20＋8＝28人\n確認：6×5－2＝30－2＝28人 ✓`,
+        visual:`<div class="vis-formula">答え：机5台・生徒28人</div>` },
+    ]
+  },
+];
+
+/* ════════════════════════════════════════
+   STATE
+════════════════════════════════════════ */
+const learn = { inflow:3, outflow:1, initial:50, current:50, simRunning:false, simTimer:null, simTime:0, capacity:100 };
+const quiz  = { level:1, correct:0, wrong:0, problem:null, hintVisible:false };
+const chState = { filter:'すべて', currentId:null, hintVisible:false, stepOpen:{} };
+
+/* ════════════════════════════════════════
+   NAVIGATION
+════════════════════════════════════════ */
+function showScreen(id, opts={}) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id + '-screen').classList.add('active');
+    if (id === 'standard')   renderStandardCourse();
+    if (id === 'exam')       renderExamCourse();
+    if (id === 'watertank')  { updateLearn(); generateProblem(); }
+    if (id === 'challenges') {
+        if (opts.unitTitle) document.getElementById('ch-screen-title').textContent = opts.unitTitle;
+        else document.getElementById('ch-screen-title').textContent = '難問チャレンジ';
+        if (opts.filter) chState.filter = opts.filter;
+        else chState.filter = 'すべて';
+        document.getElementById('ch-list-view').style.display = 'block';
+        document.getElementById('ch-detail-view').classList.remove('active');
+        renderChallengeList();
+    }
+}
+
+/* ════════════════════════════════════════
+   STANDARD COURSE
+════════════════════════════════════════ */
+function renderStandardCourse() {
+    const el = document.getElementById('std-chapter-list');
+    el.innerHTML = STANDARD_CHAPTERS.map((ch, i) => {
+        if (ch.available) {
+            return `<div class="chapter-card available" onclick="showScreen('watertank')">
+                <div class="chapter-card-inner">
+                    <div class="chapter-num-badge">
+                        <span class="chapter-num-label">第${i+1}章</span>
+                        <span class="chapter-num-val">${i+1}</span>
+                    </div>
+                    <div class="chapter-body">
+                        <div class="chapter-title">${ch.title}</div>
+                        <div class="chapter-sub">${ch.sub}</div>
+                        <div class="chapter-tags">${ch.tags.map(t=>`<span class="chapter-tag">${t}</span>`).join('')}</div>
+                    </div>
+                    <span class="chapter-arrow">›</span>
+                </div>
+                <div class="chapter-card-footer">
+                    <button class="chapter-action-btn btn-learn" onclick="event.stopPropagation();showScreen('watertank');switchTab('learn')">📖 学ぶ</button>
+                    <button class="chapter-action-btn btn-practice" onclick="event.stopPropagation();showScreen('watertank');switchTab('quiz')">✏️ 練習</button>
+                </div>
+            </div>`;
+        } else {
+            return `<div class="chapter-card locked">
+                <div class="chapter-card-inner">
+                    <div class="chapter-num-badge">
+                        <span class="chapter-num-label">第${i+1}章</span>
+                        <span class="chapter-num-val">${i+1}</span>
+                    </div>
+                    <div class="chapter-body">
+                        <div class="chapter-title">${ch.title}</div>
+                        <div class="chapter-sub">${ch.sub}</div>
+                        <div class="chapter-tags">${ch.tags.map(t=>`<span class="chapter-tag">${t}</span>`).join('')}</div>
+                    </div>
+                    <span class="chapter-coming-badge">準備中</span>
+                </div>
+            </div>`;
+        }
+    }).join('');
+}
+
+/* ════════════════════════════════════════
+   EXAM COURSE
+════════════════════════════════════════ */
+function renderExamCourse() {
+    const el = document.getElementById('exam-unit-list');
+    el.innerHTML = EXAM_UNITS.map(u => {
+        const stars = '★'.repeat(u.difficulty) + '☆'.repeat(5 - u.difficulty);
+        if (u.available) {
+            return `<div class="unit-card available" onclick="openUnit('${u.id}')">
+                <div class="unit-card-inner">
+                    <div class="unit-num-badge">${u.num}</div>
+                    <div class="unit-body">
+                        <div class="unit-title">${u.title}</div>
+                        <div class="unit-sub">${u.sub}</div>
+                        <div class="unit-meta">
+                            <span class="unit-stars">${stars}</span>
+                            <span class="unit-count">${u.count}問</span>
+                        </div>
+                    </div>
+                    <span class="unit-arrow">›</span>
+                </div>
+            </div>`;
+        } else {
+            return `<div class="unit-card locked">
+                <div class="unit-card-inner">
+                    <div class="unit-num-badge">${u.num}</div>
+                    <div class="unit-body">
+                        <div class="unit-title">${u.title}</div>
+                        <div class="unit-sub">${u.sub}</div>
+                        <div class="unit-meta"><span class="unit-stars">${stars}</span></div>
+                    </div>
+                    <span class="unit-coming">準備中</span>
+                </div>
+            </div>`;
+        }
+    }).join('');
+}
+
+function openUnit(unitId) {
+    const unit = EXAM_UNITS.find(u => u.id === unitId);
+    if (!unit || !unit.available) return;
+    showScreen('challenges', { filter: unit.category, unitTitle: unit.num + ' ' + unit.title });
+}
+
+/* ════════════════════════════════════════
+   LEARN MODE
+════════════════════════════════════════ */
+function switchTab(tab) {
+    const tabs = document.querySelectorAll('#watertank-screen .tab');
+    tabs.forEach((t,i) => t.classList.toggle('active', (tab==='learn'?0:1)===i));
+    document.querySelectorAll('#watertank-screen .tab-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+}
+
+function updateLearn() {
+    learn.inflow  = +document.getElementById('slider-inflow').value;
+    learn.outflow = +document.getElementById('slider-outflow').value;
+    learn.initial = +document.getElementById('slider-initial').value;
+    if (!learn.simRunning) learn.current = learn.initial;
+    document.getElementById('val-inflow').textContent  = learn.inflow;
+    document.getElementById('val-outflow').textContent = learn.outflow;
+    document.getElementById('val-initial').textContent = learn.initial;
+    refreshInfoPanel();
+}
+
+function refreshInfoPanel() {
+    const net = learn.inflow - learn.outflow;
+    document.getElementById('info-inflow').textContent  = learn.inflow  + ' L/分';
+    document.getElementById('info-outflow').textContent = learn.outflow + ' L/分';
+    document.getElementById('info-net').textContent     = (net>=0?'+':'') + net + ' L';
+    document.getElementById('info-current').textContent = Math.round(learn.current) + ' L';
+    document.getElementById('flow-net-card').classList.toggle('negative', net<0);
+    const pct = Math.min(Math.abs(net)/10*50, 50);
+    const bar = document.getElementById('net-bar');
+    bar.className = 'net-bar-fill ' + (net>=0?'pos':'neg');
+    bar.style.width = pct + '%';
+    const txt = document.getElementById('net-bar-text');
+    if (net>0)      { txt.textContent=`毎分 +${net}L 増えています`; txt.style.color='#2E7D32'; }
+    else if (net<0) { txt.textContent=`毎分 ${net}L 減っています`; txt.style.color='#B71C1C'; }
+    else            { txt.textContent='水量は変わりません（入出が同じ）'; txt.style.color='#555'; }
+    const pctW = Math.max(0, Math.min(100, learn.current/learn.capacity*100));
+    document.getElementById('water-fill').style.height = pctW + '%';
+}
+
+function startSim() {
+    if (learn.simRunning) return;
+    learn.simRunning=true; learn.simTime=0; learn.current=learn.initial;
+    learn.simTimer = setInterval(() => {
+        const dt=0.05;
+        learn.current = Math.max(0, Math.min(learn.capacity, learn.current+(learn.inflow-learn.outflow)*dt));
+        learn.simTime += dt;
+        document.getElementById('sim-time').textContent = learn.simTime.toFixed(1);
+        refreshInfoPanel();
+        if (learn.current<=0 || learn.current>=learn.capacity) stopSim();
+    }, 50);
+}
+function stopSim() { clearInterval(learn.simTimer); learn.simRunning=false; }
+function resetSim() { stopSim(); learn.simTime=0; learn.current=learn.initial; document.getElementById('sim-time').textContent='0.0'; refreshInfoPanel(); }
+
+/* ════════════════════════════════════════
+   QUIZ
+════════════════════════════════════════ */
+function ri(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+
+const generators = {
+    1() {
+        const inflow=ri(2,9), outflow=ri(1,inflow), net=inflow-outflow;
+        return { text:`水槽に毎分 ${inflow}L の水が入り、\n毎分 ${outflow}L の水が出ていきます。\n\n1分間で水は何L 増えますか？\n（減る場合はマイナスで答えよう）`, inflow, outflow, initial:0,
+            answer:net, unit:'L', hint:`入ってくる水 − 出ていく水 = 1分間の変化\n${inflow} − ${outflow} = ？`,
+            exp:`入ってくる水 ${inflow}L から\n出ていく水 ${outflow}L を引くと\n${inflow} − ${outflow} = ${net}L` };
+    },
+    2() {
+        const inflow=ri(3,8), outflow=ri(1,inflow-1), initial=ri(1,4)*10, time=ri(3,8), net=inflow-outflow, answer=initial+net*time;
+        return { text:`水槽に最初 ${initial}L の水があります。\n毎分 ${inflow}L 入り、毎分 ${outflow}L 出ていきます。\n\n${time}分後は何Lですか？`, inflow, outflow, initial, time,
+            answer:Math.max(0,answer), unit:'L', hint:`1分で ${net>=0?'+':''}${net}L 変わる\n${time}分で ${net}×${time}=${net*time}L 変わる\n最初の量 + 変化 = ？`,
+            exp:`1分で ${net>=0?'+':''}${net}L 変化\n${time}分で ${net}×${time}=${net*time}L 変化\n${initial}+(${net*time})=${answer}L` };
+    },
+    3() {
+        const full=ri(3,15)*10, type=Math.random()<.5?'full':'empty';
+        if (type==='full') {
+            const initial=ri(1,Math.floor(full/2/10))*10, net=ri(2,8), inflow=net+ri(1,4), outflow=inflow-net, remain=full-initial, time=Math.ceil(remain/net);
+            return { text:`容量 ${full}L の水槽に、今 ${initial}L の水があります。\n毎分 ${inflow}L 入り、毎分 ${outflow}L 出ていきます。\n\n何分後に満水（${full}L）になりますか？`, inflow, outflow, initial,
+                answer:time, unit:'分', hint:`1分で ${net}L 増える\n満水まであと ${remain}L\n${remain}÷${net}=？分`, exp:`1分で ${net}L 増える\n満水まであと ${remain}L\n${remain}÷${net}=${time}分` };
+        } else {
+            const initial=ri(3,8)*10, net=ri(2,6), outflow=net+ri(1,3), inflow=outflow-net, time=Math.ceil(initial/net);
+            return { text:`水槽に ${initial}L の水があります。\n毎分 ${inflow}L 入り、毎分 ${outflow}L 出ていきます。\n\n何分後に空になりますか？`, inflow, outflow, initial,
+                answer:time, unit:'分', hint:`1分で ${net}L 減る\n残り ${initial}L\n${initial}÷${net}=？分`, exp:`1分で ${net}L 減る\n残り ${initial}L\n${initial}÷${net}=${time}分` };
+        }
+    }
+};
+
+function setLevel(lv) {
+    quiz.level=lv; quiz.correct=quiz.wrong=0;
+    document.getElementById('score-ok').textContent='0';
+    document.getElementById('score-ng').textContent='0';
+    document.querySelectorAll('.level-btn').forEach((b,i)=>b.classList.toggle('active',i+1===lv));
+    generateProblem();
+}
+
+function generateProblem() {
+    const p=generators[quiz.level]();
+    quiz.problem=p; quiz.hintVisible=false;
+    document.getElementById('prob-badge').textContent='レベル'+quiz.level;
+    document.getElementById('prob-text').textContent=p.text;
+    document.getElementById('ans-unit').textContent=p.unit;
+    document.getElementById('ans-input').value='';
+    document.getElementById('ans-input').className='answer-input';
+    document.getElementById('mini-in-label').textContent=`⬇️ 毎分${p.inflow}L`;
+    document.getElementById('mini-out-label').textContent=`⬆️ 毎分${p.outflow}L`;
+    document.getElementById('mini-chip-in').textContent=`入る: ${p.inflow}L/分`;
+    document.getElementById('mini-chip-out').textContent=`出る: ${p.outflow}L/分`;
+    document.getElementById('mini-water').style.height=Math.max(8,Math.min(90,(p.initial/100)*90))+'%';
+    const rb=document.getElementById('result-box');
+    rb.style.display='none'; rb.className='result-box';
+    document.getElementById('next-btn').style.display='none';
+    const hb=document.getElementById('hint-box');
+    hb.style.display='none'; hb.textContent=p.hint;
+    document.querySelector('.hint-btn').textContent='💡 ヒントを見る';
+}
+
+function checkAnswer() {
+    const p=quiz.problem, val=parseFloat(document.getElementById('ans-input').value);
+    if (isNaN(val)) return;
+    const ok=Math.abs(val-p.answer)<0.01;
+    document.getElementById('ans-input').className='answer-input '+(ok?'correct':'wrong');
+    const rb=document.getElementById('result-box');
+    if (ok) { quiz.correct++; document.getElementById('score-ok').textContent=quiz.correct; rb.className='result-box ok'; document.getElementById('result-headline').textContent='⭕ 正解！すばらしい！'; document.getElementById('result-msg').textContent=''; }
+    else    { quiz.wrong++;   document.getElementById('score-ng').textContent=quiz.wrong;   rb.className='result-box ng'; document.getElementById('result-headline').textContent='❌ まちがい'; document.getElementById('result-msg').textContent=`正解は ${p.answer}${p.unit} でした`; }
+    document.getElementById('result-exp').textContent=p.exp;
+    rb.style.display='block';
+    document.getElementById('next-btn').style.display='block';
+}
+function nextQuestion() { generateProblem(); }
+function toggleHint() {
+    quiz.hintVisible=!quiz.hintVisible;
+    document.getElementById('hint-box').style.display=quiz.hintVisible?'block':'none';
+    document.querySelector('.hint-btn').textContent=quiz.hintVisible?'💡 ヒントを隠す':'💡 ヒントを見る';
+}
+
+/* ════════════════════════════════════════
+   CHALLENGES
+════════════════════════════════════════ */
+const CH_CATS = ['すべて','水槽','速さ','割合','植木算','つるかめ算','過不足算'];
+
+function renderChallengeList() {
+    document.getElementById('ch-filter-row').innerHTML = CH_CATS.map(cat =>
+        `<button class="ch-filter-btn${chState.filter===cat?' active':''}" onclick="chSetFilter('${cat}')">${cat}</button>`
+    ).join('');
+    const filtered = chState.filter==='すべて' ? CHALLENGES : CHALLENGES.filter(c=>c.category===chState.filter);
+    document.getElementById('ch-cards-container').innerHTML = filtered.map(c => {
+        const stars='★'.repeat(c.difficulty)+'☆'.repeat(5-c.difficulty);
+        const preview=c.text.replace(/\n/g,' ').slice(0,48)+'…';
+        return `<div class="ch-card" style="border-left-color:${c.borderColor}" onclick="openChallenge('${c.id}')">
+            <div class="ch-card-top"><span class="ch-cat-badge" style="background:${c.catBg};color:${c.catColor}">${c.category}</span><span class="ch-stars">${stars}</span></div>
+            <div class="ch-card-title">${c.title}</div>
+            <div class="ch-card-preview">${preview}</div>
+        </div>`;
+    }).join('');
+}
+
+function chSetFilter(cat) { chState.filter=cat; renderChallengeList(); }
+
+function openChallenge(id) {
+    const ch=CHALLENGES.find(c=>c.id===id); if (!ch) return;
+    chState.currentId=id; chState.hintVisible=false; chState.stepOpen={};
+    document.getElementById('ch-list-view').style.display='none';
+    document.getElementById('ch-detail-view').classList.add('active');
+    document.getElementById('ch-detail-title-sm').textContent=ch.title;
+    const stars='★'.repeat(ch.difficulty)+'☆'.repeat(5-ch.difficulty);
+    const badge=document.getElementById('ch-prob-cat-badge');
+    badge.textContent=ch.category; badge.style.cssText=`background:${ch.catBg};color:${ch.catColor}`;
+    document.getElementById('ch-prob-stars').textContent=stars;
+    document.getElementById('ch-prob-text').textContent=ch.text;
+    document.getElementById('ch-ans-input').value='';
+    document.getElementById('ch-ans-input').className='ch-ans-input';
+    document.getElementById('ch-ans-unit').textContent=ch.unit;
+    document.getElementById('ch-hint-btn').textContent='💡 ヒントを見る';
+    document.getElementById('ch-hint-box').style.display='none';
+    document.getElementById('ch-hint-box').textContent=ch.hint;
+    const rb=document.getElementById('ch-result-box');
+    rb.style.display='none'; rb.className='ch-result-box';
+    document.getElementById('ch-steps-container').innerHTML=ch.steps.map((s,i)=>`
+        <div class="ch-step">
+            <div class="ch-step-hd" onclick="chToggleStep(${i})">
+                <div class="ch-step-num">${i+1}</div>
+                <div class="ch-step-name">${s.title}</div>
+                <span class="ch-step-chevron" id="ch-chev-${i}">›</span>
+            </div>
+            <div class="ch-step-bd" id="ch-step-bd-${i}">
+                <div class="ch-step-text">${s.text}</div>
+                <div>${s.visual}</div>
+            </div>
+        </div>`).join('');
+}
+
+function closeChallenge() {
+    document.getElementById('ch-list-view').style.display='block';
+    document.getElementById('ch-detail-view').classList.remove('active');
+}
+
+function chSubmitAnswer() {
+    const ch=CHALLENGES.find(c=>c.id===chState.currentId); if (!ch) return;
+    const val=parseFloat(document.getElementById('ch-ans-input').value); if (isNaN(val)) return;
+    const ok=Math.abs(val-ch.answer)<0.01;
+    document.getElementById('ch-ans-input').className='ch-ans-input '+(ok?'correct':'wrong');
+    const rb=document.getElementById('ch-result-box');
+    rb.className='ch-result-box '+(ok?'ok':'ng');
+    document.getElementById('ch-result-hl').textContent=ok?'⭕ 正解！すばらしい！':'❌ まちがい';
+    document.getElementById('ch-result-msg').textContent=ok?'下のステップ解説も確認してみよう。':`正解は ${ch.answer}${ch.unit} でした。ヒントやステップ解説を見てみよう！`;
+    rb.style.display='block';
+}
+
+function chToggleHint() {
+    chState.hintVisible=!chState.hintVisible;
+    document.getElementById('ch-hint-box').style.display=chState.hintVisible?'block':'none';
+    document.getElementById('ch-hint-btn').textContent=chState.hintVisible?'💡 ヒントを隠す':'💡 ヒントを見る';
+}
+
+function chToggleStep(i) {
+    chState.stepOpen[i]=!chState.stepOpen[i];
+    document.getElementById('ch-step-bd-'+i).classList.toggle('open',!!chState.stepOpen[i]);
+    document.getElementById('ch-chev-'+i).classList.toggle('open',!!chState.stepOpen[i]);
+}
+
+function chExpandAll() {
+    const ch=CHALLENGES.find(c=>c.id===chState.currentId); if (!ch) return;
+    ch.steps.forEach((_,i)=>{ chState.stepOpen[i]=true; document.getElementById('ch-step-bd-'+i).classList.add('open'); document.getElementById('ch-chev-'+i).classList.add('open'); });
+}
+
+/* ════════════════════════════════════════
+   INIT
+════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('ans-input').addEventListener('keydown', e => { if(e.key==='Enter') checkAnswer(); });
+    document.getElementById('ch-ans-input').addEventListener('keydown', e => { if(e.key==='Enter') chSubmitAnswer(); });
+    updateLearn();
+    generateProblem();
+});
+</script>
+</body>
+</html>

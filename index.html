@@ -69,6 +69,17 @@
         .home-sub { color: rgba(255,255,255,.8); font-size: .92rem; text-align: center; margin-bottom: 36px; }
         .home-sub b { color: #fff; }
         .home-grade-badge { display: inline-block; background: rgba(255,255,255,.25); color: #fff; font-size: .82rem; font-weight: bold; padding: 4px 14px; border-radius: 20px; margin-bottom: 10px; }
+        .home-notice {
+            max-width: 440px; width: 100%;
+            background: rgba(255,255,255,.15);
+            border: 1px solid rgba(255,255,255,.3);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-top: 20px;
+            display: flex; align-items: flex-start; gap: 10px;
+        }
+        .home-notice-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+        .home-notice-text { color: rgba(255,255,255,.9); font-size: .8rem; line-height: 1.7; }
         .course-cards { display: flex; flex-direction: column; gap: 16px; max-width: 440px; width: 100%; }
         .course-card {
             border-radius: 20px; padding: 24px 22px; cursor: pointer;
@@ -468,6 +479,13 @@
                 <div class="cc-desc">中学受験レベルの難問を<br>単元別・ステップ解説で攻略</div>
             </div>
             <span class="cc-arrow">›</span>
+        </div>
+    </div>
+    <div class="home-notice">
+        <span class="home-notice-icon">🛠️</span>
+        <div class="home-notice-text">
+            <b>現在、学年別コンテンツを制作中です。</b><br>
+            5年生・6年生ともに同じ内容が表示されますが、今後それぞれの学年に合わせた問題・解説を順次追加していく予定です。
         </div>
     </div>
 </div>

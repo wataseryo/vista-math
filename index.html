@@ -24,16 +24,51 @@
         .screen { display: none; min-height: 100vh; flex-direction: column; }
         .screen.active { display: flex; }
 
+        /* ══ GRADE SELECTION ══ */
+        #grade-screen {
+            background: linear-gradient(160deg, #43cea2 0%, #185a9d 100%);
+            align-items: center;
+            padding: 60px 20px 40px;
+        }
+        .grade-logo { font-size: 3.5rem; margin-bottom: 14px; }
+        .grade-title { color: #fff; font-size: 1.8rem; font-weight: bold; text-align: center; text-shadow: 0 2px 8px rgba(0,0,0,.2); margin-bottom: 8px; }
+        .grade-sub { color: rgba(255,255,255,.85); font-size: .92rem; text-align: center; margin-bottom: 40px; }
+        .grade-cards { display: flex; flex-direction: column; gap: 16px; max-width: 380px; width: 100%; }
+        .grade-card {
+            border-radius: 22px; padding: 28px 24px; cursor: pointer;
+            display: flex; align-items: center; gap: 20px;
+            box-shadow: 0 6px 28px rgba(0,0,0,.2);
+            transition: transform .18s, box-shadow .18s; user-select: none;
+        }
+        .grade-card:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(0,0,0,.25); }
+        .grade-card:active { transform: translateY(-2px); }
+        .grade-card.g5 { background: #fff; }
+        .grade-card.g6 { background: linear-gradient(135deg, #f7971e, #ffd200); }
+        .grade-card-icon { font-size: 3rem; flex-shrink: 0; }
+        .grade-card-body { flex: 1; }
+        .grade-card-label { font-size: .72rem; font-weight: bold; letter-spacing: .08em; margin-bottom: 4px; }
+        .grade-card.g5 .grade-card-label { color: #185a9d; }
+        .grade-card.g6 .grade-card-label { color: rgba(0,0,0,.5); }
+        .grade-card-title { font-size: 1.5rem; font-weight: bold; margin-bottom: 4px; }
+        .grade-card.g5 .grade-card-title { color: #1a1a2e; }
+        .grade-card.g6 .grade-card-title { color: #1a1a2e; }
+        .grade-card-desc { font-size: .78rem; line-height: 1.6; }
+        .grade-card.g5 .grade-card-desc { color: #777; }
+        .grade-card.g6 .grade-card-desc { color: rgba(0,0,0,.55); }
+        .grade-card-arrow { font-size: 1.5rem; color: rgba(0,0,0,.2); flex-shrink: 0; }
+
         /* ══ COURSE SELECTION ══ */
         #home-screen {
             background: linear-gradient(160deg, #667eea 0%, #764ba2 100%);
             align-items: center;
             padding: 48px 20px 40px;
+            position: relative;
         }
         .home-logo { font-size: 3rem; margin-bottom: 10px; }
         .home-title { color: #fff; font-size: 1.75rem; font-weight: bold; text-align: center; text-shadow: 0 2px 8px rgba(0,0,0,.2); margin-bottom: 6px; }
         .home-sub { color: rgba(255,255,255,.8); font-size: .92rem; text-align: center; margin-bottom: 36px; }
         .home-sub b { color: #fff; }
+        .home-grade-badge { display: inline-block; background: rgba(255,255,255,.25); color: #fff; font-size: .82rem; font-weight: bold; padding: 4px 14px; border-radius: 20px; margin-bottom: 10px; }
         .course-cards { display: flex; flex-direction: column; gap: 16px; max-width: 440px; width: 100%; }
         .course-card {
             border-radius: 20px; padding: 24px 22px; cursor: pointer;
@@ -380,11 +415,41 @@
 </head>
 <body>
 
+<!-- ════════ GRADE SELECTION ════════ -->
+<div id="grade-screen" class="screen active">
+    <div class="grade-logo">📚</div>
+    <div class="grade-title">算数ビジュアル学習</div>
+    <div class="grade-sub">まず学年を選んでね！</div>
+    <div class="grade-cards">
+        <div class="grade-card g5" onclick="selectGrade(5)">
+            <span class="grade-card-icon">🐣</span>
+            <div class="grade-card-body">
+                <div class="grade-card-label">GRADE 5</div>
+                <div class="grade-card-title">5年生</div>
+                <div class="grade-card-desc">割合・速さ・図形など<br>5年生の算数を学ぼう</div>
+            </div>
+            <span class="grade-card-arrow">›</span>
+        </div>
+        <div class="grade-card g6" onclick="selectGrade(6)">
+            <span class="grade-card-icon">🚀</span>
+            <div class="grade-card-body">
+                <div class="grade-card-label">GRADE 6</div>
+                <div class="grade-card-title">6年生</div>
+                <div class="grade-card-desc">比・場合の数・受験対策まで<br>レベルアップして挑戦！</div>
+            </div>
+            <span class="grade-card-arrow">›</span>
+        </div>
+    </div>
+</div>
+
 <!-- ════════ COURSE SELECTION ════════ -->
-<div id="home-screen" class="screen active">
+<div id="home-screen" class="screen">
+    <div style="position:absolute;top:16px;left:16px">
+        <button onclick="showScreen('grade')" style="background:rgba(255,255,255,.22);border:none;color:#fff;padding:6px 13px;border-radius:8px;cursor:pointer;font-size:.82rem;font-family:inherit">← 学年選択</button>
+    </div>
     <div class="home-logo">📚</div>
     <div class="home-title">算数ビジュアル学習</div>
-    <div class="home-sub">コースを選んで学ぼう</div>
+    <div class="home-sub" id="home-grade-display">コースを選んで学ぼう</div>
     <div class="course-cards">
         <div class="course-card std" onclick="showScreen('standard')">
             <span class="cc-icon">📘</span>
@@ -410,7 +475,7 @@
 <!-- ════════ STANDARD COURSE ════════ -->
 <div id="standard-screen" class="screen">
     <div class="screen-header std-header">
-        <button class="back-btn" onclick="showScreen('home')">← もどる</button>
+        <button class="back-btn" onclick="showScreen('home')">← コース選択</button>
         <span class="screen-title">📘 標準コース</span>
     </div>
     <div class="std-hero">
@@ -751,6 +816,7 @@ const CHALLENGES = [
 /* ════════════════════════════════════════
    STATE
 ════════════════════════════════════════ */
+const appState = { grade: 5 };
 const learn = { inflow:3, outflow:1, initial:50, current:50, simRunning:false, simTimer:null, simTime:0, capacity:100 };
 const quiz  = { level:1, correct:0, wrong:0, problem:null, hintVisible:false };
 const chState = { filter:'すべて', currentId:null, hintVisible:false, stepOpen:{} };
@@ -758,6 +824,14 @@ const chState = { filter:'すべて', currentId:null, hintVisible:false, stepOpe
 /* ════════════════════════════════════════
    NAVIGATION
 ════════════════════════════════════════ */
+function selectGrade(g) {
+    appState.grade = g;
+    const label = g + '年生';
+    document.getElementById('home-grade-display').innerHTML =
+        `<span style="background:rgba(255,255,255,.25);padding:3px 12px;border-radius:20px;font-weight:bold">${label}</span> のコースを選ぼう`;
+    showScreen('home');
+}
+
 function showScreen(id, opts={}) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id + '-screen').classList.add('active');

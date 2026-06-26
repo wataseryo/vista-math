@@ -825,7 +825,7 @@
     <div id="prac-cat-view" style="display:flex;flex-direction:column;flex:1;overflow:hidden">
         <div class="prac-hero">
             <div class="prac-hero-title" id="prac-hero-title">演習問題</div>
-            <div class="prac-hero-sub">分野を選んで問題にチャレンジしよう</div>
+            <div class="prac-hero-sub">分野を選択せよ</div>
         </div>
         <div class="prac-cat-section" style="overflow-y:auto;flex:1">
             <div class="prac-section-lbl">分野を選ぶ</div>
@@ -895,7 +895,7 @@
     <div id="std-prac-cat-view" style="display:flex;flex-direction:column;flex:1;overflow:hidden">
         <div class="prac-hero" style="background:linear-gradient(135deg,#1976D2,#0D47A1)">
             <div class="prac-hero-title" id="std-prac-hero-title">演習問題</div>
-            <div class="prac-hero-sub">単元を選んで問題にチャレンジしよう</div>
+            <div class="prac-hero-sub">単元を選択せよ</div>
         </div>
         <div class="prac-cat-section" style="overflow-y:auto;flex:1">
             <div class="prac-section-lbl">単元を選ぶ</div>
@@ -1097,12 +1097,12 @@
                 <div class="ch-prob-text" id="ch-prob-text"></div>
             </div>
             <div class="ch-ans-card">
-                <div class="ch-ans-label">✏️ あなたの答えを入力しよう</div>
+                <div class="ch-ans-label">解答欄</div>
                 <div class="ch-ans-row">
                     <input type="number" class="ch-ans-input" id="ch-ans-input" placeholder="答え">
                     <span class="ch-ans-unit" id="ch-ans-unit">L</span>
                 </div>
-                <button class="ch-submit-btn" onclick="chSubmitAnswer()">答え合わせ ✔</button>
+                <button class="ch-submit-btn" onclick="chSubmitAnswer()">解答する</button>
                 <button class="ch-hint-btn" id="ch-hint-btn" onclick="chToggleHint()">💡 ヒントを見る</button>
                 <div class="ch-hint-box" id="ch-hint-box"></div>
                 <div class="ch-result-box" id="ch-result-box">
@@ -1219,7 +1219,7 @@ const PRACTICE_PROBLEMS = [
 ════════════════════════════════════════ */
 const CHALLENGES = [
   { id:'c1', grade:6, category:'水槽', catColor:'#0277BD', catBg:'#E3F2FD', borderColor:'#0288D1', title:'途中で条件が変わる水槽', difficulty:3,
-    text:`容量100Lの水槽に最初20Lの水があります。\n毎分3Lの水を入れ始めました。\n5分後に、さらに毎分2Lの管を追加しました。\n\n最初から何分後に水槽の水が50Lになりますか？`,
+    text:`容量100Lの水槽に最初20Lの水があります。\n毎分3Lの水を入れ始めました。\n5分後に、さらに毎分2Lの管を追加しました。\n\n最初から何分後に水槽の水が50Lになるか。`,
     answer:8, unit:'分', hint:`「5分後」を境に前半・後半に分けて考えよう。\n前半（5分間）で水は何Lになる？\n後半は毎分何L増える？`,
     steps:[
       { title:'前半・後半に分ける', text:`「5分後に管が追加される」ので\n2つの場面に分けます。\n\n【前半】0〜5分：毎分3L入る\n【後半】5分以降：3＋2＝毎分5L入る`,
@@ -1233,7 +1233,7 @@ const CHALLENGES = [
     ]
   },
   { id:'c2', grade:6, category:'水槽', catColor:'#0277BD', catBg:'#E3F2FD', borderColor:'#0288D1', title:'2つの管で満水にする', difficulty:3,
-    text:`空の水槽をA管だけで満水にすると30分、\nB管だけで満水にすると20分かかります。\n\nA管とB管を同時に使うと何分で満水になりますか？`,
+    text:`空の水槽をA管だけで満水にすると30分、\nB管だけで満水にすると20分かかります。\n\nA管とB管を同時に使うと何分で満水になるか。`,
     answer:12, unit:'分', hint:`1分間にA管は全体の何分の1入れる？\n合わせた速さ＝A管＋B管`,
     steps:[
       { title:'1分間に入る量を分数で表す', text:`A管：30分で満水 → 1分で全体の 1/30\nB管：20分で満水 → 1分で全体の 1/20`,
@@ -1245,7 +1245,7 @@ const CHALLENGES = [
     ]
   },
   { id:'c3', grade:6, category:'速さ', catColor:'#2E7D32', catBg:'#E8F5E9', borderColor:'#43A047', title:'出会い算', difficulty:2,
-    text:`A地点とB地点は2000m離れています。\n太郎くんはA地点から分速60mで、\n花子さんはB地点から分速40mで\n同時に向かい合って歩きます。\n\n何分後に2人は出会いますか？`,
+    text:`A地点とB地点は2000m離れています。\n太郎くんはA地点から分速60mで、\n花子さんはB地点から分速40mで\n同時に向かい合って歩きます。\n\n何分後に2人は出会うか。`,
     answer:20, unit:'分', hint:`2人が1分間に縮める距離の合計は？\n合わせた速さ＝太郎の速さ＋花子の速さ`,
     steps:[
       { title:'状況を図にする', text:`2000mを2人が向き合って歩く\n→ 1分ごとに距離が縮まる`,
@@ -1257,7 +1257,7 @@ const CHALLENGES = [
     ]
   },
   { id:'c4', grade:6, category:'速さ', catColor:'#2E7D32', catBg:'#E8F5E9', borderColor:'#43A047', title:'追いかけ算', difficulty:3,
-    text:`太郎くんは7時ちょうどに家を出て、\n分速60mで学校へ歩きます。\nお母さんは7時10分に自転車で追いかけ、\n分速180mで走ります。\n\nお母さんが太郎くんに追いつくのは7時何分ですか？`,
+    text:`太郎は7時に家を出て、分速60mで学校へ向かう。\n母は7時10分に自転車で追いかけ、分速180mで走る。\n\n母が太郎に追いつくのは7時何分か。`,
     answer:15, unit:'分（7時）', hint:`お母さんが出発したとき、太郎くんは何m先？\n1分間に縮まる距離は？（差の速さ）`,
     steps:[
       { title:'お母さん出発時の差を求める', text:`太郎くんは10分先に出発\n10分間に：60×10＝600m 先にいる`,
@@ -1269,7 +1269,7 @@ const CHALLENGES = [
     ]
   },
   { id:'c5', grade:6, category:'割合', catColor:'#6A1B9A', catBg:'#F3E5F5', borderColor:'#8E24AA', title:'食塩水の混合', difficulty:4,
-    text:`10%の食塩水200gと\n5%の食塩水300gを混ぜました。\n\n混ぜた後の食塩水は何%ですか？`,
+    text:`10%の食塩水200gと\n5%の食塩水300gを混ぜました。\n\n混ぜた後の食塩水の濃度は何%か。`,
     answer:7, unit:'%', hint:`まず「塩の量(g)」を先に求めよう。\n塩の量 ＝ 食塩水の量 × 濃度（÷100）`,
     steps:[
       { title:'それぞれの塩の量を求める', text:`10%食塩水200g → 塩：200×0.1＝20g\n5%食塩水300g  → 塩：300×0.05＝15g`,
@@ -1281,7 +1281,7 @@ const CHALLENGES = [
     ]
   },
   { id:'c6', grade:5, category:'植木算', catColor:'#E65100', catBg:'#FFF3E0', borderColor:'#FB8C00', title:'道に木を植える（両端あり）', difficulty:2,
-    text:`100mの道の両端に木を植えます。\n木と木の間隔を10mにするとき、\n木は全部で何本必要ですか？`,
+    text:`100mの道の両端に木を植えます。\n木と木の間隔を10mにするとき、\n木は全部で何本必要か。`,
     answer:11, unit:'本', hint:`まず「間隔の数」を求めよう。\n両端に植えるとき：木の本数 ＝ 間隔の数 ＋ 1`,
     steps:[
       { title:'間隔の数を求める', text:`道の長さ ÷ 間隔 ＝ 間隔の数\n100 ÷ 10 ＝ 10（個の間隔）`,
@@ -1291,7 +1291,7 @@ const CHALLENGES = [
     ]
   },
   { id:'c7', grade:5, category:'つるかめ算', catColor:'#00695C', catBg:'#E0F2F1', borderColor:'#00897B', title:'ツルとカメの足の数', difficulty:3,
-    text:`ツルとカメが合わせて10匹います。\n足の本数の合計は28本でした。\n\nツルは何匹いますか？`,
+    text:`ツルとカメが合わせて10匹います。\n足の本数の合計は28本でした。\n\nツルは何匹か。`,
     answer:6, unit:'匹', hint:`「全部ツルだったら足は何本？」から考えよう。\nカメ1匹に替えると足は何本増える？`,
     steps:[
       { title:'全部ツルと仮定する', text:`10匹すべてツルとすると\n足の合計：2×10＝20本\n実際は28本 → 28－20＝8本 多い`,
@@ -1303,7 +1303,7 @@ const CHALLENGES = [
     ]
   },
   { id:'c8', grade:5, category:'過不足算', catColor:'#AD1457', catBg:'#FCE4EC', borderColor:'#E91E63', title:'余りと不足（机と生徒）', difficulty:4,
-    text:`生徒を机に座らせます。\n1つの机に4人ずつ座ると8人余ります。\n1つの机に6人ずつ座ると2人足りません。\n\n生徒は何人いますか？`,
+    text:`生徒を机に座らせます。\n1つの机に4人ずつ座ると8人余ります。\n1つの机に6人ずつ座ると2人足りません。\n\n生徒は何人か。`,
     answer:28, unit:'人', hint:`机の台数を□として2つの式を立てよう。\n4×□＋8 ＝ 6×□－2`,
     steps:[
       { title:'机の台数を□とおく', text:`机の台数を□台とすると：\n4人ずつ・余り8人 → 生徒数 ＝ 4×□＋8\n6人ずつ・2人不足 → 生徒数 ＝ 6×□－2`,
@@ -1317,7 +1317,7 @@ const CHALLENGES = [
 
   /* ── 和差算 ── */
   { id:'c9', grade:5, category:'和差算', catColor:'#1565C0', catBg:'#E3F2FD', borderColor:'#1976D2', title:'シールの枚数（和差算 基本）', difficulty:2,
-    text:`たろうさんとはなこさんが持っているシールの合計は80枚で、\nたろうさんははなこさんより12枚多く持っています。\n\nたろうさんは何枚持っていますか？`,
+    text:`太郎と花子が持っているシールの合計は80枚で、\n太郎は花子より12枚多く持っている。\n\n太郎は何枚持っているか。`,
     answer:46, unit:'枚',
     hint:`テープ図を書いてみよう。\n大きい方 ＝ （和 ＋ 差）÷ 2 で求められるよ！`,
     steps:[
@@ -1337,7 +1337,7 @@ const CHALLENGES = [
     ]
   },
   { id:'c10', grade:5, category:'和差算', catColor:'#1565C0', catBg:'#E3F2FD', borderColor:'#1976D2', title:'2チームの得点（和差算 応用）', difficulty:2,
-    text:`AチームとBチームの合計得点は96点で、\nAチームはBチームより14点多い。\n\nAチームの得点は何点ですか？`,
+    text:`AチームとBチームの合計得点は96点で、\nAチームはBチームより14点多い。\n\nAチームの得点は何点か。`,
     answer:55, unit:'点',
     hint:`「大きい方＝（和＋差）÷2」の公式を使おう！\nAチームが大きい方だよ。`,
     steps:[
@@ -1359,7 +1359,7 @@ const CHALLENGES = [
 
   /* ── 年齢算 基礎 ── */
   { id:'c11', grade:5, category:'年齢算', catColor:'#00695C', catBg:'#E0F2F1', borderColor:'#00897B', title:'倍数での年齢算', difficulty:3,
-    text:`現在、父の年齢は子の年齢の5倍です。\n父と子の年齢の差は28歳です。\n\n父は現在何歳ですか？`,
+    text:`現在、父の年齢は子の年齢の5倍です。\n父と子の年齢の差は28歳です。\n\n父は現在何歳か。`,
     answer:35, unit:'歳',
     hint:`「差は変わらない」がポイント！\n父 − 子 ＝ 28歳\n父 ＝ 5×子 だから…\n5×子 − 子 ＝ 4×子 ＝ 28歳`,
     steps:[
@@ -1375,7 +1375,7 @@ const CHALLENGES = [
     ]
   },
   { id:'c12', grade:5, category:'年齢算', catColor:'#00695C', catBg:'#E0F2F1', borderColor:'#00897B', title:'何年後に○倍になるか', difficulty:3,
-    text:`現在、母は37歳で、子は9歳です。\n\n何年後に母の年齢が子の年齢の3倍になりますか？`,
+    text:`現在、母は37歳で、子は9歳です。\n\n何年後に母の年齢が子の年齢の3倍になるか。`,
     answer:5, unit:'年後',
     hint:`何年後かを□とおいて式を作ろう。\n(37＋□) ＝ 3×(9＋□) となるよ。`,
     steps:[
@@ -1393,7 +1393,7 @@ const CHALLENGES = [
 
   /* ── 流水算 ── */
   { id:'c13', grade:6, category:'流水算', catColor:'#0277BD', catBg:'#E1F5FE', borderColor:'#039BE5', title:'静水時の速さを求める', difficulty:3,
-    text:`ある船が川を20km上るのに4時間、\n同じ20kmを下るのに2時間かかりました。\n\nこの船の静水時の速さは何km/hですか？`,
+    text:`ある船が川を20km上るのに4時間、\n同じ20kmを下るのに2時間かかりました。\n\nこの船の静水時の速さを求めよ。`,
     answer:7.5, unit:'km/h',
     hint:`まず上りと下りの速さを別々に求めよう。\n静水時の速さ ＝ (上りの速さ ＋ 下りの速さ) ÷ 2`,
     steps:[
@@ -1415,7 +1415,7 @@ const CHALLENGES = [
     ]
   },
   { id:'c14', grade:6, category:'流水算', catColor:'#0277BD', catBg:'#E1F5FE', borderColor:'#039BE5', title:'上りの距離を求める', difficulty:4,
-    text:`静水での速さが時速12kmの船があります。\n流速が時速3kmの川を上るのに2時間かかりました。\n\nこの区間は何kmですか？`,
+    text:`静水での速さが時速12kmの船があります。\n流速が時速3kmの川を上るのに2時間かかりました。\n\nこの区間の距離は何kmか。`,
     answer:18, unit:'km',
     hint:`上りの速さ ＝ 静水速 − 流速\n距離 ＝ 速さ × 時間`,
     steps:[
@@ -1437,7 +1437,7 @@ const CHALLENGES = [
 
   /* ── 通過算 ── */
   { id:'c15', grade:6, category:'通過算', catColor:'#37474F', catBg:'#ECEFF1', borderColor:'#546E7A', title:'電車が橋を渡る', difficulty:3,
-    text:`長さ150mの電車が時速90kmで走っています。\n長さ450mの橋を渡り始めてから\n渡り終わるまでの時間は何秒ですか？`,
+    text:`長さ150mの電車が時速90kmで走っています。\n長さ450mの橋を渡り始めてから\n渡り終わるまでの時間は何秒か。`,
     answer:24, unit:'秒',
     hint:`電車が「完全に橋を渡る」距離は？\n電車の長さ ＋ 橋の長さ を考えよう！`,
     steps:[
@@ -1457,7 +1457,7 @@ const CHALLENGES = [
     ]
   },
   { id:'c16', grade:6, category:'通過算', catColor:'#37474F', catBg:'#ECEFF1', borderColor:'#546E7A', title:'2列車が追い越す', difficulty:4,
-    text:`長さ200mの電車Aが秒速30mで、\n長さ100mの電車Bが秒速20mで\n同じ方向に走っています。\n\nAがBに追いついてから完全に追い越すまでの時間は何秒ですか？`,
+    text:`長さ200mの電車Aが秒速30mで、\n長さ100mの電車Bが秒速20mで\n同じ方向に走っています。\n\nAがBに追いついてから完全に追い越すまでの時間は何秒か。`,
     answer:30, unit:'秒',
     hint:`追い越す距離 ＝ A の長さ ＋ B の長さ\n差の速さ ＝ 速いA − 遅いB`,
     steps:[
@@ -1479,7 +1479,7 @@ const CHALLENGES = [
 
   /* ── ニュートン算 ── */
   { id:'c17', grade:6, category:'ニュートン算', catColor:'#6A1B9A', catBg:'#F3E5F5', borderColor:'#8E24AA', title:'行列はなくなる（ニュートン算 基本）', difficulty:4,
-    text:`入場ゲートの外に行列があります。\n毎分3人ずつ新たに並んできます。\n\nゲートを2つ開けると20分でなくなり、\n3つ開けると10分でなくなります。\n\n最初に並んでいた人は何人ですか？`,
+    text:`入場ゲートの外に行列があります。\n毎分3人ずつ新たに並んできます。\n\nゲートを2つ開けると20分でなくなり、\n3つ開けると10分でなくなります。\n\n最初に並んでいた人は何人か。`,
     answer:60, unit:'人',
     hint:`式を2つ立てよう。\n最初の人数をN、1つのゲートが1分間に処理する人数をbとおく。\nN ＋ 増えた人数 ＝ 処理した人数`,
     steps:[
@@ -1505,7 +1505,7 @@ const CHALLENGES = [
     ]
   },
   { id:'c18', grade:6, category:'ニュートン算', catColor:'#6A1B9A', catBg:'#F3E5F5', borderColor:'#8E24AA', title:'牧場の草（ニュートン算 応用）', difficulty:5,
-    text:`草が毎日一定量生える牧場があります。\n4頭の牛が食べると10日で草がなくなり、\n2頭だと30日でなくなります。\n\n6頭だと何日で草がなくなりますか？`,
+    text:`草が毎日一定量生える牧場があります。\n4頭の牛が食べると10日で草がなくなり、\n2頭だと30日でなくなります。\n\n6頭だと何日で草がなくなるか。`,
     answer:6, unit:'日',
     hint:`最初の草の量をS、1日に生える量をa、\n牛1頭が1日に食べる量をbとおこう。\nS ＋ 日数×a ＝ 頭数×b×日数`,
     steps:[
@@ -1529,7 +1529,7 @@ const CHALLENGES = [
 
   /* ── 消去算 ── */
   { id:'c19', grade:6, category:'消去算', catColor:'#E65100', catBg:'#FFF3E0', borderColor:'#FB8C00', title:'りんごとみかん（消去算 基本）', difficulty:3,
-    text:`りんご2個とみかん3個の合計は360円、\nりんご1個とみかん2個の合計は210円です。\n\nりんご1個はいくらですか？`,
+    text:`りんご2個とみかん3個の合計は360円、\nりんご1個とみかん2個の合計は210円です。\n\nりんご1個の値段を求めよ。`,
     answer:90, unit:'円',
     hint:`2つの式の「みかん」を消そう！\n②×2でみかんの数を合わせてから引き算するよ。`,
     steps:[
@@ -1551,7 +1551,7 @@ const CHALLENGES = [
     ]
   },
   { id:'c20', grade:6, category:'消去算', catColor:'#E65100', catBg:'#FFF3E0', borderColor:'#FB8C00', title:'えんぴつとノート（消去算 応用）', difficulty:4,
-    text:`えんぴつ3本とノート2冊の合計は460円、\nえんぴつ5本とノート3冊の合計は740円です。\n\nえんぴつ1本はいくらですか？`,
+    text:`えんぴつ3本とノート2冊の合計は460円、\nえんぴつ5本とノート3冊の合計は740円です。\n\nえんぴつ1本の値段を求めよ。`,
     answer:100, unit:'円',
     hint:`ノートを消すために①×3、②×2で\nノートの数を合わせてみよう！`,
     steps:[
@@ -1576,7 +1576,7 @@ const CHALLENGES = [
 
   /* ── 植木算 2問目（池の周り） ── */
   { id:'c21', grade:5, category:'植木算', catColor:'#E65100', catBg:'#FFF3E0', borderColor:'#FB8C00', title:'池の周りに木を植える', difficulty:2,
-    text:`周囲が120mの池の周りに、\n10m間隔で木を植えます。\n\n木は全部で何本必要ですか？`,
+    text:`周囲が120mの池の周りに、\n10m間隔で木を植えます。\n\n木は全部で何本必要か。`,
     answer:12, unit:'本',
     hint:`「池の周り」は輪っか型！\n最後の木と最初の木の間も「間隔」になるよ。\n池の問題では 本数 ＝ 間隔の数 になるよ。`,
     steps:[
@@ -1604,7 +1604,7 @@ const CHALLENGES = [
 
   /* ── つるかめ算 2問目（点数問題） ── */
   { id:'c22', grade:5, category:'つるかめ算', catColor:'#00695C', catBg:'#E0F2F1', borderColor:'#00897B', title:'テストの点数（つるかめ算 応用）', difficulty:3,
-    text:`30問のテストで、\n正解すると4点もらえ、\n間違えると1点引かれます。\n\n全問解いて90点でした。\n正解は何問ですか？`,
+    text:`30問のテストで、\n正解すると4点もらえ、\n間違えると1点引かれます。\n\n全問解いて90点でした。\n正解は何問か。`,
     answer:24, unit:'問',
     hint:`「全部正解だったら何点？」から考えよう。\n4×30 ＝ 120点のはず。\n実際より30点少ない…なぜ？\n1問間違えるたびに 4＋1＝5点 減るよ！`,
     steps:[
@@ -1630,7 +1630,7 @@ const CHALLENGES = [
 
   /* ── 過不足算 2問目（おかし分け） ── */
   { id:'c23', grade:5, category:'過不足算', catColor:'#AD1457', catBg:'#FCE4EC', borderColor:'#E91E63', title:'おかしを配る（過不足算）', difficulty:3,
-    text:`子どもたちにおかしを配ります。\n4個ずつ配ると6個余り、\n6個ずつ配ると10個足りません。\n\n子どもは何人いますか？`,
+    text:`子どもたちにおかしを配ります。\n4個ずつ配ると6個余り、\n6個ずつ配ると10個足りません。\n\n子どもは何人か。`,
     answer:8, unit:'人',
     hint:`□を子どもの人数とすると2つの式が立てられるよ。\n4×□＋6 ＝ 6×□－10\nを解こう！`,
     steps:[
@@ -1651,7 +1651,7 @@ const CHALLENGES = [
 
   /* ── 旅人算 往復の平均速 ── */
   { id:'c24', grade:6, category:'速さ', catColor:'#2E7D32', catBg:'#E8F5E9', borderColor:'#43A047', title:'往復の平均の速さ', difficulty:4,
-    text:`A地点からB地点まで行きは時速4km、\n帰りは時速6kmで歩きました。\n\n往復の平均の速さは何km/hですか？`,
+    text:`A地点からB地点まで行きは時速4km、\n帰りは時速6kmで歩きました。\n\n往復の平均の速さを求めよ。`,
     answer:4.8, unit:'km/h',
     hint:`距離を具体的な数で置いてみよう！\nAB間を12kmと仮定すると計算しやすいよ。\n平均の速さ ＝ 総距離 ÷ 総時間`,
     steps:[
@@ -1669,7 +1669,7 @@ const CHALLENGES = [
 
   /* ── 通過算 3問目（すれ違い） ── */
   { id:'c25', grade:6, category:'通過算', catColor:'#37474F', catBg:'#ECEFF1', borderColor:'#546E7A', title:'2列車がすれ違う', difficulty:3,
-    text:`長さ100mの電車Aが秒速15mで、\n長さ200mの電車Bが秒速10mで\n逆方向に走っています。\n\nすれ違い始めてから終わるまでの時間は何秒ですか？`,
+    text:`長さ100mの電車Aが秒速15mで、\n長さ200mの電車Bが秒速10mで\n逆方向に走っています。\n\nすれ違い始めてから終わるまでの時間は何秒か。`,
     answer:12, unit:'秒',
     hint:`すれ違う距離 ＝ AとBの長さを合わせた距離\n逆方向なので合わせた速さ ＝ 速さの和！`,
     steps:[
@@ -1690,7 +1690,7 @@ const CHALLENGES = [
 
   /* ── 食塩水 蒸発 ── */
   { id:'c26', grade:6, category:'割合', catColor:'#6A1B9A', catBg:'#F3E5F5', borderColor:'#8E24AA', title:'食塩水を蒸発させる', difficulty:4,
-    text:`10%の食塩水300gから\n水を蒸発させて15%にしたい。\n\n何gの水を蒸発させればよいですか？`,
+    text:`10%の食塩水300gから\n水を蒸発させて15%にしたい。\n\n何gの水を蒸発させればよいか。`,
     answer:100, unit:'g',
     hint:`蒸発しても塩の量は変わらない！\nまず塩の量を求めて、\n15%になるときの食塩水の量を逆算しよう。`,
     steps:[
@@ -1708,7 +1708,7 @@ const CHALLENGES = [
 
   /* ── 売買損益 ── */
   { id:'c27', grade:6, category:'売買損益', catColor:'#1B5E20', catBg:'#E8F5E9', borderColor:'#2E7D32', title:'定価と利益（売買損益 基本）', difficulty:3,
-    text:`ある商品を450円で仕入れました。\n仕入れ値の20%の利益をのせて\n定価をつけました。\n\n定価はいくらですか？`,
+    text:`ある商品を450円で仕入れました。\n仕入れ値の20%の利益をのせて\n定価をつけました。\n\n定価を求めよ。`,
     answer:540, unit:'円',
     hint:`定価 ＝ 仕入れ値 × (1 ＋ 利益の割合)\n20%の利益 → 1.2倍！`,
     steps:[
@@ -1726,7 +1726,7 @@ const CHALLENGES = [
     ]
   },
   { id:'c28', grade:6, category:'売買損益', catColor:'#1B5E20', catBg:'#E8F5E9', borderColor:'#2E7D32', title:'割引と損益（売買損益 応用）', difficulty:4,
-    text:`定価800円の品物を定価の15%引きで売りました。\n仕入れ値は600円です。\n\n利益は何円ですか？`,
+    text:`定価800円の品物を定価の15%引きで売りました。\n仕入れ値は600円です。\n\n利益は何円か。`,
     answer:80, unit:'円',
     hint:`まず売値を求めよう。\n売値 ＝ 定価 × (1 − 割引率)\n次に 利益 ＝ 売値 − 仕入れ値`,
     steps:[
@@ -2422,11 +2422,11 @@ function chSubmitAnswer() {
     rb.className='ch-result-box '+(ok?'ok':'ng');
     if (ok) {
         document.getElementById('ch-result-hl').textContent='⭕ 正解！';
-        document.getElementById('ch-result-msg').textContent='下のステップ解説も確認してみよう。';
+        document.getElementById('ch-result-msg').textContent='ステップ解説で解法を確認せよ。';
         addStar();
     } else {
         document.getElementById('ch-result-hl').textContent='❌ ' + getWrongMsg();
-        document.getElementById('ch-result-msg').textContent=`正解は ${ch.answer}${ch.unit} でした。ヒントやステップ解説を見てみよう！`;
+        document.getElementById('ch-result-msg').textContent=`正解は ${ch.answer}${ch.unit} でした。ヒントまたはステップ解説で確認せよ。`;
         resetStreak();
     }
     rb.style.display='block';

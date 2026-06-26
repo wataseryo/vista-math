@@ -725,6 +725,20 @@
             100% { transform: translateX(-50%) translateY(0); opacity: 1; }
         }
 
+        /* ── Attempt history dots ── */
+        .att-dots { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 4px; }
+        .att-dot { font-size: .6rem; font-weight: 800; width: 15px; height: 15px;
+            border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
+        .att-dot.ok { background: #0C2E1A; color: #34D399; }
+        .att-dot.ng { background: #3D1515; color: #F87171; }
+        /* ── Retry button ── */
+        .retry-btn {
+            background: none; border: 1px solid rgba(0,0,0,.18);
+            color: rgba(0,0,0,.4); font-size: .72rem; padding: 4px 11px;
+            border-radius: 6px; cursor: pointer; margin-top: 8px; margin-left: 4px;
+            font-family: inherit;
+        }
+        .retry-btn:hover { background: rgba(0,0,0,.06); }
         /* ── Reveal answer button ── */
         .reveal-ans-btn {
             background: none; border: 1px solid rgba(183,28,28,.35);
@@ -1854,6 +1868,7 @@ function stdPracOpenCat(chapterId) {
                 <div class="prac-prob-body">
                     <div class="prac-prob-title">${p.title}</div>
                     <div class="prac-prob-meta">${stars}</div>
+                    ${getAttemptDots(p.id)}
                 </div>
                 <span style="color:#bbb;font-size:1.1rem">›</span>
             </div>`;
@@ -1905,15 +1920,18 @@ function stdPracCheckAnswer() {
     document.getElementById('std-prac-ans-input').className = 'prac-ans-input ' + (ok ? 'correct' : 'wrong');
     const rb = document.getElementById('std-prac-result-box');
     rb.style.display = 'block';
+    const pid = stdPracState.currentProbId;
     if (ok) {
         rb.style.background = '#E8F5E9'; rb.style.color = '#2E7D32';
-        rb.textContent = '⭕ 正解！';
+        rb.innerHTML = `<div>⭕ 正解！</div><button class="retry-btn" onclick="stdPracRetry()">もう一度解く</button>`;
+        recordProblemAttempt(pid, true);
         recordAnswer(`g${appState.grade}_std_${stdPracState.currentCatId}`, true);
         addStar();
         { const _k=`g${appState.grade}_std_${stdPracState.currentCatId}`; const _s=getStatsForKey(_k); const _ch=(appState.grade===5?STANDARD_CHAPTERS_G5:STANDARD_CHAPTERS_G6).find(c=>c.id===stdPracState.currentCatId); if(_s) showAccuracyCard(_ch?_ch.title:'標準演習', _s.correct, _s.total); }
     } else {
         rb.style.background = '#FFEBEE'; rb.style.color = '#C62828';
-        rb.innerHTML = `<div>❌ ${getWrongMsg()}</div><button class="reveal-ans-btn" data-answer="${p.answer}" data-unit="${p.unit}" onclick="revealAnswer(this)">解答を確認する</button>`;
+        rb.innerHTML = `<div>❌ ${getWrongMsg()}</div><button class="reveal-ans-btn" data-answer="${p.answer}" data-unit="${p.unit}" onclick="revealAnswer(this)">解答を確認する</button><button class="retry-btn" onclick="stdPracRetry()">もう一度解く</button>`;
+        recordProblemAttempt(pid, false);
         recordAnswer(`g${appState.grade}_std_${stdPracState.currentCatId}`, false);
         resetStreak();
     }
@@ -2000,6 +2018,7 @@ function pracOpenCat(catId) {
                 <div class="prac-prob-body">
                     <div class="prac-prob-title">${p.title}</div>
                     <div class="prac-prob-meta">${stars}</div>
+                    ${getAttemptDots(p.id)}
                 </div>
                 <span style="color:#bbb;font-size:1.1rem">›</span>
             </div>`;
@@ -2055,15 +2074,18 @@ function pracCheckAnswer() {
     document.getElementById('prac-ans-input').className = 'prac-ans-input ' + (ok ? 'correct' : 'wrong');
     const rb = document.getElementById('prac-result-box');
     rb.style.display = 'block';
+    const pid = pracState.currentProbId;
     if (ok) {
         rb.style.background = '#E8F5E9'; rb.style.color = '#2E7D32';
-        rb.textContent = '⭕ 正解！';
+        rb.innerHTML = `<div>⭕ 正解！</div><button class="retry-btn" onclick="pracRetry()">もう一度解く</button>`;
+        recordProblemAttempt(pid, true);
         recordAnswer(`g${appState.grade}_exam_${pracState.currentCatId}`, true);
         addStar();
         { const _k=`g${appState.grade}_exam_${pracState.currentCatId}`; const _s=getStatsForKey(_k); const _cat=PRACTICE_CATS.find(c=>c.id===pracState.currentCatId); if(_s) showAccuracyCard(_cat?_cat.title:'受験演習', _s.correct, _s.total); }
     } else {
         rb.style.background = '#FFEBEE'; rb.style.color = '#C62828';
-        rb.innerHTML = `<div>❌ ${getWrongMsg()}</div><button class="reveal-ans-btn" data-answer="${p.answer}" data-unit="${p.unit}" onclick="revealAnswer(this)">解答を確認する</button>`;
+        rb.innerHTML = `<div>❌ ${getWrongMsg()}</div><button class="reveal-ans-btn" data-answer="${p.answer}" data-unit="${p.unit}" onclick="revealAnswer(this)">解答を確認する</button><button class="retry-btn" onclick="pracRetry()">もう一度解く</button>`;
+        recordProblemAttempt(pid, false);
         recordAnswer(`g${appState.grade}_exam_${pracState.currentCatId}`, false);
         resetStreak();
     }
@@ -2399,6 +2421,7 @@ function renderChallengeList() {
             <div class="ch-card-top"><span class="ch-cat-badge" style="background:${c.catBg};color:${c.catColor}">${c.category}</span><span class="ch-stars">${stars}</span></div>
             <div class="ch-card-title">${c.title}</div>
             <div class="ch-card-preview">${preview}</div>
+            ${getAttemptDots(c.id)}
         </div>`;
     }).join('');
 }
@@ -2452,13 +2475,15 @@ function chSubmitAnswer() {
     rb.className='ch-result-box '+(ok?'ok':'ng');
     if (ok) {
         document.getElementById('ch-result-hl').textContent='⭕ 正解！';
-        document.getElementById('ch-result-msg').textContent='ステップ解説で解法を確認せよ。';
+        document.getElementById('ch-result-msg').innerHTML=`<div>ステップ解説で解法を確認せよ。</div><button class="retry-btn" onclick="chRetry()">もう一度解く</button>`;
+        recordProblemAttempt(ch.id, true);
         recordAnswer(`g${appState.grade}_ch_${ch.category}`, true);
         addStar();
         { const _k=`g${appState.grade}_ch_${ch.category}`; const _s=getStatsForKey(_k); if(_s) showAccuracyCard(ch.category, _s.correct, _s.total); }
     } else {
         document.getElementById('ch-result-hl').textContent='❌ ' + getWrongMsg();
-        document.getElementById('ch-result-msg').innerHTML=`<div>ヒントまたはステップ解説で確認せよ。</div><button class="reveal-ans-btn" data-answer="${ch.answer}" data-unit="${ch.unit}" onclick="revealAnswer(this)">解答を確認する</button>`;
+        document.getElementById('ch-result-msg').innerHTML=`<div>ヒントまたはステップ解説で確認せよ。</div><button class="reveal-ans-btn" data-answer="${ch.answer}" data-unit="${ch.unit}" onclick="revealAnswer(this)">解答を確認する</button><button class="retry-btn" onclick="chRetry()">もう一度解く</button>`;
+        recordProblemAttempt(ch.id, false);
         recordAnswer(`g${appState.grade}_ch_${ch.category}`, false);
         resetStreak();
     }
@@ -2544,6 +2569,43 @@ const WRONG_MSGS = [
 ];
 
 function getWrongMsg() { return WRONG_MSGS[Math.floor(Math.random() * WRONG_MSGS.length)]; }
+
+/* ── Per-problem attempt history ── */
+function recordProblemAttempt(probId, correct) {
+    const h = JSON.parse(localStorage.getItem('vista_history') || '{}');
+    if (!h[probId]) h[probId] = [];
+    h[probId].push(correct);
+    localStorage.setItem('vista_history', JSON.stringify(h));
+}
+function getProblemHistory(probId) {
+    return (JSON.parse(localStorage.getItem('vista_history') || '{}'))[probId] || [];
+}
+function getAttemptDots(probId) {
+    const h = getProblemHistory(probId);
+    if (!h.length) return '';
+    const dots = h.map(ok => `<span class="att-dot ${ok?'ok':'ng'}">${ok?'✓':'✗'}</span>`).join('');
+    return `<div class="att-dots">${dots}</div>`;
+}
+
+/* ── Retry (re-attempt same problem) ── */
+function stdPracRetry() {
+    const inp = document.getElementById('std-prac-ans-input');
+    if (inp) { inp.value = ''; inp.className = 'prac-ans-input'; inp.focus(); }
+    const rb = document.getElementById('std-prac-result-box');
+    if (rb) rb.style.display = 'none';
+}
+function pracRetry() {
+    const inp = document.getElementById('prac-ans-input');
+    if (inp) { inp.value = ''; inp.className = 'prac-ans-input'; inp.focus(); }
+    const rb = document.getElementById('prac-result-box');
+    if (rb) rb.style.display = 'none';
+}
+function chRetry() {
+    const inp = document.getElementById('ch-ans-input');
+    if (inp) { inp.value = ''; inp.className = 'ch-ans-input'; inp.focus(); }
+    const rb = document.getElementById('ch-result-box');
+    if (rb) { rb.style.display = 'none'; rb.className = 'ch-result-box'; }
+}
 
 function revealAnswer(btn) {
     const ans = btn.dataset.answer, unit = btn.dataset.unit || '';

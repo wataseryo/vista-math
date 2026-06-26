@@ -422,6 +422,55 @@
         .vis-animal-legs { color: #E64A19; font-weight: bold; }
         .vis-trees { display: flex; align-items: center; padding: 8px 0; flex-wrap: wrap; gap: 2px; }
         .vis-tree-sp { font-size: .6rem; color: #E64A19; padding: 0 2px; white-space: nowrap; }
+
+        /* ══ テープ図（和差算） ══ */
+        .vis-tape-wrap { padding: 6px 0; }
+        .vis-tape-row { display: flex; align-items: center; gap: 8px; margin: 5px 0; }
+        .vis-tape-lbl { font-size: .72rem; color: #555; width: 52px; flex-shrink: 0; text-align: right; font-weight: bold; }
+        .vis-tape { height: 28px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: .7rem; font-weight: bold; min-width: 20px; }
+        .vis-tape-anno { font-size: .68rem; color: #E64A19; margin-left: 4px; font-weight: bold; white-space: nowrap; }
+        .vis-tape-brace { display: flex; align-items: center; gap: 4px; margin: 2px 0 2px 60px; color: #555; font-size: .7rem; }
+
+        /* ══ 年齢表 ══ */
+        .vis-age-tbl { overflow-x: auto; margin: 8px 0; }
+        .vis-age-tbl table { border-collapse: collapse; margin: 0 auto; font-size: .8rem; }
+        .vis-age-tbl th, .vis-age-tbl td { border: 1.5px solid #90CAF9; padding: 6px 14px; text-align: center; }
+        .vis-age-tbl th { background: #E3F2FD; color: #1565C0; font-weight: bold; }
+        .vis-age-tbl td.hl { background: #FFF9C4; font-weight: bold; color: #E65100; }
+        .vis-age-tbl td { color: #333; }
+
+        /* ══ 流水算ビジュアル ══ */
+        .vis-river-wrap { background: linear-gradient(to bottom, #B3E5FC 0%, #81D4FA 100%); border-radius: 10px; padding: 12px 14px; margin: 8px 0; }
+        .vis-river-flow-lbl { color: #0277BD; font-size: .72rem; font-weight: bold; text-align: center; margin-bottom: 6px; }
+        .vis-river-boats { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 8px; }
+        .vis-boat-card { background: rgba(255,255,255,.9); border: 2px solid #0277BD; border-radius: 8px; padding: 6px 10px; text-align: center; min-width: 80px; }
+        .vis-boat-card-lbl { font-size: .68rem; font-weight: bold; color: #0277BD; margin-bottom: 3px; }
+        .vis-boat-card-val { font-size: 1rem; font-weight: bold; color: #01579B; }
+        .vis-river-formula { background: rgba(255,255,255,.85); border-radius: 8px; padding: 6px 12px; margin-top: 8px; font-size: .8rem; font-weight: bold; color: #01579B; text-align: center; white-space: pre-line; line-height: 1.7; }
+
+        /* ══ 通過算ビジュアル ══ */
+        .vis-train-wrap { background: #ECEFF1; border-radius: 10px; padding: 12px 14px; margin: 8px 0; }
+        .vis-track-line { display: flex; align-items: center; gap: 4px; margin: 8px 0; }
+        .vis-train-el { background: linear-gradient(135deg, #1976D2, #0D47A1); color: #fff; border-radius: 5px; padding: 5px 10px; font-size: .7rem; font-weight: bold; white-space: nowrap; flex-shrink: 0; }
+        .vis-bridge-el { background: linear-gradient(135deg, #795548, #4E342E); color: #fff; border-radius: 5px; padding: 5px 14px; font-size: .7rem; font-weight: bold; white-space: nowrap; flex-shrink: 0; }
+        .vis-track-gap { flex: 1; border-bottom: 3px dashed #90A4AE; }
+        .vis-train-lengths { display: flex; align-items: center; gap: 4px; margin-top: 4px; font-size: .68rem; color: #546E7A; }
+        .vis-train-sum { background: #FFF9C4; border: 1.5px solid #FFB300; border-radius: 6px; padding: 4px 10px; font-size: .8rem; font-weight: bold; color: #E65100; text-align: center; margin-top: 6px; }
+
+        /* ══ ニュートン算ビジュアル ══ */
+        .vis-newton-wrap { background: #F3E5F5; border-radius: 10px; padding: 12px; margin: 8px 0; display: flex; justify-content: center; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+        .vis-newton-box { text-align: center; font-size: .7rem; color: #555; }
+        .vis-newton-icon { font-size: 1.8rem; }
+        .vis-newton-lbl { font-weight: bold; color: #6A1B9A; margin-top: 3px; }
+        .vis-newton-val { font-size: .82rem; color: #4A148C; margin-top: 1px; }
+
+        /* ══ 消去算ビジュアル ══ */
+        .vis-eq-wrap { margin: 8px 0; }
+        .vis-eq-row { display: flex; align-items: center; gap: 6px; background: #fff; border: 1.5px solid #E0E0E0; border-radius: 8px; padding: 8px 12px; margin: 5px 0; font-size: .85rem; flex-wrap: wrap; }
+        .vis-eq-no { background: #E8EAF6; color: #3949AB; border-radius: 4px; padding: 2px 7px; font-size: .72rem; font-weight: bold; flex-shrink: 0; }
+        .vis-eq-body { font-weight: bold; color: #1a1a2e; }
+        .vis-eq-ans { color: #E64A19; font-weight: bold; margin-left: auto; }
+        .vis-eq-arrow { background: #FFF3E0; border: 1.5px solid #FFB300; border-radius: 6px; padding: 6px 12px; font-size: .8rem; font-weight: bold; color: #E65100; text-align: center; margin: 5px 0; }
     </style>
 </head>
 <body>
@@ -730,10 +779,51 @@ const EXAM_UNITS = [
 ];
 
 /* ════════════════════════════════════════
+   GRADE-SPECIFIC DATA
+════════════════════════════════════════ */
+const STANDARD_CHAPTERS_G5 = [
+    { id: 'watertank', num: '第1章', title: '水と量の問題',  sub: '水槽・流量の基礎', tags: ['水槽問題', '流量計算'], available: true },
+    { id: 'speed-g5',  num: '第2章', title: '速さと時間',    sub: '速さ・時間・距離の三角形（みはじ）', tags: ['速さ計算', 'みはじ'], available: false },
+    { id: 'ratio-g5',  num: '第3章', title: '割合と百分率',  sub: '何%・何倍の問題', tags: ['割合', '百分率'], available: false },
+    { id: 'cases-g5',  num: '第4章', title: '場合の数',      sub: '順序よく数える・樹形図', tags: ['樹形図', '数え方'], available: false },
+    { id: 'figures-g5',num: '第5章', title: '図形の面積',    sub: '三角形・台形・平行四辺形', tags: ['面積', '補助線'], available: false },
+];
+const STANDARD_CHAPTERS_G6 = [
+    { id: 'watertank', num: '第1章', title: '水と量・仕事算', sub: '複数の管・仕事算・ニュートン算入門', tags: ['水槽問題', '仕事算'], available: true },
+    { id: 'speed-g6',  num: '第2章', title: '速さの応用',    sub: '旅人算・通過算・流水算', tags: ['旅人算', '速さ応用'], available: false },
+    { id: 'ratio-g6',  num: '第3章', title: '割合と比の応用', sub: '食塩水・売買損益・相当算', tags: ['食塩水', '比の利用'], available: false },
+    { id: 'cases-g6',  num: '第4章', title: '場合の数 応用', sub: '順列・組み合わせ・確率入門', tags: ['順列', '組み合わせ'], available: false },
+    { id: 'figures-g6',num: '第5章', title: '図形・空間図形', sub: '面積比・体積・図形の移動', tags: ['面積比', '体積'], available: false },
+];
+
+const EXAM_UNITS_G5 = [
+    { id: 'unit-plant',   num: 'Unit 01', title: '植木算',      sub: '間隔と本数・池の周り',              difficulty: 2, category: '植木算',    count: 1, available: true },
+    { id: 'unit-crane',   num: 'Unit 02', title: 'つるかめ算',  sub: '仮定して差し引く解法',              difficulty: 3, category: 'つるかめ算', count: 1, available: true },
+    { id: 'unit-surplus', num: 'Unit 03', title: '過不足算',    sub: '余りと不足から求める',              difficulty: 3, category: '過不足算',  count: 1, available: true },
+    { id: 'unit-wasdiff', num: 'Unit 04', title: '和差算',      sub: '2量の和と差からそれぞれを求める',   difficulty: 2, category: '和差算',    count: 2, available: true },
+    { id: 'unit-age-g5',  num: 'Unit 05', title: '年齢算 基礎', sub: '差は変わらない・現在と過去・未来',  difficulty: 3, category: '年齢算',    count: 2, available: true },
+    { id: 'unit-divide',  num: 'Unit 06', title: '分配算',      sub: '条件付きで分ける・差から求める',    difficulty: 3, category: '分配算',    count: 0, available: false },
+];
+const EXAM_UNITS_G6 = [
+    { id: 'unit-water',   num: 'Unit 01', title: '水槽・仕事算',  sub: '複数の管・途中で条件が変わる問題',  difficulty: 3, category: '水槽',       count: 2, available: true },
+    { id: 'unit-speed',   num: 'Unit 02', title: '旅人算',        sub: '出会い算・追いかけ算・往復',        difficulty: 3, category: '速さ',       count: 2, available: true },
+    { id: 'unit-stream',  num: 'Unit 03', title: '流水算',        sub: '上りと下りの速さ・静水速度と流速',  difficulty: 4, category: '流水算',     count: 2, available: true },
+    { id: 'unit-train',   num: 'Unit 04', title: '通過算',        sub: '電車が橋・トンネルを通る問題',      difficulty: 3, category: '通過算',     count: 2, available: true },
+    { id: 'unit-newton',  num: 'Unit 05', title: 'ニュートン算',  sub: '増えながら減る・行列・牧草問題',    difficulty: 5, category: 'ニュートン算', count: 2, available: true },
+    { id: 'unit-elim',    num: 'Unit 06', title: '消去算',        sub: '2つの式から答えを導く解法',         difficulty: 4, category: '消去算',     count: 2, available: true },
+    { id: 'unit-ratio',   num: 'Unit 07', title: '割合・食塩水',  sub: '濃度計算・混合・蒸発問題',          difficulty: 4, category: '割合',       count: 1, available: true },
+    { id: 'unit-trade',   num: 'Unit 08', title: '売買損益',      sub: '定価・売値・利益・割引の関係',      difficulty: 4, category: '売買損益',   count: 2, available: true },
+    { id: 'unit-ratio2',  num: 'Unit 09', title: '比の文章題',    sub: '相当算・倍数算・分配比',            difficulty: 4, category: '比',         count: 0, available: false },
+];
+
+const CH_CATS_G5 = ['すべて','植木算','つるかめ算','過不足算','和差算','年齢算'];
+const CH_CATS_G6 = ['すべて','水槽','速さ','流水算','通過算','ニュートン算','消去算','割合','売買損益'];
+
+/* ════════════════════════════════════════
    CHALLENGES DATA
 ════════════════════════════════════════ */
 const CHALLENGES = [
-  { id:'c1', category:'水槽', catColor:'#0277BD', catBg:'#E3F2FD', borderColor:'#0288D1', title:'途中で条件が変わる水槽', difficulty:3,
+  { id:'c1', grade:6, category:'水槽', catColor:'#0277BD', catBg:'#E3F2FD', borderColor:'#0288D1', title:'途中で条件が変わる水槽', difficulty:3,
     text:`容量100Lの水槽に最初20Lの水があります。\n毎分3Lの水を入れ始めました。\n5分後に、さらに毎分2Lの管を追加しました。\n\n最初から何分後に水槽の水が50Lになりますか？`,
     answer:8, unit:'分', hint:`「5分後」を境に前半・後半に分けて考えよう。\n前半（5分間）で水は何Lになる？\n後半は毎分何L増える？`,
     steps:[
@@ -747,7 +837,7 @@ const CHALLENGES = [
         visual:`<div class="vis-timeline"><div class="vis-phase" style="flex:5;background:#0288D1">前半 5分</div><div class="vis-phase" style="flex:3;background:#E64A19">後半 3分</div></div><div class="vis-formula">答え：8分後</div>` },
     ]
   },
-  { id:'c2', category:'水槽', catColor:'#0277BD', catBg:'#E3F2FD', borderColor:'#0288D1', title:'2つの管で満水にする', difficulty:3,
+  { id:'c2', grade:6, category:'水槽', catColor:'#0277BD', catBg:'#E3F2FD', borderColor:'#0288D1', title:'2つの管で満水にする', difficulty:3,
     text:`空の水槽をA管だけで満水にすると30分、\nB管だけで満水にすると20分かかります。\n\nA管とB管を同時に使うと何分で満水になりますか？`,
     answer:12, unit:'分', hint:`1分間にA管は全体の何分の1入れる？\n合わせた速さ＝A管＋B管`,
     steps:[
@@ -759,7 +849,7 @@ const CHALLENGES = [
         visual:`<div class="vis-formula">1 ÷ (1/12) ＝ 12分</div>` },
     ]
   },
-  { id:'c3', category:'速さ', catColor:'#2E7D32', catBg:'#E8F5E9', borderColor:'#43A047', title:'出会い算', difficulty:2,
+  { id:'c3', grade:6, category:'速さ', catColor:'#2E7D32', catBg:'#E8F5E9', borderColor:'#43A047', title:'出会い算', difficulty:2,
     text:`A地点とB地点は2000m離れています。\n太郎くんはA地点から分速60mで、\n花子さんはB地点から分速40mで\n同時に向かい合って歩きます。\n\n何分後に2人は出会いますか？`,
     answer:20, unit:'分', hint:`2人が1分間に縮める距離の合計は？\n合わせた速さ＝太郎の速さ＋花子の速さ`,
     steps:[
@@ -771,7 +861,7 @@ const CHALLENGES = [
         visual:`<div class="vis-formula">2000 ÷ 100 ＝ 20分</div>` },
     ]
   },
-  { id:'c4', category:'速さ', catColor:'#2E7D32', catBg:'#E8F5E9', borderColor:'#43A047', title:'追いかけ算', difficulty:3,
+  { id:'c4', grade:6, category:'速さ', catColor:'#2E7D32', catBg:'#E8F5E9', borderColor:'#43A047', title:'追いかけ算', difficulty:3,
     text:`太郎くんは7時ちょうどに家を出て、\n分速60mで学校へ歩きます。\nお母さんは7時10分に自転車で追いかけ、\n分速180mで走ります。\n\nお母さんが太郎くんに追いつくのは7時何分ですか？`,
     answer:15, unit:'分（7時）', hint:`お母さんが出発したとき、太郎くんは何m先？\n1分間に縮まる距離は？（差の速さ）`,
     steps:[
@@ -783,7 +873,7 @@ const CHALLENGES = [
         visual:`<div class="vis-formula">600 ÷ 120 ＝ 5分後 → 7時15分</div>` },
     ]
   },
-  { id:'c5', category:'割合', catColor:'#6A1B9A', catBg:'#F3E5F5', borderColor:'#8E24AA', title:'食塩水の混合', difficulty:4,
+  { id:'c5', grade:6, category:'割合', catColor:'#6A1B9A', catBg:'#F3E5F5', borderColor:'#8E24AA', title:'食塩水の混合', difficulty:4,
     text:`10%の食塩水200gと\n5%の食塩水300gを混ぜました。\n\n混ぜた後の食塩水は何%ですか？`,
     answer:7, unit:'%', hint:`まず「塩の量(g)」を先に求めよう。\n塩の量 ＝ 食塩水の量 × 濃度（÷100）`,
     steps:[
@@ -795,7 +885,7 @@ const CHALLENGES = [
         visual:`<div class="vis-formula">35 ÷ 500 × 100 ＝ 7%</div>` },
     ]
   },
-  { id:'c6', category:'植木算', catColor:'#E65100', catBg:'#FFF3E0', borderColor:'#FB8C00', title:'道に木を植える（両端あり）', difficulty:2,
+  { id:'c6', grade:5, category:'植木算', catColor:'#E65100', catBg:'#FFF3E0', borderColor:'#FB8C00', title:'道に木を植える（両端あり）', difficulty:2,
     text:`100mの道の両端に木を植えます。\n木と木の間隔を10mにするとき、\n木は全部で何本必要ですか？`,
     answer:11, unit:'本', hint:`まず「間隔の数」を求めよう。\n両端に植えるとき：木の本数 ＝ 間隔の数 ＋ 1`,
     steps:[
@@ -805,7 +895,7 @@ const CHALLENGES = [
         visual:`<div class="vis-formula">間隔10個 → 木は11本</div>` },
     ]
   },
-  { id:'c7', category:'つるかめ算', catColor:'#00695C', catBg:'#E0F2F1', borderColor:'#00897B', title:'ツルとカメの足の数', difficulty:3,
+  { id:'c7', grade:5, category:'つるかめ算', catColor:'#00695C', catBg:'#E0F2F1', borderColor:'#00897B', title:'ツルとカメの足の数', difficulty:3,
     text:`ツルとカメが合わせて10匹います。\n足の本数の合計は28本でした。\n\nツルは何匹いますか？`,
     answer:6, unit:'匹', hint:`「全部ツルだったら足は何本？」から考えよう。\nカメ1匹に替えると足は何本増える？`,
     steps:[
@@ -817,7 +907,7 @@ const CHALLENGES = [
         visual:`<div class="vis-animals">${Array(6).fill(0).map(()=>'<div class="vis-animal"><div class="vis-animal-ico">🦢</div><div class="vis-animal-legs">2本</div></div>').join('')}${Array(4).fill(0).map(()=>'<div class="vis-animal"><div class="vis-animal-ico">🐢</div><div class="vis-animal-legs">4本</div></div>').join('')}</div><div class="vis-formula">答え：ツル 6匹</div>` },
     ]
   },
-  { id:'c8', category:'過不足算', catColor:'#AD1457', catBg:'#FCE4EC', borderColor:'#E91E63', title:'余りと不足（机と生徒）', difficulty:4,
+  { id:'c8', grade:5, category:'過不足算', catColor:'#AD1457', catBg:'#FCE4EC', borderColor:'#E91E63', title:'余りと不足（机と生徒）', difficulty:4,
     text:`生徒を机に座らせます。\n1つの机に4人ずつ座ると8人余ります。\n1つの机に6人ずつ座ると2人足りません。\n\n生徒は何人いますか？`,
     answer:28, unit:'人', hint:`机の台数を□として2つの式を立てよう。\n4×□＋8 ＝ 6×□－2`,
     steps:[
@@ -827,6 +917,432 @@ const CHALLENGES = [
         visual:`<div class="vis-formula">4□＋8 ＝ 6□－2\n→ 2□ ＝ 10 → □ ＝ 5台</div>` },
       { title:'生徒数を求める（確認）', text:`□＝5を代入：4×5＋8＝20＋8＝28人\n確認：6×5－2＝30－2＝28人 ✓`,
         visual:`<div class="vis-formula">答え：机5台・生徒28人</div>` },
+    ]
+  },
+
+  /* ── 和差算 ── */
+  { id:'c9', grade:5, category:'和差算', catColor:'#1565C0', catBg:'#E3F2FD', borderColor:'#1976D2', title:'シールの枚数（和差算 基本）', difficulty:2,
+    text:`たろうさんとはなこさんが持っているシールの合計は80枚で、\nたろうさんははなこさんより12枚多く持っています。\n\nたろうさんは何枚持っていますか？`,
+    answer:46, unit:'枚',
+    hint:`テープ図を書いてみよう。\n大きい方 ＝ （和 ＋ 差）÷ 2 で求められるよ！`,
+    steps:[
+      { title:'テープ図で整理する',
+        text:`たろうをはなこに合わせると全部わかる！\nたろうの「12枚多い部分」をはなこに移すと…`,
+        visual:`<div class="vis-tape-wrap">
+  <div class="vis-tape-row"><span class="vis-tape-lbl">たろう</span><div class="vis-tape" style="width:68%;background:#1976D2">68%</div><div class="vis-tape" style="width:12%;background:#E64A19;margin-left:2px">＋12</div></div>
+  <div class="vis-tape-row"><span class="vis-tape-lbl">はなこ</span><div class="vis-tape" style="width:68%;background:#43A047">同じ長さ</div></div>
+  <div class="vis-tape-brace">←────── 合計 80枚 ──────→　差 12枚</div>
+</div>` },
+      { title:'はなこの枚数を求める',
+        text:`差の12枚を除いた分を2等分します。\nはなこ × 2 ＝ 80 − 12 ＝ 68枚\nはなこ ＝ 68 ÷ 2 ＝ 34枚`,
+        visual:`<div class="vis-formula">はなこ ＝ (80 − 12) ÷ 2 ＝ 34枚</div>` },
+      { title:'たろうの枚数を求める（答え）',
+        text:`たろうははなこより12枚多いので…\nたろう ＝ 34 ＋ 12 ＝ 46枚`,
+        visual:`<div class="vis-formula">たろう ＝ 34 ＋ 12 ＝ 46枚\n\n別解：大きい方 ＝ (80 ＋ 12) ÷ 2 ＝ 46枚</div>` },
+    ]
+  },
+  { id:'c10', grade:5, category:'和差算', catColor:'#1565C0', catBg:'#E3F2FD', borderColor:'#1976D2', title:'2チームの得点（和差算 応用）', difficulty:2,
+    text:`AチームとBチームの合計得点は96点で、\nAチームはBチームより14点多い。\n\nAチームの得点は何点ですか？`,
+    answer:55, unit:'点',
+    hint:`「大きい方＝（和＋差）÷2」の公式を使おう！\nAチームが大きい方だよ。`,
+    steps:[
+      { title:'状況をテープ図で整理',
+        text:`2チームの合計が96点、差が14点。\nAが多い方。`,
+        visual:`<div class="vis-tape-wrap">
+  <div class="vis-tape-row"><span class="vis-tape-lbl">A チーム</span><div class="vis-tape" style="width:65%;background:#1976D2">？</div><div class="vis-tape" style="width:13%;background:#E64A19;margin-left:2px">＋14</div></div>
+  <div class="vis-tape-row"><span class="vis-tape-lbl">B チーム</span><div class="vis-tape" style="width:65%;background:#43A047">？</div></div>
+  <div class="vis-tape-brace">←── 合計 96点 ──→　差 14点</div>
+</div>` },
+      { title:'大きい方（A）を求める公式',
+        text:`大きい方 ＝ （合計 ＋ 差） ÷ 2\n＝（96 ＋ 14）÷ 2\n＝ 110 ÷ 2 ＝ 55点`,
+        visual:`<div class="vis-formula">A ＝ (96 ＋ 14) ÷ 2 ＝ 55点</div>` },
+      { title:'Bチームも確認',
+        text:`B ＝ 96 − 55 ＝ 41点\n確認：A − B ＝ 55 − 41 ＝ 14点 ✓`,
+        visual:`<div class="vis-formula">B ＝ 96 − 55 ＝ 41点　差：55 − 41 ＝ 14 ✓</div>` },
+    ]
+  },
+
+  /* ── 年齢算 基礎 ── */
+  { id:'c11', grade:5, category:'年齢算', catColor:'#00695C', catBg:'#E0F2F1', borderColor:'#00897B', title:'倍数での年齢算', difficulty:3,
+    text:`現在、父の年齢は子の年齢の5倍です。\n父と子の年齢の差は28歳です。\n\n父は現在何歳ですか？`,
+    answer:35, unit:'歳',
+    hint:`「差は変わらない」がポイント！\n父 − 子 ＝ 28歳\n父 ＝ 5×子 だから…\n5×子 − 子 ＝ 4×子 ＝ 28歳`,
+    steps:[
+      { title:'差は変わらないことを確認',
+        text:`年齢は同じスピードで増えるから\n父と子の差はいつも同じ！\n父 − 子 ＝ 28歳（ずっと）`,
+        visual:`<div class="vis-age-tbl"><table><tr><th>　</th><th>父</th><th>子</th><th>差</th></tr><tr><td>現在</td><td>?歳</td><td>?歳</td><td class="hl">28歳</td></tr></table></div>` },
+      { title:'倍数の関係から子の年齢を求める',
+        text:`父 ＝ 子 × 5\n父 − 子 ＝ 子×5 − 子 ＝ 子×4\n\n子×4 ＝ 28\n子 ＝ 28 ÷ 4 ＝ 7歳`,
+        visual:`<div class="vis-formula">5×子 − 1×子 ＝ 4×子 ＝ 28\n子 ＝ 28 ÷ 4 ＝ 7歳</div>` },
+      { title:'父の年齢を求める（答え）',
+        text:`父 ＝ 子 × 5 ＝ 7 × 5 ＝ 35歳\n確認：35 − 7 ＝ 28歳 ✓`,
+        visual:`<div class="vis-age-tbl"><table><tr><th>　</th><th>父</th><th>子</th><th>差</th></tr><tr><td>現在</td><td class="hl">35歳</td><td>7歳</td><td>28歳 ✓</td></tr></table></div>` },
+    ]
+  },
+  { id:'c12', grade:5, category:'年齢算', catColor:'#00695C', catBg:'#E0F2F1', borderColor:'#00897B', title:'何年後に○倍になるか', difficulty:3,
+    text:`現在、母は37歳で、子は9歳です。\n\n何年後に母の年齢が子の年齢の3倍になりますか？`,
+    answer:5, unit:'年後',
+    hint:`何年後かを□とおいて式を作ろう。\n(37＋□) ＝ 3×(9＋□) となるよ。`,
+    steps:[
+      { title:'何年後かを□とおく',
+        text:`□年後の年齢を表します。\n母：37＋□歳\n子：9＋□歳`,
+        visual:`<div class="vis-age-tbl"><table><tr><th>　</th><th>母</th><th>子</th></tr><tr><td>現在</td><td>37歳</td><td>9歳</td></tr><tr><td class="hl">□年後</td><td class="hl">37＋□歳</td><td class="hl">9＋□歳</td></tr></table></div>` },
+      { title:'3倍の式を作る',
+        text:`□年後に「母＝子の3倍」になるから：\n37＋□ ＝ 3×(9＋□)\n37＋□ ＝ 27＋3□`,
+        visual:`<div class="vis-formula">37 ＋ □ ＝ 3 × (9 ＋ □)</div>` },
+      { title:'□を求める（答え）',
+        text:`37＋□ ＝ 27＋3□\n37−27 ＝ 3□−□\n10 ＝ 2□\n□ ＝ 5年後`,
+        visual:`<div class="vis-formula">10 ＝ 2□　→　□ ＝ 5年後</div><div class="vis-age-tbl" style="margin-top:8px"><table><tr><th>　</th><th>母</th><th>子</th><th>関係</th></tr><tr><td>5年後</td><td class="hl">42歳</td><td class="hl">14歳</td><td class="hl">3倍 ✓</td></tr></table></div>` },
+    ]
+  },
+
+  /* ── 流水算 ── */
+  { id:'c13', grade:6, category:'流水算', catColor:'#0277BD', catBg:'#E1F5FE', borderColor:'#039BE5', title:'静水時の速さを求める', difficulty:3,
+    text:`ある船が川を20km上るのに4時間、\n同じ20kmを下るのに2時間かかりました。\n\nこの船の静水時の速さは何km/hですか？`,
+    answer:7.5, unit:'km/h',
+    hint:`まず上りと下りの速さを別々に求めよう。\n静水時の速さ ＝ (上りの速さ ＋ 下りの速さ) ÷ 2`,
+    steps:[
+      { title:'上りの速さと下りの速さを求める',
+        text:`上りの速さ ＝ 距離 ÷ 時間\n＝ 20 ÷ 4 ＝ 5 km/h\n\n下りの速さ ＝ 20 ÷ 2 ＝ 10 km/h`,
+        visual:`<div class="vis-river-wrap">
+  <div class="vis-river-flow-lbl">→ 川の流れ</div>
+  <div class="vis-river-boats">
+    <div class="vis-boat-card"><div class="vis-boat-card-lbl">上り（川を遡る）</div><div class="vis-boat-card-val">5 km/h</div></div>
+    <div class="vis-boat-card"><div class="vis-boat-card-lbl">下り（川を下る）</div><div class="vis-boat-card-val">10 km/h</div></div>
+  </div>
+</div>` },
+      { title:'なぜ平均するの？',
+        text:`上りの速さ ＝ 静水速 − 流速\n下りの速さ ＝ 静水速 ＋ 流速\n\n足すと流速が消える！\n(静水速−流速)＋(静水速＋流速) ＝ 静水速×2`,
+        visual:`<div class="vis-river-formula">上り：静水速 − 流速 ＝ 5\n下り：静水速 ＋ 流速 ＝ 10\n─────────────────\n合計：静水速 × 2 ＝ 15</div>` },
+      { title:'静水時の速さを求める（答え）',
+        text:`静水時の速さ\n＝（上りの速さ ＋ 下りの速さ）÷ 2\n＝（5 ＋ 10）÷ 2 ＝ 7.5 km/h`,
+        visual:`<div class="vis-formula">静水時の速さ ＝ (5 ＋ 10) ÷ 2 ＝ 7.5 km/h</div>` },
+    ]
+  },
+  { id:'c14', grade:6, category:'流水算', catColor:'#0277BD', catBg:'#E1F5FE', borderColor:'#039BE5', title:'上りの距離を求める', difficulty:4,
+    text:`静水での速さが時速12kmの船があります。\n流速が時速3kmの川を上るのに2時間かかりました。\n\nこの区間は何kmですか？`,
+    answer:18, unit:'km',
+    hint:`上りの速さ ＝ 静水速 − 流速\n距離 ＝ 速さ × 時間`,
+    steps:[
+      { title:'上りの速さを求める',
+        text:`川を上るとき、流れが逆向きにブレーキをかける。\n\n上りの速さ ＝ 静水速 − 流速\n＝ 12 − 3 ＝ 9 km/h`,
+        visual:`<div class="vis-river-wrap">
+  <div class="vis-river-flow-lbl">→ 川の流れ（時速3km）</div>
+  <div class="vis-river-boats">
+    <div class="vis-boat-card"><div class="vis-boat-card-lbl">静水での速さ</div><div class="vis-boat-card-val">12 km/h</div></div>
+    <div class="vis-boat-card"><div class="vis-boat-card-lbl">流速（引き算）</div><div class="vis-boat-card-val">−3 km/h</div></div>
+    <div class="vis-boat-card" style="border-color:#E65100"><div class="vis-boat-card-lbl" style="color:#E65100">上りの速さ</div><div class="vis-boat-card-val" style="color:#BF360C">9 km/h</div></div>
+  </div>
+</div>` },
+      { title:'距離を求める（答え）',
+        text:`距離 ＝ 速さ × 時間\n＝ 9 × 2 ＝ 18 km`,
+        visual:`<div class="vis-formula">距離 ＝ 9 × 2 ＝ 18 km</div>` },
+    ]
+  },
+
+  /* ── 通過算 ── */
+  { id:'c15', grade:6, category:'通過算', catColor:'#37474F', catBg:'#ECEFF1', borderColor:'#546E7A', title:'電車が橋を渡る', difficulty:3,
+    text:`長さ150mの電車が時速90kmで走っています。\n長さ450mの橋を渡り始めてから\n渡り終わるまでの時間は何秒ですか？`,
+    answer:24, unit:'秒',
+    hint:`電車が「完全に橋を渡る」距離は？\n電車の長さ ＋ 橋の長さ を考えよう！`,
+    steps:[
+      { title:'電車が進む距離を考える',
+        text:`電車の先頭が橋に入ってから\n電車の最後尾が橋を出るまで。\n→ 進む距離 ＝ 電車の長さ ＋ 橋の長さ`,
+        visual:`<div class="vis-train-wrap">
+  <div style="font-size:.72rem;color:#546E7A;margin-bottom:6px">先頭が橋に入る</div>
+  <div class="vis-track-line"><div class="vis-train-el">🚂 電車150m →</div><div class="vis-track-gap"></div><div class="vis-bridge-el">橋 450m</div></div>
+  <div class="vis-train-sum">進む距離 ＝ 150m ＋ 450m ＝ 600m</div>
+</div>` },
+      { title:'時速を秒速に直す',
+        text:`時速90km ＝ 90000m ÷ 3600秒\n＝ 25m/秒`,
+        visual:`<div class="vis-formula">90 km/h ＝ 90000 ÷ 3600 ＝ 25 m/秒</div>` },
+      { title:'時間を求める（答え）',
+        text:`時間 ＝ 距離 ÷ 速さ\n＝ 600 ÷ 25 ＝ 24秒`,
+        visual:`<div class="vis-formula">600 ÷ 25 ＝ 24秒</div>` },
+    ]
+  },
+  { id:'c16', grade:6, category:'通過算', catColor:'#37474F', catBg:'#ECEFF1', borderColor:'#546E7A', title:'2列車が追い越す', difficulty:4,
+    text:`長さ200mの電車Aが秒速30mで、\n長さ100mの電車Bが秒速20mで\n同じ方向に走っています。\n\nAがBに追いついてから完全に追い越すまでの時間は何秒ですか？`,
+    answer:30, unit:'秒',
+    hint:`追い越す距離 ＝ A の長さ ＋ B の長さ\n差の速さ ＝ 速いA − 遅いB`,
+    steps:[
+      { title:'追い越す距離を考える',
+        text:`AがBを「完全に追い越す」には\nAとBの長さを合わせた距離を進まないといけない！`,
+        visual:`<div class="vis-train-wrap">
+  <div class="vis-track-line"><div class="vis-train-el">B 100m →20m/s</div><div class="vis-track-gap"></div></div>
+  <div class="vis-track-line"><div class="vis-train-el" style="background:linear-gradient(135deg,#E64A19,#BF360C)">A 200m →30m/s</div><div class="vis-track-gap"></div></div>
+  <div class="vis-train-sum">追い越す距離 ＝ 200m ＋ 100m ＝ 300m</div>
+</div>` },
+      { title:'差の速さを求める',
+        text:`同じ方向なので速さの差が縮まるスピード。\n差の速さ ＝ 30 − 20 ＝ 10 m/秒`,
+        visual:`<div class="vis-formula">差の速さ ＝ 30 − 20 ＝ 10 m/秒</div>` },
+      { title:'時間を求める（答え）',
+        text:`時間 ＝ 距離 ÷ 差の速さ\n＝ 300 ÷ 10 ＝ 30秒`,
+        visual:`<div class="vis-formula">300 ÷ 10 ＝ 30秒</div>` },
+    ]
+  },
+
+  /* ── ニュートン算 ── */
+  { id:'c17', grade:6, category:'ニュートン算', catColor:'#6A1B9A', catBg:'#F3E5F5', borderColor:'#8E24AA', title:'行列はなくなる（ニュートン算 基本）', difficulty:4,
+    text:`入場ゲートの外に行列があります。\n毎分3人ずつ新たに並んできます。\n\nゲートを2つ開けると20分でなくなり、\n3つ開けると10分でなくなります。\n\n最初に並んでいた人は何人ですか？`,
+    answer:60, unit:'人',
+    hint:`式を2つ立てよう。\n最初の人数をN、1つのゲートが1分間に処理する人数をbとおく。\nN ＋ 増えた人数 ＝ 処理した人数`,
+    steps:[
+      { title:'状況を整理する',
+        text:`ポイント：行列は増えながら減っていく！\n\n最初の人数：N人\n毎分 3人ずつ増える\nゲート1つが毎分 b人処理する`,
+        visual:`<div class="vis-newton-wrap">
+  <div class="vis-newton-box"><div class="vis-newton-icon">🚶</div><div class="vis-newton-lbl">最初 N人</div></div>
+  <div class="vis-newton-box"><div class="vis-newton-icon">➕</div><div class="vis-newton-lbl">毎分3人増加</div></div>
+  <div class="vis-newton-box"><div class="vis-newton-icon">🚪</div><div class="vis-newton-lbl">ゲートがb人/分 処理</div></div>
+</div>` },
+      { title:'2つの式を立てる',
+        text:`2ゲート・20分でなくなる：\nN ＋ 3×20 ＝ 2b×20\n→ N ＋ 60 ＝ 40b … ①\n\n3ゲート・10分でなくなる：\nN ＋ 3×10 ＝ 3b×10\n→ N ＋ 30 ＝ 30b … ②`,
+        visual:`<div class="vis-eq-wrap">
+  <div class="vis-eq-row"><span class="vis-eq-no">①</span><span class="vis-eq-body">N ＋ 60 ＝ 40b</span></div>
+  <div class="vis-eq-row"><span class="vis-eq-no">②</span><span class="vis-eq-body">N ＋ 30 ＝ 30b</span></div>
+</div>` },
+      { title:'bを求める',
+        text:`①－②：\n(N＋60) − (N＋30) ＝ 40b − 30b\n30 ＝ 10b\nb ＝ 3人/分（ゲート1つの処理速度）`,
+        visual:`<div class="vis-formula">① − ② ：30 ＝ 10b　→　b ＝ 3</div>` },
+      { title:'最初の人数Nを求める（答え）',
+        text:`②に b＝3 を代入：\nN ＋ 30 ＝ 30×3 ＝ 90\nN ＝ 60人`,
+        visual:`<div class="vis-formula">N ＝ 90 − 30 ＝ 60人</div>` },
+    ]
+  },
+  { id:'c18', grade:6, category:'ニュートン算', catColor:'#6A1B9A', catBg:'#F3E5F5', borderColor:'#8E24AA', title:'牧場の草（ニュートン算 応用）', difficulty:5,
+    text:`草が毎日一定量生える牧場があります。\n4頭の牛が食べると10日で草がなくなり、\n2頭だと30日でなくなります。\n\n6頭だと何日で草がなくなりますか？`,
+    answer:6, unit:'日',
+    hint:`最初の草の量をS、1日に生える量をa、\n牛1頭が1日に食べる量をbとおこう。\nS ＋ 日数×a ＝ 頭数×b×日数`,
+    steps:[
+      { title:'文字を使って式を立てる',
+        text:`最初の草：S\n1日に生える量：a\n牛1頭が1日に食べる量：b\n\n4頭×10日：S＋10a ＝ 40b … ①\n2頭×30日：S＋30a ＝ 60b … ②`,
+        visual:`<div class="vis-eq-wrap">
+  <div class="vis-eq-row"><span class="vis-eq-no">①</span><span class="vis-eq-body">S ＋ 10a ＝ 40b</span></div>
+  <div class="vis-eq-row"><span class="vis-eq-no">②</span><span class="vis-eq-body">S ＋ 30a ＝ 60b</span></div>
+</div>` },
+      { title:'②－①で aとbの関係を求める',
+        text:`② − ① ：\n20a ＝ 20b\na ＝ b\n→ 1日に生える量 ＝ 牛1頭分の食べる量！`,
+        visual:`<div class="vis-formula">② − ① ：20a ＝ 20b　→　a ＝ b</div>` },
+      { title:'最初の草の量 S を求める',
+        text:`①に a＝b を代入：\nS ＋ 10b ＝ 40b\nS ＝ 30b`,
+        visual:`<div class="vis-formula">S ＝ 30b（最初の草は牛30頭分の1日分）</div>` },
+      { title:'6頭の場合の日数を求める（答え）',
+        text:`6頭・□日の場合：\nS ＋ □×a ＝ 6b×□\n30b ＋ □b ＝ 6b□\n30 ＋ □ ＝ 6□\n5□ ＝ 30\n□ ＝ 6日`,
+        visual:`<div class="vis-formula">30 ＋ □ ＝ 6□\n5□ ＝ 30　→　□ ＝ 6日</div>` },
+    ]
+  },
+
+  /* ── 消去算 ── */
+  { id:'c19', grade:6, category:'消去算', catColor:'#E65100', catBg:'#FFF3E0', borderColor:'#FB8C00', title:'りんごとみかん（消去算 基本）', difficulty:3,
+    text:`りんご2個とみかん3個の合計は360円、\nりんご1個とみかん2個の合計は210円です。\n\nりんご1個はいくらですか？`,
+    answer:90, unit:'円',
+    hint:`2つの式の「みかん」を消そう！\n②×2でみかんの数を合わせてから引き算するよ。`,
+    steps:[
+      { title:'式を立てる',
+        text:`りんごをa円、みかんをb円とおく。\n2a ＋ 3b ＝ 360 … ①\na ＋ 2b ＝ 210 … ②`,
+        visual:`<div class="vis-eq-wrap">
+  <div class="vis-eq-row"><span class="vis-eq-no">①</span><span class="vis-eq-body">りんご×2 ＋ みかん×3 </span><span class="vis-eq-ans">＝ 360円</span></div>
+  <div class="vis-eq-row"><span class="vis-eq-no">②</span><span class="vis-eq-body">りんご×1 ＋ みかん×2 </span><span class="vis-eq-ans">＝ 210円</span></div>
+</div>` },
+      { title:'②を2倍してみかんの数を合わせる',
+        text:`②×2：2a ＋ 4b ＝ 420 … ③\n\n③ − ①：b ＝ 420 − 360 ＝ 60円`,
+        visual:`<div class="vis-eq-wrap">
+  <div class="vis-eq-row"><span class="vis-eq-no">②×2</span><span class="vis-eq-body">りんご×2 ＋ みかん×4 </span><span class="vis-eq-ans">＝ 420円</span></div>
+  <div class="vis-eq-arrow">③ − ①：みかん×1 ＝ 60円</div>
+</div>` },
+      { title:'りんごの値段を求める（答え）',
+        text:`②に b＝60 を代入：\na ＋ 2×60 ＝ 210\na ＋ 120 ＝ 210\na ＝ 90円`,
+        visual:`<div class="vis-formula">りんご ＝ 210 − 120 ＝ 90円</div>` },
+    ]
+  },
+  { id:'c20', grade:6, category:'消去算', catColor:'#E65100', catBg:'#FFF3E0', borderColor:'#FB8C00', title:'えんぴつとノート（消去算 応用）', difficulty:4,
+    text:`えんぴつ3本とノート2冊の合計は460円、\nえんぴつ5本とノート3冊の合計は740円です。\n\nえんぴつ1本はいくらですか？`,
+    answer:100, unit:'円',
+    hint:`ノートを消すために①×3、②×2で\nノートの数を合わせてみよう！`,
+    steps:[
+      { title:'式を立てる',
+        text:`えんぴつをa円、ノートをb円とおく。\n3a ＋ 2b ＝ 460 … ①\n5a ＋ 3b ＝ 740 … ②`,
+        visual:`<div class="vis-eq-wrap">
+  <div class="vis-eq-row"><span class="vis-eq-no">①</span><span class="vis-eq-body">えんぴつ×3 ＋ ノート×2 </span><span class="vis-eq-ans">＝ 460円</span></div>
+  <div class="vis-eq-row"><span class="vis-eq-no">②</span><span class="vis-eq-body">えんぴつ×5 ＋ ノート×3 </span><span class="vis-eq-ans">＝ 740円</span></div>
+</div>` },
+      { title:'ノートを消す（①×3と②×2で数を合わせる）',
+        text:`①×3：9a ＋ 6b ＝ 1380\n②×2：10a ＋ 6b ＝ 1480\n\n②×2 − ①×3：\n10a − 9a ＝ 1480 − 1380\na ＝ 100円`,
+        visual:`<div class="vis-eq-wrap">
+  <div class="vis-eq-row"><span class="vis-eq-no">①×3</span><span class="vis-eq-body">9a ＋ 6b </span><span class="vis-eq-ans">＝ 1380</span></div>
+  <div class="vis-eq-row"><span class="vis-eq-no">②×2</span><span class="vis-eq-body">10a ＋ 6b </span><span class="vis-eq-ans">＝ 1480</span></div>
+  <div class="vis-eq-arrow">②×2 − ①×3：えんぴつ 1本 ＝ 100円</div>
+</div>` },
+      { title:'ノートの値段も確認',
+        text:`①に a＝100 を代入：\n3×100 ＋ 2b ＝ 460\n2b ＝ 160\nb ＝ 80円`,
+        visual:`<div class="vis-formula">えんぴつ：100円　ノート：80円\n確認：5×100＋3×80 ＝ 500＋240 ＝ 740 ✓</div>` },
+    ]
+  },
+
+  /* ── 植木算 2問目（池の周り） ── */
+  { id:'c21', grade:5, category:'植木算', catColor:'#E65100', catBg:'#FFF3E0', borderColor:'#FB8C00', title:'池の周りに木を植える', difficulty:2,
+    text:`周囲が120mの池の周りに、\n10m間隔で木を植えます。\n\n木は全部で何本必要ですか？`,
+    answer:12, unit:'本',
+    hint:`「池の周り」は輪っか型！\n最後の木と最初の木の間も「間隔」になるよ。\n池の問題では 本数 ＝ 間隔の数 になるよ。`,
+    steps:[
+      { title:'道型と池型の違いを確認',
+        text:`道型（直線）：木の本数 ＝ 間隔の数 ＋ 1\n池型（輪っか）：木の本数 ＝ 間隔の数\n\n池は「端がない」から ＋1 が不要！`,
+        visual:`<div class="vis-trees" style="flex-wrap:nowrap;justify-content:center;gap:4px;padding:12px 4px">
+  <span style="font-size:1.2rem">🌳</span>
+  <span class="vis-tree-sp">10m</span>
+  <span style="font-size:1.2rem">🌳</span>
+  <span class="vis-tree-sp">10m</span>
+  <span style="font-size:1.2rem">🌳</span>
+  <span class="vis-tree-sp">…</span>
+  <span style="font-size:1.2rem">🌳</span>
+  <span class="vis-tree-sp">10m</span>
+  <span style="font-size:1.4rem;color:#1976D2">↩</span>
+</div><div style="text-align:center;font-size:.72rem;color:#555;margin-top:4px">輪っか：最後の間隔も10m</div>` },
+      { title:'間隔の数を求める',
+        text:`間隔の数 ＝ 周囲 ÷ 間隔\n＝ 120 ÷ 10 ＝ 12（個の間隔）`,
+        visual:`<div class="vis-formula">間隔の数 ＝ 120 ÷ 10 ＝ 12</div>` },
+      { title:'木の本数を求める（答え）',
+        text:`池型では 本数 ＝ 間隔の数\n→ 12本`,
+        visual:`<div class="vis-formula">池型：木の本数 ＝ 間隔の数 ＝ 12本</div>` },
+    ]
+  },
+
+  /* ── つるかめ算 2問目（点数問題） ── */
+  { id:'c22', grade:5, category:'つるかめ算', catColor:'#00695C', catBg:'#E0F2F1', borderColor:'#00897B', title:'テストの点数（つるかめ算 応用）', difficulty:3,
+    text:`30問のテストで、\n正解すると4点もらえ、\n間違えると1点引かれます。\n\n全問解いて90点でした。\n正解は何問ですか？`,
+    answer:24, unit:'問',
+    hint:`「全部正解だったら何点？」から考えよう。\n4×30 ＝ 120点のはず。\n実際より30点少ない…なぜ？\n1問間違えるたびに 4＋1＝5点 減るよ！`,
+    steps:[
+      { title:'全問正解と仮定する',
+        text:`全部正解なら：4×30 ＝ 120点\n実際は90点\n差：120 − 90 ＝ 30点 少ない`,
+        visual:`<div class="vis-formula">全問正解の仮定：4 × 30 ＝ 120点\n実際との差：120 − 90 ＝ 30点</div>` },
+      { title:'1問間違えると何点変わるか',
+        text:`正解を1問→間違いに替えると：\n・＋4点のはずが → −1点になる\n1問替えるたびに 4＋1＝5点 少なくなる`,
+        visual:`<div class="vis-animals">
+  <div class="vis-animal"><div class="vis-animal-ico">✅</div><div class="vis-animal-legs" style="color:#1976D2">＋4点</div></div>
+  <div style="font-size:1.2rem;color:#ccc;padding:8px 4px">→</div>
+  <div class="vis-animal"><div class="vis-animal-ico">❌</div><div class="vis-animal-legs">−1点</div></div>
+  <div style="padding:8px 4px;font-size:.8rem;color:#555">差：5点ずつ減る</div>
+</div>` },
+      { title:'間違いの数を求める',
+        text:`間違いの数 ＝ 差 ÷ 1問あたりの変化\n＝ 30 ÷ 5 ＝ 6問`,
+        visual:`<div class="vis-formula">間違い ＝ 30 ÷ 5 ＝ 6問</div>` },
+      { title:'正解の数を求める（答え）',
+        text:`正解 ＝ 30 − 6 ＝ 24問\n確認：4×24 − 1×6 ＝ 96−6 ＝ 90点 ✓`,
+        visual:`<div class="vis-formula">正解 ＝ 30 − 6 ＝ 24問\n確認：4×24 − 1×6 ＝ 90点 ✓</div>` },
+    ]
+  },
+
+  /* ── 過不足算 2問目（おかし分け） ── */
+  { id:'c23', grade:5, category:'過不足算', catColor:'#AD1457', catBg:'#FCE4EC', borderColor:'#E91E63', title:'おかしを配る（過不足算）', difficulty:3,
+    text:`子どもたちにおかしを配ります。\n4個ずつ配ると6個余り、\n6個ずつ配ると10個足りません。\n\n子どもは何人いますか？`,
+    answer:8, unit:'人',
+    hint:`□を子どもの人数とすると2つの式が立てられるよ。\n4×□＋6 ＝ 6×□－10\nを解こう！`,
+    steps:[
+      { title:'おかしの合計をそれぞれ表す',
+        text:`同じおかしの数を2通りで表す：\n\n4個ずつ → 4×□＋6（6個余る）\n6個ずつ → 6×□－10（10個足りない）`,
+        visual:`<div class="vis-eq-wrap">
+  <div class="vis-eq-row"><span class="vis-eq-no">式1</span><span class="vis-eq-body">4×□ ＋ 6</span><span style="font-size:.72rem;color:#555;margin-left:8px">（4個配って6個余る）</span></div>
+  <div class="vis-eq-row"><span class="vis-eq-no">式2</span><span class="vis-eq-body">6×□ − 10</span><span style="font-size:.72rem;color:#555;margin-left:8px">（6個配って10個足りない）</span></div>
+</div>` },
+      { title:'方程式を解く',
+        text:`式1 ＝ 式2（同じおかしの数）\n4□＋6 ＝ 6□－10\n6＋10 ＝ 6□－4□\n16 ＝ 2□\n□ ＝ 8人`,
+        visual:`<div class="vis-formula">4□ ＋ 6 ＝ 6□ − 10\n16 ＝ 2□\n□ ＝ 8人</div>` },
+      { title:'おかしの数も確認（答え）',
+        text:`子ども：8人\nおかしの数：4×8＋6 ＝ 38個\n確認：6×8－10 ＝ 48－10 ＝ 38個 ✓`,
+        visual:`<div class="vis-formula">おかし：4×8＋6 ＝ 38個\n確認：6×8－10 ＝ 38個 ✓</div>` },
+    ]
+  },
+
+  /* ── 旅人算 往復の平均速 ── */
+  { id:'c24', grade:6, category:'速さ', catColor:'#2E7D32', catBg:'#E8F5E9', borderColor:'#43A047', title:'往復の平均の速さ', difficulty:4,
+    text:`A地点からB地点まで行きは時速4km、\n帰りは時速6kmで歩きました。\n\n往復の平均の速さは何km/hですか？`,
+    answer:4.8, unit:'km/h',
+    hint:`距離を具体的な数で置いてみよう！\nAB間を12kmと仮定すると計算しやすいよ。\n平均の速さ ＝ 総距離 ÷ 総時間`,
+    steps:[
+      { title:'なぜ単純に (4+6)÷2 ではダメなの？',
+        text:`行きと帰りで速さが違うと\nかかる時間が違う。\n遅い方（行き4km/h）の時間が長い → 平均は4km/hに近くなる！`,
+        visual:`<div class="vis-numline"><div class="vis-numline-bar"></div><div class="vis-numline-dot" style="background:#0288D1;left:8%"></div><div class="vis-numline-dot" style="background:#E64A19;left:92%"></div><div class="vis-numline-lbl" style="left:8%">A地点</div><div class="vis-numline-lbl" style="left:92%">B地点</div><div class="vis-numline-lbl" style="left:50%;transform:translateX(-50%);top:0">行き4km/h → 帰り6km/h ←</div></div>` },
+      { title:'AB間を12kmと仮定して計算',
+        text:`行きの時間：12 ÷ 4 ＝ 3時間\n帰りの時間：12 ÷ 6 ＝ 2時間\n\n往復の総距離：12×2 ＝ 24km\n往復の総時間：3＋2 ＝ 5時間`,
+        visual:`<div class="vis-formula">行き：12÷4＝3時間\n帰り：12÷6＝2時間\n合計：24km ÷ 5時間</div>` },
+      { title:'平均の速さを求める（答え）',
+        text:`平均の速さ ＝ 総距離 ÷ 総時間\n＝ 24 ÷ 5 ＝ 4.8 km/h`,
+        visual:`<div class="vis-formula">平均の速さ ＝ 24 ÷ 5 ＝ 4.8 km/h\n\n公式：2 ÷ (1/4 ＋ 1/6) ＝ 4.8 km/h</div>` },
+    ]
+  },
+
+  /* ── 通過算 3問目（すれ違い） ── */
+  { id:'c25', grade:6, category:'通過算', catColor:'#37474F', catBg:'#ECEFF1', borderColor:'#546E7A', title:'2列車がすれ違う', difficulty:3,
+    text:`長さ100mの電車Aが秒速15mで、\n長さ200mの電車Bが秒速10mで\n逆方向に走っています。\n\nすれ違い始めてから終わるまでの時間は何秒ですか？`,
+    answer:12, unit:'秒',
+    hint:`すれ違う距離 ＝ AとBの長さを合わせた距離\n逆方向なので合わせた速さ ＝ 速さの和！`,
+    steps:[
+      { title:'すれ違う距離を考える',
+        text:`先頭同士が出会ってから\n最後尾が離れるまで。\n→ 距離 ＝ 100 ＋ 200 ＝ 300m`,
+        visual:`<div class="vis-train-wrap">
+  <div class="vis-track-line"><div class="vis-train-el">← B 200m / 10m/s</div><div class="vis-track-gap"></div><div class="vis-train-el">A 100m / 15m/s →</div></div>
+  <div class="vis-train-sum">すれ違う距離 ＝ 100m ＋ 200m ＝ 300m</div>
+</div>` },
+      { title:'合わせた速さを求める',
+        text:`逆方向 → 速さを足す！\n合わせた速さ ＝ 15 ＋ 10 ＝ 25 m/秒`,
+        visual:`<div class="vis-formula">逆方向の合わせた速さ ＝ 15 ＋ 10 ＝ 25 m/秒</div>` },
+      { title:'時間を求める（答え）',
+        text:`時間 ＝ 距離 ÷ 合わせた速さ\n＝ 300 ÷ 25 ＝ 12秒`,
+        visual:`<div class="vis-formula">300 ÷ 25 ＝ 12秒</div>` },
+    ]
+  },
+
+  /* ── 食塩水 蒸発 ── */
+  { id:'c26', grade:6, category:'割合', catColor:'#6A1B9A', catBg:'#F3E5F5', borderColor:'#8E24AA', title:'食塩水を蒸発させる', difficulty:4,
+    text:`10%の食塩水300gから\n水を蒸発させて15%にしたい。\n\n何gの水を蒸発させればよいですか？`,
+    answer:100, unit:'g',
+    hint:`蒸発しても塩の量は変わらない！\nまず塩の量を求めて、\n15%になるときの食塩水の量を逆算しよう。`,
+    steps:[
+      { title:'塩の量を求める',
+        text:`塩の量は蒸発しても変わらない！\n塩 ＝ 300g × 10% ＝ 300 × 0.1 ＝ 30g`,
+        visual:`<div class="vis-beakers"><div><div class="vis-beaker"><div class="vis-beaker-liq" style="height:70%;background:rgba(3,169,244,.45)"></div></div><div class="vis-beaker-lbl">10%<br>300g<br><b>塩30g</b></div></div><span style="font-size:1.5rem;color:#ccc;padding-bottom:20px">→ 蒸発 →</span><div><div class="vis-beaker" style="width:45px;height:60px"><div class="vis-beaker-liq" style="height:70%;background:rgba(3,169,244,.6)"></div></div><div class="vis-beaker-lbl">15%<br>？g<br><b>塩30g</b></div></div></div>` },
+      { title:'15%のときの食塩水の量を求める',
+        text:`15% ＝ 塩30g ÷ 食塩水の量\n食塩水の量 ＝ 30 ÷ 0.15 ＝ 200g`,
+        visual:`<div class="vis-formula">食塩水の量 ＝ 30 ÷ 0.15 ＝ 200g</div>` },
+      { title:'蒸発させた水の量を求める（答え）',
+        text:`蒸発量 ＝ 元の量 − 残った量\n＝ 300 − 200 ＝ 100g`,
+        visual:`<div class="vis-formula">蒸発量 ＝ 300 − 200 ＝ 100g</div>` },
+    ]
+  },
+
+  /* ── 売買損益 ── */
+  { id:'c27', grade:6, category:'売買損益', catColor:'#1B5E20', catBg:'#E8F5E9', borderColor:'#2E7D32', title:'定価と利益（売買損益 基本）', difficulty:3,
+    text:`ある商品を450円で仕入れました。\n仕入れ値の20%の利益をのせて\n定価をつけました。\n\n定価はいくらですか？`,
+    answer:540, unit:'円',
+    hint:`定価 ＝ 仕入れ値 × (1 ＋ 利益の割合)\n20%の利益 → 1.2倍！`,
+    steps:[
+      { title:'売買損益の関係を整理',
+        text:`仕入れ値：商品を買った値段\n利益：もうけた金額\n定価 ＝ 仕入れ値 ＋ 利益`,
+        visual:`<div class="vis-tape-wrap">
+  <div class="vis-tape-row"><span class="vis-tape-lbl">定価</span><div class="vis-tape" style="width:72%;background:#1976D2">仕入れ値 450円</div><div class="vis-tape" style="width:14%;background:#E64A19;margin-left:2px">利益20%</div></div>
+</div>` },
+      { title:'利益の金額を求める',
+        text:`利益 ＝ 仕入れ値 × 利益の割合\n＝ 450 × 0.2 ＝ 90円`,
+        visual:`<div class="vis-formula">利益 ＝ 450 × 0.2 ＝ 90円</div>` },
+      { title:'定価を求める（答え）',
+        text:`定価 ＝ 仕入れ値 ＋ 利益\n＝ 450 ＋ 90 ＝ 540円\n\n別解：450 × 1.2 ＝ 540円`,
+        visual:`<div class="vis-formula">定価 ＝ 450 × 1.2 ＝ 540円</div>` },
+    ]
+  },
+  { id:'c28', grade:6, category:'売買損益', catColor:'#1B5E20', catBg:'#E8F5E9', borderColor:'#2E7D32', title:'割引と損益（売買損益 応用）', difficulty:4,
+    text:`定価800円の品物を定価の15%引きで売りました。\n仕入れ値は600円です。\n\n利益は何円ですか？`,
+    answer:80, unit:'円',
+    hint:`まず売値を求めよう。\n売値 ＝ 定価 × (1 − 割引率)\n次に 利益 ＝ 売値 − 仕入れ値`,
+    steps:[
+      { title:'割引後の売値を求める',
+        text:`15%引き → 定価の(100−15)% ＝ 85%で売る\n売値 ＝ 800 × 0.85 ＝ 680円`,
+        visual:`<div class="vis-tape-wrap">
+  <div class="vis-tape-row"><span class="vis-tape-lbl">定価</span><div class="vis-tape" style="width:85%;background:#1976D2">売値の部分 85%</div><div class="vis-tape" style="width:13%;background:#999;margin-left:2px">割引15%</div></div>
+</div><div class="vis-formula" style="margin-top:6px">売値 ＝ 800 × 0.85 ＝ 680円</div>` },
+      { title:'利益を求める（答え）',
+        text:`利益 ＝ 売値 − 仕入れ値\n＝ 680 − 600 ＝ 80円`,
+        visual:`<div class="vis-formula">利益 ＝ 680 − 600 ＝ 80円</div>` },
     ]
   },
 ];
@@ -871,8 +1387,9 @@ function showScreen(id, opts={}) {
    STANDARD COURSE
 ════════════════════════════════════════ */
 function renderStandardCourse() {
+    const chapters = appState.grade === 5 ? STANDARD_CHAPTERS_G5 : STANDARD_CHAPTERS_G6;
     const el = document.getElementById('std-chapter-list');
-    el.innerHTML = STANDARD_CHAPTERS.map((ch, i) => {
+    el.innerHTML = chapters.map((ch, i) => {
         if (ch.available) {
             return `<div class="chapter-card available" onclick="showScreen('watertank')">
                 <div class="chapter-card-inner">
@@ -915,8 +1432,9 @@ function renderStandardCourse() {
    EXAM COURSE
 ════════════════════════════════════════ */
 function renderExamCourse() {
+    const units = appState.grade === 5 ? EXAM_UNITS_G5 : EXAM_UNITS_G6;
     const el = document.getElementById('exam-unit-list');
-    el.innerHTML = EXAM_UNITS.map(u => {
+    el.innerHTML = units.map(u => {
         const stars = '★'.repeat(u.difficulty) + '☆'.repeat(5 - u.difficulty);
         if (u.available) {
             return `<div class="unit-card available" onclick="openUnit('${u.id}')">
@@ -950,7 +1468,8 @@ function renderExamCourse() {
 }
 
 function openUnit(unitId) {
-    const unit = EXAM_UNITS.find(u => u.id === unitId);
+    const units = appState.grade === 5 ? EXAM_UNITS_G5 : EXAM_UNITS_G6;
+    const unit = units.find(u => u.id === unitId);
     if (!unit || !unit.available) return;
     showScreen('challenges', { filter: unit.category, unitTitle: unit.num + ' ' + unit.title });
 }
@@ -1093,13 +1612,13 @@ function toggleHint() {
 /* ════════════════════════════════════════
    CHALLENGES
 ════════════════════════════════════════ */
-const CH_CATS = ['すべて','水槽','速さ','割合','植木算','つるかめ算','過不足算'];
-
 function renderChallengeList() {
-    document.getElementById('ch-filter-row').innerHTML = CH_CATS.map(cat =>
+    const cats = appState.grade === 5 ? CH_CATS_G5 : CH_CATS_G6;
+    document.getElementById('ch-filter-row').innerHTML = cats.map(cat =>
         `<button class="ch-filter-btn${chState.filter===cat?' active':''}" onclick="chSetFilter('${cat}')">${cat}</button>`
     ).join('');
-    const filtered = chState.filter==='すべて' ? CHALLENGES : CHALLENGES.filter(c=>c.category===chState.filter);
+    let filtered = CHALLENGES.filter(c => c.grade === appState.grade);
+    if (chState.filter !== 'すべて') filtered = filtered.filter(c => c.category === chState.filter);
     document.getElementById('ch-cards-container').innerHTML = filtered.map(c => {
         const stars='★'.repeat(c.difficulty)+'☆'.repeat(5-c.difficulty);
         const preview=c.text.replace(/\n/g,' ').slice(0,48)+'…';

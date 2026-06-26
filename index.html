@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>算数ビジュアル学習</title>
+    <title>VISTA — 算数を、見える化する。</title>
     <style>
         :root {
             --std-primary: #2563EB;
@@ -48,7 +48,8 @@
             padding: 60px 20px 40px;
         }
         .grade-logo { font-size: 3.5rem; margin-bottom: 14px; }
-        .grade-title { color: #fff; font-size: 1.8rem; font-weight: bold; text-align: center; text-shadow: 0 2px 8px rgba(0,0,0,.2); margin-bottom: 8px; }
+        .grade-title { color: #fff; font-size: 2.4rem; font-weight: 800; text-align: center; letter-spacing: .12em; text-shadow: 0 2px 16px rgba(0,0,0,.35); margin-bottom: 4px; }
+        .grade-tagline { color: rgba(255,255,255,.65); font-size: .82rem; text-align: center; letter-spacing: .05em; margin-bottom: 32px; }
         .grade-sub { color: rgba(255,255,255,.85); font-size: .92rem; text-align: center; margin-bottom: 40px; }
         .grade-cards { display: flex; flex-direction: column; gap: 16px; max-width: 380px; width: 100%; }
         .grade-card {
@@ -83,7 +84,7 @@
             position: relative;
         }
         .home-logo { font-size: 3rem; margin-bottom: 10px; }
-        .home-title { color: #fff; font-size: 1.75rem; font-weight: bold; text-align: center; text-shadow: 0 2px 8px rgba(0,0,0,.2); margin-bottom: 6px; }
+        .home-title { color: #fff; font-size: 2rem; font-weight: 800; text-align: center; letter-spacing: .12em; text-shadow: 0 2px 16px rgba(0,0,0,.35); margin-bottom: 6px; }
         .home-sub { color: rgba(255,255,255,.8); font-size: .92rem; text-align: center; margin-bottom: 36px; }
         .home-sub b { color: #fff; }
         .home-grade-badge { display: inline-block; background: rgba(255,255,255,.25); color: #fff; font-size: .82rem; font-weight: bold; padding: 4px 14px; border-radius: 20px; margin-bottom: 10px; }
@@ -721,7 +722,8 @@
 
 <!-- ════════ GRADE SELECTION ════════ -->
 <div id="grade-screen" class="screen active">
-        <div class="grade-title">算数ビジュアル学習</div>
+        <div class="grade-title">VISTA</div>
+        <div class="grade-tagline">算数を、見える化する。</div>
     <div class="grade-sub">学年を選択してください</div>
     <div class="grade-cards">
         <div class="grade-card g5" onclick="selectGrade(5)">
@@ -748,7 +750,7 @@
     <div style="position:absolute;top:16px;left:16px">
         <button onclick="showScreen('grade')" style="background:rgba(255,255,255,.22);border:none;color:#fff;padding:6px 13px;border-radius:8px;cursor:pointer;font-size:.82rem;font-family:inherit">← 学年選択</button>
     </div>
-        <div class="home-title">算数ビジュアル学習</div>
+        <div class="home-title">VISTA</div>
     <div class="home-sub" id="home-grade-display">コースを選択</div>
     <div class="course-cards">
         <div class="course-card std" onclick="showScreen('std-mode')">

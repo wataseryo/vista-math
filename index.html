@@ -554,6 +554,160 @@
         .prac-topic-link-body { flex: 1; }
         .prac-topic-link-title { font-size: .85rem; font-weight: bold; color: var(--exam-primary); margin-bottom: 2px; }
         .prac-topic-link-sub { font-size: .72rem; color: #888; }
+
+        /* ══ KIDS-FRIENDLY UI ENHANCEMENTS ══ */
+
+        /* Larger base font for kids */
+        body { font-size: 15px; }
+
+        /* Increase tiny font sizes throughout */
+        .grade-card-label { font-size: .8rem; }
+        .grade-card-desc { font-size: .88rem; line-height: 1.7; }
+        .cc-label { font-size: .78rem; }
+        .cc-desc { font-size: .84rem; }
+        .chapter-tag { font-size: .72rem; padding: 3px 10px; }
+        .chapter-sub { font-size: .8rem; }
+        .chapter-coming-badge { font-size: .7rem; }
+        .unit-sub { font-size: .8rem; }
+        .unit-stars { font-size: .84rem; }
+        .unit-count { font-size: .76rem; }
+        .ch-card-preview { font-size: .84rem; }
+        .ch-filter-btn { font-size: .84rem; padding: 7px 16px; }
+        .ch-step-name { font-size: .94rem; }
+        .ch-step-text { font-size: .92rem; }
+        .prac-cat-sub { font-size: .72rem; }
+        .prac-cat-title { font-size: .88rem; }
+        .exam-stat-label { font-size: .72rem; }
+        .back-btn { padding: 8px 16px; font-size: .88rem; }
+        .tab { font-size: .9rem; padding: 14px 8px; }
+        .hint-btn, .ch-hint-btn { padding: 9px 16px; font-size: .84rem; }
+        .problem-text { font-size: 1.05rem; }
+        .ch-prob-text { font-size: 1rem; }
+
+        /* Grade screen - more vibrant & fun */
+        .grade-logo { font-size: 4.2rem; animation: logo-float 2.5s ease-in-out infinite; }
+        @keyframes logo-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .grade-title { font-size: 2rem; }
+        .grade-card { border-radius: 26px; }
+        .grade-card-title { font-size: 1.75rem; }
+        .grade-card-icon { font-size: 3.4rem; }
+        .grade-card.g5 { background: linear-gradient(135deg, #fff 0%, #E3F2FD 100%); border: 2px solid #90CAF9; }
+        .grade-card.g6 { background: linear-gradient(135deg, #FFD200, #f7971e); }
+
+        /* Subtle pulse on available chapter/unit cards */
+        @keyframes avail-glow-blue {
+            0%, 100% { box-shadow: 0 2px 10px rgba(25,118,210,.08); }
+            50% { box-shadow: 0 6px 24px rgba(25,118,210,.28); }
+        }
+        @keyframes avail-glow-orange {
+            0%, 100% { box-shadow: 0 2px 10px rgba(230,74,25,.08); }
+            50% { box-shadow: 0 6px 24px rgba(230,74,25,.24); }
+        }
+        .chapter-card.available { animation: avail-glow-blue 3s ease-in-out infinite; }
+        .unit-card.available { animation: avail-glow-orange 3s ease-in-out infinite; }
+
+        /* Bouncy result feedback */
+        .result-box.ok, .ch-result-box.ok {
+            animation: result-pop 0.45s cubic-bezier(0.68,-0.55,0.265,1.55);
+            border-left: 5px solid #43A047;
+            font-size: .96rem;
+        }
+        .result-box.ng, .ch-result-box.ng {
+            animation: result-shake 0.4s ease;
+            border-left: 5px solid #E53935;
+            font-size: .96rem;
+        }
+        @keyframes result-pop {
+            0% { transform: scale(0.7); opacity: 0; }
+            70% { transform: scale(1.06); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes result-shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-6px); }
+            40% { transform: translateX(6px); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+        }
+
+        /* ── Star/XP Counter Badge ── */
+        #star-counter-badge {
+            position: fixed; top: 12px; right: 12px; z-index: 500;
+            background: linear-gradient(135deg, #FFD700, #FF9800);
+            color: #fff; font-weight: bold; font-size: .94rem;
+            padding: 7px 16px; border-radius: 22px;
+            box-shadow: 0 3px 14px rgba(255,152,0,.45);
+            display: none; align-items: center; gap: 5px;
+            cursor: default; user-select: none;
+        }
+        #star-counter-badge.visible { display: flex; }
+        #star-counter-badge.bump { animation: star-bump 0.4s ease; }
+        @keyframes star-bump {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.35); }
+        }
+
+        /* ── Celebration Confetti Overlay ── */
+        #celebration-overlay {
+            position: fixed; inset: 0; pointer-events: none;
+            z-index: 9999; display: none; overflow: hidden;
+        }
+        .confetti-p {
+            position: absolute; top: -24px;
+            animation: confetti-fall linear forwards;
+        }
+        @keyframes confetti-fall {
+            0%   { top: -24px; opacity: 1; transform: rotate(0deg) translateX(0); }
+            80%  { opacity: 1; }
+            100% { top: 110vh; opacity: 0; transform: rotate(540deg) translateX(40px); }
+        }
+
+        /* ── Big Success Popup ── */
+        #success-popup {
+            position: fixed; top: 44%; left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, #FF6B6B 0%, #FFD700 100%);
+            color: #fff; font-size: 1.7rem; font-weight: bold;
+            padding: 22px 36px; border-radius: 28px;
+            box-shadow: 0 10px 48px rgba(0,0,0,.28);
+            z-index: 10000; pointer-events: none;
+            display: none; text-align: center; white-space: nowrap;
+            line-height: 1.3;
+        }
+        #success-popup.active {
+            display: block;
+            animation: popup-bounce 0.5s cubic-bezier(0.68,-0.55,0.265,1.55) forwards;
+        }
+        @keyframes popup-bounce {
+            0%   { transform: translate(-50%,-50%) scale(0); }
+            70%  { transform: translate(-50%,-50%) scale(1.08); }
+            100% { transform: translate(-50%,-50%) scale(1); }
+        }
+
+        /* ── Streak Notification ── */
+        #streak-popup {
+            position: fixed; bottom: 24px; left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: #fff; font-size: 1.05rem; font-weight: bold;
+            padding: 13px 26px; border-radius: 26px;
+            box-shadow: 0 5px 22px rgba(255,107,107,.45);
+            z-index: 9000; display: none; white-space: nowrap;
+        }
+        #streak-popup.in { display: block; animation: streak-slide-up 0.5s cubic-bezier(0.68,-0.55,0.265,1.55); }
+        @keyframes streak-slide-up {
+            0% { transform: translateX(-50%) translateY(80px); opacity: 0; }
+            100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        /* ── Wrong Answer Encouragement ── */
+        .wrong-encourage {
+            font-size: .84rem; color: #E64A19; font-weight: bold;
+            margin-top: 6px;
+        }
     </style>
 </head>
 <body>
@@ -1722,9 +1876,15 @@ function stdPracCheckAnswer() {
     document.getElementById('std-prac-ans-input').className = 'prac-ans-input ' + (ok ? 'correct' : 'wrong');
     const rb = document.getElementById('std-prac-result-box');
     rb.style.display = 'block';
-    rb.style.background = ok ? '#E8F5E9' : '#FFEBEE';
-    rb.style.color = ok ? '#2E7D32' : '#C62828';
-    rb.textContent = ok ? '⭕ 正解！すばらしい！' : `❌ まちがい — 正解は ${p.answer}${p.unit} でした`;
+    if (ok) {
+        rb.style.background = '#E8F5E9'; rb.style.color = '#2E7D32';
+        rb.textContent = '⭕ 正解！';
+        addStar();
+    } else {
+        rb.style.background = '#FFEBEE'; rb.style.color = '#C62828';
+        rb.textContent = `❌ ${getWrongMsg()} — 正解は ${p.answer}${p.unit} でした`;
+        resetStreak();
+    }
 }
 
 function stdPracToggleSolution() {
@@ -1862,9 +2022,15 @@ function pracCheckAnswer() {
     document.getElementById('prac-ans-input').className = 'prac-ans-input ' + (ok ? 'correct' : 'wrong');
     const rb = document.getElementById('prac-result-box');
     rb.style.display = 'block';
-    rb.style.background = ok ? '#E8F5E9' : '#FFEBEE';
-    rb.style.color = ok ? '#2E7D32' : '#C62828';
-    rb.textContent = ok ? '⭕ 正解！すばらしい！' : `❌ まちがい — 正解は ${p.answer}${p.unit} でした`;
+    if (ok) {
+        rb.style.background = '#E8F5E9'; rb.style.color = '#2E7D32';
+        rb.textContent = '⭕ 正解！';
+        addStar();
+    } else {
+        rb.style.background = '#FFEBEE'; rb.style.color = '#C62828';
+        rb.textContent = `❌ ${getWrongMsg()} — 正解は ${p.answer}${p.unit} でした`;
+        resetStreak();
+    }
 }
 
 function pracToggleSolution() {
@@ -1913,6 +2079,13 @@ function showScreen(id, opts={}) {
         document.getElementById('ch-list-view').style.display = 'block';
         document.getElementById('ch-detail-view').classList.remove('active');
         renderChallengeList();
+    }
+    // スターバッジ表示制御
+    const noStarScreens = ['grade', 'home'];
+    const badge = document.getElementById('star-counter-badge');
+    if (badge) {
+        if (noStarScreens.includes(id)) badge.classList.remove('visible');
+        else badge.classList.add('visible');
     }
 }
 
@@ -2138,8 +2311,19 @@ function checkAnswer() {
     const ok=Math.abs(val-p.answer)<0.01;
     document.getElementById('ans-input').className='answer-input '+(ok?'correct':'wrong');
     const rb=document.getElementById('result-box');
-    if (ok) { quiz.correct++; document.getElementById('score-ok').textContent=quiz.correct; rb.className='result-box ok'; document.getElementById('result-headline').textContent='⭕ 正解！すばらしい！'; document.getElementById('result-msg').textContent=''; }
-    else    { quiz.wrong++;   document.getElementById('score-ng').textContent=quiz.wrong;   rb.className='result-box ng'; document.getElementById('result-headline').textContent='❌ まちがい'; document.getElementById('result-msg').textContent=`正解は ${p.answer}${p.unit} でした`; }
+    if (ok) {
+        quiz.correct++; document.getElementById('score-ok').textContent=quiz.correct;
+        rb.className='result-box ok';
+        document.getElementById('result-headline').textContent='⭕ 正解！';
+        document.getElementById('result-msg').textContent='';
+        addStar();
+    } else {
+        quiz.wrong++; document.getElementById('score-ng').textContent=quiz.wrong;
+        rb.className='result-box ng';
+        document.getElementById('result-headline').textContent='❌ ' + getWrongMsg();
+        document.getElementById('result-msg').textContent=`正解は ${p.answer}${p.unit} でした`;
+        resetStreak();
+    }
     document.getElementById('result-exp').textContent=p.exp;
     rb.style.display='block';
     document.getElementById('next-btn').style.display='block';
@@ -2223,8 +2407,15 @@ function chSubmitAnswer() {
     document.getElementById('ch-ans-input').className='ch-ans-input '+(ok?'correct':'wrong');
     const rb=document.getElementById('ch-result-box');
     rb.className='ch-result-box '+(ok?'ok':'ng');
-    document.getElementById('ch-result-hl').textContent=ok?'⭕ 正解！すばらしい！':'❌ まちがい';
-    document.getElementById('ch-result-msg').textContent=ok?'下のステップ解説も確認してみよう。':`正解は ${ch.answer}${ch.unit} でした。ヒントやステップ解説を見てみよう！`;
+    if (ok) {
+        document.getElementById('ch-result-hl').textContent='⭕ 正解！';
+        document.getElementById('ch-result-msg').textContent='下のステップ解説も確認してみよう。';
+        addStar();
+    } else {
+        document.getElementById('ch-result-hl').textContent='❌ ' + getWrongMsg();
+        document.getElementById('ch-result-msg').textContent=`正解は ${ch.answer}${ch.unit} でした。ヒントやステップ解説を見てみよう！`;
+        resetStreak();
+    }
     rb.style.display='block';
 }
 
@@ -2246,14 +2437,111 @@ function chExpandAll() {
 }
 
 /* ════════════════════════════════════════
+   GAMIFICATION
+════════════════════════════════════════ */
+const gameState = {
+    stars: parseInt(localStorage.getItem('math_stars') || '0'),
+    streak: 0,
+};
+
+const CORRECT_MSGS = [
+    'やったー！天才！', 'すごい！正解！', 'かっこいい！やったね！',
+    'パーフェクト！', 'その調子！最高！', 'よっしゃ！正解！',
+    'すばらしい！ファイト！', 'チャンピオン！'
+];
+const WRONG_MSGS = [
+    'もう一回チャレンジ！', '惜しい！あとちょっと！',
+    'ヒントを見てみよう！', '次はきっと正解！', '負けないで！ファイト！'
+];
+
+function getCorrectMsg() { return CORRECT_MSGS[Math.floor(Math.random() * CORRECT_MSGS.length)]; }
+function getWrongMsg()   { return WRONG_MSGS[Math.floor(Math.random() * WRONG_MSGS.length)]; }
+
+function addStar() {
+    gameState.stars++;
+    gameState.streak++;
+    localStorage.setItem('math_stars', gameState.stars);
+    updateStarBadge();
+    triggerStarBump();
+    showCelebration();
+    if (gameState.streak >= 3) showStreakPopup();
+}
+
+function resetStreak() { gameState.streak = 0; }
+
+function updateStarBadge() {
+    const el = document.getElementById('star-count');
+    if (el) el.textContent = gameState.stars;
+}
+
+function triggerStarBump() {
+    const badge = document.getElementById('star-counter-badge');
+    if (!badge) return;
+    badge.classList.remove('bump');
+    void badge.offsetWidth; // reflow
+    badge.classList.add('bump');
+    setTimeout(() => badge.classList.remove('bump'), 400);
+}
+
+function showCelebration() {
+    const overlay = document.getElementById('celebration-overlay');
+    if (!overlay) return;
+    overlay.innerHTML = '';
+    const colors = ['#FFD700','#FF6B6B','#4ECDC4','#45B7D1','#96CEB4','#FFEAA7','#DDA0DD','#FF9A56','#A8E063'];
+    for (let i = 0; i < 32; i++) {
+        const p = document.createElement('div');
+        p.className = 'confetti-p';
+        p.style.left = (Math.random() * 100) + 'vw';
+        p.style.animationDelay = (Math.random() * 0.5) + 's';
+        p.style.animationDuration = (1.1 + Math.random() * 0.7) + 's';
+        p.style.background = colors[Math.floor(Math.random() * colors.length)];
+        const size = 7 + Math.random() * 9;
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.borderRadius = Math.random() > 0.4 ? '50%' : '2px';
+        overlay.appendChild(p);
+    }
+    overlay.style.display = 'block';
+
+    const popup = document.getElementById('success-popup');
+    if (popup) {
+        popup.textContent = '🎉 ' + getCorrectMsg();
+        popup.classList.add('active');
+    }
+
+    setTimeout(() => {
+        overlay.style.display = 'none';
+        if (popup) popup.classList.remove('active');
+    }, 1900);
+}
+
+function showStreakPopup() {
+    const el = document.getElementById('streak-popup');
+    if (!el) return;
+    el.textContent = `🔥 ${gameState.streak}問連続正解！すごい！`;
+    el.classList.remove('in');
+    void el.offsetWidth;
+    el.classList.add('in');
+    setTimeout(() => el.classList.remove('in'), 2800);
+}
+
+/* ════════════════════════════════════════
    INIT
 ════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('ans-input').addEventListener('keydown', e => { if(e.key==='Enter') checkAnswer(); });
     document.getElementById('ch-ans-input').addEventListener('keydown', e => { if(e.key==='Enter') chSubmitAnswer(); });
+    updateStarBadge();
     updateLearn();
     generateProblem();
 });
 </script>
+
+<!-- ════════ GAMIFICATION OVERLAYS ════════ -->
+<div id="star-counter-badge">⭐ <span id="star-count">0</span></div>
+<div id="celebration-overlay"></div>
+<div id="success-popup"></div>
+<div id="streak-popup"></div>
+
 </body>
 </html>

@@ -539,15 +539,14 @@
         .acc-badge.low  { background: #3D1515; color: #F87171; }
         .acc-badge.mid  { background: #3D2E0A; color: #FBBF24; }
         .acc-badge.high { background: #0C2E1A; color: #34D399; }
-        /* ── home progress strip ── */
-        #home-progress { display:flex; gap:16px; justify-content:center; align-items:center; margin: -4px 0 18px; }
-        .hp-stat { text-align:center; }
-        .hp-stat-val { font-size:1.3rem; font-weight:800; color:#fff; line-height:1; }
-        .hp-stat-label { font-size:.62rem; color:rgba(255,255,255,.45); letter-spacing:.05em; margin-top:2px; }
-        .hp-divider { width:1px; height:28px; background:rgba(255,255,255,.18); }
-        .hp-bar-wrap { width:140px; }
-        .hp-bar-bg { background:rgba(255,255,255,.12); border-radius:4px; height:4px; overflow:hidden; }
-        .hp-bar-fill { height:4px; border-radius:4px; background:linear-gradient(90deg,#34D399,#059669); transition:width .5s ease; }
+        /* ── Course card accuracy strip ── */
+        .cc-acc { margin-top: 8px; display: flex; align-items: center; gap: 8px; }
+        .cc-acc-bar-bg { flex:1; background: rgba(255,255,255,.15); border-radius: 3px; height: 3px; overflow: hidden; }
+        .cc-acc-bar-fill { height: 3px; border-radius: 3px; transition: width .5s ease; }
+        .std .cc-acc-bar-fill  { background: #60A5FA; }
+        .exam .cc-acc-bar-fill { background: #F87171; }
+        .cc-acc-pct { font-size: .72rem; font-weight: 700; color: rgba(255,255,255,.85); white-space: nowrap; }
+        .cc-acc-sub { font-size: .65rem; color: rgba(255,255,255,.4); white-space: nowrap; }
         .prac-cat-ribbon { position: absolute; top: 8px; right: -8px; background: var(--exam-primary); color: #fff; font-size: .58rem; padding: 2px 10px 2px 8px; font-weight: bold; }
 
         /* Practice problem list */
@@ -788,7 +787,6 @@
     </div>
         <div class="home-title">VISTA</div>
     <div class="home-sub" id="home-grade-display">コースを選択</div>
-    <div id="home-progress"></div>
     <div class="course-cards">
         <div class="course-card std" onclick="showScreen('std-mode')">
             <span class="cc-icon">📘</span>
@@ -796,6 +794,7 @@
                 <div class="cc-label">Standard Course</div>
                 <div class="cc-title">標準コース</div>
                 <div class="cc-desc">トピック学習 ＋ 演習問題で<br>基礎をしっかり定着させる</div>
+                <div class="cc-acc" id="std-acc-info"></div>
             </div>
             <span class="cc-arrow">›</span>
         </div>
@@ -805,6 +804,7 @@
                 <div class="cc-label">Exam Course</div>
                 <div class="cc-title">受験コース</div>
                 <div class="cc-desc">トピック学習 ＋ 演習問題で<br>中学受験算数を完全攻略</div>
+                <div class="cc-acc" id="exam-acc-info"></div>
             </div>
             <span class="cc-arrow">›</span>
         </div>
@@ -2523,12 +2523,6 @@ function getStatsForKey(key) {
     return stats[key] || null;
 }
 
-function getOverallStats() {
-    const stats = JSON.parse(localStorage.getItem('vista_stats') || '{}');
-    let total = 0, correct = 0;
-    Object.values(stats).forEach(s => { total += s.total; correct += s.correct; });
-    return { total, correct };
-}
 
 function getAccuracyBadge(key) {
     const s = getStatsForKey(key);
@@ -2538,21 +2532,34 @@ function getAccuracyBadge(key) {
     return `<span class="acc-badge ${cls}">${pct}% (${s.correct}/${s.total})</span>`;
 }
 
-function renderHomeProgress() {
-    const el = document.getElementById('home-progress');
+function getGradeCourseStats(grade, ...prefixes) {
+    const stats = JSON.parse(localStorage.getItem('vista_stats') || '{}');
+    let total = 0, correct = 0;
+    prefixes.forEach(pfx => {
+        const key = `g${grade}_${pfx}_`;
+        Object.entries(stats).forEach(([k, v]) => {
+            if (k.startsWith(key)) { total += v.total; correct += v.correct; }
+        });
+    });
+    return { total, correct };
+}
+
+function renderCourseAcc(elId, grade, ...prefixes) {
+    const el = document.getElementById(elId);
     if (!el) return;
-    const { total, correct } = getOverallStats();
+    const { total, correct } = getGradeCourseStats(grade, ...prefixes);
     if (total === 0) { el.innerHTML = ''; return; }
     const pct = Math.round(correct / total * 100);
     el.innerHTML = `
-        <div class="hp-stat"><div class="hp-stat-val">${total}</div><div class="hp-stat-label">解答数</div></div>
-        <div class="hp-divider"></div>
-        <div class="hp-stat hp-bar-wrap">
-            <div class="hp-bar-bg"><div class="hp-bar-fill" style="width:${pct}%"></div></div>
-            <div class="hp-stat-label" style="margin-top:5px">正答率 ${pct}%</div>
-        </div>
-        <div class="hp-divider"></div>
-        <div class="hp-stat"><div class="hp-stat-val">${correct}</div><div class="hp-stat-label">正解数</div></div>`;
+        <div class="cc-acc-bar-bg"><div class="cc-acc-bar-fill" style="width:${pct}%"></div></div>
+        <span class="cc-acc-pct">${pct}%</span>
+        <span class="cc-acc-sub">${correct}/${total}問</span>`;
+}
+
+function renderHomeProgress() {
+    const g = appState.grade;
+    renderCourseAcc('std-acc-info',  g, 'std');
+    renderCourseAcc('exam-acc-info', g, 'exam', 'ch');
 }
 
 /* ════════════════════════════════════════

@@ -471,6 +471,89 @@
         .vis-eq-body { font-weight: bold; color: #1a1a2e; }
         .vis-eq-ans { color: #E64A19; font-weight: bold; margin-left: auto; }
         .vis-eq-arrow { background: #FFF3E0; border: 1.5px solid #FFB300; border-radius: 6px; padding: 6px 12px; font-size: .8rem; font-weight: bold; color: #E65100; text-align: center; margin: 5px 0; }
+
+        /* ══ EXAM MODE SELECTION ══ */
+        #exam-mode-screen { background: #FFF8F5; }
+        .exam-mode-body { display: flex; flex-direction: column; align-items: center; padding: 28px 16px 40px; flex: 1; overflow-y: auto; }
+        .exam-mode-grade-badge { background: var(--exam-light); color: var(--exam-primary); font-weight: bold; font-size: .82rem; padding: 4px 18px; border-radius: 20px; margin-bottom: 10px; }
+        .exam-mode-heading { font-size: 1.25rem; font-weight: bold; color: #1a1a2e; margin-bottom: 6px; text-align: center; }
+        .exam-mode-sub { color: #888; font-size: .82rem; margin-bottom: 26px; text-align: center; }
+        .exam-mode-cards { display: flex; flex-direction: column; gap: 18px; max-width: 440px; width: 100%; }
+        .exam-mode-card { border-radius: 20px; padding: 26px 22px; cursor: pointer; transition: transform .18s, box-shadow .18s; position: relative; box-shadow: 0 4px 20px rgba(0,0,0,.1); }
+        .exam-mode-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(0,0,0,.16); }
+        .exam-mode-card:active { transform: translateY(-2px); }
+        .exam-mode-card.topic  { background: #fff; border-top: 5px solid var(--std-primary); }
+        .exam-mode-card.prac   { background: linear-gradient(135deg, #FF9A56, #E64A19); border-top: 5px solid #BF360C; }
+        .exam-mode-card-icon { font-size: 2.4rem; margin-bottom: 8px; }
+        .exam-mode-card-title { font-size: 1.25rem; font-weight: bold; margin-bottom: 4px; }
+        .exam-mode-card.topic .exam-mode-card-title { color: #1a1a2e; }
+        .exam-mode-card.prac  .exam-mode-card-title { color: #fff; }
+        .exam-mode-card-sub { font-size: .82rem; margin-bottom: 14px; }
+        .exam-mode-card.topic .exam-mode-card-sub { color: #888; }
+        .exam-mode-card.prac  .exam-mode-card-sub { color: rgba(255,255,255,.85); }
+        .exam-mode-feats { display: flex; flex-direction: column; gap: 5px; }
+        .exam-mode-feat { font-size: .78rem; display: flex; align-items: center; gap: 6px; }
+        .exam-mode-card.topic .exam-mode-feat { color: #555; }
+        .exam-mode-card.prac  .exam-mode-feat { color: rgba(255,255,255,.9); }
+        .exam-mode-feat-icon { font-size: .9rem; }
+
+        /* ══ PRACTICE SCREEN ══ */
+        #practice-screen { background: #FFF8F5; }
+        .prac-hero { background: linear-gradient(135deg, #E64A19, #BF360C); padding: 18px 20px 22px; color: #fff; }
+        .prac-hero-title { font-size: 1.05rem; font-weight: bold; margin-bottom: 4px; }
+        .prac-hero-sub { font-size: .78rem; color: rgba(255,255,255,.85); }
+        .prac-cat-section { padding: 14px 14px 24px; flex: 1; overflow-y: auto; }
+        .prac-section-lbl { font-size: .72rem; font-weight: bold; color: #999; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; margin-top: 4px; }
+        .prac-cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .prac-cat-card { background: #fff; border-radius: 14px; padding: 16px 12px; box-shadow: 0 2px 10px rgba(0,0,0,.08); cursor: pointer; transition: transform .15s, box-shadow .15s; text-align: center; position: relative; overflow: hidden; }
+        .prac-cat-card.avail:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,.13); }
+        .prac-cat-card.coming { opacity: .55; cursor: default; }
+        .prac-cat-icon { font-size: 1.8rem; margin-bottom: 6px; }
+        .prac-cat-num { font-size: .62rem; font-weight: bold; color: #aaa; margin-bottom: 3px; }
+        .prac-cat-title { font-size: .82rem; font-weight: bold; color: #1a1a2e; margin-bottom: 4px; line-height: 1.3; }
+        .prac-cat-sub { font-size: .66rem; color: #888; line-height: 1.4; margin-bottom: 8px; }
+        .prac-cat-count { font-size: .7rem; font-weight: bold; color: var(--exam-primary); }
+        .prac-cat-coming { font-size: .62rem; background: #f0f0f0; color: #aaa; padding: 2px 7px; border-radius: 6px; font-weight: bold; }
+        .prac-cat-ribbon { position: absolute; top: 8px; right: -8px; background: var(--exam-primary); color: #fff; font-size: .58rem; padding: 2px 10px 2px 8px; font-weight: bold; }
+
+        /* Practice problem list */
+        .prac-prob-header { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: #fff; border-bottom: 1px solid #f0f0f0; flex-shrink: 0; }
+        .prac-prob-back { background: #f5f5f5; border: none; border-radius: 8px; padding: 6px 12px; font-size: .82rem; cursor: pointer; font-family: inherit; }
+        .prac-prob-section-title { font-size: .95rem; font-weight: bold; color: #1a1a2e; }
+        .prac-prob-list-body { padding: 14px; flex: 1; overflow-y: auto; }
+        .prac-prob-card { background: #fff; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.07); display: flex; align-items: center; gap: 12px; cursor: pointer; transition: transform .15s; }
+        .prac-prob-card:hover { transform: translateY(-2px); }
+        .prac-prob-num { background: var(--exam-light); color: var(--exam-primary); font-size: .7rem; font-weight: bold; padding: 4px 8px; border-radius: 8px; flex-shrink: 0; white-space: nowrap; }
+        .prac-prob-body { flex: 1; min-width: 0; }
+        .prac-prob-title { font-size: .9rem; font-weight: bold; color: #1a1a2e; margin-bottom: 3px; }
+        .prac-prob-meta { font-size: .72rem; color: #888; }
+        .prac-empty-msg { text-align: center; color: #bbb; font-size: .9rem; padding: 48px 20px; line-height: 1.8; }
+
+        /* Practice problem detail */
+        .prac-detail-wrap { display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+        .prac-detail-header { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: #fff; border-bottom: 1px solid #f0f0f0; flex-shrink: 0; }
+        .prac-detail-body { flex: 1; overflow-y: auto; padding: 16px; }
+        .prac-detail-cat { font-size: .72rem; font-weight: bold; padding: 3px 10px; border-radius: 10px; margin-bottom: 12px; display: inline-block; }
+        .prac-detail-q { background: #fff; border-radius: 14px; padding: 18px; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(0,0,0,.08); font-size: .9rem; line-height: 1.9; white-space: pre-line; color: #1a1a2e; }
+        .prac-detail-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+        .prac-detail-btn { flex: 1; min-width: 120px; padding: 10px; border: none; border-radius: 10px; cursor: pointer; font-family: inherit; font-size: .82rem; font-weight: bold; transition: opacity .15s; }
+        .prac-detail-btn:hover { opacity: .85; }
+        .btn-prac-sol { background: #E3F2FD; color: #1565C0; }
+        .btn-prac-topic { background: var(--exam-light); color: var(--exam-primary); }
+        .prac-ans-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+        .prac-ans-input { flex: 1; border: 2px solid #E0E0E0; border-radius: 10px; padding: 10px 14px; font-size: 1rem; font-family: inherit; outline: none; }
+        .prac-ans-input:focus { border-color: var(--exam-primary); }
+        .prac-ans-input.correct { border-color: #43A047; background: #E8F5E9; }
+        .prac-ans-input.wrong   { border-color: #E53935; background: #FFEBEE; }
+        .prac-ans-unit { font-size: .85rem; color: #555; white-space: nowrap; }
+        .prac-check-btn { background: linear-gradient(135deg, #FF9A56, #E64A19); color: #fff; border: none; border-radius: 10px; padding: 10px 20px; font-family: inherit; font-weight: bold; cursor: pointer; }
+        .prac-sol-box { background: #F8F9FA; border: 1.5px solid #E0E0E0; border-radius: 12px; padding: 16px; margin-bottom: 14px; white-space: pre-line; font-size: .85rem; line-height: 1.8; color: #333; }
+        .prac-topic-link { background: #fff; border: 2px solid var(--exam-primary); border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: background .15s; }
+        .prac-topic-link:hover { background: var(--exam-light); }
+        .prac-topic-link-icon { font-size: 1.4rem; flex-shrink: 0; }
+        .prac-topic-link-body { flex: 1; }
+        .prac-topic-link-title { font-size: .85rem; font-weight: bold; color: var(--exam-primary); margin-bottom: 2px; }
+        .prac-topic-link-sub { font-size: .72rem; color: #888; }
     </style>
 </head>
 <body>
@@ -520,22 +603,86 @@
             </div>
             <span class="cc-arrow">›</span>
         </div>
-        <div class="course-card exam" onclick="showScreen('exam')">
+        <div class="course-card exam" onclick="showScreen('exam-mode')">
             <span class="cc-icon">🔥</span>
             <div class="cc-body">
                 <div class="cc-label">Exam Course</div>
                 <div class="cc-title">受験コース</div>
-                <div class="cc-desc">中学受験レベルの難問を<br>単元別・ステップ解説で攻略</div>
+                <div class="cc-desc">トピック学習 ＋ 演習問題で<br>中学受験算数を完全攻略</div>
             </div>
             <span class="cc-arrow">›</span>
         </div>
     </div>
-    <div class="home-notice">
-        <span class="home-notice-icon">🛠️</span>
-        <div class="home-notice-text">
-            <b>現在、学年別コンテンツを制作中です。</b><br>
-            5年生・6年生ともに同じ内容が表示されますが、今後それぞれの学年に合わせた問題・解説を順次追加していく予定です。
+</div>
+
+<!-- ════════ STANDARD COURSE ════════ -->
+<!-- ════════ EXAM MODE SELECTION ════════ -->
+<div id="exam-mode-screen" class="screen">
+    <div class="screen-header exam-header">
+        <button class="back-btn" onclick="showScreen('home')">← コース選択</button>
+        <span class="screen-title">🔥 受験コース</span>
+    </div>
+    <div class="exam-mode-body">
+        <div id="exam-mode-grade-badge" class="exam-mode-grade-badge">6年生</div>
+        <div class="exam-mode-heading">学習モードを選ぼう</div>
+        <div class="exam-mode-sub">まず解き方を学んで、次に演習で定着！</div>
+        <div class="exam-mode-cards">
+            <div class="exam-mode-card topic" onclick="showScreen('exam')">
+                <div class="exam-mode-card-icon">📚</div>
+                <div class="exam-mode-card-title">トピック学習</div>
+                <div class="exam-mode-card-sub">単元別に解き方をマスターする</div>
+                <div class="exam-mode-feats">
+                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">🗂️</span>9分野に分類された問題</div>
+                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">🔢</span>ステップごとの丁寧な解説</div>
+                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">📊</span>図・グラフでビジュアル理解</div>
+                </div>
+            </div>
+            <div class="exam-mode-card prac" onclick="showScreen('practice')">
+                <div class="exam-mode-card-icon">✏️</div>
+                <div class="exam-mode-card-title">演習問題</div>
+                <div class="exam-mode-card-sub">入試形式の問題で実力を試す</div>
+                <div class="exam-mode-feats">
+                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">📝</span>分野別に整理された練習問題</div>
+                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">💡</span>解説をすぐに確認できる</div>
+                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">🔗</span>トピック学習へすぐアクセス</div>
+                </div>
+            </div>
         </div>
+    </div>
+</div>
+
+<!-- ════════ PRACTICE SCREEN ════════ -->
+<div id="practice-screen" class="screen">
+    <div class="screen-header exam-header">
+        <button class="back-btn" id="prac-back-btn" onclick="pracGoBack()">← もどる</button>
+        <span class="screen-title" id="prac-screen-title">演習問題</span>
+    </div>
+    <!-- カテゴリ一覧 -->
+    <div id="prac-cat-view" style="display:flex;flex-direction:column;flex:1;overflow:hidden">
+        <div class="prac-hero">
+            <div class="prac-hero-title" id="prac-hero-title">演習問題</div>
+            <div class="prac-hero-sub">分野を選んで問題にチャレンジしよう</div>
+        </div>
+        <div class="prac-cat-section" style="overflow-y:auto;flex:1">
+            <div class="prac-section-lbl">分野を選ぶ</div>
+            <div class="prac-cat-grid" id="prac-cat-grid"><!-- populated by JS --></div>
+        </div>
+    </div>
+    <!-- 問題リスト -->
+    <div id="prac-prob-view" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+        <div class="prac-prob-header">
+            <button class="prac-prob-back" onclick="pracShowCats()">← 分野へ</button>
+            <span class="prac-prob-section-title" id="prac-prob-section-title"></span>
+        </div>
+        <div class="prac-prob-list-body" id="prac-prob-list-body"><!-- populated by JS --></div>
+    </div>
+    <!-- 問題詳細 -->
+    <div id="prac-detail-view" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+        <div class="prac-detail-header">
+            <button class="prac-prob-back" onclick="pracShowProbs()">← 問題一覧</button>
+            <span class="prac-prob-section-title" id="prac-detail-cat-label"></span>
+        </div>
+        <div class="prac-detail-body" id="prac-detail-body"><!-- populated by JS --></div>
     </div>
 </div>
 
@@ -561,30 +708,18 @@
 <!-- ════════ EXAM COURSE ════════ -->
 <div id="exam-screen" class="screen">
     <div class="screen-header exam-header">
-        <button class="back-btn" onclick="showScreen('home')">← もどる</button>
-        <span class="screen-title">🔥 受験コース</span>
+        <button class="back-btn" onclick="showScreen('exam-mode')">← もどる</button>
+        <span class="screen-title" id="exam-screen-title">📚 トピック学習</span>
     </div>
     <div class="exam-hero">
-        <div class="exam-hero-title">単元別 難問チャレンジ</div>
+        <div class="exam-hero-title" id="exam-hero-title">分野別 ステップ解説</div>
         <div class="exam-hero-sub">図解・ステップ解説で本質から理解する</div>
-        <div class="exam-stats">
-            <div class="exam-stat">
-                <div class="exam-stat-num">6</div>
-                <div class="exam-stat-label">単元</div>
-            </div>
-            <div class="exam-stat">
-                <div class="exam-stat-num">8</div>
-                <div class="exam-stat-label">問題</div>
-            </div>
-            <div class="exam-stat">
-                <div class="exam-stat-num">★★★</div>
-                <div class="exam-stat-label">平均難易度</div>
-            </div>
+        <div class="exam-stats" id="exam-stats">
+            <div class="exam-stat"><div class="exam-stat-num" id="exam-stat-units">9</div><div class="exam-stat-label">分野</div></div>
+            <div class="exam-stat"><div class="exam-stat-num" id="exam-stat-problems">?</div><div class="exam-stat-label">問題</div></div>
         </div>
     </div>
-    <div class="exam-unit-list" id="exam-unit-list">
-        <!-- populated by JS -->
-    </div>
+    <div class="exam-unit-list" id="exam-unit-list"><!-- populated by JS --></div>
 </div>
 
 <!-- ════════ WATER TANK ════════ -->
@@ -707,7 +842,7 @@
 <!-- ════════ CHALLENGES SCREEN ════════ -->
 <div id="challenges-screen" class="screen">
     <div class="screen-header" id="ch-screen-header">
-        <button class="back-btn" id="ch-back-btn" onclick="showScreen('exam')">← もどる</button>
+        <button class="back-btn" id="ch-back-btn" onclick="goBackFromChallenges()">← もどる</button>
         <span class="screen-title" id="ch-screen-title">難問チャレンジ</span>
     </div>
     <div id="ch-list-view" class="ch-list-view">
@@ -796,28 +931,54 @@ const STANDARD_CHAPTERS_G6 = [
     { id: 'figures-g6',num: '第5章', title: '図形・空間図形', sub: '面積比・体積・図形の移動', tags: ['面積比', '体積'], available: false },
 ];
 
+/* 9分野構造 ── 5年生 */
 const EXAM_UNITS_G5 = [
-    { id: 'unit-plant',   num: 'Unit 01', title: '植木算',      sub: '間隔と本数・池の周り',              difficulty: 2, category: '植木算',    count: 1, available: true },
-    { id: 'unit-crane',   num: 'Unit 02', title: 'つるかめ算',  sub: '仮定して差し引く解法',              difficulty: 3, category: 'つるかめ算', count: 1, available: true },
-    { id: 'unit-surplus', num: 'Unit 03', title: '過不足算',    sub: '余りと不足から求める',              difficulty: 3, category: '過不足算',  count: 1, available: true },
-    { id: 'unit-wasdiff', num: 'Unit 04', title: '和差算',      sub: '2量の和と差からそれぞれを求める',   difficulty: 2, category: '和差算',    count: 2, available: true },
-    { id: 'unit-age-g5',  num: 'Unit 05', title: '年齢算 基礎', sub: '差は変わらない・現在と過去・未来',  difficulty: 3, category: '年齢算',    count: 2, available: true },
-    { id: 'unit-divide',  num: 'Unit 06', title: '分配算',      sub: '条件付きで分ける・差から求める',    difficulty: 3, category: '分配算',    count: 0, available: false },
+    { id: 'u5-calc',    num: '①', icon: '🔢', title: '計算・数の処理',   sub: '工夫した計算・逆算・特殊な計算',          difficulty: 1, categories: ['計算'],                                              count: 0,  available: false },
+    { id: 'u5-number',  num: '②', icon: '🔍', title: '数の性質・規則性', sub: '約数・倍数・余り・数列・周期算・場合分け', difficulty: 3, categories: ['数の性質','規則性'],                               count: 0,  available: false },
+    { id: 'u5-ratio',   num: '③', icon: '⚖️', title: '割合・比',          sub: '割合・百分率・濃度・売買損益・比の利用',  difficulty: 4, categories: ['割合','売買損益'],                               count: 0,  available: false },
+    { id: 'u5-special', num: '④', icon: '📝', title: '特殊算・文章題',   sub: '和差算・つるかめ算・年齢算・過不足算・植木算', difficulty: 3, categories: ['和差算','年齢算','つるかめ算','過不足算','植木算'], count: 10, available: true  },
+    { id: 'u5-speed',   num: '⑤', icon: '🏃', title: '速さ',              sub: '速さの基本・旅人算・ダイヤグラム',        difficulty: 3, categories: ['速さ'],                                          count: 0,  available: false },
+    { id: 'u5-plane',   num: '⑥', icon: '📐', title: '平面図形',          sub: '面積・角度・円・相似・図形移動',          difficulty: 4, categories: ['平面図形'],                                      count: 0,  available: false },
+    { id: 'u5-solid',   num: '⑦', icon: '📦', title: '立体図形・水量',   sub: '体積・表面積・水そう・水深グラフ',        difficulty: 4, categories: ['水槽','立体'],                                   count: 0,  available: false },
+    { id: 'u5-cases',   num: '⑧', icon: '🎯', title: '場合の数・論理',   sub: '順列・組合せ・樹形図・条件整理',         difficulty: 3, categories: ['場合の数'],                                      count: 0,  available: false },
+    { id: 'u5-data',    num: '⑨', icon: '📊', title: 'データ・グラフ',   sub: '平均・グラフの読み取り・資料整理',        difficulty: 2, categories: ['データ'],                                        count: 0,  available: false },
 ];
+/* 9分野構造 ── 6年生（入試大分類に再編） */
 const EXAM_UNITS_G6 = [
-    { id: 'unit-water',   num: 'Unit 01', title: '水槽・仕事算',  sub: '複数の管・途中で条件が変わる問題',  difficulty: 3, category: '水槽',       count: 2, available: true },
-    { id: 'unit-speed',   num: 'Unit 02', title: '旅人算',        sub: '出会い算・追いかけ算・往復',        difficulty: 3, category: '速さ',       count: 2, available: true },
-    { id: 'unit-stream',  num: 'Unit 03', title: '流水算',        sub: '上りと下りの速さ・静水速度と流速',  difficulty: 4, category: '流水算',     count: 2, available: true },
-    { id: 'unit-train',   num: 'Unit 04', title: '通過算',        sub: '電車が橋・トンネルを通る問題',      difficulty: 3, category: '通過算',     count: 2, available: true },
-    { id: 'unit-newton',  num: 'Unit 05', title: 'ニュートン算',  sub: '増えながら減る・行列・牧草問題',    difficulty: 5, category: 'ニュートン算', count: 2, available: true },
-    { id: 'unit-elim',    num: 'Unit 06', title: '消去算',        sub: '2つの式から答えを導く解法',         difficulty: 4, category: '消去算',     count: 2, available: true },
-    { id: 'unit-ratio',   num: 'Unit 07', title: '割合・食塩水',  sub: '濃度計算・混合・蒸発問題',          difficulty: 4, category: '割合',       count: 1, available: true },
-    { id: 'unit-trade',   num: 'Unit 08', title: '売買損益',      sub: '定価・売値・利益・割引の関係',      difficulty: 4, category: '売買損益',   count: 2, available: true },
-    { id: 'unit-ratio2',  num: 'Unit 09', title: '比の文章題',    sub: '相当算・倍数算・分配比',            difficulty: 4, category: '比',         count: 0, available: false },
+    { id: 'u6-calc',    num: '①', icon: '🔢', title: '計算・数の処理',   sub: '逆算・条件付き計算・工夫した計算',            difficulty: 2, categories: ['計算'],                                    count: 0,  available: false },
+    { id: 'u6-number',  num: '②', icon: '🔍', title: '数・規則・論理',   sub: '約数・余り・規則性・推理・場合分け',          difficulty: 4, categories: ['数の性質','規則性'],                       count: 0,  available: false },
+    { id: 'u6-ratio',   num: '③', icon: '⚖️', title: '割合・比の完成',   sub: '連比・相当算・売買・濃度・比融合問題',        difficulty: 5, categories: ['割合','売買損益'],                       count: 3,  available: true  },
+    { id: 'u6-special', num: '④', icon: '📝', title: '文章題の総合化',   sub: '水槽・仕事算・ニュートン算・消去算',          difficulty: 4, categories: ['水槽','ニュートン算','消去算'],           count: 6,  available: true  },
+    { id: 'u6-speed',   num: '⑤', icon: '🏃', title: '速さの完成',       sub: '旅人算・流水算・通過算・ダイヤグラム・速さと比', difficulty: 4, categories: ['速さ','流水算','通過算'],             count: 6,  available: true  },
+    { id: 'u6-plane',   num: '⑥', icon: '📐', title: '平面図形の完成',   sub: '面積比・相似・円・移動・図形融合',            difficulty: 5, categories: ['平面図形'],                            count: 0,  available: false },
+    { id: 'u6-solid',   num: '⑦', icon: '📦', title: '立体図形の完成',   sub: '回転体・切断・体積比・投影図',                difficulty: 5, categories: ['立体'],                                count: 0,  available: false },
+    { id: 'u6-cases',   num: '⑧', icon: '🎯', title: '場合の数・論理',   sub: '条件付き・道順・塗り分け・論理融合',         difficulty: 4, categories: ['場合の数'],                             count: 0,  available: false },
+    { id: 'u6-data',    num: '⑨', icon: '📊', title: 'データ・グラフ',   sub: '統計・グラフ読解・確率風問題',                difficulty: 3, categories: ['データ'],                               count: 0,  available: false },
 ];
 
-const CH_CATS_G5 = ['すべて','植木算','つるかめ算','過不足算','和差算','年齢算'];
-const CH_CATS_G6 = ['すべて','水槽','速さ','流水算','通過算','ニュートン算','消去算','割合','売買損益'];
+/* 演習問題 9分野カテゴリ定義 */
+const PRACTICE_CATS = [
+    { id: 'pc-calc',    icon: '🔢', title: '計算・数の処理',   sub: '工夫した計算・逆算',           unitId5: 'u5-calc',    unitId6: 'u6-calc'    },
+    { id: 'pc-number',  icon: '🔍', title: '数の性質・規則性', sub: '約数・倍数・数列・周期',        unitId5: 'u5-number',  unitId6: 'u6-number'  },
+    { id: 'pc-ratio',   icon: '⚖️', title: '割合・比',          sub: '濃度・売買・比の利用',         unitId5: 'u5-ratio',   unitId6: 'u6-ratio'   },
+    { id: 'pc-special', icon: '📝', title: '特殊算・文章題',   sub: '和差算・つるかめ算・仕事算',   unitId5: 'u5-special', unitId6: 'u6-special' },
+    { id: 'pc-speed',   icon: '🏃', title: '速さ',              sub: '旅人算・流水算・通過算',       unitId5: 'u5-speed',   unitId6: 'u6-speed'   },
+    { id: 'pc-plane',   icon: '📐', title: '平面図形',          sub: '面積・角度・相似・円',         unitId5: 'u5-plane',   unitId6: 'u6-plane'   },
+    { id: 'pc-solid',   icon: '📦', title: '立体図形・水量',   sub: '体積・水そう・水深グラフ',     unitId5: 'u5-solid',   unitId6: 'u6-solid'   },
+    { id: 'pc-cases',   icon: '🎯', title: '場合の数・論理',   sub: '順列・組合せ・条件整理',      unitId5: 'u5-cases',   unitId6: 'u6-cases'   },
+    { id: 'pc-data',    icon: '📊', title: 'データ・グラフ',   sub: '平均・グラフの読み取り',       unitId5: 'u5-data',    unitId6: 'u6-data'    },
+];
+
+/* 演習問題データ（今後追加） */
+const PRACTICE_PROBLEMS = [
+    /* 例：
+    { id: 'pp1', catId: 'pc-special', grade: 5,
+      title: '和差算 基本', difficulty: 2,
+      text: '...', answer: 46, unit: '枚',
+      solution: '解説文...',
+      topicUnitId: 'u5-special'  // トピック学習へのリンク
+    }, */
+];
 
 /* ════════════════════════════════════════
    CHALLENGES DATA
@@ -1366,21 +1527,182 @@ function selectGrade(g) {
     showScreen('home');
 }
 
+/* ════════════════════════════════════════
+   EXAM MODE SELECTION
+════════════════════════════════════════ */
+function renderExamMode() {
+    const label = appState.grade + '年生';
+    document.getElementById('exam-mode-grade-badge').textContent = label + ' 受験コース';
+}
+
+/* ════════════════════════════════════════
+   PRACTICE SCREEN
+════════════════════════════════════════ */
+const pracState = { currentCatId: null, currentProbId: null };
+
+function renderPractice() {
+    const label = appState.grade + '年生';
+    const heroEl = document.getElementById('prac-hero-title');
+    if (heroEl) heroEl.textContent = label + ' 演習問題';
+    pracShowCats();
+}
+
+function pracShowCats() {
+    document.getElementById('prac-cat-view').style.display  = 'flex';
+    document.getElementById('prac-prob-view').style.display = 'none';
+    document.getElementById('prac-detail-view').style.display = 'none';
+    document.getElementById('prac-screen-title').textContent = '演習問題';
+
+    const g = appState.grade;
+    const units = g === 5 ? EXAM_UNITS_G5 : EXAM_UNITS_G6;
+    document.getElementById('prac-cat-grid').innerHTML = PRACTICE_CATS.map(cat => {
+        const unitId = g === 5 ? cat.unitId5 : cat.unitId6;
+        const unit   = units.find(u => u.id === unitId);
+        const probs  = PRACTICE_PROBLEMS.filter(p => p.catId === cat.id && p.grade === g);
+        const count  = probs.length;
+        const avail  = count > 0;
+        return `<div class="prac-cat-card ${avail?'avail':'coming'}" onclick="${avail?`pracOpenCat('${cat.id}')`:''}">
+            <div class="prac-cat-icon">${cat.icon}</div>
+            <div class="prac-cat-num">${unit ? unit.num : ''}</div>
+            <div class="prac-cat-title">${cat.title}</div>
+            <div class="prac-cat-sub">${cat.sub}</div>
+            ${avail
+                ? `<div class="prac-cat-count">${count}問</div>`
+                : `<div class="prac-cat-coming">準備中</div>`}
+        </div>`;
+    }).join('');
+}
+
+function pracOpenCat(catId) {
+    pracState.currentCatId = catId;
+    const cat   = PRACTICE_CATS.find(c => c.id === catId);
+    const probs = PRACTICE_PROBLEMS.filter(p => p.catId === catId && p.grade === appState.grade);
+    document.getElementById('prac-cat-view').style.display  = 'none';
+    document.getElementById('prac-prob-view').style.display = 'flex';
+    document.getElementById('prac-detail-view').style.display = 'none';
+    document.getElementById('prac-prob-section-title').textContent = cat ? cat.title : '';
+    document.getElementById('prac-screen-title').textContent = cat ? cat.title : '演習問題';
+    if (probs.length === 0) {
+        document.getElementById('prac-prob-list-body').innerHTML =
+            `<div class="prac-empty-msg">この分野の演習問題は<br>準備中です 🚧<br><br>トピック学習で解き方を確認しよう！</div>`;
+    } else {
+        document.getElementById('prac-prob-list-body').innerHTML = probs.map((p, i) => {
+            const stars = '★'.repeat(p.difficulty) + '☆'.repeat(5 - p.difficulty);
+            return `<div class="prac-prob-card" onclick="pracOpenProb('${p.id}')">
+                <div class="prac-prob-num">問${i+1}</div>
+                <div class="prac-prob-body">
+                    <div class="prac-prob-title">${p.title}</div>
+                    <div class="prac-prob-meta">${stars}</div>
+                </div>
+                <span style="color:#bbb;font-size:1.1rem">›</span>
+            </div>`;
+        }).join('');
+    }
+}
+
+function pracOpenProb(probId) {
+    pracState.currentProbId = probId;
+    const p   = PRACTICE_PROBLEMS.find(x => x.id === probId);
+    if (!p) return;
+    const cat = PRACTICE_CATS.find(c => c.id === p.catId);
+    const unitId = appState.grade === 5 ? cat.unitId5 : cat.unitId6;
+    const units  = appState.grade === 5 ? EXAM_UNITS_G5 : EXAM_UNITS_G6;
+    const unit   = units.find(u => u.id === unitId);
+
+    document.getElementById('prac-prob-view').style.display   = 'none';
+    document.getElementById('prac-detail-view').style.display = 'flex';
+    document.getElementById('prac-detail-cat-label').textContent = cat ? cat.title : '';
+    document.getElementById('prac-screen-title').textContent  = p.title;
+
+    const body = document.getElementById('prac-detail-body');
+    body.innerHTML = `
+        <div class="prac-detail-q">${p.text}</div>
+        <div class="prac-ans-row">
+            <input class="prac-ans-input" id="prac-ans-input" type="number" placeholder="答えを入力" />
+            <span class="prac-ans-unit">${p.unit}</span>
+            <button class="prac-check-btn" onclick="pracCheckAnswer()">答え合わせ</button>
+        </div>
+        <div id="prac-result-box" style="display:none;background:#E8F5E9;border-radius:10px;padding:12px;margin-bottom:14px;font-weight:bold;font-size:.9rem"></div>
+        <div class="prac-detail-actions">
+            <button class="prac-detail-btn btn-prac-sol" onclick="pracToggleSolution()">💡 解説を見る</button>
+            ${unit ? `<button class="prac-detail-btn btn-prac-topic" onclick="pracGoToTopic('${unitId}')">📚 トピックで学ぶ</button>` : ''}
+        </div>
+        <div id="prac-sol-box" class="prac-sol-box" style="display:none">${p.solution || '解説を準備中です。'}</div>
+        ${unit ? `<div class="prac-topic-link" onclick="pracGoToTopic('${unitId}')">
+            <div class="prac-topic-link-icon">📚</div>
+            <div class="prac-topic-link-body">
+                <div class="prac-topic-link-title">${unit.num} ${unit.title}</div>
+                <div class="prac-topic-link-sub">ステップ解説でじっくり学ぼう →</div>
+            </div>
+        </div>` : ''}
+    `;
+    document.getElementById('prac-ans-input').addEventListener('keydown', e => { if(e.key==='Enter') pracCheckAnswer(); });
+}
+
+function pracCheckAnswer() {
+    const p = PRACTICE_PROBLEMS.find(x => x.id === pracState.currentProbId);
+    if (!p) return;
+    const val = parseFloat(document.getElementById('prac-ans-input').value);
+    if (isNaN(val)) return;
+    const ok = Math.abs(val - p.answer) < 0.01;
+    document.getElementById('prac-ans-input').className = 'prac-ans-input ' + (ok ? 'correct' : 'wrong');
+    const rb = document.getElementById('prac-result-box');
+    rb.style.display = 'block';
+    rb.style.background = ok ? '#E8F5E9' : '#FFEBEE';
+    rb.style.color = ok ? '#2E7D32' : '#C62828';
+    rb.textContent = ok ? '⭕ 正解！すばらしい！' : `❌ まちがい — 正解は ${p.answer}${p.unit} でした`;
+}
+
+function pracToggleSolution() {
+    const box = document.getElementById('prac-sol-box');
+    const btn = document.querySelector('.btn-prac-sol');
+    const isHidden = box.style.display === 'none';
+    box.style.display = isHidden ? 'block' : 'none';
+    if (btn) btn.textContent = isHidden ? '💡 解説を閉じる' : '💡 解説を見る';
+}
+
+function pracGoToTopic(unitId) {
+    // exam-mode → exam → unit の challenges へ遷移
+    appState.pracReturnCatId = pracState.currentCatId;
+    openUnit(unitId);
+}
+
+function pracShowProbs() {
+    if (pracState.currentCatId) pracOpenCat(pracState.currentCatId);
+    else pracShowCats();
+}
+
+function pracGoBack() {
+    const catView    = document.getElementById('prac-cat-view');
+    const probView   = document.getElementById('prac-prob-view');
+    const detailView = document.getElementById('prac-detail-view');
+    if (detailView.style.display !== 'none') { pracShowProbs(); }
+    else if (probView.style.display !== 'none') { pracShowCats(); }
+    else { showScreen('exam-mode'); }
+}
+
 function showScreen(id, opts={}) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id + '-screen').classList.add('active');
     if (id === 'standard')   renderStandardCourse();
     if (id === 'exam')       renderExamCourse();
+    if (id === 'exam-mode')  renderExamMode();
+    if (id === 'practice')   renderPractice();
     if (id === 'watertank')  { updateLearn(); generateProblem(); }
     if (id === 'challenges') {
         if (opts.unitTitle) document.getElementById('ch-screen-title').textContent = opts.unitTitle;
         else document.getElementById('ch-screen-title').textContent = '難問チャレンジ';
-        if (opts.filter) chState.filter = opts.filter;
-        else chState.filter = 'すべて';
+        chState.unitCategories = opts.categories || null;
+        chState.filter = 'すべて';
         document.getElementById('ch-list-view').style.display = 'block';
         document.getElementById('ch-detail-view').classList.remove('active');
         renderChallengeList();
     }
+}
+
+function goBackFromChallenges() {
+    // challenges から exam-mode 経由で exam へ戻る
+    showScreen('exam');
 }
 
 /* ════════════════════════════════════════
@@ -1439,9 +1761,9 @@ function renderExamCourse() {
         if (u.available) {
             return `<div class="unit-card available" onclick="openUnit('${u.id}')">
                 <div class="unit-card-inner">
-                    <div class="unit-num-badge">${u.num}</div>
+                    <div class="unit-num-badge" style="font-size:1.1rem;width:36px;height:36px">${u.icon||u.num}</div>
                     <div class="unit-body">
-                        <div class="unit-title">${u.title}</div>
+                        <div class="unit-title">${u.num} ${u.title}</div>
                         <div class="unit-sub">${u.sub}</div>
                         <div class="unit-meta">
                             <span class="unit-stars">${stars}</span>
@@ -1454,9 +1776,9 @@ function renderExamCourse() {
         } else {
             return `<div class="unit-card locked">
                 <div class="unit-card-inner">
-                    <div class="unit-num-badge">${u.num}</div>
+                    <div class="unit-num-badge" style="font-size:1.1rem;width:36px;height:36px">${u.icon||u.num}</div>
                     <div class="unit-body">
-                        <div class="unit-title">${u.title}</div>
+                        <div class="unit-title">${u.num} ${u.title}</div>
                         <div class="unit-sub">${u.sub}</div>
                         <div class="unit-meta"><span class="unit-stars">${stars}</span></div>
                     </div>
@@ -1465,13 +1787,17 @@ function renderExamCourse() {
             </div>`;
         }
     }).join('');
+    // ヘッダーのstat更新
+    const total = units.reduce((s,u) => s + u.count, 0);
+    const el2 = document.getElementById('exam-stat-problems');
+    if (el2) el2.textContent = total;
 }
 
 function openUnit(unitId) {
     const units = appState.grade === 5 ? EXAM_UNITS_G5 : EXAM_UNITS_G6;
     const unit = units.find(u => u.id === unitId);
     if (!unit || !unit.available) return;
-    showScreen('challenges', { filter: unit.category, unitTitle: unit.num + ' ' + unit.title });
+    showScreen('challenges', { categories: unit.categories, unitTitle: unit.num + ' ' + unit.title });
 }
 
 /* ════════════════════════════════════════
@@ -1613,12 +1939,16 @@ function toggleHint() {
    CHALLENGES
 ════════════════════════════════════════ */
 function renderChallengeList() {
-    const cats = appState.grade === 5 ? CH_CATS_G5 : CH_CATS_G6;
-    document.getElementById('ch-filter-row').innerHTML = cats.map(cat =>
+    // unitのcategoriesでまず絞る、なければ学年全体
+    let base = CHALLENGES.filter(c => c.grade === appState.grade);
+    if (chState.unitCategories) base = base.filter(c => chState.unitCategories.includes(c.category));
+    // フィルタボタンを動的生成
+    const availCats = ['すべて', ...new Set(base.map(c => c.category))];
+    if (!availCats.includes(chState.filter)) chState.filter = 'すべて';
+    document.getElementById('ch-filter-row').innerHTML = availCats.map(cat =>
         `<button class="ch-filter-btn${chState.filter===cat?' active':''}" onclick="chSetFilter('${cat}')">${cat}</button>`
     ).join('');
-    let filtered = CHALLENGES.filter(c => c.grade === appState.grade);
-    if (chState.filter !== 'すべて') filtered = filtered.filter(c => c.category === chState.filter);
+    let filtered = chState.filter === 'すべて' ? base : base.filter(c => c.category === chState.filter);
     document.getElementById('ch-cards-container').innerHTML = filtered.map(c => {
         const stars='★'.repeat(c.difficulty)+'☆'.repeat(5-c.difficulty);
         const preview=c.text.replace(/\n/g,' ').slice(0,48)+'…';

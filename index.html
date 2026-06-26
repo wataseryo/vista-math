@@ -725,6 +725,17 @@
             100% { transform: translateX(-50%) translateY(0); opacity: 1; }
         }
 
+        /* ── Reveal answer button ── */
+        .reveal-ans-btn {
+            background: none; border: 1px solid rgba(183,28,28,.35);
+            color: #B71C1C; font-size: .75rem; padding: 4px 12px;
+            border-radius: 6px; cursor: pointer; margin-top: 8px;
+            font-family: inherit; display: inline-block;
+        }
+        .reveal-ans-btn:hover { background: rgba(183,28,28,.06); }
+        .revealed-ans { margin-top: 8px; font-size: .85rem; color: #555; font-weight: normal; }
+        .revealed-ans strong { color: #B71C1C; font-weight: 800; }
+
         /* ── Wrong Answer color ── */
         .wrong-encourage { font-size: .84rem; color: var(--exam-primary); font-weight: bold; margin-top: 6px; }
     </style>
@@ -1902,7 +1913,7 @@ function stdPracCheckAnswer() {
         { const _k=`g${appState.grade}_std_${stdPracState.currentCatId}`; const _s=getStatsForKey(_k); const _ch=(appState.grade===5?STANDARD_CHAPTERS_G5:STANDARD_CHAPTERS_G6).find(c=>c.id===stdPracState.currentCatId); if(_s) showAccuracyCard(_ch?_ch.title:'標準演習', _s.correct, _s.total); }
     } else {
         rb.style.background = '#FFEBEE'; rb.style.color = '#C62828';
-        rb.textContent = `❌ ${getWrongMsg()} — 正解は ${p.answer}${p.unit} でした`;
+        rb.innerHTML = `<div>❌ ${getWrongMsg()}</div><button class="reveal-ans-btn" data-answer="${p.answer}" data-unit="${p.unit}" onclick="revealAnswer(this)">解答を確認する</button>`;
         recordAnswer(`g${appState.grade}_std_${stdPracState.currentCatId}`, false);
         resetStreak();
     }
@@ -2052,7 +2063,7 @@ function pracCheckAnswer() {
         { const _k=`g${appState.grade}_exam_${pracState.currentCatId}`; const _s=getStatsForKey(_k); const _cat=PRACTICE_CATS.find(c=>c.id===pracState.currentCatId); if(_s) showAccuracyCard(_cat?_cat.title:'受験演習', _s.correct, _s.total); }
     } else {
         rb.style.background = '#FFEBEE'; rb.style.color = '#C62828';
-        rb.textContent = `❌ ${getWrongMsg()} — 正解は ${p.answer}${p.unit} でした`;
+        rb.innerHTML = `<div>❌ ${getWrongMsg()}</div><button class="reveal-ans-btn" data-answer="${p.answer}" data-unit="${p.unit}" onclick="revealAnswer(this)">解答を確認する</button>`;
         recordAnswer(`g${appState.grade}_exam_${pracState.currentCatId}`, false);
         resetStreak();
     }
@@ -2344,7 +2355,7 @@ function checkAnswer() {
         quiz.correct++; document.getElementById('score-ok').textContent=quiz.correct;
         rb.className='result-box ok';
         document.getElementById('result-headline').textContent='⭕ 正解！';
-        document.getElementById('result-msg').textContent='';
+        document.getElementById('result-msg').innerHTML='';
         recordAnswer('watertank', true);
         addStar();
         { const s = getStatsForKey('watertank'); if(s) showAccuracyCard('水そう練習', s.correct, s.total); }
@@ -2352,7 +2363,7 @@ function checkAnswer() {
         quiz.wrong++; document.getElementById('score-ng').textContent=quiz.wrong;
         rb.className='result-box ng';
         document.getElementById('result-headline').textContent='❌ ' + getWrongMsg();
-        document.getElementById('result-msg').textContent=`正解は ${p.answer}${p.unit} でした`;
+        document.getElementById('result-msg').innerHTML=`<button class="reveal-ans-btn" data-answer="${p.answer}" data-unit="${p.unit}" onclick="revealAnswer(this)">解答を確認する</button>`;
         recordAnswer('watertank', false);
         resetStreak();
     }
@@ -2447,7 +2458,7 @@ function chSubmitAnswer() {
         { const _k=`g${appState.grade}_ch_${ch.category}`; const _s=getStatsForKey(_k); if(_s) showAccuracyCard(ch.category, _s.correct, _s.total); }
     } else {
         document.getElementById('ch-result-hl').textContent='❌ ' + getWrongMsg();
-        document.getElementById('ch-result-msg').textContent=`正解は ${ch.answer}${ch.unit} でした。ヒントまたはステップ解説で確認せよ。`;
+        document.getElementById('ch-result-msg').innerHTML=`<div>ヒントまたはステップ解説で確認せよ。</div><button class="reveal-ans-btn" data-answer="${ch.answer}" data-unit="${ch.unit}" onclick="revealAnswer(this)">解答を確認する</button>`;
         recordAnswer(`g${appState.grade}_ch_${ch.category}`, false);
         resetStreak();
     }
@@ -2533,6 +2544,11 @@ const WRONG_MSGS = [
 ];
 
 function getWrongMsg() { return WRONG_MSGS[Math.floor(Math.random() * WRONG_MSGS.length)]; }
+
+function revealAnswer(btn) {
+    const ans = btn.dataset.answer, unit = btn.dataset.unit || '';
+    btn.outerHTML = `<div class="revealed-ans">正解: <strong>${ans}${unit}</strong></div>`;
+}
 
 function addStar() {
     gameState.stars++;

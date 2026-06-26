@@ -594,12 +594,12 @@
     <div class="home-title">算数ビジュアル学習</div>
     <div class="home-sub" id="home-grade-display">コースを選んで学ぼう</div>
     <div class="course-cards">
-        <div class="course-card std" onclick="showScreen('standard')">
+        <div class="course-card std" onclick="showScreen('std-mode')">
             <span class="cc-icon">📘</span>
             <div class="cc-body">
                 <div class="cc-label">Standard Course</div>
                 <div class="cc-title">標準コース</div>
-                <div class="cc-desc">教科書の章立てで<br>基礎からしっかり学ぶ</div>
+                <div class="cc-desc">トピック学習 ＋ 演習問題で<br>基礎をしっかり定着させる</div>
             </div>
             <span class="cc-arrow">›</span>
         </div>
@@ -686,11 +686,81 @@
     </div>
 </div>
 
-<!-- ════════ STANDARD COURSE ════════ -->
-<div id="standard-screen" class="screen">
+<!-- ════════ STD MODE SELECTION ════════ -->
+<div id="std-mode-screen" class="screen">
     <div class="screen-header std-header">
         <button class="back-btn" onclick="showScreen('home')">← コース選択</button>
         <span class="screen-title">📘 標準コース</span>
+    </div>
+    <div class="exam-mode-body" style="background:#F0F5FF">
+        <div id="std-mode-grade-badge" class="exam-mode-grade-badge" style="background:#E3F2FD;color:#1565C0">5年生</div>
+        <div class="exam-mode-heading">学習モードを選ぼう</div>
+        <div class="exam-mode-sub">まず解き方を学んで、次に演習で定着！</div>
+        <div class="exam-mode-cards">
+            <div class="exam-mode-card topic" onclick="showScreen('standard')">
+                <div class="exam-mode-card-icon">📘</div>
+                <div class="exam-mode-card-title">トピック学習</div>
+                <div class="exam-mode-card-sub" style="color:#888">章立てで解き方をマスターする</div>
+                <div class="exam-mode-feats">
+                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">🗂️</span>単元ごとに整理された解説</div>
+                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">🔢</span>インタラクティブな操作で体験</div>
+                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">📊</span>図・グラフでビジュアル理解</div>
+                </div>
+            </div>
+            <div class="exam-mode-card" style="background:linear-gradient(135deg,#42A5F5,#1976D2);border-top:5px solid #0D47A1" onclick="showScreen('std-practice')">
+                <div class="exam-mode-card-icon">✏️</div>
+                <div class="exam-mode-card-title" style="color:#fff">演習問題</div>
+                <div class="exam-mode-card-sub" style="color:rgba(255,255,255,.85)">基礎力を問題演習で固める</div>
+                <div class="exam-mode-feats">
+                    <div class="exam-mode-feat" style="color:rgba(255,255,255,.9)"><span class="exam-mode-feat-icon">📝</span>単元別に整理された練習問題</div>
+                    <div class="exam-mode-feat" style="color:rgba(255,255,255,.9)"><span class="exam-mode-feat-icon">💡</span>解説をすぐに確認できる</div>
+                    <div class="exam-mode-feat" style="color:rgba(255,255,255,.9)"><span class="exam-mode-feat-icon">🔗</span>トピック学習へすぐアクセス</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ════════ STD PRACTICE ════════ -->
+<div id="std-practice-screen" class="screen">
+    <div class="screen-header std-header">
+        <button class="back-btn" id="std-prac-back-btn" onclick="stdPracGoBack()">← もどる</button>
+        <span class="screen-title" id="std-prac-screen-title">演習問題</span>
+    </div>
+    <!-- カテゴリ一覧 -->
+    <div id="std-prac-cat-view" style="display:flex;flex-direction:column;flex:1;overflow:hidden">
+        <div class="prac-hero" style="background:linear-gradient(135deg,#1976D2,#0D47A1)">
+            <div class="prac-hero-title" id="std-prac-hero-title">演習問題</div>
+            <div class="prac-hero-sub">単元を選んで問題にチャレンジしよう</div>
+        </div>
+        <div class="prac-cat-section" style="overflow-y:auto;flex:1">
+            <div class="prac-section-lbl">単元を選ぶ</div>
+            <div class="prac-cat-grid" id="std-prac-cat-grid"></div>
+        </div>
+    </div>
+    <!-- 問題リスト -->
+    <div id="std-prac-prob-view" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+        <div class="prac-prob-header">
+            <button class="prac-prob-back" onclick="stdPracShowCats()">← 単元へ</button>
+            <span class="prac-prob-section-title" id="std-prac-prob-section-title"></span>
+        </div>
+        <div class="prac-prob-list-body" id="std-prac-prob-list-body"></div>
+    </div>
+    <!-- 問題詳細 -->
+    <div id="std-prac-detail-view" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+        <div class="prac-detail-header">
+            <button class="prac-prob-back" onclick="stdPracShowProbs()">← 問題一覧</button>
+            <span class="prac-prob-section-title" id="std-prac-detail-cat-label"></span>
+        </div>
+        <div class="prac-detail-body" id="std-prac-detail-body"></div>
+    </div>
+</div>
+
+<!-- ════════ STANDARD COURSE ════════ -->
+<div id="standard-screen" class="screen">
+    <div class="screen-header std-header">
+        <button class="back-btn" onclick="showScreen('std-mode')">← もどる</button>
+        <span class="screen-title">📘 トピック学習</span>
     </div>
     <div class="std-hero">
         <div class="std-hero-title">章立てで学ぶ算数</div>
@@ -725,7 +795,7 @@
 <!-- ════════ WATER TANK ════════ -->
 <div id="watertank-screen" class="screen">
     <div class="screen-header std-header">
-        <button class="back-btn" onclick="showScreen('standard')">← もどる</button>
+        <button class="back-btn" onclick="showScreen('std-mode')">← もどる</button>
         <span class="screen-title">🚰 第1章：水と量の問題</span>
     </div>
     <div class="tab-bar">
@@ -1536,6 +1606,150 @@ function renderExamMode() {
 }
 
 /* ════════════════════════════════════════
+   STANDARD MODE SELECTION
+════════════════════════════════════════ */
+function renderStdMode() {
+    const label = appState.grade + '年生';
+    document.getElementById('std-mode-grade-badge').textContent = label + ' 標準コース';
+}
+
+/* ════════════════════════════════════════
+   STANDARD PRACTICE SCREEN
+════════════════════════════════════════ */
+const stdPracState = { currentCatId: null, currentProbId: null };
+
+function renderStdPractice() {
+    const label = appState.grade + '年生';
+    document.getElementById('std-prac-hero-title').textContent = label + ' 演習問題';
+    stdPracShowCats();
+}
+
+function stdPracShowCats() {
+    document.getElementById('std-prac-cat-view').style.display    = 'flex';
+    document.getElementById('std-prac-prob-view').style.display   = 'none';
+    document.getElementById('std-prac-detail-view').style.display = 'none';
+    document.getElementById('std-prac-screen-title').textContent  = '演習問題';
+
+    const g = appState.grade;
+    const chapters = g === 5 ? STANDARD_CHAPTERS_G5 : STANDARD_CHAPTERS_G6;
+    // 標準コースの章をカテゴリとして使う
+    document.getElementById('std-prac-cat-grid').innerHTML = chapters.map((ch, i) => {
+        const probs = PRACTICE_PROBLEMS.filter(p => p.chapterId === ch.id && p.grade === g && p.course === 'std');
+        const count = probs.length;
+        const avail = count > 0;
+        return `<div class="prac-cat-card ${avail?'avail':'coming'}" onclick="${avail?`stdPracOpenCat('${ch.id}')`:''}">
+            <div class="prac-cat-icon">${['💧','🏃','⚖️','🎲','📐'][i] || '📘'}</div>
+            <div class="prac-cat-num">${ch.num}</div>
+            <div class="prac-cat-title">${ch.title}</div>
+            <div class="prac-cat-sub">${ch.sub}</div>
+            ${avail
+                ? `<div class="prac-cat-count">${count}問</div>`
+                : `<div class="prac-cat-coming">準備中</div>`}
+        </div>`;
+    }).join('');
+}
+
+function stdPracOpenCat(chapterId) {
+    stdPracState.currentCatId = chapterId;
+    const g = appState.grade;
+    const chapters = g === 5 ? STANDARD_CHAPTERS_G5 : STANDARD_CHAPTERS_G6;
+    const ch = chapters.find(c => c.id === chapterId);
+    const probs = PRACTICE_PROBLEMS.filter(p => p.chapterId === chapterId && p.grade === g && p.course === 'std');
+    document.getElementById('std-prac-cat-view').style.display    = 'none';
+    document.getElementById('std-prac-prob-view').style.display   = 'flex';
+    document.getElementById('std-prac-detail-view').style.display = 'none';
+    document.getElementById('std-prac-prob-section-title').textContent = ch ? ch.title : '';
+    document.getElementById('std-prac-screen-title').textContent  = ch ? ch.title : '演習問題';
+    if (probs.length === 0) {
+        document.getElementById('std-prac-prob-list-body').innerHTML =
+            `<div class="prac-empty-msg">この単元の演習問題は<br>準備中です 🚧<br><br>トピック学習で解き方を確認しよう！</div>`;
+    } else {
+        document.getElementById('std-prac-prob-list-body').innerHTML = probs.map((p, i) => {
+            const stars = '★'.repeat(p.difficulty) + '☆'.repeat(5 - p.difficulty);
+            return `<div class="prac-prob-card" onclick="stdPracOpenProb('${p.id}')">
+                <div class="prac-prob-num">問${i+1}</div>
+                <div class="prac-prob-body">
+                    <div class="prac-prob-title">${p.title}</div>
+                    <div class="prac-prob-meta">${stars}</div>
+                </div>
+                <span style="color:#bbb;font-size:1.1rem">›</span>
+            </div>`;
+        }).join('');
+    }
+}
+
+function stdPracOpenProb(probId) {
+    stdPracState.currentProbId = probId;
+    const p = PRACTICE_PROBLEMS.find(x => x.id === probId);
+    if (!p) return;
+    const g = appState.grade;
+    const chapters = g === 5 ? STANDARD_CHAPTERS_G5 : STANDARD_CHAPTERS_G6;
+    const ch = chapters.find(c => c.id === p.chapterId);
+    document.getElementById('std-prac-prob-view').style.display   = 'none';
+    document.getElementById('std-prac-detail-view').style.display = 'flex';
+    document.getElementById('std-prac-detail-cat-label').textContent = ch ? ch.title : '';
+    document.getElementById('std-prac-screen-title').textContent  = p.title;
+    document.getElementById('std-prac-detail-body').innerHTML = `
+        <div class="prac-detail-q">${p.text}</div>
+        <div class="prac-ans-row">
+            <input class="prac-ans-input" id="std-prac-ans-input" type="number" placeholder="答えを入力" />
+            <span class="prac-ans-unit">${p.unit}</span>
+            <button class="prac-check-btn" style="background:linear-gradient(135deg,#42A5F5,#1976D2)" onclick="stdPracCheckAnswer()">答え合わせ</button>
+        </div>
+        <div id="std-prac-result-box" style="display:none;background:#E8F5E9;border-radius:10px;padding:12px;margin-bottom:14px;font-weight:bold;font-size:.9rem"></div>
+        <div class="prac-detail-actions">
+            <button class="prac-detail-btn btn-prac-sol" onclick="stdPracToggleSolution()">💡 解説を見る</button>
+            ${ch ? `<button class="prac-detail-btn" style="background:#E3F2FD;color:#1565C0" onclick="showScreen('standard')">📘 トピックで学ぶ</button>` : ''}
+        </div>
+        <div id="std-prac-sol-box" class="prac-sol-box" style="display:none">${p.solution || '解説を準備中です。'}</div>
+        ${ch ? `<div class="prac-topic-link" style="border-color:var(--std-primary)" onclick="showScreen('standard')">
+            <div class="prac-topic-link-icon">📘</div>
+            <div class="prac-topic-link-body">
+                <div class="prac-topic-link-title" style="color:var(--std-primary)">${ch.num} ${ch.title}</div>
+                <div class="prac-topic-link-sub">ステップ解説でじっくり学ぼう →</div>
+            </div>
+        </div>` : ''}
+    `;
+    document.getElementById('std-prac-ans-input').addEventListener('keydown', e => { if(e.key==='Enter') stdPracCheckAnswer(); });
+}
+
+function stdPracCheckAnswer() {
+    const p = PRACTICE_PROBLEMS.find(x => x.id === stdPracState.currentProbId);
+    if (!p) return;
+    const val = parseFloat(document.getElementById('std-prac-ans-input').value);
+    if (isNaN(val)) return;
+    const ok = Math.abs(val - p.answer) < 0.01;
+    document.getElementById('std-prac-ans-input').className = 'prac-ans-input ' + (ok ? 'correct' : 'wrong');
+    const rb = document.getElementById('std-prac-result-box');
+    rb.style.display = 'block';
+    rb.style.background = ok ? '#E8F5E9' : '#FFEBEE';
+    rb.style.color = ok ? '#2E7D32' : '#C62828';
+    rb.textContent = ok ? '⭕ 正解！すばらしい！' : `❌ まちがい — 正解は ${p.answer}${p.unit} でした`;
+}
+
+function stdPracToggleSolution() {
+    const box = document.getElementById('std-prac-sol-box');
+    const btn = document.querySelector('.btn-prac-sol');
+    const isHidden = box.style.display === 'none';
+    box.style.display = isHidden ? 'block' : 'none';
+    if (btn) btn.textContent = isHidden ? '💡 解説を閉じる' : '💡 解説を見る';
+}
+
+function stdPracShowProbs() {
+    if (stdPracState.currentCatId) stdPracOpenCat(stdPracState.currentCatId);
+    else stdPracShowCats();
+}
+
+function stdPracGoBack() {
+    const catView    = document.getElementById('std-prac-cat-view');
+    const probView   = document.getElementById('std-prac-prob-view');
+    const detailView = document.getElementById('std-prac-detail-view');
+    if (detailView.style.display !== 'none') { stdPracShowProbs(); }
+    else if (probView.style.display !== 'none') { stdPracShowCats(); }
+    else { showScreen('std-mode'); }
+}
+
+/* ════════════════════════════════════════
    PRACTICE SCREEN
 ════════════════════════════════════════ */
 const pracState = { currentCatId: null, currentProbId: null };
@@ -1684,10 +1898,12 @@ function pracGoBack() {
 function showScreen(id, opts={}) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id + '-screen').classList.add('active');
-    if (id === 'standard')   renderStandardCourse();
-    if (id === 'exam')       renderExamCourse();
-    if (id === 'exam-mode')  renderExamMode();
-    if (id === 'practice')   renderPractice();
+    if (id === 'standard')      renderStandardCourse();
+    if (id === 'std-mode')      renderStdMode();
+    if (id === 'std-practice')  renderStdPractice();
+    if (id === 'exam')          renderExamCourse();
+    if (id === 'exam-mode')     renderExamMode();
+    if (id === 'practice')      renderPractice();
     if (id === 'watertank')  { updateLearn(); generateProblem(); }
     if (id === 'challenges') {
         if (opts.unitTitle) document.getElementById('ch-screen-title').textContent = opts.unitTitle;

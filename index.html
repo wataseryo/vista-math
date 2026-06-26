@@ -533,6 +533,21 @@
         .prac-cat-sub { font-size: .66rem; color: #888; line-height: 1.4; margin-bottom: 8px; }
         .prac-cat-count { font-size: .7rem; font-weight: bold; color: var(--exam-primary); }
         .prac-cat-coming { font-size: .62rem; background: #f0f0f0; color: #aaa; padding: 2px 7px; border-radius: 6px; font-weight: bold; }
+        /* ── accuracy badge ── */
+        .acc-badge { font-size: .62rem; font-weight: 700; padding: 2px 7px; border-radius: 6px; margin-top: 3px; display: inline-block; }
+        .acc-badge.none { background: #2A2A3A; color: #666; }
+        .acc-badge.low  { background: #3D1515; color: #F87171; }
+        .acc-badge.mid  { background: #3D2E0A; color: #FBBF24; }
+        .acc-badge.high { background: #0C2E1A; color: #34D399; }
+        /* ── home progress strip ── */
+        #home-progress { display:flex; gap:16px; justify-content:center; align-items:center; margin: -4px 0 18px; }
+        .hp-stat { text-align:center; }
+        .hp-stat-val { font-size:1.3rem; font-weight:800; color:#fff; line-height:1; }
+        .hp-stat-label { font-size:.62rem; color:rgba(255,255,255,.45); letter-spacing:.05em; margin-top:2px; }
+        .hp-divider { width:1px; height:28px; background:rgba(255,255,255,.18); }
+        .hp-bar-wrap { width:140px; }
+        .hp-bar-bg { background:rgba(255,255,255,.12); border-radius:4px; height:4px; overflow:hidden; }
+        .hp-bar-fill { height:4px; border-radius:4px; background:linear-gradient(90deg,#34D399,#059669); transition:width .5s ease; }
         .prac-cat-ribbon { position: absolute; top: 8px; right: -8px; background: var(--exam-primary); color: #fff; font-size: .58rem; padding: 2px 10px 2px 8px; font-weight: bold; }
 
         /* Practice problem list */
@@ -752,6 +767,7 @@
     </div>
         <div class="home-title">VISTA</div>
     <div class="home-sub" id="home-grade-display">コースを選択</div>
+    <div id="home-progress"></div>
     <div class="course-cards">
         <div class="course-card std" onclick="showScreen('std-mode')">
             <span class="cc-icon">📘</span>
@@ -1796,13 +1812,14 @@ function stdPracShowCats() {
         const probs = PRACTICE_PROBLEMS.filter(p => p.chapterId === ch.id && p.grade === g && p.course === 'std');
         const count = probs.length;
         const avail = count > 0;
+        const accBadge = avail ? getAccuracyBadge(`g${g}_std_${ch.id}`) : '';
         return `<div class="prac-cat-card ${avail?'avail':'coming'}" onclick="${avail?`stdPracOpenCat('${ch.id}')`:''}">
             <div class="prac-cat-icon">${['💧','🏃','⚖️','🎲','📐'][i] || '📘'}</div>
             <div class="prac-cat-num">${ch.num}</div>
             <div class="prac-cat-title">${ch.title}</div>
             <div class="prac-cat-sub">${ch.sub}</div>
             ${avail
-                ? `<div class="prac-cat-count">${count}問</div>`
+                ? `<div class="prac-cat-count">${count}問</div>${accBadge}`
                 : `<div class="prac-cat-coming">準備中</div>`}
         </div>`;
     }).join('');
@@ -1884,10 +1901,12 @@ function stdPracCheckAnswer() {
     if (ok) {
         rb.style.background = '#E8F5E9'; rb.style.color = '#2E7D32';
         rb.textContent = '⭕ 正解！';
+        recordAnswer(`g${appState.grade}_std_${stdPracState.currentCatId}`, true);
         addStar();
     } else {
         rb.style.background = '#FFEBEE'; rb.style.color = '#C62828';
         rb.textContent = `❌ ${getWrongMsg()} — 正解は ${p.answer}${p.unit} でした`;
+        recordAnswer(`g${appState.grade}_std_${stdPracState.currentCatId}`, false);
         resetStreak();
     }
 }
@@ -1940,13 +1959,14 @@ function pracShowCats() {
         const probs  = PRACTICE_PROBLEMS.filter(p => p.catId === cat.id && p.grade === g);
         const count  = probs.length;
         const avail  = count > 0;
+        const accBadge = avail ? getAccuracyBadge(`g${g}_exam_${cat.id}`) : '';
         return `<div class="prac-cat-card ${avail?'avail':'coming'}" onclick="${avail?`pracOpenCat('${cat.id}')`:''}">
             <div class="prac-cat-icon">${cat.icon}</div>
             <div class="prac-cat-num">${unit ? unit.num : ''}</div>
             <div class="prac-cat-title">${cat.title}</div>
             <div class="prac-cat-sub">${cat.sub}</div>
             ${avail
-                ? `<div class="prac-cat-count">${count}問</div>`
+                ? `<div class="prac-cat-count">${count}問</div>${accBadge}`
                 : `<div class="prac-cat-coming">準備中</div>`}
         </div>`;
     }).join('');
@@ -2030,10 +2050,12 @@ function pracCheckAnswer() {
     if (ok) {
         rb.style.background = '#E8F5E9'; rb.style.color = '#2E7D32';
         rb.textContent = '⭕ 正解！';
+        recordAnswer(`g${appState.grade}_exam_${pracState.currentCatId}`, true);
         addStar();
     } else {
         rb.style.background = '#FFEBEE'; rb.style.color = '#C62828';
         rb.textContent = `❌ ${getWrongMsg()} — 正解は ${p.answer}${p.unit} でした`;
+        recordAnswer(`g${appState.grade}_exam_${pracState.currentCatId}`, false);
         resetStreak();
     }
 }
@@ -2072,6 +2094,7 @@ function showScreen(id, opts={}) {
     next.classList.add('active');
     void next.offsetWidth;
     next.classList.add('slide-in');
+    if (id === 'home')          renderHomeProgress();
     if (id === 'standard')      renderStandardCourse();
     if (id === 'std-mode')      renderStdMode();
     if (id === 'std-practice')  renderStdPractice();
@@ -2324,12 +2347,14 @@ function checkAnswer() {
         rb.className='result-box ok';
         document.getElementById('result-headline').textContent='⭕ 正解！';
         document.getElementById('result-msg').textContent='';
+        recordAnswer('watertank', true);
         addStar();
     } else {
         quiz.wrong++; document.getElementById('score-ng').textContent=quiz.wrong;
         rb.className='result-box ng';
         document.getElementById('result-headline').textContent='❌ ' + getWrongMsg();
         document.getElementById('result-msg').textContent=`正解は ${p.answer}${p.unit} でした`;
+        recordAnswer('watertank', false);
         resetStreak();
     }
     document.getElementById('result-exp').textContent=p.exp;
@@ -2418,10 +2443,12 @@ function chSubmitAnswer() {
     if (ok) {
         document.getElementById('ch-result-hl').textContent='⭕ 正解！';
         document.getElementById('ch-result-msg').textContent='ステップ解説で解法を確認せよ。';
+        recordAnswer(`g${appState.grade}_ch_${ch.category}`, true);
         addStar();
     } else {
         document.getElementById('ch-result-hl').textContent='❌ ' + getWrongMsg();
         document.getElementById('ch-result-msg').textContent=`正解は ${ch.answer}${ch.unit} でした。ヒントまたはステップ解説で確認せよ。`;
+        recordAnswer(`g${appState.grade}_ch_${ch.category}`, false);
         resetStreak();
     }
     rb.style.display='block';
@@ -2442,6 +2469,54 @@ function chToggleStep(i) {
 function chExpandAll() {
     const ch=CHALLENGES.find(c=>c.id===chState.currentId); if (!ch) return;
     ch.steps.forEach((_,i)=>{ chState.stepOpen[i]=true; document.getElementById('ch-step-bd-'+i).classList.add('open'); document.getElementById('ch-chev-'+i).classList.add('open'); });
+}
+
+/* ════════════════════════════════════════
+   PROGRESS TRACKING
+════════════════════════════════════════ */
+function recordAnswer(key, correct) {
+    const stats = JSON.parse(localStorage.getItem('vista_stats') || '{}');
+    if (!stats[key]) stats[key] = { correct: 0, total: 0 };
+    stats[key].total++;
+    if (correct) stats[key].correct++;
+    localStorage.setItem('vista_stats', JSON.stringify(stats));
+}
+
+function getStatsForKey(key) {
+    const stats = JSON.parse(localStorage.getItem('vista_stats') || '{}');
+    return stats[key] || null;
+}
+
+function getOverallStats() {
+    const stats = JSON.parse(localStorage.getItem('vista_stats') || '{}');
+    let total = 0, correct = 0;
+    Object.values(stats).forEach(s => { total += s.total; correct += s.correct; });
+    return { total, correct };
+}
+
+function getAccuracyBadge(key) {
+    const s = getStatsForKey(key);
+    if (!s || s.total === 0) return `<span class="acc-badge none">未挑戦</span>`;
+    const pct = Math.round(s.correct / s.total * 100);
+    const cls = pct >= 80 ? 'high' : pct >= 50 ? 'mid' : 'low';
+    return `<span class="acc-badge ${cls}">${pct}% (${s.correct}/${s.total})</span>`;
+}
+
+function renderHomeProgress() {
+    const el = document.getElementById('home-progress');
+    if (!el) return;
+    const { total, correct } = getOverallStats();
+    if (total === 0) { el.innerHTML = ''; return; }
+    const pct = Math.round(correct / total * 100);
+    el.innerHTML = `
+        <div class="hp-stat"><div class="hp-stat-val">${total}</div><div class="hp-stat-label">解答数</div></div>
+        <div class="hp-divider"></div>
+        <div class="hp-stat hp-bar-wrap">
+            <div class="hp-bar-bg"><div class="hp-bar-fill" style="width:${pct}%"></div></div>
+            <div class="hp-stat-label" style="margin-top:5px">正答率 ${pct}%</div>
+        </div>
+        <div class="hp-divider"></div>
+        <div class="hp-stat"><div class="hp-stat-val">${correct}</div><div class="hp-stat-label">正解数</div></div>`;
 }
 
 /* ════════════════════════════════════════

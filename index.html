@@ -812,12 +812,12 @@ const EXAM_UNITS_G6 = [
     { id: 'unit-newton',  num: 'Unit 05', title: 'ニュートン算',  sub: '増えながら減る・行列・牧草問題',    difficulty: 5, category: 'ニュートン算', count: 2, available: true },
     { id: 'unit-elim',    num: 'Unit 06', title: '消去算',        sub: '2つの式から答えを導く解法',         difficulty: 4, category: '消去算',     count: 2, available: true },
     { id: 'unit-ratio',   num: 'Unit 07', title: '割合・食塩水',  sub: '濃度計算・混合・蒸発問題',          difficulty: 4, category: '割合',       count: 1, available: true },
-    { id: 'unit-trade',   num: 'Unit 08', title: '売買損益',      sub: '定価・売値・利益の関係',            difficulty: 4, category: '売買損益',   count: 0, available: false },
+    { id: 'unit-trade',   num: 'Unit 08', title: '売買損益',      sub: '定価・売値・利益・割引の関係',      difficulty: 4, category: '売買損益',   count: 2, available: true },
     { id: 'unit-ratio2',  num: 'Unit 09', title: '比の文章題',    sub: '相当算・倍数算・分配比',            difficulty: 4, category: '比',         count: 0, available: false },
 ];
 
 const CH_CATS_G5 = ['すべて','植木算','つるかめ算','過不足算','和差算','年齢算'];
-const CH_CATS_G6 = ['すべて','水槽','速さ','流水算','通過算','ニュートン算','消去算','割合'];
+const CH_CATS_G6 = ['すべて','水槽','速さ','流水算','通過算','ニュートン算','消去算','割合','売買損益'];
 
 /* ════════════════════════════════════════
    CHALLENGES DATA
@@ -1176,6 +1176,173 @@ const CHALLENGES = [
       { title:'ノートの値段も確認',
         text:`①に a＝100 を代入：\n3×100 ＋ 2b ＝ 460\n2b ＝ 160\nb ＝ 80円`,
         visual:`<div class="vis-formula">えんぴつ：100円　ノート：80円\n確認：5×100＋3×80 ＝ 500＋240 ＝ 740 ✓</div>` },
+    ]
+  },
+
+  /* ── 植木算 2問目（池の周り） ── */
+  { id:'c21', grade:5, category:'植木算', catColor:'#E65100', catBg:'#FFF3E0', borderColor:'#FB8C00', title:'池の周りに木を植える', difficulty:2,
+    text:`周囲が120mの池の周りに、\n10m間隔で木を植えます。\n\n木は全部で何本必要ですか？`,
+    answer:12, unit:'本',
+    hint:`「池の周り」は輪っか型！\n最後の木と最初の木の間も「間隔」になるよ。\n池の問題では 本数 ＝ 間隔の数 になるよ。`,
+    steps:[
+      { title:'道型と池型の違いを確認',
+        text:`道型（直線）：木の本数 ＝ 間隔の数 ＋ 1\n池型（輪っか）：木の本数 ＝ 間隔の数\n\n池は「端がない」から ＋1 が不要！`,
+        visual:`<div class="vis-trees" style="flex-wrap:nowrap;justify-content:center;gap:4px;padding:12px 4px">
+  <span style="font-size:1.2rem">🌳</span>
+  <span class="vis-tree-sp">10m</span>
+  <span style="font-size:1.2rem">🌳</span>
+  <span class="vis-tree-sp">10m</span>
+  <span style="font-size:1.2rem">🌳</span>
+  <span class="vis-tree-sp">…</span>
+  <span style="font-size:1.2rem">🌳</span>
+  <span class="vis-tree-sp">10m</span>
+  <span style="font-size:1.4rem;color:#1976D2">↩</span>
+</div><div style="text-align:center;font-size:.72rem;color:#555;margin-top:4px">輪っか：最後の間隔も10m</div>` },
+      { title:'間隔の数を求める',
+        text:`間隔の数 ＝ 周囲 ÷ 間隔\n＝ 120 ÷ 10 ＝ 12（個の間隔）`,
+        visual:`<div class="vis-formula">間隔の数 ＝ 120 ÷ 10 ＝ 12</div>` },
+      { title:'木の本数を求める（答え）',
+        text:`池型では 本数 ＝ 間隔の数\n→ 12本`,
+        visual:`<div class="vis-formula">池型：木の本数 ＝ 間隔の数 ＝ 12本</div>` },
+    ]
+  },
+
+  /* ── つるかめ算 2問目（点数問題） ── */
+  { id:'c22', grade:5, category:'つるかめ算', catColor:'#00695C', catBg:'#E0F2F1', borderColor:'#00897B', title:'テストの点数（つるかめ算 応用）', difficulty:3,
+    text:`30問のテストで、\n正解すると4点もらえ、\n間違えると1点引かれます。\n\n全問解いて90点でした。\n正解は何問ですか？`,
+    answer:24, unit:'問',
+    hint:`「全部正解だったら何点？」から考えよう。\n4×30 ＝ 120点のはず。\n実際より30点少ない…なぜ？\n1問間違えるたびに 4＋1＝5点 減るよ！`,
+    steps:[
+      { title:'全問正解と仮定する',
+        text:`全部正解なら：4×30 ＝ 120点\n実際は90点\n差：120 − 90 ＝ 30点 少ない`,
+        visual:`<div class="vis-formula">全問正解の仮定：4 × 30 ＝ 120点\n実際との差：120 − 90 ＝ 30点</div>` },
+      { title:'1問間違えると何点変わるか',
+        text:`正解を1問→間違いに替えると：\n・＋4点のはずが → −1点になる\n1問替えるたびに 4＋1＝5点 少なくなる`,
+        visual:`<div class="vis-animals">
+  <div class="vis-animal"><div class="vis-animal-ico">✅</div><div class="vis-animal-legs" style="color:#1976D2">＋4点</div></div>
+  <div style="font-size:1.2rem;color:#ccc;padding:8px 4px">→</div>
+  <div class="vis-animal"><div class="vis-animal-ico">❌</div><div class="vis-animal-legs">−1点</div></div>
+  <div style="padding:8px 4px;font-size:.8rem;color:#555">差：5点ずつ減る</div>
+</div>` },
+      { title:'間違いの数を求める',
+        text:`間違いの数 ＝ 差 ÷ 1問あたりの変化\n＝ 30 ÷ 5 ＝ 6問`,
+        visual:`<div class="vis-formula">間違い ＝ 30 ÷ 5 ＝ 6問</div>` },
+      { title:'正解の数を求める（答え）',
+        text:`正解 ＝ 30 − 6 ＝ 24問\n確認：4×24 − 1×6 ＝ 96−6 ＝ 90点 ✓`,
+        visual:`<div class="vis-formula">正解 ＝ 30 − 6 ＝ 24問\n確認：4×24 − 1×6 ＝ 90点 ✓</div>` },
+    ]
+  },
+
+  /* ── 過不足算 2問目（おかし分け） ── */
+  { id:'c23', grade:5, category:'過不足算', catColor:'#AD1457', catBg:'#FCE4EC', borderColor:'#E91E63', title:'おかしを配る（過不足算）', difficulty:3,
+    text:`子どもたちにおかしを配ります。\n4個ずつ配ると6個余り、\n6個ずつ配ると10個足りません。\n\n子どもは何人いますか？`,
+    answer:8, unit:'人',
+    hint:`□を子どもの人数とすると2つの式が立てられるよ。\n4×□＋6 ＝ 6×□－10\nを解こう！`,
+    steps:[
+      { title:'おかしの合計をそれぞれ表す',
+        text:`同じおかしの数を2通りで表す：\n\n4個ずつ → 4×□＋6（6個余る）\n6個ずつ → 6×□－10（10個足りない）`,
+        visual:`<div class="vis-eq-wrap">
+  <div class="vis-eq-row"><span class="vis-eq-no">式1</span><span class="vis-eq-body">4×□ ＋ 6</span><span style="font-size:.72rem;color:#555;margin-left:8px">（4個配って6個余る）</span></div>
+  <div class="vis-eq-row"><span class="vis-eq-no">式2</span><span class="vis-eq-body">6×□ − 10</span><span style="font-size:.72rem;color:#555;margin-left:8px">（6個配って10個足りない）</span></div>
+</div>` },
+      { title:'方程式を解く',
+        text:`式1 ＝ 式2（同じおかしの数）\n4□＋6 ＝ 6□－10\n6＋10 ＝ 6□－4□\n16 ＝ 2□\n□ ＝ 8人`,
+        visual:`<div class="vis-formula">4□ ＋ 6 ＝ 6□ − 10\n16 ＝ 2□\n□ ＝ 8人</div>` },
+      { title:'おかしの数も確認（答え）',
+        text:`子ども：8人\nおかしの数：4×8＋6 ＝ 38個\n確認：6×8－10 ＝ 48－10 ＝ 38個 ✓`,
+        visual:`<div class="vis-formula">おかし：4×8＋6 ＝ 38個\n確認：6×8－10 ＝ 38個 ✓</div>` },
+    ]
+  },
+
+  /* ── 旅人算 往復の平均速 ── */
+  { id:'c24', grade:6, category:'速さ', catColor:'#2E7D32', catBg:'#E8F5E9', borderColor:'#43A047', title:'往復の平均の速さ', difficulty:4,
+    text:`A地点からB地点まで行きは時速4km、\n帰りは時速6kmで歩きました。\n\n往復の平均の速さは何km/hですか？`,
+    answer:4.8, unit:'km/h',
+    hint:`距離を具体的な数で置いてみよう！\nAB間を12kmと仮定すると計算しやすいよ。\n平均の速さ ＝ 総距離 ÷ 総時間`,
+    steps:[
+      { title:'なぜ単純に (4+6)÷2 ではダメなの？',
+        text:`行きと帰りで速さが違うと\nかかる時間が違う。\n遅い方（行き4km/h）の時間が長い → 平均は4km/hに近くなる！`,
+        visual:`<div class="vis-numline"><div class="vis-numline-bar"></div><div class="vis-numline-dot" style="background:#0288D1;left:8%"></div><div class="vis-numline-dot" style="background:#E64A19;left:92%"></div><div class="vis-numline-lbl" style="left:8%">A地点</div><div class="vis-numline-lbl" style="left:92%">B地点</div><div class="vis-numline-lbl" style="left:50%;transform:translateX(-50%);top:0">行き4km/h → 帰り6km/h ←</div></div>` },
+      { title:'AB間を12kmと仮定して計算',
+        text:`行きの時間：12 ÷ 4 ＝ 3時間\n帰りの時間：12 ÷ 6 ＝ 2時間\n\n往復の総距離：12×2 ＝ 24km\n往復の総時間：3＋2 ＝ 5時間`,
+        visual:`<div class="vis-formula">行き：12÷4＝3時間\n帰り：12÷6＝2時間\n合計：24km ÷ 5時間</div>` },
+      { title:'平均の速さを求める（答え）',
+        text:`平均の速さ ＝ 総距離 ÷ 総時間\n＝ 24 ÷ 5 ＝ 4.8 km/h`,
+        visual:`<div class="vis-formula">平均の速さ ＝ 24 ÷ 5 ＝ 4.8 km/h\n\n公式：2 ÷ (1/4 ＋ 1/6) ＝ 4.8 km/h</div>` },
+    ]
+  },
+
+  /* ── 通過算 3問目（すれ違い） ── */
+  { id:'c25', grade:6, category:'通過算', catColor:'#37474F', catBg:'#ECEFF1', borderColor:'#546E7A', title:'2列車がすれ違う', difficulty:3,
+    text:`長さ100mの電車Aが秒速15mで、\n長さ200mの電車Bが秒速10mで\n逆方向に走っています。\n\nすれ違い始めてから終わるまでの時間は何秒ですか？`,
+    answer:12, unit:'秒',
+    hint:`すれ違う距離 ＝ AとBの長さを合わせた距離\n逆方向なので合わせた速さ ＝ 速さの和！`,
+    steps:[
+      { title:'すれ違う距離を考える',
+        text:`先頭同士が出会ってから\n最後尾が離れるまで。\n→ 距離 ＝ 100 ＋ 200 ＝ 300m`,
+        visual:`<div class="vis-train-wrap">
+  <div class="vis-track-line"><div class="vis-train-el">← B 200m / 10m/s</div><div class="vis-track-gap"></div><div class="vis-train-el">A 100m / 15m/s →</div></div>
+  <div class="vis-train-sum">すれ違う距離 ＝ 100m ＋ 200m ＝ 300m</div>
+</div>` },
+      { title:'合わせた速さを求める',
+        text:`逆方向 → 速さを足す！\n合わせた速さ ＝ 15 ＋ 10 ＝ 25 m/秒`,
+        visual:`<div class="vis-formula">逆方向の合わせた速さ ＝ 15 ＋ 10 ＝ 25 m/秒</div>` },
+      { title:'時間を求める（答え）',
+        text:`時間 ＝ 距離 ÷ 合わせた速さ\n＝ 300 ÷ 25 ＝ 12秒`,
+        visual:`<div class="vis-formula">300 ÷ 25 ＝ 12秒</div>` },
+    ]
+  },
+
+  /* ── 食塩水 蒸発 ── */
+  { id:'c26', grade:6, category:'割合', catColor:'#6A1B9A', catBg:'#F3E5F5', borderColor:'#8E24AA', title:'食塩水を蒸発させる', difficulty:4,
+    text:`10%の食塩水300gから\n水を蒸発させて15%にしたい。\n\n何gの水を蒸発させればよいですか？`,
+    answer:100, unit:'g',
+    hint:`蒸発しても塩の量は変わらない！\nまず塩の量を求めて、\n15%になるときの食塩水の量を逆算しよう。`,
+    steps:[
+      { title:'塩の量を求める',
+        text:`塩の量は蒸発しても変わらない！\n塩 ＝ 300g × 10% ＝ 300 × 0.1 ＝ 30g`,
+        visual:`<div class="vis-beakers"><div><div class="vis-beaker"><div class="vis-beaker-liq" style="height:70%;background:rgba(3,169,244,.45)"></div></div><div class="vis-beaker-lbl">10%<br>300g<br><b>塩30g</b></div></div><span style="font-size:1.5rem;color:#ccc;padding-bottom:20px">→ 蒸発 →</span><div><div class="vis-beaker" style="width:45px;height:60px"><div class="vis-beaker-liq" style="height:70%;background:rgba(3,169,244,.6)"></div></div><div class="vis-beaker-lbl">15%<br>？g<br><b>塩30g</b></div></div></div>` },
+      { title:'15%のときの食塩水の量を求める',
+        text:`15% ＝ 塩30g ÷ 食塩水の量\n食塩水の量 ＝ 30 ÷ 0.15 ＝ 200g`,
+        visual:`<div class="vis-formula">食塩水の量 ＝ 30 ÷ 0.15 ＝ 200g</div>` },
+      { title:'蒸発させた水の量を求める（答え）',
+        text:`蒸発量 ＝ 元の量 − 残った量\n＝ 300 − 200 ＝ 100g`,
+        visual:`<div class="vis-formula">蒸発量 ＝ 300 − 200 ＝ 100g</div>` },
+    ]
+  },
+
+  /* ── 売買損益 ── */
+  { id:'c27', grade:6, category:'売買損益', catColor:'#1B5E20', catBg:'#E8F5E9', borderColor:'#2E7D32', title:'定価と利益（売買損益 基本）', difficulty:3,
+    text:`ある商品を450円で仕入れました。\n仕入れ値の20%の利益をのせて\n定価をつけました。\n\n定価はいくらですか？`,
+    answer:540, unit:'円',
+    hint:`定価 ＝ 仕入れ値 × (1 ＋ 利益の割合)\n20%の利益 → 1.2倍！`,
+    steps:[
+      { title:'売買損益の関係を整理',
+        text:`仕入れ値：商品を買った値段\n利益：もうけた金額\n定価 ＝ 仕入れ値 ＋ 利益`,
+        visual:`<div class="vis-tape-wrap">
+  <div class="vis-tape-row"><span class="vis-tape-lbl">定価</span><div class="vis-tape" style="width:72%;background:#1976D2">仕入れ値 450円</div><div class="vis-tape" style="width:14%;background:#E64A19;margin-left:2px">利益20%</div></div>
+</div>` },
+      { title:'利益の金額を求める',
+        text:`利益 ＝ 仕入れ値 × 利益の割合\n＝ 450 × 0.2 ＝ 90円`,
+        visual:`<div class="vis-formula">利益 ＝ 450 × 0.2 ＝ 90円</div>` },
+      { title:'定価を求める（答え）',
+        text:`定価 ＝ 仕入れ値 ＋ 利益\n＝ 450 ＋ 90 ＝ 540円\n\n別解：450 × 1.2 ＝ 540円`,
+        visual:`<div class="vis-formula">定価 ＝ 450 × 1.2 ＝ 540円</div>` },
+    ]
+  },
+  { id:'c28', grade:6, category:'売買損益', catColor:'#1B5E20', catBg:'#E8F5E9', borderColor:'#2E7D32', title:'割引と損益（売買損益 応用）', difficulty:4,
+    text:`定価800円の品物を定価の15%引きで売りました。\n仕入れ値は600円です。\n\n利益は何円ですか？`,
+    answer:80, unit:'円',
+    hint:`まず売値を求めよう。\n売値 ＝ 定価 × (1 − 割引率)\n次に 利益 ＝ 売値 − 仕入れ値`,
+    steps:[
+      { title:'割引後の売値を求める',
+        text:`15%引き → 定価の(100−15)% ＝ 85%で売る\n売値 ＝ 800 × 0.85 ＝ 680円`,
+        visual:`<div class="vis-tape-wrap">
+  <div class="vis-tape-row"><span class="vis-tape-lbl">定価</span><div class="vis-tape" style="width:85%;background:#1976D2">売値の部分 85%</div><div class="vis-tape" style="width:13%;background:#999;margin-left:2px">割引15%</div></div>
+</div><div class="vis-formula" style="margin-top:6px">売値 ＝ 800 × 0.85 ＝ 680円</div>` },
+      { title:'利益を求める（答え）',
+        text:`利益 ＝ 売値 − 仕入れ値\n＝ 680 − 600 ＝ 80円`,
+        visual:`<div class="vis-formula">利益 ＝ 680 − 600 ＝ 80円</div>` },
     ]
   },
 ];

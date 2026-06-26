@@ -681,37 +681,33 @@
             position: fixed; inset: 0; pointer-events: none;
             z-index: 9999; display: none; overflow: hidden;
         }
-        .confetti-p {
-            position: absolute; top: -24px;
-            animation: confetti-fall linear forwards;
+        /* ── +1★ float (C) ── */
+        .star-float {
+            position: fixed; pointer-events: none; z-index: 10000;
+            font-size: 1rem; font-weight: 800; color: var(--gold);
+            animation: star-float-up .85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
-        @keyframes confetti-fall {
-            0%   { top: -24px; opacity: 1; transform: rotate(0deg); }
-            80%  { opacity: 1; }
-            100% { top: 110vh; opacity: 0; transform: rotate(480deg) translateX(30px); }
+        @keyframes star-float-up {
+            0%   { opacity: 1; transform: translateY(0) scale(1.1); }
+            60%  { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-52px) scale(.8); }
         }
 
-        /* ── Success Popup (dark × gold) ── */
-        #success-popup {
-            position: fixed; top: 44%; left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background: var(--navy);
-            border: 2px solid var(--gold);
-            color: #fff; font-size: 1.5rem; font-weight: bold;
-            padding: 20px 32px; border-radius: var(--radius-lg);
-            box-shadow: 0 16px 56px rgba(0,0,0,.45), 0 0 0 1px var(--gold);
-            z-index: 10000; pointer-events: none;
-            display: none; text-align: center; white-space: nowrap;
-            line-height: 1.35; letter-spacing: .01em;
+        /* ── Accuracy card (B) ── */
+        #accuracy-card {
+            position: fixed; bottom: 72px; left: 50%;
+            transform: translateX(-50%) translateY(12px);
+            background: #0F172A; border: 1px solid rgba(201,168,76,.45);
+            border-radius: 10px; padding: 9px 18px;
+            display: flex; align-items: center; gap: 10px;
+            opacity: 0; transition: opacity .22s, transform .22s;
+            pointer-events: none; z-index: 9500; white-space: nowrap;
         }
-        #success-popup.active {
-            display: block;
-            animation: popup-snap .32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-        @keyframes popup-snap {
-            0%   { transform: translate(-50%,-50%) scale(0.7); opacity: 0; }
-            100% { transform: translate(-50%,-50%) scale(1);   opacity: 1; }
-        }
+        #accuracy-card.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .ac-label { color: rgba(255,255,255,.5); font-size: .72rem; }
+        .ac-sep   { color: rgba(255,255,255,.2); font-size: .72rem; }
+        .ac-pct   { color: var(--gold); font-size: .95rem; font-weight: 800; }
+        .ac-frac  { color: rgba(255,255,255,.35); font-size: .68rem; }
 
         /* ── Streak Notification (dark × gold) ── */
         #streak-popup {
@@ -1903,6 +1899,7 @@ function stdPracCheckAnswer() {
         rb.textContent = '⭕ 正解！';
         recordAnswer(`g${appState.grade}_std_${stdPracState.currentCatId}`, true);
         addStar();
+        { const _k=`g${appState.grade}_std_${stdPracState.currentCatId}`; const _s=getStatsForKey(_k); const _ch=(appState.grade===5?STANDARD_CHAPTERS_G5:STANDARD_CHAPTERS_G6).find(c=>c.id===stdPracState.currentCatId); if(_s) showAccuracyCard(_ch?_ch.title:'標準演習', _s.correct, _s.total); }
     } else {
         rb.style.background = '#FFEBEE'; rb.style.color = '#C62828';
         rb.textContent = `❌ ${getWrongMsg()} — 正解は ${p.answer}${p.unit} でした`;
@@ -2052,6 +2049,7 @@ function pracCheckAnswer() {
         rb.textContent = '⭕ 正解！';
         recordAnswer(`g${appState.grade}_exam_${pracState.currentCatId}`, true);
         addStar();
+        { const _k=`g${appState.grade}_exam_${pracState.currentCatId}`; const _s=getStatsForKey(_k); const _cat=PRACTICE_CATS.find(c=>c.id===pracState.currentCatId); if(_s) showAccuracyCard(_cat?_cat.title:'受験演習', _s.correct, _s.total); }
     } else {
         rb.style.background = '#FFEBEE'; rb.style.color = '#C62828';
         rb.textContent = `❌ ${getWrongMsg()} — 正解は ${p.answer}${p.unit} でした`;
@@ -2349,6 +2347,7 @@ function checkAnswer() {
         document.getElementById('result-msg').textContent='';
         recordAnswer('watertank', true);
         addStar();
+        { const s = getStatsForKey('watertank'); if(s) showAccuracyCard('水そう練習', s.correct, s.total); }
     } else {
         quiz.wrong++; document.getElementById('score-ng').textContent=quiz.wrong;
         rb.className='result-box ng';
@@ -2445,6 +2444,7 @@ function chSubmitAnswer() {
         document.getElementById('ch-result-msg').textContent='ステップ解説で解法を確認せよ。';
         recordAnswer(`g${appState.grade}_ch_${ch.category}`, true);
         addStar();
+        { const _k=`g${appState.grade}_ch_${ch.category}`; const _s=getStatsForKey(_k); if(_s) showAccuracyCard(ch.category, _s.correct, _s.total); }
     } else {
         document.getElementById('ch-result-hl').textContent='❌ ' + getWrongMsg();
         document.getElementById('ch-result-msg').textContent=`正解は ${ch.answer}${ch.unit} でした。ヒントまたはステップ解説で確認せよ。`;
@@ -2527,18 +2527,12 @@ const gameState = {
     streak: 0,
 };
 
-const CORRECT_MSGS = [
-    'やったー！天才！', 'すごい！正解！', 'かっこいい！やったね！',
-    'パーフェクト！', 'その調子！最高！', 'よっしゃ！正解！',
-    'すばらしい！ファイト！', 'チャンピオン！'
-];
 const WRONG_MSGS = [
     'もう一回チャレンジ！', '惜しい！あとちょっと！',
     'ヒントを見てみよう！', '次はきっと正解！', '負けないで！ファイト！'
 ];
 
-function getCorrectMsg() { return CORRECT_MSGS[Math.floor(Math.random() * CORRECT_MSGS.length)]; }
-function getWrongMsg()   { return WRONG_MSGS[Math.floor(Math.random() * WRONG_MSGS.length)]; }
+function getWrongMsg() { return WRONG_MSGS[Math.floor(Math.random() * WRONG_MSGS.length)]; }
 
 function addStar() {
     gameState.stars++;
@@ -2546,8 +2540,32 @@ function addStar() {
     localStorage.setItem('math_stars', gameState.stars);
     updateStarBadge();
     triggerStarBump();
-    showCelebration();
+    showFloatStar();
     if (gameState.streak >= 3) showStreakPopup();
+}
+
+function showFloatStar() {
+    const badge = document.getElementById('star-counter-badge');
+    const rect = badge ? badge.getBoundingClientRect() : { left: window.innerWidth - 70, top: 20, width: 60 };
+    const el = document.createElement('div');
+    el.className = 'star-float';
+    el.textContent = '+1 ★';
+    el.style.left = (rect.left + rect.width / 2 - 20) + 'px';
+    el.style.top = (rect.top + 4) + 'px';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 900);
+}
+
+function showAccuracyCard(label, correct, total) {
+    const el = document.getElementById('accuracy-card');
+    if (!el) return;
+    const pct = Math.round(correct / total * 100);
+    el.innerHTML = `<span class="ac-label">${label}</span><span class="ac-sep">|</span><span class="ac-pct">${pct}%</span><span class="ac-frac">${correct}/${total}</span>`;
+    el.classList.remove('show');
+    void el.offsetWidth;
+    el.classList.add('show');
+    clearTimeout(el._hideTimer);
+    el._hideTimer = setTimeout(() => el.classList.remove('show'), 2200);
 }
 
 function resetStreak() { gameState.streak = 0; }
@@ -2566,37 +2584,6 @@ function triggerStarBump() {
     setTimeout(() => badge.classList.remove('bump'), 400);
 }
 
-function showCelebration() {
-    const overlay = document.getElementById('celebration-overlay');
-    if (!overlay) return;
-    overlay.innerHTML = '';
-    const colors = ['#FFD700','#FF6B6B','#4ECDC4','#45B7D1','#96CEB4','#FFEAA7','#DDA0DD','#FF9A56','#A8E063'];
-    for (let i = 0; i < 32; i++) {
-        const p = document.createElement('div');
-        p.className = 'confetti-p';
-        p.style.left = (Math.random() * 100) + 'vw';
-        p.style.animationDelay = (Math.random() * 0.5) + 's';
-        p.style.animationDuration = (1.1 + Math.random() * 0.7) + 's';
-        p.style.background = colors[Math.floor(Math.random() * colors.length)];
-        const size = 7 + Math.random() * 9;
-        p.style.width = size + 'px';
-        p.style.height = size + 'px';
-        p.style.borderRadius = Math.random() > 0.4 ? '50%' : '2px';
-        overlay.appendChild(p);
-    }
-    overlay.style.display = 'block';
-
-    const popup = document.getElementById('success-popup');
-    if (popup) {
-        popup.textContent = '🎉 ' + getCorrectMsg();
-        popup.classList.add('active');
-    }
-
-    setTimeout(() => {
-        overlay.style.display = 'none';
-        if (popup) popup.classList.remove('active');
-    }, 1900);
-}
 
 function showStreakPopup() {
     const el = document.getElementById('streak-popup');
@@ -2622,8 +2609,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- ════════ GAMIFICATION OVERLAYS ════════ -->
 <div id="star-counter-badge">⭐ <span id="star-count">0</span></div>
-<div id="celebration-overlay"></div>
-<div id="success-popup"></div>
+<div id="accuracy-card"></div>
 <div id="streak-popup"></div>
 
 </body>

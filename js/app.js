@@ -711,6 +711,7 @@ function chSubmitAnswer() {
         resetStreak();
     }
     rb.style.display='block';
+    document.querySelector('.ch-steps-card').style.display='block';
 }
 
 function chToggleHint() {

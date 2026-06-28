@@ -140,11 +140,17 @@ function stdPracOpenProb(probId) {
                 <div class="prac-topic-link-sub">ステップ解説でじっくり学ぼう →</div>
             </div>
         </div>` : ''}
-        ${probs.length > 1 ? `<div class="prac-bottom-nav">
-            <span class="prac-prob-counter">問 ${currentIdx + 1} / ${probs.length}</span>
-            <button class="prac-next-btn" onclick="stdPracNextProblem()">次の問題 →</button>
-        </div>` : ''}
     `;
+    const nextBtn = document.getElementById('std-prac-next-prob-btn');
+    if (nextBtn) {
+        if (probs.length > 1) {
+            nextBtn.style.display = '';
+            nextBtn.textContent = `次の問題 (${currentIdx + 1}/${probs.length}) →`;
+        } else {
+            nextBtn.style.display = 'none';
+        }
+    }
+    document.getElementById('std-prac-detail-body').scrollTop = 0;
     document.getElementById('std-prac-ans-input').addEventListener('keydown', e => { if(e.key==='Enter') stdPracCheckAnswer(); });
 }
 
@@ -307,11 +313,18 @@ function pracOpenProb(probId) {
                 <div class="prac-topic-link-sub">ステップ解説でじっくり学ぼう →</div>
             </div>
         </div>` : ''}
-        ${probs.length > 1 ? `<div class="prac-bottom-nav">
-            <span class="prac-prob-counter">問 ${currentIdx + 1} / ${probs.length}</span>
-            <button class="prac-next-btn" onclick="pracNextProblem()">次の問題 →</button>
-        </div>` : ''}
     `;
+    const nextBtn = document.getElementById('prac-next-prob-btn');
+    if (nextBtn) {
+        if (probs.length > 1) {
+            nextBtn.style.display = '';
+            nextBtn.textContent = `次の問題 (${currentIdx + 1}/${probs.length}) →`;
+        } else {
+            nextBtn.style.display = 'none';
+        }
+    }
+    const body = document.getElementById('prac-detail-body');
+    body.scrollTop = 0;
     document.getElementById('prac-ans-input').addEventListener('keydown', e => { if(e.key==='Enter') pracCheckAnswer(); });
 }
 
@@ -842,6 +855,8 @@ function openChallenge(id) {
                 <div>${s.visual}</div>
             </div>
         </div>`).join('');
+    const detailEl = document.getElementById('ch-detail-view');
+    if (detailEl) detailEl.scrollTop = 0;
 }
 
 function closeChallenge() {

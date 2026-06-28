@@ -798,7 +798,7 @@
         /* ── 次の問題ナビゲーション ── */
         .prac-bottom-nav { display: flex; justify-content: space-between; align-items: center; padding: 14px 0 6px; margin-top: 10px; border-top: 1px solid #f0f0f0; }
         .prac-prob-counter { font-size: .78rem; color: #bbb; font-weight: bold; letter-spacing: .04em; }
-        .prac-next-btn { background: linear-gradient(135deg, #FF9A56, #E64A19); color: #fff; border: none; border-radius: 10px; padding: 10px 20px; font-family: inherit; font-weight: bold; cursor: pointer; font-size: .9rem; transition: opacity .15s, transform .15s; }
+        .prac-next-btn { background: linear-gradient(135deg, #FF9A56, #E64A19); color: #fff; border: none; border-radius: 10px; padding: 7px 14px; font-family: inherit; font-weight: bold; cursor: pointer; font-size: .82rem; transition: opacity .15s, transform .15s; margin-left: auto; white-space: nowrap; flex-shrink: 0; }
         .prac-next-btn:hover { opacity: .88; transform: translateY(-1px); }
         .ch-next-prob-btn { background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3); color: #fff; padding: 6px 13px; border-radius: 8px; cursor: pointer; font-size: .82rem; font-family: inherit; transition: background .15s; white-space: nowrap; flex-shrink: 0; }
         .ch-next-prob-btn:hover { background: rgba(255,255,255,.28); }

@@ -115,6 +115,8 @@ function stdPracOpenProb(probId) {
     const g = appState.grade;
     const chapters = g === 5 ? STANDARD_CHAPTERS_G5 : STANDARD_CHAPTERS_G6;
     const ch = chapters.find(c => c.id === p.chapterId);
+    const probs = PRACTICE_PROBLEMS.filter(q => q.chapterId === stdPracState.currentCatId && q.grade === g && q.course === 'std');
+    const currentIdx = probs.findIndex(q => q.id === probId);
     document.getElementById('std-prac-prob-view').style.display   = 'none';
     document.getElementById('std-prac-detail-view').style.display = 'flex';
     document.getElementById('std-prac-detail-cat-label').textContent = ch ? ch.title : '';
@@ -129,18 +131,29 @@ function stdPracOpenProb(probId) {
         <div id="std-prac-result-box" style="display:none;background:#E8F5E9;border-radius:10px;padding:12px;margin-bottom:14px;font-weight:bold;font-size:.9rem"></div>
         <div class="prac-detail-actions">
             <button class="prac-detail-btn btn-prac-sol" onclick="stdPracToggleSolution()">💡 解説を見る</button>
-            ${ch ? `<button class="prac-detail-btn" style="background:#E3F2FD;color:#1565C0" onclick="showScreen('standard')">📘 トピックで学ぶ</button>` : ''}
+            ${ch ? `<button class="prac-detail-btn" style="background:#E3F2FD;color:#1565C0" onclick="showScreen('standard')">トピックで学ぶ</button>` : ''}
         </div>
         <div id="std-prac-sol-box" class="prac-sol-box" style="display:none">${p.solution || '解説を準備中です。'}</div>
         ${ch ? `<div class="prac-topic-link" style="border-color:var(--std-primary)" onclick="showScreen('standard')">
-            <div class="prac-topic-link-icon">📘</div>
             <div class="prac-topic-link-body">
                 <div class="prac-topic-link-title" style="color:var(--std-primary)">${ch.num} ${ch.title}</div>
                 <div class="prac-topic-link-sub">ステップ解説でじっくり学ぼう →</div>
             </div>
         </div>` : ''}
+        ${probs.length > 1 ? `<div class="prac-bottom-nav">
+            <span class="prac-prob-counter">問 ${currentIdx + 1} / ${probs.length}</span>
+            <button class="prac-next-btn" onclick="stdPracNextProblem()">次の問題 →</button>
+        </div>` : ''}
     `;
     document.getElementById('std-prac-ans-input').addEventListener('keydown', e => { if(e.key==='Enter') stdPracCheckAnswer(); });
+}
+
+function stdPracNextProblem() {
+    const g = appState.grade;
+    const probs = PRACTICE_PROBLEMS.filter(p => p.chapterId === stdPracState.currentCatId && p.grade === g && p.course === 'std');
+    if (probs.length <= 1) return;
+    const idx = probs.findIndex(p => p.id === stdPracState.currentProbId);
+    stdPracOpenProb(probs[(idx + 1) % probs.length].id);
 }
 
 function stdPracCheckAnswer() {
@@ -266,6 +279,8 @@ function pracOpenProb(probId) {
     const unitId = appState.grade === 5 ? cat.unitId5 : cat.unitId6;
     const units  = appState.grade === 5 ? EXAM_UNITS_G5 : EXAM_UNITS_G6;
     const unit   = units.find(u => u.id === unitId);
+    const probs  = PRACTICE_PROBLEMS.filter(q => q.catId === pracState.currentCatId && q.grade === appState.grade);
+    const currentIdx = probs.findIndex(q => q.id === probId);
 
     document.getElementById('prac-prob-view').style.display   = 'none';
     document.getElementById('prac-detail-view').style.display = 'flex';
@@ -283,18 +298,28 @@ function pracOpenProb(probId) {
         <div id="prac-result-box" style="display:none;background:#E8F5E9;border-radius:10px;padding:12px;margin-bottom:14px;font-weight:bold;font-size:.9rem"></div>
         <div class="prac-detail-actions">
             <button class="prac-detail-btn btn-prac-sol" onclick="pracToggleSolution()">💡 解説を見る</button>
-            ${unit ? `<button class="prac-detail-btn btn-prac-topic" onclick="pracGoToTopic('${unitId}')">📚 トピックで学ぶ</button>` : ''}
+            ${unit ? `<button class="prac-detail-btn btn-prac-topic" onclick="pracGoToTopic('${unitId}')">トピックで学ぶ</button>` : ''}
         </div>
         <div id="prac-sol-box" class="prac-sol-box" style="display:none">${p.solution || '解説を準備中です。'}</div>
         ${unit ? `<div class="prac-topic-link" onclick="pracGoToTopic('${unitId}')">
-            <div class="prac-topic-link-icon">📚</div>
             <div class="prac-topic-link-body">
                 <div class="prac-topic-link-title">${unit.num} ${unit.title}</div>
                 <div class="prac-topic-link-sub">ステップ解説でじっくり学ぼう →</div>
             </div>
         </div>` : ''}
+        ${probs.length > 1 ? `<div class="prac-bottom-nav">
+            <span class="prac-prob-counter">問 ${currentIdx + 1} / ${probs.length}</span>
+            <button class="prac-next-btn" onclick="pracNextProblem()">次の問題 →</button>
+        </div>` : ''}
     `;
     document.getElementById('prac-ans-input').addEventListener('keydown', e => { if(e.key==='Enter') pracCheckAnswer(); });
+}
+
+function pracNextProblem() {
+    const probs = PRACTICE_PROBLEMS.filter(p => p.catId === pracState.currentCatId && p.grade === appState.grade);
+    if (probs.length <= 1) return;
+    const idx = probs.findIndex(p => p.id === pracState.currentProbId);
+    pracOpenProb(probs[(idx + 1) % probs.length].id);
 }
 
 function pracCheckAnswer() {
@@ -732,16 +757,32 @@ function toggleHint() {
 /* ════════════════════════════════════════
    CHALLENGES
 ════════════════════════════════════════ */
-function renderChallengeList() {
+function getCurrentChallengesFiltered() {
     let base = CHALLENGES.filter(c => c.grade === appState.grade);
-    // mainCategory（大分類）フィルター優先、次に unitCategories（細分類）
     if (chState.mainCategory) {
         base = base.filter(c => c.mainCategory === chState.mainCategory);
     } else if (chState.unitCategories) {
         base = base.filter(c => chState.unitCategories.includes(c.category));
     }
     base = base.filter(c => c.difficulty >= chState.tierMin && c.difficulty <= chState.tierMax);
-    // フィルタボタンを動的生成
+    return chState.filter === 'すべて' ? base : base.filter(c => c.category === chState.filter);
+}
+
+function chNextProblem() {
+    const list = getCurrentChallengesFiltered();
+    if (list.length <= 1) return;
+    const idx = list.findIndex(c => c.id === chState.currentId);
+    openChallenge(list[(idx + 1) % list.length].id);
+}
+
+function renderChallengeList() {
+    let base = CHALLENGES.filter(c => c.grade === appState.grade);
+    if (chState.mainCategory) {
+        base = base.filter(c => c.mainCategory === chState.mainCategory);
+    } else if (chState.unitCategories) {
+        base = base.filter(c => chState.unitCategories.includes(c.category));
+    }
+    base = base.filter(c => c.difficulty >= chState.tierMin && c.difficulty <= chState.tierMax);
     const availCats = ['すべて', ...new Set(base.map(c => c.category))];
     if (!availCats.includes(chState.filter)) chState.filter = 'すべて';
     document.getElementById('ch-filter-row').innerHTML = availCats.map(cat =>
@@ -768,6 +809,14 @@ function openChallenge(id) {
     document.getElementById('ch-list-view').style.display='none';
     document.getElementById('ch-detail-view').classList.add('active');
     document.getElementById('ch-detail-title-sm').textContent=ch.title;
+    // 次の問題ボタンのカウンター更新
+    const chList = getCurrentChallengesFiltered();
+    const chIdx  = chList.findIndex(c => c.id === id);
+    const nextBtn = document.getElementById('ch-next-prob-btn');
+    if (nextBtn) {
+        nextBtn.style.display = chList.length > 1 ? '' : 'none';
+        nextBtn.textContent   = `次の問題 (${chIdx + 1}/${chList.length}) →`;
+    }
     const stars='★'.repeat(ch.difficulty)+'☆'.repeat(5-ch.difficulty);
     const badge=document.getElementById('ch-prob-cat-badge');
     badge.textContent=ch.category; badge.style.cssText=`background:${ch.catBg};color:${ch.catColor}`;

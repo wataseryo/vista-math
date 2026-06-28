@@ -76,3 +76,16 @@ const PRACTICE_CATS = [
     { id: 'pc-cases',   icon: '🎯', title: '場合の数・論理',   sub: '順列・組合せ・条件整理',      unitId5: 'u5-cases',   unitId6: 'u6-cases'   },
 ];
 
+/* ════════════════════════════════════════
+   CATEGORIES MASTER（8分野 正規ID）
+════════════════════════════════════════ */
+const CATEGORIES = [
+    { id: 'calculation',         name: '計算・数の処理',   priority: 'C' },
+    { id: 'number_properties',   name: '数の性質・規則性', priority: 'B' },
+    { id: 'ratio',               name: '割合・比',          priority: 'A' },
+    { id: 'speed',               name: '速さ',              priority: 'A' },
+    { id: 'word_problems',       name: '特殊算・文章題',   priority: 'A' },
+    { id: 'plane_geometry',      name: '平面図形',          priority: 'A' },
+    { id: 'solid_geometry',      name: '立体図形・水量',   priority: 'A' },
+    { id: 'combinatorics_logic', name: '場合の数・論理',   priority: 'B' },
+];

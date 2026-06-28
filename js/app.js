@@ -659,7 +659,7 @@ function openChallenge(id) {
     const badge=document.getElementById('ch-prob-cat-badge');
     badge.textContent=ch.category; badge.style.cssText=`background:${ch.catBg};color:${ch.catColor}`;
     document.getElementById('ch-prob-stars').textContent=stars;
-    document.getElementById('ch-prob-text').textContent=ch.text;
+    document.getElementById('ch-prob-text').textContent=ch.question;
     document.getElementById('ch-ans-input').value='';
     document.getElementById('ch-ans-input').className='ch-ans-input';
     document.getElementById('ch-ans-unit').textContent=ch.answerUnit;
@@ -668,7 +668,7 @@ function openChallenge(id) {
     document.getElementById('ch-hint-box').textContent=ch.hint;
     const rb=document.getElementById('ch-result-box');
     rb.style.display='none'; rb.className='ch-result-box';
-    document.getElementById('ch-steps-container').innerHTML=ch.steps.map((s,i)=>`
+    document.getElementById('ch-steps-container').innerHTML=ch.explanation.map((s,i)=>`
         <div class="ch-step">
             <div class="ch-step-hd" onclick="chToggleStep(${i})">
                 <div class="ch-step-num">${i+1}</div>
@@ -725,7 +725,7 @@ function chToggleStep(i) {
 
 function chExpandAll() {
     const ch=CHALLENGES.find(c=>c.id===chState.currentId); if (!ch) return;
-    ch.steps.forEach((_,i)=>{ chState.stepOpen[i]=true; document.getElementById('ch-step-bd-'+i).classList.add('open'); document.getElementById('ch-chev-'+i).classList.add('open'); });
+    ch.explanation.forEach((_,i)=>{ chState.stepOpen[i]=true; document.getElementById('ch-step-bd-'+i).classList.add('open'); document.getElementById('ch-chev-'+i).classList.add('open'); });
 }
 
 /* ════════════════════════════════════════

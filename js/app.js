@@ -323,7 +323,6 @@ function pracOpenProb(probId) {
             nextBtn.style.display = 'none';
         }
     }
-    const body = document.getElementById('prac-detail-body');
     body.scrollTop = 0;
     document.getElementById('prac-ans-input').addEventListener('keydown', e => { if(e.key==='Enter') pracCheckAnswer(); });
 }

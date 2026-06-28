@@ -637,7 +637,7 @@ function renderChallengeList() {
     let filtered = chState.filter === 'すべて' ? base : base.filter(c => c.category === chState.filter);
     document.getElementById('ch-cards-container').innerHTML = filtered.map(c => {
         const stars='★'.repeat(c.difficulty)+'☆'.repeat(5-c.difficulty);
-        const preview=c.text.replace(/\n/g,' ').slice(0,48)+'…';
+        const preview=c.question.replace(/\n/g,' ').slice(0,48)+'…';
         return `<div class="ch-card" style="border-left-color:${c.borderColor}" onclick="openChallenge('${c.id}')">
             <div class="ch-card-top"><span class="ch-cat-badge" style="background:${c.catBg};color:${c.catColor}">${c.category}</span><span class="ch-stars">${stars}</span></div>
             <div class="ch-card-title">${c.title}</div>
@@ -689,7 +689,9 @@ function closeChallenge() {
 
 function chSubmitAnswer() {
     const ch=CHALLENGES.find(c=>c.id===chState.currentId); if (!ch) return;
-    const val=parseFloat(document.getElementById('ch-ans-input').value); if (isNaN(val)) return;
+    const raw=document.getElementById('ch-ans-input').value
+        .replace(/[０-９]/g,s=>String.fromCharCode(s.charCodeAt(0)-0xFEE0)).trim();
+    const val=parseFloat(raw); if (isNaN(val)) return;
     const ok=Math.abs(val-ch.answer)<0.01;
     document.getElementById('ch-ans-input').className='ch-ans-input '+(ok?'correct':'wrong');
     const rb=document.getElementById('ch-result-box');

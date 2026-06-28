@@ -534,4 +534,92 @@ const CHALLENGES = [
         visual:`<div class="vis-formula">利益 ＝ 680 − 600 ＝ 80円</div>` },
     ]
   },
+
+  /* ────────────────────────────────────────
+     割合・比（ratio）テスト3問
+  ──────────────────────────────────────── */
+
+  /* 食塩水 */
+  { id:'g6_ratio_salt_001', grade:6, course:'exam',
+    category:'食塩水', catColor:'#0277BD', catBg:'#E1F5FE', borderColor:'#039BE5',
+    mainCategory:'ratio', unit:'食塩水', pattern:'食塩水の混合',
+    difficulty:2, answerType:'number',
+    title:'食塩水を混ぜる（基本）',
+    question:`8%の食塩水150gと、2%の食塩水100gを混ぜました。\n\n混ぜた後の食塩水の濃度は何%ですか。`,
+    answer:5.6, answerUnit:'%',
+    hint:`先に「塩の重さ」をそれぞれ求めよう。\n塩の重さ ＝ 食塩水の重さ × 濃度（÷100）\n2つの塩を合わせて、全体の重さで割ると濃度が出るよ。`,
+    tags:['割合・比','食塩水','混合'],
+    visualTypes:['beaker','balance'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'なぜ「塩の重さ」から考えるのか',
+        text:`濃度は「塩が全体の何%か」を表します。\n混ぜると食塩水の量は変わりますが、\n塩の重さは変わらず足し算できます。\nだから先に「塩の重さ」をそれぞれ求めます。`,
+        visual:`<div class="vis-beakers"><div><div class="vis-beaker"><div class="vis-beaker-liq" style="height:65%;background:rgba(3,169,244,.55)"></div></div><div class="vis-beaker-lbl">8%<br>150g</div></div><span style="font-size:1.5rem;color:#ccc;padding-bottom:20px">+</span><div><div class="vis-beaker"><div class="vis-beaker-liq" style="height:65%;background:rgba(3,169,244,.2)"></div></div><div class="vis-beaker-lbl">2%<br>100g</div></div><span style="font-size:1.5rem;color:#ccc;padding-bottom:20px">=</span><div><div class="vis-beaker" style="width:65px;height:80px"><div class="vis-beaker-liq" style="height:65%;background:rgba(3,169,244,.38)"></div></div><div class="vis-beaker-lbl">?%<br>250g</div></div></div>` },
+      { title:'それぞれの塩の重さを求める',
+        text:`8%の食塩水150g の塩：\n　150 × 0.08 ＝ 12g\n\n2%の食塩水100g の塩：\n　100 × 0.02 ＝ 2g`,
+        visual:`<div class="vis-beakers"><div><div class="vis-beaker"><div class="vis-beaker-liq" style="height:65%;background:rgba(3,169,244,.55)"></div></div><div class="vis-beaker-lbl">8%・150g<br><b>塩 12g</b></div></div><span style="font-size:1.5rem;color:#ccc;padding-bottom:20px">+</span><div><div class="vis-beaker"><div class="vis-beaker-liq" style="height:65%;background:rgba(3,169,244,.2)"></div></div><div class="vis-beaker-lbl">2%・100g<br><b>塩 2g</b></div></div></div>` },
+      { title:'混ぜた後の合計を求める',
+        text:`塩の合計：12 ＋ 2 ＝ 14g\n食塩水の合計：150 ＋ 100 ＝ 250g`,
+        visual:`<div class="vis-formula">塩 12g ＋ 2g ＝ 14g<br>食塩水 150g ＋ 100g ＝ 250g</div>` },
+      { title:'濃度を計算する（答え）',
+        text:`濃度 ＝ 塩の重さ ÷ 食塩水の重さ × 100\n＝ 14 ÷ 250 × 100\n＝ 5.6%`,
+        visual:`<div class="vis-formula">14 ÷ 250 × 100 ＝ <b>5.6%</b></div>` },
+    ]
+  },
+
+  /* 売買損益 */
+  { id:'g6_ratio_profit_001', grade:6, course:'exam',
+    category:'売買損益', catColor:'#1B5E20', catBg:'#E8F5E9', borderColor:'#2E7D32',
+    mainCategory:'ratio', unit:'売買損益', pattern:'原価から定価を求める',
+    difficulty:2, answerType:'number',
+    title:'定価を求める（利益率から）',
+    question:`ある店が仕入れ値500円の品物に、\n仕入れ値の24%の利益を見込んで定価をつけました。\n\n定価は何円ですか。`,
+    answer:620, answerUnit:'円',
+    hint:`「利益を見込む」とは、仕入れ値に利益分を足すことだよ。\n定価 ＝ 仕入れ値 × (1 ＋ 利益率)`,
+    tags:['割合・比','売買損益','定価'],
+    visualTypes:['priceFlow','barModel'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'「利益を見込む」とはどういう意味か',
+        text:`仕入れ値に「いくら儲けたいか」を上乗せしたのが定価です。\n24%の利益 ＝ 仕入れ値の24%分を上乗せ\nつまり定価は仕入れ値の 100% ＋ 24% ＝ 124% になります。`,
+        visual:`<div class="vis-tape-row"><span class="vis-tape-lbl">仕入れ値</span><div class="vis-tape" style="width:80%;background:#1976D2">仕入れ値 100%</div></div><div class="vis-tape-row" style="margin-top:6px"><span class="vis-tape-lbl">定価</span><div class="vis-tape" style="width:80%;background:#1976D2">仕入れ値 100%</div><div class="vis-tape" style="width:19%;background:#43A047;margin-left:2px">利益 24%</div></div>` },
+      { title:'計算式を作る',
+        text:`定価 ＝ 仕入れ値 × (1 ＋ 0.24)\n＝ 500 × 1.24`,
+        visual:`<div class="vis-formula">500 × 1.24 ＝ ?</div>` },
+      { title:'計算する（答え）',
+        text:`500 × 1.24 ＝ 620円`,
+        visual:`<div class="vis-formula">500 × 1.24 ＝ <b>620円</b></div>` },
+      { title:'答えを確かめる',
+        text:`利益：620 − 500 ＝ 120円\n120 ÷ 500 × 100 ＝ 24% ✓\n仕入れ値の24%の利益になっているね。`,
+        visual:`<div class="vis-formula">利益 120円 ÷ 仕入れ値 500円 × 100 ＝ 24% ✓</div>` },
+    ]
+  },
+
+  /* 比の基本 */
+  { id:'g6_ratio_ratio_001', grade:6, course:'exam',
+    category:'比', catColor:'#6A1B9A', catBg:'#F3E5F5', borderColor:'#8E24AA',
+    mainCategory:'ratio', unit:'比の基本', pattern:'比から量を求める',
+    difficulty:2, answerType:'number',
+    title:'比で量を求める（全体から分ける）',
+    question:`AさんとBさんのあめの数の比は 3：5 です。\n2人のあめの合計は240個です。\n\nAさんのあめは何個ですか。`,
+    answer:90, answerUnit:'個',
+    hint:`比 3：5 は「全体を8に分けたとき、Aが3つ分・Bが5つ分」ということだよ。\nAの量 ＝ 全体 × 3/(3+5)`,
+    tags:['割合・比','比','比から量を求める'],
+    visualTypes:['ratioBar'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'比が表す意味を理解する',
+        text:`3：5 は「Aが3、Bが5の割合」という意味です。\n合わせると 3＋5＝8 の部分になります。\nつまり全体240個を8等分したとき、Aは3つ分もらえます。`,
+        visual:`<div class="vis-tape-row"><span class="vis-tape-lbl">A</span><div class="vis-tape" style="width:37%;background:#8E24AA">3</div></div><div class="vis-tape-row" style="margin-top:6px"><span class="vis-tape-lbl">B</span><div class="vis-tape" style="width:63%;background:#AB47BC">5</div></div><div style="text-align:center;color:#666;font-size:.85rem;margin-top:4px">合計 8 → 全体 240個</div>` },
+      { title:'1あたりの量を求める',
+        text:`全体 240個 が 8つ分にあたるので\n1つ分 ＝ 240 ÷ 8 ＝ 30個`,
+        visual:`<div class="vis-formula">240 ÷ 8 ＝ 30個（1あたり）</div>` },
+      { title:'Aの量を求める（答え）',
+        text:`Aは3つ分なので\nA ＝ 30 × 3 ＝ 90個`,
+        visual:`<div class="vis-formula">30 × 3 ＝ <b>90個</b></div>` },
+      { title:'答えを確かめる',
+        text:`A：B ＝ 90：150 ＝ 3：5 ✓\n合計：90 ＋ 150 ＝ 240個 ✓`,
+        visual:`<div class="vis-formula">90 ＋ 150 ＝ 240 ✓　　90：150 ＝ 3：5 ✓</div>` },
+    ]
+  },
 ];

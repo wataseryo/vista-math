@@ -1,7 +1,7 @@
 const appState = { grade: 5 };
 const learn = { inflow:3, outflow:1, initial:50, current:50, simRunning:false, simTimer:null, simTime:0, capacity:100 };
 const quiz  = { level:1, correct:0, wrong:0, problem:null, hintVisible:false };
-const chState = { filter:'すべて', currentId:null, hintVisible:false, stepOpen:{} };
+const chState = { filter:'すべて', currentId:null, hintVisible:false, stepOpen:{}, tierMin:1, tierMax:5, fromScreen:'exam' };
 
 /* ════════════════════════════════════════
    NAVIGATION
@@ -358,6 +358,9 @@ function showScreen(id, opts={}) {
         if (opts.unitTitle) document.getElementById('ch-screen-title').textContent = opts.unitTitle;
         else document.getElementById('ch-screen-title').textContent = '難問チャレンジ';
         chState.unitCategories = opts.categories || null;
+        chState.tierMin = opts.tierMin !== undefined ? opts.tierMin : 1;
+        chState.tierMax = opts.tierMax !== undefined ? opts.tierMax : 5;
+        chState.fromScreen = opts.fromScreen || 'exam';
         chState.filter = 'すべて';
         document.getElementById('ch-list-view').style.display = 'block';
         document.getElementById('ch-detail-view').classList.remove('active');
@@ -373,8 +376,7 @@ function showScreen(id, opts={}) {
 }
 
 function goBackFromChallenges() {
-    // challenges から exam-mode 経由で exam へ戻る
-    showScreen('exam');
+    showScreen(chState.fromScreen || 'exam');
 }
 
 /* ════════════════════════════════════════
@@ -469,7 +471,62 @@ function openUnit(unitId) {
     const units = appState.grade === 5 ? EXAM_UNITS_G5 : EXAM_UNITS_G6;
     const unit = units.find(u => u.id === unitId);
     if (!unit || !unit.available) return;
+    if (unit.topicScreen) { showScreen(unit.topicScreen); return; }
     showScreen('challenges', { categories: unit.categories, unitTitle: unit.num + ' ' + unit.title });
+}
+
+function openHardChallenge() {
+    const units = appState.grade === 5 ? EXAM_UNITS_G5 : EXAM_UNITS_G6;
+    const allCats = [...new Set(units.flatMap(u => u.categories || []))];
+    showScreen('challenges', {
+        categories: allCats,
+        unitTitle: '難問チャレンジ ★4〜★5',
+        tierMin: 4, tierMax: 5,
+        fromScreen: 'exam-mode',
+    });
+}
+
+function saltSwitchTab(tab) {
+    document.querySelectorAll('.salt-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.salt-tab-content').forEach(c => c.style.display = 'none');
+    document.getElementById('salt-tab-' + tab + '-btn').classList.add('active');
+    document.getElementById('salt-tab-' + tab).style.display = 'block';
+}
+
+function openSaltPractice() {
+    showScreen('challenges', {
+        categories: ['食塩水'],
+        unitTitle: '食塩水 — 演習問題',
+        tierMin: 2, tierMax: 3,
+        fromScreen: 'salt',
+    });
+}
+
+function openSaltChallenge() {
+    showScreen('challenges', {
+        categories: ['食塩水'],
+        unitTitle: '食塩水 — 難問チャレンジ',
+        tierMin: 4, tierMax: 5,
+        fromScreen: 'salt',
+    });
+}
+
+function checkSaltConfirm() {
+    const raw = document.getElementById('salt-quiz-input').value
+        .replace(/[０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0)).trim();
+    const val = parseFloat(raw);
+    const el = document.getElementById('salt-quiz-result');
+    if (isNaN(val)) return;
+    const ok = Math.abs(val - 20) < 0.01;
+    el.style.display = 'block';
+    if (ok) {
+        el.innerHTML = `<div class="ch-result-box ok"><div class="ch-result-hl">⭕ 正解！</div><div class="ch-result-msg">250 × 0.08 ＝ 20g　よくできました！<br><button class="topic-nav-btn prac" style="margin-top:10px" onclick="openSaltPractice()">演習問題に進む →</button></div></div>`;
+        recordAnswer('g' + appState.grade + '_salt_topic', true);
+        addStar();
+    } else {
+        el.innerHTML = `<div class="ch-result-box ng"><div class="ch-result-hl">❌ もう一度考えよう</div><div class="ch-result-msg">塩の重さ ＝ 食塩水の重さ × 濃度<br>＝ 250 × 0.08 で計算してみよう。</div></div>`;
+        recordAnswer('g' + appState.grade + '_salt_topic', false);
+    }
 }
 
 /* ════════════════════════════════════════
@@ -628,6 +685,7 @@ function renderChallengeList() {
     // unitのcategoriesでまず絞る、なければ学年全体
     let base = CHALLENGES.filter(c => c.grade === appState.grade);
     if (chState.unitCategories) base = base.filter(c => chState.unitCategories.includes(c.category));
+    base = base.filter(c => c.difficulty >= chState.tierMin && c.difficulty <= chState.tierMax);
     // フィルタボタンを動的生成
     const availCats = ['すべて', ...new Set(base.map(c => c.category))];
     if (!availCats.includes(chState.filter)) chState.filter = 'すべて';

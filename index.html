@@ -98,6 +98,16 @@
                     <div class="exam-mode-feat"><span class="exam-mode-feat-icon">🔗</span>トピック学習へすぐアクセス</div>
                 </div>
             </div>
+            <div class="exam-mode-card hard" onclick="openHardChallenge()">
+                <div class="exam-mode-card-icon">🔥</div>
+                <div class="exam-mode-card-title">難問チャレンジ</div>
+                <div class="exam-mode-card-sub">入試典型問題で実力を試す</div>
+                <div class="exam-mode-feats">
+                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">⭐</span>★4〜★5 の入試典型問題</div>
+                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">🧠</span>思考力・応用力を鍛える</div>
+                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">📋</span>ステップ別の丁寧な解説つき</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -356,6 +366,80 @@
                 </div>
                 <button class="next-btn" id="next-btn" onclick="nextQuestion()">次の問題へ →</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- ════════ SALT (食塩水) TOPIC SCREEN ════════ -->
+<div id="salt-screen" class="screen">
+    <div class="screen-header exam-header">
+        <button class="back-btn" onclick="showScreen('exam')">← 単元一覧</button>
+        <span class="screen-title">🧪 食塩水</span>
+    </div>
+    <div class="salt-tab-bar">
+        <button class="salt-tab active" id="salt-tab-learn-btn" onclick="saltSwitchTab('learn')">📖 学ぶ</button>
+        <button class="salt-tab" id="salt-tab-quiz-btn" onclick="saltSwitchTab('quiz')">✏️ 確認問題</button>
+    </div>
+    <!-- LEARN TAB -->
+    <div id="salt-tab-learn" class="salt-tab-content" style="overflow-y:auto;flex:1;padding:16px">
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">食塩水の濃度とは？</div>
+            <div class="topic-concept-text">食塩水は「水」に「塩」を溶かしたものです。<br>「濃度」は、食塩水全体に対して塩が何%あるかを表します。</div>
+            <div class="topic-formula-box">
+                <div class="topic-formula">濃度(%) ＝ 塩の重さ ÷ 食塩水の重さ × 100</div>
+            </div>
+            <div class="vis-beakers" style="justify-content:flex-start;gap:24px">
+                <div>
+                    <div class="vis-beaker" style="width:70px;height:90px">
+                        <div class="vis-beaker-liq" style="height:70%;background:rgba(3,169,244,.15)"></div>
+                        <div style="position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:.65rem;color:#0277BD;font-weight:bold">水</div>
+                    </div>
+                    <div class="vis-beaker-lbl">薄い（低濃度）</div>
+                </div>
+                <div>
+                    <div class="vis-beaker" style="width:70px;height:90px">
+                        <div class="vis-beaker-liq" style="height:70%;background:rgba(3,169,244,.55)"></div>
+                        <div style="position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:.65rem;color:#0277BD;font-weight:bold">塩↑</div>
+                    </div>
+                    <div class="vis-beaker-lbl">濃い（高濃度）</div>
+                </div>
+            </div>
+        </div>
+        <div class="topic-example-card">
+            <div class="topic-section-lbl">📝 基本例題</div>
+            <div class="topic-example-q">20%の食塩水500gに含まれる<br>塩の重さは何gですか？</div>
+            <div class="topic-steps">
+                <div class="topic-step">
+                    <div class="topic-step-num">1</div>
+                    <div class="topic-step-text">「20%」とは食塩水全体の20%が塩ということ。<br>塩の重さ ＝ 食塩水の重さ × 濃度（÷100）</div>
+                </div>
+                <div class="topic-step">
+                    <div class="topic-step-num">2</div>
+                    <div class="topic-step-text">500 × 0.20 ＝ <b>100g</b></div>
+                </div>
+                <div class="topic-step">
+                    <div class="topic-step-num">3</div>
+                    <div class="topic-step-text">確認：100 ÷ 500 × 100 ＝ 20% ✓</div>
+                </div>
+            </div>
+        </div>
+        <div class="topic-nav-card">
+            <div class="topic-nav-label">この単元の問題に挑戦しよう</div>
+            <button class="topic-nav-btn prac" onclick="openSaltPractice()">✏️ 演習問題（★2〜★3）を解く</button>
+            <button class="topic-nav-btn hard" onclick="openSaltChallenge()">🔥 難問チャレンジ（★4〜★5）に挑む</button>
+        </div>
+    </div>
+    <!-- QUIZ TAB -->
+    <div id="salt-tab-quiz" class="salt-tab-content" style="overflow-y:auto;flex:1;padding:16px;display:none">
+        <div class="topic-quiz-card">
+            <div class="topic-section-lbl">✏️ 確認問題（★1）</div>
+            <div class="topic-quiz-q">8%の食塩水250gに含まれる<br>塩の重さは何gですか？</div>
+            <div class="topic-quiz-ans-row">
+                <input type="number" id="salt-quiz-input" class="ch-ans-input" placeholder="答え" style="max-width:120px">
+                <span class="ch-ans-unit">g</span>
+            </div>
+            <button class="ch-submit-btn" onclick="checkSaltConfirm()">解答する</button>
+            <div id="salt-quiz-result" style="display:none;margin-top:12px"></div>
         </div>
     </div>
 </div>

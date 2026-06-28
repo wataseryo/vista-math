@@ -56,7 +56,8 @@ const EXAM_UNITS_G5 = [
 const EXAM_UNITS_G6 = [
     { id: 'u6-calc',    num: '①', icon: '🔢', title: '計算・数の処理',   sub: '逆算・条件付き計算・工夫した計算',            difficulty: 2, categories: ['計算'],                                    count: 0,  available: false },
     { id: 'u6-number',  num: '②', icon: '🔍', title: '数・規則・論理',   sub: '約数・余り・規則性・推理・場合分け',          difficulty: 4, categories: ['数の性質','規則性'],                       count: 0,  available: false },
-    { id: 'u6-ratio',   num: '③', icon: '⚖️', title: '割合・比の完成',   sub: '連比・相当算・売買・濃度・比融合問題',        difficulty: 5, categories: ['割合','比','割合の基本','売買損益','食塩水','相当算','倍数算','仕事算','ニュートン算'],  count: 30, available: true  },
+    { id: 'u6-ratio',   num: '③', icon: '⚖️', title: '割合・比の完成',   sub: '連比・相当算・売買・濃度・比融合問題',        difficulty: 5, categories: ['割合','比','割合の基本','売買損益','相当算','倍数算','仕事算','ニュートン算'],  count: 25, available: true  },
+    { id: 'u6-salt',    num: '③+', icon: '🧪', title: '食塩水',          sub: '濃度計算・混合・蒸発・希釈',                  difficulty: 4, categories: ['食塩水'],                              count: 5,  available: true, topicScreen: 'salt' },
     { id: 'u6-special', num: '④', icon: '📝', title: '文章題の総合化',   sub: '水槽・仕事算・ニュートン算・消去算',          difficulty: 4, categories: ['水槽','ニュートン算','消去算'],           count: 6,  available: true  },
     { id: 'u6-speed',   num: '⑤', icon: '🏃', title: '速さの完成',       sub: '旅人算・流水算・通過算・ダイヤグラム・速さと比', difficulty: 4, categories: ['速さ','流水算','通過算'],             count: 6,  available: true  },
     { id: 'u6-plane',   num: '⑥', icon: '📐', title: '平面図形の完成',   sub: '面積比・相似・円・移動・図形融合',            difficulty: 5, categories: ['平面図形'],                            count: 0,  available: false },

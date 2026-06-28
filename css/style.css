@@ -508,6 +508,32 @@
         .exam-mode-card.topic .exam-mode-feat { color: #555; }
         .exam-mode-card.prac  .exam-mode-feat { color: rgba(255,255,255,.9); }
         .exam-mode-feat-icon { font-size: .9rem; }
+        /* 難問チャレンジカード */
+        .exam-mode-card.hard { background: linear-gradient(135deg, #1A237E, #311B92); border-top: 5px solid #7C4DFF; }
+        .exam-mode-card.hard .exam-mode-card-title { color: #fff; }
+        .exam-mode-card.hard .exam-mode-card-sub   { color: rgba(255,255,255,.85); }
+        .exam-mode-card.hard .exam-mode-feat       { color: rgba(255,255,255,.9); }
+        /* トピック学習 共通スタイル */
+        .salt-tab-bar { display:flex; border-bottom:1px solid #e0e0e0; background:#fff; flex-shrink:0; }
+        .salt-tab { flex:1; padding:12px 0; border:none; background:none; font-size:.88rem; font-family:inherit; cursor:pointer; color:#888; border-bottom:3px solid transparent; transition:all .2s; }
+        .salt-tab.active { color:#0277BD; border-bottom-color:#0277BD; font-weight:bold; }
+        .topic-concept-card,.topic-example-card,.topic-nav-card,.topic-quiz-card { background:#fff; border-radius:14px; padding:18px; box-shadow:0 2px 10px rgba(0,0,0,.07); margin-bottom:16px; }
+        .topic-concept-title { font-size:1rem; font-weight:bold; color:#0277BD; margin-bottom:8px; }
+        .topic-concept-text  { font-size:.85rem; color:#555; line-height:1.7; margin-bottom:14px; }
+        .topic-formula-box   { background:#E1F5FE; border-radius:10px; padding:12px; margin-bottom:14px; text-align:center; }
+        .topic-formula       { font-size:.95rem; font-weight:bold; color:#0277BD; }
+        .topic-section-lbl   { font-size:.75rem; font-weight:bold; color:#888; letter-spacing:.05em; margin-bottom:10px; }
+        .topic-example-q,.topic-quiz-q { font-size:.95rem; color:#1a1a2e; line-height:1.7; margin-bottom:14px; font-weight:500; }
+        .topic-steps         { display:flex; flex-direction:column; gap:10px; margin-bottom:0; }
+        .topic-step          { display:flex; align-items:flex-start; gap:10px; }
+        .topic-step-num      { width:24px; height:24px; border-radius:50%; background:#0277BD; color:#fff; font-size:.78rem; font-weight:bold; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+        .topic-step-text     { font-size:.88rem; color:#333; line-height:1.65; }
+        .topic-nav-label     { font-size:.82rem; color:#888; margin-bottom:12px; }
+        .topic-nav-btn       { width:100%; padding:13px; border:none; border-radius:12px; font-size:.9rem; font-weight:bold; cursor:pointer; font-family:inherit; margin-bottom:10px; transition:all .18s; }
+        .topic-nav-btn.prac  { background:linear-gradient(135deg,#FF9A56,#E64A19); color:#fff; }
+        .topic-nav-btn.hard  { background:linear-gradient(135deg,#7C4DFF,#311B92); color:#fff; }
+        .topic-nav-btn:hover { opacity:.9; transform:translateY(-2px); }
+        .topic-quiz-ans-row  { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
 
         /* ══ PRACTICE SCREEN ══ */
         #practice-screen { background: #FFF8F5; }

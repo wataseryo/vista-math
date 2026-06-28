@@ -837,6 +837,36 @@
             flex-shrink: 0;
         }
 
+        /* ══ TARGET ══ */
+        .target-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 48px;
+        }
+        .target-card {
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 28px 24px;
+            border-top: 4px solid var(--blue);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .target-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        .target-icon { font-size: 2.2rem; margin-bottom: 14px; }
+        .target-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .target-desc {
+            font-size: .87rem;
+            color: var(--text-sub);
+            line-height: 1.75;
+        }
+
         /* ══ FAQ ══ */
         .faq-section { background: var(--surface); }
         .faq-list {
@@ -1325,6 +1355,37 @@
                     <li>★4〜★5 の難問チャレンジ</li>
                     <li>単元別・総合の2モード演習</li>
                 </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TARGET -->
+<section id="target">
+    <div class="container">
+        <div class="section-label reveal">For Whom</div>
+        <div class="section-title reveal">こんな方におすすめ</div>
+        <div class="section-sub reveal">VISTAは「算数が見えていない」すべての小学生のために作られています。</div>
+        <div class="target-grid">
+            <div class="target-card reveal reveal-delay-1">
+                <div class="target-icon">👦</div>
+                <div class="target-title">算数が苦手な小5・6年生</div>
+                <div class="target-desc">教科書を読んでもピンとこない、図を書いても意味がわからない——そんな子が「なるほど！」と気づける学習体験を用意しています。</div>
+            </div>
+            <div class="target-card reveal reveal-delay-2">
+                <div class="target-icon">📚</div>
+                <div class="target-title">中学受験を目指している子</div>
+                <div class="target-desc">速さ・割合・場合の数など頻出9分野を完全網羅。難問チャレンジで思考力を鍛え、入試で初見問題に対応できる力をつけます。</div>
+            </div>
+            <div class="target-card reveal reveal-delay-3">
+                <div class="target-icon">👨‍👩‍👧</div>
+                <div class="target-title">子どもの算数を一緒に見たい親御さん</div>
+                <div class="target-desc">インストール不要でブラウザで開くだけ。スマホやタブレットでいつでも子どもと一緒に取り組めます。難しい単元も図で見ればすぐ理解できます。</div>
+            </div>
+            <div class="target-card reveal reveal-delay-1">
+                <div class="target-icon">🏫</div>
+                <div class="target-title">塾の補強ツールを探している方</div>
+                <div class="target-desc">授業で理解しきれなかった単元を家で復習するための補強ツールとして。塾の代替ではなく、理解の「穴」を埋める副教材として活用できます。</div>
             </div>
         </div>
     </div>

@@ -315,7 +315,9 @@
         .score-chip.ok .score-num { color: #34D399; }
         .score-chip.ng .score-num { color: #F87171; }
         .score-chip-label { font-size: .68rem; color: var(--text-muted); letter-spacing: .04em; }
-        .level-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+        .quiz-top-bar { display: flex; align-items: flex-start; margin-bottom: 14px; }
+        .quiz-top-bar .level-row { flex: 1; margin-bottom: 0; }
+        .level-row { display: flex; gap: 8px; flex-wrap: wrap; }
         .level-btn { padding: 6px 16px; border: 2px solid #ddd; border-radius: 20px; background: #fff; cursor: pointer; font-size: .8rem; font-family: inherit; transition: all .18s; }
         .level-btn.active { background: var(--std-primary); color: #fff; border-color: var(--std-primary); }
         .problem-card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 4px 16px rgba(0,0,0,.1); }
@@ -800,8 +802,8 @@
         .prac-prob-counter { font-size: .78rem; color: #bbb; font-weight: bold; letter-spacing: .04em; }
         .prac-next-btn { background: linear-gradient(135deg, #FF9A56, #E64A19); color: #fff; border: none; border-radius: 10px; padding: 7px 14px; font-family: inherit; font-weight: bold; cursor: pointer; font-size: .82rem; transition: opacity .15s, transform .15s; margin-left: auto; white-space: nowrap; flex-shrink: 0; }
         .prac-next-btn:hover { opacity: .88; transform: translateY(-1px); }
-        .ch-next-prob-btn { background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3); color: #fff; padding: 6px 13px; border-radius: 8px; cursor: pointer; font-size: .82rem; font-family: inherit; transition: background .15s; white-space: nowrap; flex-shrink: 0; }
-        .ch-next-prob-btn:hover { background: rgba(255,255,255,.28); }
+        .ch-next-prob-btn { background: linear-gradient(135deg, #FF9A56, #E64A19); color: #fff; border: none; border-radius: 10px; padding: 7px 14px; font-family: inherit; font-weight: bold; cursor: pointer; font-size: .82rem; transition: opacity .15s, transform .15s; margin-left: auto; white-space: nowrap; flex-shrink: 0; }
+        .ch-next-prob-btn:hover { opacity: .88; transform: translateY(-1px); }
 
         /* ── Wrong Answer color ── */
         .wrong-encourage { font-size: .84rem; color: var(--exam-primary); font-weight: bold; margin-top: 6px; }

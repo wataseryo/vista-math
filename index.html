@@ -328,10 +328,13 @@
                 <div class="score-chip ok"><div class="score-num" id="score-ok">0</div><div class="score-chip-label">正解</div></div>
                 <div class="score-chip ng"><div class="score-num" id="score-ng">0</div><div class="score-chip-label">まちがい</div></div>
             </div>
-            <div class="level-row">
-                <button class="level-btn active" onclick="setLevel(1)">レベル1<br><span style="font-size:.65rem;font-weight:normal">差し引きを求める</span></button>
-                <button class="level-btn" onclick="setLevel(2)">レベル2<br><span style="font-size:.65rem;font-weight:normal">○分後の水量</span></button>
-                <button class="level-btn" onclick="setLevel(3)">レベル3<br><span style="font-size:.65rem;font-weight:normal">満水・空になる時間</span></button>
+            <div class="quiz-top-bar">
+                <div class="level-row">
+                    <button class="level-btn active" onclick="setLevel(1)">レベル1<br><span style="font-size:.65rem;font-weight:normal">差し引きを求める</span></button>
+                    <button class="level-btn" onclick="setLevel(2)">レベル2<br><span style="font-size:.65rem;font-weight:normal">○分後の水量</span></button>
+                    <button class="level-btn" onclick="setLevel(3)">レベル3<br><span style="font-size:.65rem;font-weight:normal">満水・空になる時間</span></button>
+                </div>
+                <button class="prac-next-btn" onclick="nextQuestion()" style="margin-left:8px;align-self:center">次の問題 →</button>
             </div>
             <div class="problem-card">
                 <div class="problem-badge" id="prob-badge">レベル1</div>

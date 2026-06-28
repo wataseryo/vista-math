@@ -1,7 +1,18 @@
 const appState = { grade: 5 };
 const learn = { inflow:3, outflow:1, initial:50, current:50, simRunning:false, simTimer:null, simTime:0, capacity:100 };
 const quiz  = { level:1, correct:0, wrong:0, problem:null, hintVisible:false };
-const chState = { filter:'すべて', currentId:null, hintVisible:false, stepOpen:{}, tierMin:1, tierMax:5, fromScreen:'exam' };
+const chState = { filter:'すべて', currentId:null, hintVisible:false, stepOpen:{}, tierMin:1, tierMax:5, fromScreen:'exam', mainCategory:null };
+
+const HC_CATEGORIES = [
+    { id: 'ratio',               icon: '⚖️', title: '割合・比' },
+    { id: 'speed',               icon: '🏃', title: '速さ' },
+    { id: 'word_problems',       icon: '📝', title: '特殊算・文章題' },
+    { id: 'solid_geometry',      icon: '📦', title: '立体図形・水量' },
+    { id: 'plane_geometry',      icon: '📐', title: '平面図形' },
+    { id: 'number_properties',   icon: '🔍', title: '数の性質・規則性' },
+    { id: 'combinatorics_logic', icon: '🎯', title: '場合の数・論理' },
+    { id: 'calculation',         icon: '🔢', title: '計算・数の処理' },
+];
 
 /* ════════════════════════════════════════
    NAVIGATION
@@ -354,10 +365,12 @@ function showScreen(id, opts={}) {
     if (id === 'exam-mode')     renderExamMode();
     if (id === 'practice')      renderPractice();
     if (id === 'watertank')  { updateLearn(); generateProblem(); }
+    if (id === 'hard-challenge') { hcSwitchMode('all'); renderHardChallenge(); }
     if (id === 'challenges') {
         if (opts.unitTitle) document.getElementById('ch-screen-title').textContent = opts.unitTitle;
         else document.getElementById('ch-screen-title').textContent = '難問チャレンジ';
         chState.unitCategories = opts.categories || null;
+        chState.mainCategory   = opts.mainCategory || null;
         chState.tierMin = opts.tierMin !== undefined ? opts.tierMin : 1;
         chState.tierMax = opts.tierMax !== undefined ? opts.tierMax : 5;
         chState.fromScreen = opts.fromScreen || 'exam';
@@ -476,13 +489,51 @@ function openUnit(unitId) {
 }
 
 function openHardChallenge() {
-    const units = appState.grade === 5 ? EXAM_UNITS_G5 : EXAM_UNITS_G6;
-    const allCats = [...new Set(units.flatMap(u => u.categories || []))];
+    showScreen('hard-challenge');
+}
+
+function renderHardChallenge() {
+    const grade = appState.grade;
+    const hard = CHALLENGES.filter(c => c.grade === grade && c.difficulty >= 4 && c.difficulty <= 5);
+    const countEl = document.getElementById('hc-all-count');
+    if (countEl) countEl.textContent = hard.length + '問';
+    const grid = document.getElementById('hc-cat-grid');
+    if (grid) {
+        grid.innerHTML = HC_CATEGORIES.map(cat => {
+            const count = hard.filter(c => c.mainCategory === cat.id).length;
+            const avail = count > 0;
+            return `<div class="hc-cat-card ${avail ? 'avail' : 'empty'}" ${avail ? `onclick="hcOpenCat('${cat.id}','${cat.title}')"` : ''}>
+                <div class="hc-cat-icon">${cat.icon}</div>
+                <div class="hc-cat-title">${cat.title}</div>
+                ${avail
+                    ? `<div class="hc-cat-count">${count}問</div>`
+                    : `<div class="hc-cat-coming">準備中</div>`}
+            </div>`;
+        }).join('');
+    }
+}
+
+function hcSwitchMode(mode) {
+    document.querySelectorAll('.hc-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('hc-tab-' + mode + '-btn').classList.add('active');
+    document.getElementById('hc-mode-all').style.display = mode === 'all' ? 'block' : 'none';
+    document.getElementById('hc-mode-cat').style.display = mode === 'cat' ? 'block' : 'none';
+}
+
+function hcStartAll() {
     showScreen('challenges', {
-        categories: allCats,
-        unitTitle: '難問チャレンジ ★4〜★5',
+        unitTitle: '総合チャレンジ ★4〜★5',
         tierMin: 4, tierMax: 5,
-        fromScreen: 'exam-mode',
+        fromScreen: 'hard-challenge',
+    });
+}
+
+function hcOpenCat(mainCatId, title) {
+    showScreen('challenges', {
+        mainCategory: mainCatId,
+        unitTitle: title + ' 難問チャレンジ',
+        tierMin: 4, tierMax: 5,
+        fromScreen: 'hard-challenge',
     });
 }
 
@@ -682,9 +733,13 @@ function toggleHint() {
    CHALLENGES
 ════════════════════════════════════════ */
 function renderChallengeList() {
-    // unitのcategoriesでまず絞る、なければ学年全体
     let base = CHALLENGES.filter(c => c.grade === appState.grade);
-    if (chState.unitCategories) base = base.filter(c => chState.unitCategories.includes(c.category));
+    // mainCategory（大分類）フィルター優先、次に unitCategories（細分類）
+    if (chState.mainCategory) {
+        base = base.filter(c => c.mainCategory === chState.mainCategory);
+    } else if (chState.unitCategories) {
+        base = base.filter(c => chState.unitCategories.includes(c.category));
+    }
     base = base.filter(c => c.difficulty >= chState.tierMin && c.difficulty <= chState.tierMax);
     // フィルタボタンを動的生成
     const availCats = ['すべて', ...new Set(base.map(c => c.category))];

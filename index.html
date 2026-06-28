@@ -444,6 +444,40 @@
     </div>
 </div>
 
+<!-- ════════ HARD CHALLENGE SCREEN ════════ -->
+<div id="hard-challenge-screen" class="screen">
+    <div class="screen-header hard-header">
+        <button class="back-btn" onclick="showScreen('exam-mode')">← もどる</button>
+        <span class="screen-title">🔥 難問チャレンジ</span>
+    </div>
+    <div class="hc-tab-bar">
+        <button class="hc-tab active" id="hc-tab-all-btn" onclick="hcSwitchMode('all')">🌐 総合チャレンジ</button>
+        <button class="hc-tab" id="hc-tab-cat-btn" onclick="hcSwitchMode('cat')">📂 単元別チャレンジ</button>
+    </div>
+    <div style="flex:1;overflow-y:auto">
+        <!-- 総合チャレンジ -->
+        <div id="hc-mode-all" class="hc-mode-content">
+            <div class="hc-intro-card">
+                <div class="hc-intro-icon">🔥</div>
+                <div class="hc-intro-title">入試本番の力試し</div>
+                <div class="hc-intro-sub">すべての分野の ★4〜★5 問題を<br>まとめて挑戦する総合チャレンジです</div>
+                <div class="hc-intro-count" id="hc-all-count">? 問</div>
+                <button class="hc-start-btn" onclick="hcStartAll()">総合チャレンジを始める →</button>
+            </div>
+            <div class="hc-tips">
+                <div class="hc-tip">💡 すべての分野をまたいで出題されます</div>
+                <div class="hc-tip">📋 全問にステップ別解説つき</div>
+                <div class="hc-tip">📊 正答率を記録して実力を把握</div>
+            </div>
+        </div>
+        <!-- 単元別チャレンジ -->
+        <div id="hc-mode-cat" class="hc-mode-content" style="display:none">
+            <div class="hc-cat-intro">分野を選んで集中特訓しよう</div>
+            <div class="hc-cat-grid" id="hc-cat-grid"><!-- JS が生成 --></div>
+        </div>
+    </div>
+</div>
+
 <!-- ════════ CHALLENGES SCREEN ════════ -->
 <div id="challenges-screen" class="screen">
     <div class="screen-header" id="ch-screen-header">

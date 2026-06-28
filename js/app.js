@@ -151,9 +151,9 @@ function stdPracOpenProb(probId) {
 function stdPracNextProblem() {
     const g = appState.grade;
     const probs = PRACTICE_PROBLEMS.filter(p => p.chapterId === stdPracState.currentCatId && p.grade === g && p.course === 'std');
-    if (probs.length <= 1) return;
     const idx = probs.findIndex(p => p.id === stdPracState.currentProbId);
-    stdPracOpenProb(probs[(idx + 1) % probs.length].id);
+    if (idx + 1 < probs.length) stdPracOpenProb(probs[idx + 1].id);
+    else stdPracShowCats();
 }
 
 function stdPracCheckAnswer() {
@@ -317,9 +317,9 @@ function pracOpenProb(probId) {
 
 function pracNextProblem() {
     const probs = PRACTICE_PROBLEMS.filter(p => p.catId === pracState.currentCatId && p.grade === appState.grade);
-    if (probs.length <= 1) return;
     const idx = probs.findIndex(p => p.id === pracState.currentProbId);
-    pracOpenProb(probs[(idx + 1) % probs.length].id);
+    if (idx + 1 < probs.length) pracOpenProb(probs[idx + 1].id);
+    else pracShowCats();
 }
 
 function pracCheckAnswer() {
@@ -770,9 +770,9 @@ function getCurrentChallengesFiltered() {
 
 function chNextProblem() {
     const list = getCurrentChallengesFiltered();
-    if (list.length <= 1) return;
     const idx = list.findIndex(c => c.id === chState.currentId);
-    openChallenge(list[(idx + 1) % list.length].id);
+    if (idx + 1 < list.length) openChallenge(list[idx + 1].id);
+    else closeChallenge();
 }
 
 function renderChallengeList() {

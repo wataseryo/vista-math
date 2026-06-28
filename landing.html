@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISTA — 算数を、見える化する。</title>
+    <meta name="description" content="小学5・6年生向けの算数ビジュアル学習アプリ。図・グラフ・アニメーションで算数の「なぜ」がわかる。標準コース・受験コース対応。">
+    <style>
+        :root {
+            --navy: #0F172A;
+            --blue-dark: #1E3A8A;
+            --blue: #2563EB;
+            --blue-light: #EFF6FF;
+            --gold: #C9A84C;
+            --gold-light: #FEF3C7;
+            --text: #0F172A;
+            --text-sub: #475569;
+            --text-muted: #94A3B8;
+            --surface: #F8FAFC;
+            --white: #FFFFFF;
+            --border: #E2E8F0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, sans-serif;
+            color: var(--text);
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        /* ══ NAV ══ */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+            padding: 0 24px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+        }
+        .nav-cta {
+            background: var(--blue);
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: .85rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background .15s;
+        }
+        .nav-cta:hover { background: #1D4ED8; }
+
+        /* ══ HERO ══ */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(160deg, #0F172A 0%, #1E3A8A 60%, #1E40AF 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 24px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(37,99,235,.25) 0%, transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(201,168,76,.15);
+            border: 1px solid rgba(201,168,76,.4);
+            color: var(--gold);
+            font-size: .75rem;
+            font-weight: bold;
+            letter-spacing: .1em;
+            padding: 5px 14px;
+            border-radius: 100px;
+            margin-bottom: 28px;
+        }
+        .hero-title {
+            color: #fff;
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-weight: 900;
+            letter-spacing: .15em;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 24px rgba(0,0,0,.4);
+        }
+        .hero-tagline {
+            color: rgba(255,255,255,.75);
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            letter-spacing: .08em;
+            margin-bottom: 48px;
+        }
+        .hero-cta-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        .btn-primary {
+            display: inline-block;
+            background: var(--blue);
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: bold;
+            padding: 16px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37,99,235,.45);
+            transition: transform .12s, box-shadow .12s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(37,99,235,.55);
+        }
+        .hero-note {
+            color: rgba(255,255,255,.45);
+            font-size: .78rem;
+        }
+        .hero-scroll {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,.3);
+            font-size: .75rem;
+            letter-spacing: .1em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .scroll-arrow {
+            width: 1px;
+            height: 36px;
+            background: linear-gradient(to bottom, rgba(255,255,255,.3), transparent);
+        }
+
+        /* ══ SECTION ══ */
+        section { padding: 96px 24px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .section-label {
+            font-size: .72rem;
+            font-weight: bold;
+            letter-spacing: .15em;
+            color: var(--blue);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .section-title {
+            font-size: clamp(1.6rem, 5vw, 2.4rem);
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 16px;
+        }
+        .section-sub {
+            font-size: 1rem;
+            color: var(--text-sub);
+            max-width: 560px;
+            line-height: 1.75;
+        }
+
+        /* ══ PROBLEM ══ */
+        .problem-section {
+            background: var(--surface);
+        }
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 48px;
+        }
+        .problem-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 24px;
+        }
+        .problem-icon { font-size: 2rem; margin-bottom: 14px; }
+        .problem-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .problem-desc {
+            font-size: .88rem;
+            color: var(--text-sub);
+            line-height: 1.65;
+        }
+
+        /* ══ FEATURE ══ */
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+            margin-top: 56px;
+        }
+        .feature-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .feature-item.reverse { direction: rtl; }
+        .feature-item.reverse > * { direction: ltr; }
+        .feature-label {
+            font-size: .72rem;
+            font-weight: bold;
+            letter-spacing: .1em;
+            color: var(--blue);
+            margin-bottom: 10px;
+        }
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .feature-desc {
+            font-size: .92rem;
+            color: var(--text-sub);
+            line-height: 1.75;
+        }
+        .feature-visual {
+            background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+            border-radius: 20px;
+            padding: 36px 28px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .visual-demo {
+            text-align: center;
+            width: 100%;
+        }
+        .visual-demo-title {
+            font-size: .78rem;
+            color: var(--blue);
+            font-weight: bold;
+            letter-spacing: .08em;
+            margin-bottom: 20px;
+        }
+        .tank-mini {
+            display: inline-block;
+            width: 60px;
+            height: 90px;
+            border: 3px solid #2563EB;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+            margin: 0 auto 12px;
+        }
+        .tank-water {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 55%;
+            background: linear-gradient(to top, #2563EB, #60A5FA);
+            border-radius: 0 0 2px 2px;
+        }
+        .mini-stats {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .mini-stat {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        .mini-stat-num {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--blue);
+        }
+        .mini-stat-label {
+            font-size: .65rem;
+            color: var(--text-muted);
+        }
+        .step-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+        .step-row {
+            background: white;
+            border-radius: 10px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 1px 4px rgba(0,0,0,.08);
+        }
+        .step-num {
+            width: 28px; height: 28px;
+            background: var(--blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .78rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .step-text { font-size: .82rem; color: var(--text); }
+
+        /* ══ COURSE ══ */
+        .course-section {
+            background: var(--navy);
+            color: #fff;
+        }
+        .course-section .section-label { color: var(--gold); }
+        .course-section .section-sub { color: rgba(255,255,255,.65); }
+        .course-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 48px;
+        }
+        .course-card-lp {
+            border-radius: 20px;
+            padding: 36px 28px;
+        }
+        .course-card-lp.std {
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.12);
+        }
+        .course-card-lp.exam {
+            background: linear-gradient(135deg, #1E3A8A, #2563EB);
+            border: 1px solid rgba(201,168,76,.3);
+            border-top: 3px solid var(--gold);
+        }
+        .course-tag {
+            font-size: .7rem;
+            font-weight: bold;
+            letter-spacing: .1em;
+            margin-bottom: 12px;
+        }
+        .course-card-lp.std .course-tag { color: rgba(255,255,255,.5); }
+        .course-card-lp.exam .course-tag { color: var(--gold); }
+        .course-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .course-desc {
+            font-size: .88rem;
+            color: rgba(255,255,255,.7);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        .course-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .course-list li {
+            font-size: .85rem;
+            color: rgba(255,255,255,.85);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .course-list li::before {
+            content: '✓';
+            color: var(--gold);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* ══ TARGET ══ */
+        .target-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 48px;
+        }
+        .target-card {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 24px;
+            border-top: 4px solid var(--blue);
+        }
+        .target-person { font-size: 2.2rem; margin-bottom: 12px; }
+        .target-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .target-desc {
+            font-size: .88rem;
+            color: var(--text-sub);
+            line-height: 1.7;
+        }
+
+        /* ══ CTA FINAL ══ */
+        .cta-section {
+            background: linear-gradient(160deg, #0F172A 0%, #1E3A8A 100%);
+            text-align: center;
+            padding: 96px 24px;
+        }
+        .cta-section .section-title { color: #fff; }
+        .cta-section .section-sub {
+            color: rgba(255,255,255,.65);
+            margin: 0 auto 40px;
+        }
+
+        /* ══ FOOTER ══ */
+        footer {
+            background: var(--navy);
+            color: rgba(255,255,255,.35);
+            text-align: center;
+            padding: 32px 24px;
+            font-size: .78rem;
+        }
+
+        /* ══ RESPONSIVE ══ */
+        @media (max-width: 640px) {
+            .feature-item {
+                grid-template-columns: 1fr;
+            }
+            .feature-item.reverse { direction: ltr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-logo">VISTA</div>
+    <a href="index.html" class="nav-cta">アプリを開く →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-badge">小学5・6年生向け 算数学習アプリ</div>
+    <div class="hero-title">VISTA</div>
+    <div class="hero-tagline">算数を、見える化する。</div>
+    <div class="hero-cta-group">
+        <a href="index.html" class="btn-primary">今すぐ無料で使ってみる →</a>
+        <div class="hero-note">インストール不要 · ブラウザで今すぐ起動</div>
+    </div>
+    <div class="hero-scroll">
+        <div class="scroll-arrow"></div>
+        SCROLL
+    </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem-section">
+    <div class="container">
+        <div class="section-label">Why VISTA</div>
+        <div class="section-title">算数でつまずく理由は、<br>「見えていない」から。</div>
+        <div class="section-sub">
+            割合、速さ、場合の数——これらはテキストや数式だけでは本質がつかみにくい単元です。
+            VISTAは「動く図」「インタラクティブな操作」で、算数の構造を目で見て理解できるようにします。
+        </div>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-icon">📖</div>
+                <div class="problem-title">教科書では理解しにくい</div>
+                <div class="problem-desc">静止した図と文章だけでは、数量の変化や関係性がイメージしにくい。</div>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">🎮</div>
+                <div class="problem-title">ゲームでは学力がつかない</div>
+                <div class="problem-desc">楽しさ優先の反復ドリルは飽きやすく、理解より暗記になりがち。</div>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">💡</div>
+                <div class="problem-title">VISTAは「わかった」を作る</div>
+                <div class="problem-desc">動くグラフ・インタラクティブ操作で、解き方の「なぜ」まで理解できる。</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section>
+    <div class="container">
+        <div class="section-label">Features</div>
+        <div class="section-title">VISTAの3つの強み</div>
+        <div class="feature-list">
+
+            <div class="feature-item">
+                <div class="feature-text">
+                    <div class="feature-label">Visual Learning</div>
+                    <div class="feature-title">動く図で算数の<br>「なぜ」がわかる</div>
+                    <div class="feature-desc">
+                        水量の変化、速さと距離の関係——スライダーを操作しながらリアルタイムで数値が変わる体験型の学習です。「読む」のではなく「触って理解する」ことで、記憶に残る学びになります。
+                    </div>
+                </div>
+                <div class="feature-visual">
+                    <div class="visual-demo">
+                        <div class="visual-demo-title">🚰 水の量の問題 — インタラクティブ</div>
+                        <div class="tank-mini">
+                            <div class="tank-water"></div>
+                        </div>
+                        <div class="mini-stats">
+                            <div class="mini-stat">
+                                <div class="mini-stat-num">3L</div>
+                                <div class="mini-stat-label">流入/分</div>
+                            </div>
+                            <div class="mini-stat">
+                                <div class="mini-stat-num">1L</div>
+                                <div class="mini-stat-label">流出/分</div>
+                            </div>
+                            <div class="mini-stat">
+                                <div class="mini-stat-num">+2L</div>
+                                <div class="mini-stat-label">増加/分</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-item reverse">
+                <div class="feature-text">
+                    <div class="feature-label">Step by Step</div>
+                    <div class="feature-title">ステップ別解説で<br>解き方の型が身につく</div>
+                    <div class="feature-desc">
+                        「まず何を求めるか」「なぜこの式になるか」を段階的に解説します。答えだけでなく思考のプロセスを学ぶことで、初見問題にも対応できる力がつきます。
+                    </div>
+                </div>
+                <div class="feature-visual">
+                    <div class="step-visual">
+                        <div class="step-row">
+                            <div class="step-num">1</div>
+                            <div class="step-text">全体の量と割合の関係を確認する</div>
+                        </div>
+                        <div class="step-row">
+                            <div class="step-num">2</div>
+                            <div class="step-text">図に書き起こして関係を整理する</div>
+                        </div>
+                        <div class="step-row">
+                            <div class="step-num">3</div>
+                            <div class="step-text">式を立てて計算する</div>
+                        </div>
+                        <div class="step-row">
+                            <div class="step-num">4</div>
+                            <div class="step-text">答えの単位・桁を確認する</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-text">
+                    <div class="feature-label">Dual Course</div>
+                    <div class="feature-title">標準・受験の2コースで<br>どの子にも対応</div>
+                    <div class="feature-desc">
+                        学校の授業を定着させたい子には「標準コース」、中学受験を目指す子には「受験コース」。9分野・難問チャレンジまで、レベルに合わせた学習ができます。
+                    </div>
+                </div>
+                <div class="feature-visual" style="background: linear-gradient(135deg, #FEF3C7, #FDE68A);">
+                    <div class="visual-demo">
+                        <div class="visual-demo-title" style="color:#92400E">受験コース — 9分野</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+                            <span style="background:#fff;border-radius:8px;padding:5px 10px;font-size:.75rem;color:#1E3A8A;font-weight:bold;">割合</span>
+                            <span style="background:#fff;border-radius:8px;padding:5px 10px;font-size:.75rem;color:#1E3A8A;font-weight:bold;">速さ</span>
+                            <span style="background:#fff;border-radius:8px;padding:5px 10px;font-size:.75rem;color:#1E3A8A;font-weight:bold;">場合の数</span>
+                            <span style="background:#fff;border-radius:8px;padding:5px 10px;font-size:.75rem;color:#1E3A8A;font-weight:bold;">図形</span>
+                            <span style="background:#fff;border-radius:8px;padding:5px 10px;font-size:.75rem;color:#1E3A8A;font-weight:bold;">比</span>
+                            <span style="background:#fff;border-radius:8px;padding:5px 10px;font-size:.75rem;color:#1E3A8A;font-weight:bold;">つるかめ算</span>
+                            <span style="background:#fff;border-radius:8px;padding:5px 10px;font-size:.75rem;color:#1E3A8A;font-weight:bold;">仕事算</span>
+                            <span style="background:#fff;border-radius:8px;padding:5px 10px;font-size:.75rem;color:#1E3A8A;font-weight:bold;">旅人算</span>
+                            <span style="background:#1E3A8A;border-radius:8px;padding:5px 10px;font-size:.75rem;color:#fff;font-weight:bold;">＋難問 ★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- COURSE -->
+<section class="course-section">
+    <div class="container">
+        <div class="section-label">Courses</div>
+        <div class="section-title" style="color:#fff;">2つのコースで<br>あなたのレベルに合わせて学ぶ</div>
+        <div class="section-sub">学校の授業の定着から中学受験対策まで。どちらも「ビジュアルで理解する」体験は共通です。</div>
+        <div class="course-cards">
+            <div class="course-card-lp std">
+                <div class="course-tag">STANDARD COURSE</div>
+                <div class="course-name">標準コース</div>
+                <div class="course-desc">学校の授業をしっかり定着させたい小5・6年生向け。基礎から順番に、ビジュアルで理解を積み上げます。</div>
+                <ul class="course-list">
+                    <li>単元別に整理されたトピック学習</li>
+                    <li>インタラクティブな操作で体感する</li>
+                    <li>演習問題で定着を確認</li>
+                    <li>小学5・6年生対応</li>
+                </ul>
+            </div>
+            <div class="course-card-lp exam">
+                <div class="course-tag">EXAM COURSE</div>
+                <div class="course-name">受験コース</div>
+                <div class="course-desc">中学受験を目指す子向け。9分野の頻出単元をステップ解説で完全攻略。難問チャレンジで思考力を鍛えます。</div>
+                <ul class="course-list">
+                    <li>9分野の頻出単元を網羅</li>
+                    <li>ステップ別の丁寧な解説</li>
+                    <li>★4〜★5 の難問チャレンジ</li>
+                    <li>入試形式の演習問題</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TARGET -->
+<section>
+    <div class="container">
+        <div class="section-label">For Whom</div>
+        <div class="section-title">こんな方におすすめ</div>
+        <div class="target-grid">
+            <div class="target-card">
+                <div class="target-person">👦</div>
+                <div class="target-title">算数が苦手な小5・6年生</div>
+                <div class="target-desc">教科書を読んでもピンとこない単元を、動く図とステップ解説で「なるほど」に変えます。</div>
+            </div>
+            <div class="target-card">
+                <div class="target-person">📚</div>
+                <div class="target-title">中学受験を目指す子</div>
+                <div class="target-desc">速さ・割合・場合の数など頻出単元を9分野に整理。難問チャレンジで入試レベルまで引き上げます。</div>
+            </div>
+            <div class="target-card">
+                <div class="target-person">🏫</div>
+                <div class="target-title">塾の補強ツールとして</div>
+                <div class="target-desc">授業で理解しきれなかった単元を家で復習する補強ツールとして。塾の代替ではなく、補強に。</div>
+            </div>
+            <div class="target-card">
+                <div class="target-person">👨‍👩‍👧</div>
+                <div class="target-title">親が子どもと一緒に</div>
+                <div class="target-desc">インストール不要でブラウザで開くだけ。スマホやタブレットでいつでも取り組めます。</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA FINAL -->
+<div class="cta-section">
+    <div class="container">
+        <div class="section-title">算数を、見える化しよう。</div>
+        <div class="section-sub">インストール不要。ブラウザで今すぐ使えます。</div>
+        <a href="index.html" class="btn-primary">VISTAを無料で始める →</a>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 VISTA — 算数を、見える化する。</p>
+</footer>
+
+</body>
+</html>

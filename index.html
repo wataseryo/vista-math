@@ -44,7 +44,6 @@
     <div class="home-sub" id="home-grade-display">コースを選択</div>
     <div class="course-cards">
         <div class="course-card std" onclick="showScreen('std-mode')">
-            <span class="cc-icon">📘</span>
             <div class="cc-body">
                 <div class="cc-label">Standard Course</div>
                 <div class="cc-title">標準コース</div>
@@ -54,7 +53,6 @@
             <span class="cc-arrow">›</span>
         </div>
         <div class="course-card exam" onclick="showScreen('exam-mode')">
-            <span class="cc-icon">🔥</span>
             <div class="cc-body">
                 <div class="cc-label">Exam Course</div>
                 <div class="cc-title">受験コース</div>
@@ -71,7 +69,7 @@
 <div id="exam-mode-screen" class="screen">
     <div class="screen-header exam-header">
         <button class="back-btn" onclick="showScreen('home')">← コース選択</button>
-        <span class="screen-title">🔥 受験コース</span>
+        <span class="screen-title">受験コース</span>
     </div>
     <div class="exam-mode-body">
         <div id="exam-mode-grade-badge" class="exam-mode-grade-badge">6年生</div>
@@ -79,33 +77,30 @@
         <div class="exam-mode-sub">まず解き方を学んで、次に演習で定着！</div>
         <div class="exam-mode-cards">
             <div class="exam-mode-card topic" onclick="showScreen('exam')">
-                <div class="exam-mode-card-icon">📚</div>
                 <div class="exam-mode-card-title">トピック学習</div>
                 <div class="exam-mode-card-sub">単元別に解き方をマスターする</div>
                 <div class="exam-mode-feats">
-                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">🗂️</span>9分野に分類された問題</div>
-                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">🔢</span>ステップごとの丁寧な解説</div>
-                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">📊</span>図・グラフでビジュアル理解</div>
+                    <div class="exam-mode-feat">9分野に分類された問題</div>
+                    <div class="exam-mode-feat">ステップごとの丁寧な解説</div>
+                    <div class="exam-mode-feat">図・グラフでビジュアル理解</div>
                 </div>
             </div>
             <div class="exam-mode-card prac" onclick="showScreen('practice')">
-                <div class="exam-mode-card-icon">✏️</div>
                 <div class="exam-mode-card-title">演習問題</div>
                 <div class="exam-mode-card-sub">入試形式の問題で実力を試す</div>
                 <div class="exam-mode-feats">
-                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">📝</span>分野別に整理された練習問題</div>
-                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">💡</span>解説をすぐに確認できる</div>
-                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">🔗</span>トピック学習へすぐアクセス</div>
+                    <div class="exam-mode-feat">分野別に整理された練習問題</div>
+                    <div class="exam-mode-feat">解説をすぐに確認できる</div>
+                    <div class="exam-mode-feat">トピック学習へすぐアクセス</div>
                 </div>
             </div>
             <div class="exam-mode-card hard" onclick="openHardChallenge()">
-                <div class="exam-mode-card-icon">🔥</div>
                 <div class="exam-mode-card-title">難問チャレンジ</div>
                 <div class="exam-mode-card-sub">入試典型問題で実力を試す</div>
                 <div class="exam-mode-feats">
-                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">⭐</span>★4〜★5 の入試典型問題</div>
-                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">🧠</span>思考力・応用力を鍛える</div>
-                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">📋</span>ステップ別の丁寧な解説つき</div>
+                    <div class="exam-mode-feat">★4〜★5 の入試典型問題</div>
+                    <div class="exam-mode-feat">思考力・応用力を鍛える</div>
+                    <div class="exam-mode-feat">ステップ別の丁寧な解説つき</div>
                 </div>
             </div>
         </div>
@@ -151,7 +146,7 @@
 <div id="std-mode-screen" class="screen">
     <div class="screen-header std-header">
         <button class="back-btn" onclick="showScreen('home')">← コース選択</button>
-        <span class="screen-title">📘 標準コース</span>
+        <span class="screen-title">標準コース</span>
     </div>
     <div class="exam-mode-body" style="background:#F0F5FF">
         <div id="std-mode-grade-badge" class="exam-mode-grade-badge" style="background:#E3F2FD;color:#1565C0">5年生</div>
@@ -159,23 +154,21 @@
         <div class="exam-mode-sub">まず解き方を学んで、次に演習で定着！</div>
         <div class="exam-mode-cards">
             <div class="exam-mode-card topic" onclick="showScreen('standard')">
-                <div class="exam-mode-card-icon">📘</div>
                 <div class="exam-mode-card-title">トピック学習</div>
                 <div class="exam-mode-card-sub" style="color:#888">章立てで解き方をマスターする</div>
                 <div class="exam-mode-feats">
-                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">🗂️</span>単元ごとに整理された解説</div>
-                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">🔢</span>インタラクティブな操作で体験</div>
-                    <div class="exam-mode-feat"><span class="exam-mode-feat-icon">📊</span>図・グラフでビジュアル理解</div>
+                    <div class="exam-mode-feat">単元ごとに整理された解説</div>
+                    <div class="exam-mode-feat">インタラクティブな操作で体験</div>
+                    <div class="exam-mode-feat">図・グラフでビジュアル理解</div>
                 </div>
             </div>
             <div class="exam-mode-card" style="background:linear-gradient(135deg,#42A5F5,#1976D2);border-top:5px solid #0D47A1" onclick="showScreen('std-practice')">
-                <div class="exam-mode-card-icon">✏️</div>
                 <div class="exam-mode-card-title" style="color:#fff">演習問題</div>
                 <div class="exam-mode-card-sub" style="color:rgba(255,255,255,.85)">基礎力を問題演習で固める</div>
                 <div class="exam-mode-feats">
-                    <div class="exam-mode-feat" style="color:rgba(255,255,255,.9)"><span class="exam-mode-feat-icon">📝</span>単元別に整理された練習問題</div>
-                    <div class="exam-mode-feat" style="color:rgba(255,255,255,.9)"><span class="exam-mode-feat-icon">💡</span>解説をすぐに確認できる</div>
-                    <div class="exam-mode-feat" style="color:rgba(255,255,255,.9)"><span class="exam-mode-feat-icon">🔗</span>トピック学習へすぐアクセス</div>
+                    <div class="exam-mode-feat" style="color:rgba(255,255,255,.9)">単元別に整理された練習問題</div>
+                    <div class="exam-mode-feat" style="color:rgba(255,255,255,.9)">解説をすぐに確認できる</div>
+                    <div class="exam-mode-feat" style="color:rgba(255,255,255,.9)">トピック学習へすぐアクセス</div>
                 </div>
             </div>
         </div>
@@ -221,7 +214,7 @@
 <div id="standard-screen" class="screen">
     <div class="screen-header std-header">
         <button class="back-btn" onclick="showScreen('std-mode')">← もどる</button>
-        <span class="screen-title">📘 トピック学習</span>
+        <span class="screen-title">トピック学習</span>
     </div>
     <div class="std-hero">
         <div class="std-hero-title">章立てで学ぶ算数</div>
@@ -240,7 +233,7 @@
 <div id="exam-screen" class="screen">
     <div class="screen-header exam-header">
         <button class="back-btn" onclick="showScreen('exam-mode')">← もどる</button>
-        <span class="screen-title" id="exam-screen-title">📚 トピック学習</span>
+        <span class="screen-title" id="exam-screen-title">トピック学習</span>
     </div>
     <div class="exam-hero">
         <div class="exam-hero-title" id="exam-hero-title">分野別 ステップ解説</div>
@@ -260,8 +253,8 @@
         <span class="screen-title">🚰 第1章：水と量の問題</span>
     </div>
     <div class="tab-bar">
-        <button class="tab active" onclick="switchTab('learn')">📖 学ぶモード</button>
-        <button class="tab" onclick="switchTab('quiz')">✏️ 練習問題</button>
+        <button class="tab active" onclick="switchTab('learn')">学ぶモード</button>
+        <button class="tab" onclick="switchTab('quiz')">練習問題</button>
     </div>
 
     <!-- LEARN TAB -->
@@ -374,11 +367,11 @@
 <div id="salt-screen" class="screen">
     <div class="screen-header exam-header">
         <button class="back-btn" onclick="showScreen('exam')">← 単元一覧</button>
-        <span class="screen-title">🧪 食塩水</span>
+        <span class="screen-title">食塩水</span>
     </div>
     <div class="salt-tab-bar">
-        <button class="salt-tab active" id="salt-tab-learn-btn" onclick="saltSwitchTab('learn')">📖 学ぶ</button>
-        <button class="salt-tab" id="salt-tab-quiz-btn" onclick="saltSwitchTab('quiz')">✏️ 確認問題</button>
+        <button class="salt-tab active" id="salt-tab-learn-btn" onclick="saltSwitchTab('learn')">学ぶ</button>
+        <button class="salt-tab" id="salt-tab-quiz-btn" onclick="saltSwitchTab('quiz')">確認問題</button>
     </div>
     <!-- LEARN TAB -->
     <div id="salt-tab-learn" class="salt-tab-content" style="overflow-y:auto;flex:1;padding:16px">
@@ -406,7 +399,7 @@
             </div>
         </div>
         <div class="topic-example-card">
-            <div class="topic-section-lbl">📝 基本例題</div>
+            <div class="topic-section-lbl">基本例題</div>
             <div class="topic-example-q">20%の食塩水500gに含まれる<br>塩の重さは何gですか？</div>
             <div class="topic-steps">
                 <div class="topic-step">
@@ -425,14 +418,14 @@
         </div>
         <div class="topic-nav-card">
             <div class="topic-nav-label">この単元の問題に挑戦しよう</div>
-            <button class="topic-nav-btn prac" onclick="openSaltPractice()">✏️ 演習問題（★2〜★3）を解く</button>
-            <button class="topic-nav-btn hard" onclick="openSaltChallenge()">🔥 難問チャレンジ（★4〜★5）に挑む</button>
+            <button class="topic-nav-btn prac" onclick="openSaltPractice()">演習問題（★2〜★3）を解く</button>
+            <button class="topic-nav-btn hard" onclick="openSaltChallenge()">難問チャレンジ（★4〜★5）に挑む</button>
         </div>
     </div>
     <!-- QUIZ TAB -->
     <div id="salt-tab-quiz" class="salt-tab-content" style="overflow-y:auto;flex:1;padding:16px;display:none">
         <div class="topic-quiz-card">
-            <div class="topic-section-lbl">✏️ 確認問題（★1）</div>
+            <div class="topic-section-lbl">確認問題（★1）</div>
             <div class="topic-quiz-q">8%の食塩水250gに含まれる<br>塩の重さは何gですか？</div>
             <div class="topic-quiz-ans-row">
                 <input type="number" id="salt-quiz-input" class="ch-ans-input" placeholder="答え" style="max-width:120px">
@@ -448,11 +441,11 @@
 <div id="hard-challenge-screen" class="screen">
     <div class="screen-header hard-header">
         <button class="back-btn" onclick="showScreen('exam-mode')">← もどる</button>
-        <span class="screen-title">🔥 難問チャレンジ</span>
+        <span class="screen-title">難問チャレンジ</span>
     </div>
     <div class="hc-tab-bar">
-        <button class="hc-tab active" id="hc-tab-all-btn" onclick="hcSwitchMode('all')">🌐 総合チャレンジ</button>
-        <button class="hc-tab" id="hc-tab-cat-btn" onclick="hcSwitchMode('cat')">📂 単元別チャレンジ</button>
+        <button class="hc-tab active" id="hc-tab-all-btn" onclick="hcSwitchMode('all')">総合チャレンジ</button>
+        <button class="hc-tab" id="hc-tab-cat-btn" onclick="hcSwitchMode('cat')">単元別チャレンジ</button>
     </div>
     <div style="flex:1;overflow-y:auto">
         <!-- 総合チャレンジ -->

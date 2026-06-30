@@ -1940,6 +1940,67 @@ const CHALLENGES = [
     ]
   },
 
+  /* ════════════════════════════════════════
+     比・割合の基本 難問チャレンジ（★4）
+  ════════════════════════════════════════ */
+
+  { id:'g6_ratio_ratio_hard_001', grade:6, course:'exam',
+    category:'比', catColor:'#6A1B9A', catBg:'#F3E5F5', borderColor:'#8E24AA',
+    mainCategory:'ratio', unit:'比の基本', pattern:'連比（3者の比を1つにまとめる）',
+    difficulty:4, answerType:'number',
+    title:'連比で3つの量を求める',
+    question:`AとBの個数の比は 2：3、\nBとCの個数の比は 4：5 です。\nCはAより7個多いとき、\n\nBの個数を求めなさい。`,
+    answer:12, answerUnit:'個',
+    hint:`A:B=2:3 と B:C=4:5 の2つの比を\nひとつにまとめよう。\nBの数字をそろえるには\n3と4の最小公倍数（12）を使うよ。`,
+    tags:['割合・比','比','連比','難問'],
+    visualTypes:['ratioBar'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'なぜ2つの比を1つにまとめるのか',
+        text:`A:B と B:C の比には「B」が共通しています。\nBを共通の数にそろえれば、\nA・B・CをひとつのA:B:Cの比で表せます。\n\nBの3と4を最小公倍数12にそろえます。`,
+        visual:`<div class="vis-tape-row"><span class="vis-tape-lbl">A:B</span><div class="vis-tape" style="width:40%;background:#8E24AA">2</div><div class="vis-tape" style="width:60%;background:#AB47BC;margin-left:2px">3</div></div><div class="vis-tape-row" style="margin-top:6px"><span class="vis-tape-lbl">B:C</span><div class="vis-tape" style="width:44%;background:#AB47BC">4</div><div class="vis-tape" style="width:56%;background:#CE93D8;margin-left:2px">5</div></div>` },
+      { title:'最小公倍数でBをそろえる',
+        text:`A:B ＝ 2:3 → ×4 → A:B ＝ 8:12\nB:C ＝ 4:5 → ×3 → B:C ＝ 12:15\n\nBを12にそろえたので\nA:B:C ＝ 8:12:15`,
+        visual:`<div class="vis-tape-row"><span class="vis-tape-lbl">A</span><div class="vis-tape" style="width:32%;background:#8E24AA">8</div></div><div class="vis-tape-row" style="margin-top:4px"><span class="vis-tape-lbl">B</span><div class="vis-tape" style="width:48%;background:#AB47BC">12</div></div><div class="vis-tape-row" style="margin-top:4px"><span class="vis-tape-lbl">C</span><div class="vis-tape" style="width:60%;background:#CE93D8">15</div></div>` },
+      { title:'差から「1つ分」を求める',
+        text:`C − A の比の差 ＝ 15 − 8 ＝ 7\n実際の差は7個なので\n7（比）＝ 7（個）\n1つ分 ＝ 1個`,
+        visual:`<div class="vis-formula">C − A ＝ 15 − 8 ＝ 7（比）＝ 7（個）→ 1つ分＝1個</div>` },
+      { title:'Bの個数を求める（答え）',
+        text:`B ＝ 12 × 1つ分 ＝ 12 × 1 ＝ 12個`,
+        visual:`<div class="vis-formula">B ＝ 12 × 1 ＝ <b>12個</b></div>` },
+      { title:'答えを確かめる',
+        text:`A＝8、B＝12、C＝15\nA:B ＝ 8:12 ＝ 2:3 ✓\nB:C ＝ 12:15 ＝ 4:5 ✓\nC − A ＝ 15 − 8 ＝ 7個 ✓`,
+        visual:`<div class="vis-formula">A:B ＝ 2:3 ✓　B:C ＝ 4:5 ✓　C−A ＝ 7個 ✓</div>` },
+    ]
+  },
+
+  { id:'g6_ratio_basic_hard_001', grade:6, course:'exam',
+    category:'割合の基本', catColor:'#6A1B9A', catBg:'#F3E5F5', borderColor:'#8E24AA',
+    mainCategory:'ratio', unit:'割合の基本', pattern:'2段階の割合変化を逆算する',
+    difficulty:4, answerType:'number',
+    title:'売値から仕入れ値を逆算する',
+    question:`ある商品を、仕入れ値の30%増しで定価をつけ、\nその定価から10%引きで売りました。\n\n売値が702円のとき、仕入れ値はいくらですか。`,
+    answer:600, answerUnit:'円',
+    hint:`仕入れ値を□とおいて\n定価 ＝ □ × 1.3\n売値 ＝ 定価 × 0.9 ＝ □ × 1.3 × 0.9\nこれが702円だから□を求めよう。`,
+    tags:['割合・比','割合の基本','売買損益','逆算','難問'],
+    visualTypes:['barModel'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'なぜこの問題が難しいのか',
+        text:`「30%増し」「10%引き」と2回割合が変わります。\n順番に1.3倍→0.9倍とかけていき、\n最後に逆算（÷）して仕入れ値を求めます。\nこの「2段階逆算」が★4のポイントです。`,
+        visual:`<div class="vis-tape-row"><span class="vis-tape-lbl">仕入値</span><div class="vis-tape" style="width:60%;background:#AB47BC">□円</div></div><div style="text-align:center;color:#888;font-size:.85rem;margin:3px 0">×1.3 ↓</div><div class="vis-tape-row"><span class="vis-tape-lbl">定価</span><div class="vis-tape" style="width:78%;background:#8E24AA">□×1.3</div></div><div style="text-align:center;color:#888;font-size:.85rem;margin:3px 0">×0.9 ↓</div><div class="vis-tape-row"><span class="vis-tape-lbl">売値</span><div class="vis-tape" style="width:70%;background:#6A1B9A;color:#fff">702円</div></div>` },
+      { title:'仕入れ値と売値の倍率を求める',
+        text:`定価 ＝ 仕入れ値 × 1.3\n売値 ＝ 定価 × 0.9\n　　 ＝ 仕入れ値 × 1.3 × 0.9\n　　 ＝ 仕入れ値 × 1.17`,
+        visual:`<div class="vis-formula">1.3 × 0.9 ＝ 1.17（仕入れ値の1.17倍が売値）</div>` },
+      { title:'仕入れ値を逆算する（答え）',
+        text:`仕入れ値 × 1.17 ＝ 702円\n仕入れ値 ＝ 702 ÷ 1.17 ＝ 600円`,
+        visual:`<div class="vis-formula">702 ÷ 1.17 ＝ <b>600円</b></div>` },
+      { title:'答えを確かめる',
+        text:`仕入れ値：600円\n定価：600 × 1.3 ＝ 780円\n売値：780 × 0.9 ＝ 702円 ✓`,
+        visual:`<div class="vis-formula">600 → ×1.3 → 780 → ×0.9 → 702円 ✓</div>` },
+    ]
+  },
+
   { id:'g6_ratio_salt_008', grade:6, course:'exam',
     category:'食塩水', catColor:'#0277BD', catBg:'#E1F5FE', borderColor:'#039BE5',
     mainCategory:'ratio', unit:'食塩水', pattern:'取り出して別の食塩水に加える',

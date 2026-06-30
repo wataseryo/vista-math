@@ -1006,30 +1006,31 @@ Bさんが出発したとき Aさんはすでに先行している。
 {
   id: 'g6_speed_pass_005',
   catId: 'pc-speed', grade: 6, course: 'exam',
-  mainCategory: 'speed', lessonUnit: '通過算', pattern: '電車の長さを逆算する',
-  title: '電車の長さを求める',
+  mainCategory: 'speed', lessonUnit: '通過算', pattern: '電柱と橋から電車の長さを求める',
+  title: '電柱と橋の通過から電車の長さを求める',
   difficulty: 4,
-  text: 'ある電車が500mのトンネルを通過するのに20秒かかりました。\nまた200mの橋を渡るのに10秒かかりました。\n\nこの電車の長さは何mですか？',
-  answer: 100, answerType: 'number', unit: 'm',
-  hint: '電車の長さをL mとすると\nトンネル：(L＋500)÷速さ＝20秒\n橋：(L＋200)÷速さ＝10秒\nこの2つの式から考えよう。',
-  solution: `【連立の考え方】
+  text: 'ある電車が電柱のそばを通過するのに8秒かかりました。\nまた400mの橋を渡るのに28秒かかりました。\n\nこの電車の長さは何mですか？',
+  answer: 160, answerType: 'number', unit: 'm',
+  hint: '電車の長さを L m、速さを V m/秒 とすると\n電柱：L ÷ V ＝ 8 … ①\n橋：(L＋400) ÷ V ＝ 28 … ②\n①より V ＝ L÷8。これを②に代入しよう。',
+  solution: `【電柱通過・橋通過の2式から逆算する】
 電車の長さを L m、速さを V m/秒 とする。
 
-トンネル：(L ＋ 500) ÷ V ＝ 20 … ①
-橋　　　：(L ＋ 200) ÷ V ＝ 10 … ②
+電柱通過：L ÷ V ＝ 8  … ①
+橋通過　：(L ＋ 400) ÷ V ＝ 28 … ②
 
-① ÷ ② → (L ＋ 500) ÷ (L ＋ 200) ＝ 2
+①より：V ＝ L ÷ 8
 
-L ＋ 500 ＝ 2(L ＋ 200)
-L ＋ 500 ＝ 2L ＋ 400
-500 − 400 ＝ 2L − L
-L ＝ 100m
+②に代入：(L ＋ 400) ÷ (L ÷ 8) ＝ 28
+8(L ＋ 400) ÷ L ＝ 28
+8L ＋ 3200 ＝ 28L
+3200 ＝ 20L
+L ＝ 160m
 
 【確認】
-  ②より：(100 ＋ 200) ÷ V ＝ 10 → V ＝ 30m/秒
-  ①より：(100 ＋ 500) ÷ 30 ＝ 600 ÷ 30 ＝ 20秒 ✓
+V ＝ 160 ÷ 8 ＝ 20 m/秒
+橋：(160 ＋ 400) ÷ 20 ＝ 560 ÷ 20 ＝ 28秒 ✓
 
-答え：100m`,
+答え：160m`,
   tags: ['速さ', '通過算', '逆算'], visualTypes: ['trainDiagram'], isRandomGenerated: false,
   topicUnitId: 'u6-speed',
 },
@@ -1190,25 +1191,25 @@ L ＝ 100m
   id: 'g6_speed_clock_002',
   catId: 'pc-speed', grade: 6, course: 'exam',
   mainCategory: 'speed', lessonUnit: '時計算', pattern: '長針と短針がなす角度（分あり）',
-  title: '4時30分のときの長針と短針の角度',
+  title: '3時20分のときの長針と短針の角度',
   difficulty: 2,
-  text: '4時30分のとき、長針と短針がなす小さいほうの角度は何度ですか？',
-  answer: 45, answerType: 'number', unit: '度',
-  hint: '短針は1分で 0.5度 動く。\n4時の短針の位置：30×4＝120度\nさらに30分で：0.5×30＝15度\n長針の位置：6×30＝180度',
-  solution: `【4時30分の角度】
+  text: '3時20分のとき、長針と短針がなす小さいほうの角度は何度ですか？',
+  answer: 20, answerType: 'number', unit: '度',
+  hint: '短針は1分で 0.5度 動く。\n3時の短針の位置：30×3＝90度\nさらに20分で：0.5×20＝10度\n長針の位置：6×20＝120度',
+  solution: `【3時20分の角度】
 短針の位置：
-  4時間分：30 × 4 ＝ 120度
-  30分分：0.5 × 30 ＝ 15度
-  合計：120 ＋ 15 ＝ 135度
+  3時間分：30 × 3 ＝ 90度
+  20分分：0.5 × 20 ＝ 10度
+  合計：90 ＋ 10 ＝ 100度
 
 長針の位置：
-  6 × 30 ＝ 180度
+  6 × 20 ＝ 120度
 
-2針の差：|180 − 135| ＝ 45度
+2針の差：|120 − 100| ＝ 20度
 
-45度 < 180度 なので、小さいほうの角度は 45度
+20度 < 180度 なので、小さいほうの角度は 20度
 
-答え：45度`,
+答え：20度`,
   tags: ['速さ', '時計算', '角度'], visualTypes: ['clockFace'], isRandomGenerated: false,
   topicUnitId: 'u6-speed',
 },
@@ -3024,25 +3025,25 @@ const CHALLENGES = [
 
   { id:'g6_speed_river_hard_001', grade:6, course:'exam',
     category:'流水算', catColor:'#0277BD', catBg:'#E1F5FE', borderColor:'#039BE5',
-    mainCategory:'speed', unit:'流水算', pattern:'往復時間から静水速さを求め、上り時間を計算する',
+    mainCategory:'speed', unit:'流水算', pattern:'往復時間から静水速さと流速を求める',
     difficulty:4, answerType:'number',
-    title:'上り・下りから上り時間を求める',
-    question:`ある船が静水時の速さは時速12kmです。\n川の流速は時速3kmです。\n\nこの船が川を上りで72km進むのに何時間かかりますか？`,
-    answer:9, answerUnit:'時間',
-    hint:`上り速さ ＝ 静水速さ − 流速 ＝ 12 − 3 ＝ ? km/時\n時間 ＝ 72 ÷ 上り速さ`,
-    tags:['速さ','流水算','難問'],
+    title:'往復時間から静水時の速さを求める',
+    question:`ある船がA地点からB地点（48km）まで川を下りで3時間かかりました。\n帰りのB地点からA地点への上りは4時間かかりました。\n\nこの船の静水時の速さは時速何kmですか？`,
+    answer:14, answerUnit:'km/時',
+    hint:`下り速さ ＝ 48 ÷ 3 ＝ ? km/時\n上り速さ ＝ 48 ÷ 4 ＝ ? km/時\n静水速さ ＝ (下り速さ ＋ 上り速さ) ÷ 2`,
+    tags:['速さ','流水算','往復','難問'],
     visualTypes:['riverDiagram'],
     isRandomGenerated:false,
     explanation:[
-      { title:'上り速さを求める',
-        text:`上り速さ ＝ 静水時の速さ − 流速\n       ＝ 12 − 3\n       ＝ 9 km/時`,
-        visual:`<div class="vis-formula">上り速さ ＝ 12 − 3 ＝ 9 km/時</div>` },
-      { title:'上り時間を求める（答え）',
-        text:`時間 ＝ 距離 ÷ 速さ\n     ＝ 72 ÷ 9\n     ＝ 9 時間`,
-        visual:`<div class="vis-formula">72 ÷ 9 ＝ <b>9時間</b></div>` },
-      { title:'下りも計算して比較',
-        text:`下り速さ：12 ＋ 3 ＝ 15 km/時\n下り時間：72 ÷ 15 ＝ 4.8時間\n\n上りは下りの約2倍の時間がかかる。\n川の流れに逆らうから当然！`,
-        visual:`<div class="vis-formula">下り4.8時間　上り9時間　差：4.2時間</div>` },
+      { title:'下り速さと上り速さを求める',
+        text:`下り速さ ＝ 距離 ÷ 時間\n       ＝ 48 ÷ 3 ＝ 16 km/時\n\n上り速さ ＝ 48 ÷ 4\n       ＝ 12 km/時`,
+        visual:`<div class="vis-formula">下り16 km/時　上り12 km/時</div>` },
+      { title:'静水速さと流速の関係',
+        text:`下り速さ ＝ 静水速さ ＋ 流速\n上り速さ ＝ 静水速さ − 流速\n\n2つを足すと流速が消える：\n16 ＋ 12 ＝ 静水速さ × 2\n28 ＝ 静水速さ × 2`,
+        visual:`<div class="vis-formula">（下り＋上り）÷ 2 ＝ 静水速さ</div>` },
+      { title:'静水速さを求める（答え）',
+        text:`静水速さ ＝ (16 ＋ 12) ÷ 2\n         ＝ 28 ÷ 2\n         ＝ 14 km/時\n\n流速も求める：16 − 14 ＝ 2 km/時\n確認：14 − 2 ＝ 12 km/時（上り）✓`,
+        visual:`<div class="vis-formula">静水速さ ＝ <b>14 km/時</b>　流速 ＝ 2 km/時</div>` },
     ]
   },
 

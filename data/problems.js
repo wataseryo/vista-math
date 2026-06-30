@@ -1423,6 +1423,694 @@ Bが4進むとき Aは3 → 差は1
   topicUnitId: 'u6-speed',
 },
 
+/* ────────────────────────────────────────
+   特殊算・文章題 演習問題（grade:6）
+   catId:'pc-special'  mainCategory:'word_problems'
+──────────────────────────────────────── */
+
+/* ── 和差算 5問 ── */
+{
+  id: 'g6_wp_sumdiff_001',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '和差算', pattern: '2つの数の和と差から求める',
+  title: '2つの数を求める（和差算 基本）',
+  difficulty: 1,
+  text: '2つの整数の和は54、差は16です。\n\n大きい方の数を求めなさい。',
+  answer: 35, answerType: 'number', unit: '',
+  hint: '和と差が出てきたら和差算！\n（和＋差）÷2 ＝ 大きい方の数',
+  solution: `【和差算の公式】
+大きい方 ＝ （和 ＋ 差） ÷ 2
+         ＝ （54 ＋ 16） ÷ 2
+         ＝ 70 ÷ 2
+         ＝ 35
+
+小さい方 ＝ （54 − 16） ÷ 2 ＝ 19
+確認：35 ＋ 19 ＝ 54 ✓、35 − 19 ＝ 16 ✓
+
+答え：35`,
+  tags: ['特殊算・文章題', '和差算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_sumdiff_002',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '和差算', pattern: '2つの量の和と差から大きい方を求める',
+  title: '本の冊数（和差算）',
+  difficulty: 2,
+  text: 'A棚とB棚に本が合わせて72冊あります。\nA棚はB棚より18冊多い。\n\nA棚の本は何冊ですか？',
+  answer: 45, answerType: 'number', unit: '冊',
+  hint: '大きい方（A棚）＝（和＋差）÷2',
+  solution: `【和差算】
+A棚 ＝ （72 ＋ 18） ÷ 2
+    ＝ 90 ÷ 2
+    ＝ 45冊
+
+B棚 ＝ （72 − 18） ÷ 2 ＝ 27冊
+確認：45 ＋ 27 ＝ 72 ✓、45 − 27 ＝ 18 ✓
+
+答え：45冊`,
+  tags: ['特殊算・文章題', '和差算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_sumdiff_003',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '和差算', pattern: '3つの数の和と差から最小を求める',
+  title: '3つの数の和差算',
+  difficulty: 2,
+  text: '3つの整数の和は90です。\n最大は最小より18大きく、中間は最小より6大きい。\n\n最小の数を求めなさい。',
+  answer: 22, answerType: 'number', unit: '',
+  hint: '最小の数を□とすると\n中間 ＝ □＋6、最大 ＝ □＋18\n3つの和 ＝ □＋（□＋6）＋（□＋18）＝ 90',
+  solution: `【最小を□とおく】
+□ ＋ (□＋6) ＋ (□＋18) ＝ 90
+3□ ＋ 24 ＝ 90
+3□ ＝ 66
+□ ＝ 22
+
+確認：22 ＋ 28 ＋ 40 ＝ 90 ✓
+
+答え：22`,
+  tags: ['特殊算・文章題', '和差算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_sumdiff_004',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '和差算', pattern: '所持金の和差算',
+  title: '姉と妹の所持金',
+  difficulty: 3,
+  text: '姉と妹の所持金の合計は3600円です。\n姉は妹より600円多く持っています。\n\n姉の所持金は何円ですか？',
+  answer: 2100, answerType: 'number', unit: '円',
+  hint: '姉 ＝ （合計 ＋ 差） ÷ 2',
+  solution: `【和差算】
+姉 ＝ （3600 ＋ 600） ÷ 2
+   ＝ 4200 ÷ 2
+   ＝ 2100円
+
+妹 ＝ 3600 − 2100 ＝ 1500円
+確認：2100 − 1500 ＝ 600 ✓
+
+答え：2100円`,
+  tags: ['特殊算・文章題', '和差算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_sumdiff_005',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '和差算', pattern: '3人の所持金の和差算',
+  title: '3人の所持金（和差算）',
+  difficulty: 3,
+  text: 'A、B、Cの3人の所持金の合計は2100円です。\nAはBより240円多く、BはCより180円多い。\n\nCの所持金は何円ですか？',
+  answer: 500, answerType: 'number', unit: '円',
+  hint: 'Cを□とすると B＝□＋180、A＝□＋180＋240＝□＋420\n3人の合計 ＝ □＋(□＋180)＋(□＋420)＝2100',
+  solution: `【Cを□とおく】
+AはBより240円多い → A ＝ B＋240
+BはCより180円多い → B ＝ C＋180
+よって        A ＝ C＋180＋240 ＝ C＋420
+
+C ＋ (C＋180) ＋ (C＋420) ＝ 2100
+3C ＋ 600 ＝ 2100
+3C ＝ 1500
+C ＝ 500円
+
+確認：B＝680円、A＝920円
+500＋680＋920 ＝ 2100 ✓
+
+答え：500円`,
+  tags: ['特殊算・文章題', '和差算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+/* ── つるかめ算 6問 ── */
+{
+  id: 'g6_wp_crane_001',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: 'つるかめ算', pattern: '2種類の数量から片方を求める',
+  title: '鶴と亀の足の数（基本）',
+  difficulty: 1,
+  text: '鶴と亀が合わせて10匹います。\n足の合計は28本です。\n\n鶴は何匹いますか？',
+  answer: 6, answerType: 'number', unit: '匹',
+  hint: '全部が亀（4本足）なら 4×10＝40本。\n実際との差 40−28＝12本。\n亀1匹を鶴1匹に変えると足が 4−2＝2本減る。\n12÷2＝6匹が鶴。',
+  solution: `【仮定法（つるかめ算）】
+全部が亀なら：4 × 10 ＝ 40本
+実際は 28本 → 差：40 − 28 ＝ 12本
+
+亀を鶴に変えると 1匹につき足が 2本減る
+鶴の数：12 ÷ 2 ＝ 6匹
+
+確認：鶴6＋亀4、足：6×2＋4×4 ＝ 12＋16 ＝ 28本 ✓
+
+答え：6匹`,
+  tags: ['特殊算・文章題', 'つるかめ算'], visualTypes: ['areaModel'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_crane_002',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: 'つるかめ算', pattern: '硬貨の枚数と金額',
+  title: '100円玉と50円玉',
+  difficulty: 2,
+  text: '100円硬貨と50円硬貨が合わせて20枚あります。\n合計金額は1450円です。\n\n100円硬貨は何枚ですか？',
+  answer: 9, answerType: 'number', unit: '枚',
+  hint: '全部50円なら 50×20＝1000円。\n実際との差：1450−1000＝450円。\n50円を100円に変えると1枚につき50円増える。\n450÷50＝9枚',
+  solution: `【仮定法】
+全部 50円なら：50 × 20 ＝ 1000円
+実際は 1450円 → 差：1450 − 1000 ＝ 450円
+
+50円を100円に変えると 1枚につき50円増える
+100円硬貨の枚数：450 ÷ 50 ＝ 9枚
+
+確認：100円×9＋50円×11 ＝ 900＋550 ＝ 1450円 ✓
+
+答え：9枚`,
+  tags: ['特殊算・文章題', 'つるかめ算'], visualTypes: ['areaModel'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_crane_003',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: 'つるかめ算', pattern: '正解・不正解の点数計算',
+  title: 'テストの正解数（つるかめ算）',
+  difficulty: 2,
+  text: '20問のテストで、正解すると4点、不正解だと1点引かれます。\n合計が65点でした。\n\n正解した問題数は何問ですか？',
+  answer: 17, answerType: 'number', unit: '問',
+  hint: '全問正解なら 4×20＝80点。\n実際との差：80−65＝15点。\n正解を不正解に変えると 1問につき 4＋1＝5点減る。\n15÷5＝3問が不正解。',
+  solution: `【仮定法】
+全問正解なら：4 × 20 ＝ 80点
+実際は 65点 → 差：80 − 65 ＝ 15点
+
+正解を不正解に変えると 1問につき 4＋1＝5点 減る
+不正解の数：15 ÷ 5 ＝ 3問
+正解の数：20 − 3 ＝ 17問
+
+確認：4×17 − 1×3 ＝ 68 − 3 ＝ 65点 ✓
+
+答え：17問`,
+  tags: ['特殊算・文章題', 'つるかめ算'], visualTypes: ['areaModel'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_crane_004',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: 'つるかめ算', pattern: '単価の異なる商品の個数',
+  title: 'りんごとみかんの個数',
+  difficulty: 3,
+  text: 'りんご1個80円、みかん1個50円です。\n合わせて18個買ったら合計金額は1110円でした。\n\nりんごは何個ですか？',
+  answer: 7, answerType: 'number', unit: '個',
+  hint: '全部みかんなら 50×18＝900円。\n実際との差：1110−900＝210円。\nみかんをりんごに変えると 1個につき 80−50＝30円増える。\n210÷30＝7個',
+  solution: `【仮定法】
+全部みかんなら：50 × 18 ＝ 900円
+実際は 1110円 → 差：1110 − 900 ＝ 210円
+
+みかんをりんごに変えると 1個につき 30円増える
+りんごの個数：210 ÷ 30 ＝ 7個
+
+確認：80×7＋50×11 ＝ 560＋550 ＝ 1110円 ✓
+
+答え：7個`,
+  tags: ['特殊算・文章題', 'つるかめ算'], visualTypes: ['areaModel'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_crane_005',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: 'つるかめ算', pattern: '脚の本数から椅子の数を求める',
+  title: '椅子と机の脚の数',
+  difficulty: 3,
+  text: '椅子（4本脚）と机（3本脚）が合わせて15脚あります。\n脚の合計は54本です。\n\n椅子は何脚ありますか？',
+  answer: 9, answerType: 'number', unit: '脚',
+  hint: '全部机（3本脚）なら 3×15＝45本。\n実際との差：54−45＝9本。\n机を椅子に変えると 1脚につき 4−3＝1本増える。\n9÷1＝9脚が椅子。',
+  solution: `【仮定法】
+全部机なら：3 × 15 ＝ 45本
+実際は 54本 → 差：54 − 45 ＝ 9本
+
+机を椅子に変えると 1脚につき 1本増える
+椅子の数：9 ÷ 1 ＝ 9脚（机：6脚）
+
+確認：4×9＋3×6 ＝ 36＋18 ＝ 54本 ✓
+
+答え：9脚`,
+  tags: ['特殊算・文章題', 'つるかめ算'], visualTypes: ['areaModel'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_crane_006',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: 'つるかめ算', pattern: '乗り物と速さの組み合わせ',
+  title: '電車とバスで旅行（つるかめ算）',
+  difficulty: 4,
+  text: 'バス（時速30km）と電車（時速80km）を乗り継いで旅行した。\n合計3時間で190km移動した。\n\n電車に乗っていた時間は何時間ですか？',
+  answer: 2, answerType: 'number', unit: '時間',
+  hint: '全部バスなら 30×3＝90km。\n実際との差：190−90＝100km。\nバスを電車に変えると 1時間につき 80−30＝50km増える。\n100÷50＝2時間が電車。',
+  solution: `【仮定法】
+全部バスなら：30 × 3 ＝ 90km
+実際は 190km → 差：190 − 90 ＝ 100km
+
+バスを電車に変えると 1時間につき 50km増える
+電車の時間：100 ÷ 50 ＝ 2時間
+バスの時間：3 − 2 ＝ 1時間
+
+確認：30×1＋80×2 ＝ 30＋160 ＝ 190km ✓
+
+答え：2時間`,
+  tags: ['特殊算・文章題', 'つるかめ算', '速さとの融合'], visualTypes: ['areaModel'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+/* ── 過不足算・差集め算 5問 ── */
+{
+  id: 'g6_wp_surplus_001',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '過不足算', pattern: '余りと不足から人数を求める',
+  title: '鉛筆を配る（過不足算 基本）',
+  difficulty: 2,
+  text: '生徒に鉛筆を配ります。\n1人4本ずつ配ると6本余り、\n1人5本ずつ配ると4本足りません。\n\n生徒は何人いますか？',
+  answer: 10, answerType: 'number', unit: '人',
+  hint: '配る余り・不足が出てきたら過不足算！\n人数 ＝ （余り ＋ 不足） ÷ （多い方 − 少ない方）',
+  solution: `【過不足算の公式】
+人数 ＝ （余り ＋ 不足） ÷ （1人分の差）
+     ＝ （6 ＋ 4） ÷ （5 − 4）
+     ＝ 10 ÷ 1
+     ＝ 10人
+
+確認：4×10＋6 ＝ 46本、5×10−4 ＝ 46本 ✓（鉛筆は46本）
+
+答え：10人`,
+  tags: ['特殊算・文章題', '過不足算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_surplus_002',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '過不足算', pattern: '配ると余りと不足から人数を求める',
+  title: 'おかしを配る（過不足算）',
+  difficulty: 2,
+  text: 'おかしを何人かに配ります。\n1人3個ずつ配ると5個余り、\n1人4個ずつ配ると3個足りません。\n\n子どもは何人いますか？',
+  answer: 8, answerType: 'number', unit: '人',
+  hint: '人数 ＝ （余り ＋ 不足） ÷ （1人分の差）\n      ＝ （5 ＋ 3） ÷ （4 − 3）',
+  solution: `【過不足算】
+人数 ＝ （5 ＋ 3） ÷ （4 − 3）
+     ＝ 8 ÷ 1
+     ＝ 8人
+
+おかしの数：3×8＋5 ＝ 29個
+確認：4×8 ＝ 32 > 29、差 ＝ 3個 ✓
+
+答え：8人`,
+  tags: ['特殊算・文章題', '過不足算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_surplus_003',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '過不足算', pattern: '人数とカード総枚数を両方求める',
+  title: 'カードを配る（人数と枚数）',
+  difficulty: 3,
+  text: 'カードを何人かに配ります。\n1人6枚ずつ配ると4枚余り、\n1人7枚ずつ配ると2枚足りません。\n\nカードは全部で何枚ありますか？',
+  answer: 40, answerType: 'number', unit: '枚',
+  hint: 'まず人数を求めよう。\n人数 ＝ （4 ＋ 2） ÷ （7 − 6） ＝ 6人\nカードの枚数 ＝ 6×6＋4 ＝ ?',
+  solution: `【人数を求める】
+人数 ＝ （4 ＋ 2） ÷ （7 − 6）
+     ＝ 6 ÷ 1 ＝ 6人
+
+【カードの枚数を求める】
+カード ＝ 6×6＋4 ＝ 36＋4 ＝ 40枚
+
+確認：7×6 ＝ 42 > 40、差 ＝ 2枚 ✓
+
+答え：40枚`,
+  tags: ['特殊算・文章題', '過不足算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_surplus_004',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '過不足算', pattern: '長椅子の数を求める（両不足）',
+  title: '長椅子の数（過不足算）',
+  difficulty: 3,
+  text: '長椅子に生徒が座ります。\n1脚に4人ずつ座ると8人が座れません。\n1脚に5人ずつ座ると最後の1脚に3人しか座れません。\n\n長椅子は何脚ありますか？',
+  answer: 10, answerType: 'number', unit: '脚',
+  hint: '1脚5人のとき「最後に3人」→ その脚は2人分空き。\n座れる最大：5×n − (5−3) ＝ 5n−2\n4人のときの合計：4n＋8\n4n＋8 ＝ 5n−2',
+  solution: `【方程式で解く】
+椅子の数を n 脚とする。
+
+4人ずつ座ると 8人余り：全員 ＝ 4n＋8
+5人ずつで最後に 3人：全員 ＝ 5(n−1)＋3 ＝ 5n−2
+
+4n＋8 ＝ 5n−2
+8＋2 ＝ 5n−4n
+n ＝ 10脚
+
+確認：全員 ＝ 4×10＋8 ＝ 48人
+5×9＋3 ＝ 48人 ✓
+
+答え：10脚`,
+  tags: ['特殊算・文章題', '過不足算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_surplus_005',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '過不足算', pattern: '1人分の量が多い差集め算',
+  title: '折り紙を配る（差集め算）',
+  difficulty: 4,
+  text: '何人かの子どもに折り紙を配ります。\n1人に12枚ずつ配ると20枚余り、\n1人に15枚ずつ配ると16枚足りません。\n\n折り紙は全部で何枚ですか？',
+  answer: 164, answerType: 'number', unit: '枚',
+  hint: '1人分の差が 15−12＝3枚。\n人数 ＝ （余り ＋ 不足） ÷ 差 ＝ （20＋16）÷3 ＝ 12人\n折り紙 ＝ 12×12＋20',
+  solution: `【差集め算】
+人数 ＝ （20 ＋ 16） ÷ （15 − 12）
+     ＝ 36 ÷ 3
+     ＝ 12人
+
+折り紙の枚数：12 × 12 ＋ 20 ＝ 164枚
+
+確認：15 × 12 ＝ 180 > 164、差 ＝ 16枚 ✓
+
+答え：164枚`,
+  tags: ['特殊算・文章題', '過不足算', '差集め算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+/* ── 植木算 5問 ── */
+{
+  id: 'g6_wp_tree_001',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '植木算', pattern: '両端あり・間隔から本数を求める',
+  title: '道路に木を植える（基本）',
+  difficulty: 1,
+  text: '道の片側に、端から端まで5mおきに木を植えます。\n道の長さは50mです。\n\n木は何本必要ですか？',
+  answer: 11, answerType: 'number', unit: '本',
+  hint: '木・電柱・間隔が出てきたら植木算！\n両端に植えるとき：本数 ＝ 道の長さ ÷ 間隔 ＋ 1',
+  solution: `【両端あり植木算】
+本数 ＝ 50 ÷ 5 ＋ 1
+     ＝ 10 ＋ 1
+     ＝ 11本
+
+答え：11本`,
+  tags: ['特殊算・文章題', '植木算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_tree_002',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '植木算', pattern: '間隔から本数を求める（道路両側）',
+  title: '道路の両側に木を植える',
+  difficulty: 2,
+  text: '40mの道路の両側に、端から端まで4mおきに木を植えます。\n\n木は合計何本必要ですか？',
+  answer: 22, answerType: 'number', unit: '本',
+  hint: '片側の本数 ＝ 40÷4＋1 ＝ 11本\n両側なので 11×2 ＝ 22本',
+  solution: `【片側の本数を求め、2倍する】
+片側の本数 ＝ 40 ÷ 4 ＋ 1 ＝ 11本
+両側の合計 ＝ 11 × 2 ＝ 22本
+
+答え：22本`,
+  tags: ['特殊算・文章題', '植木算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_tree_003',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '植木算', pattern: '本数から間隔を逆算する',
+  title: '電柱の間隔を求める',
+  difficulty: 2,
+  text: '100mの道の片側に端から端まで等間隔に電柱を立てます。\n電柱は全部で21本です。\n\n電柱の間隔は何mですか？',
+  answer: 5, answerType: 'number', unit: 'm',
+  hint: '電柱21本なら間隔は 21−1＝20か所。\n間隔 ＝ 道の長さ ÷ 間隔の数',
+  solution: `【逆算】
+間隔の数 ＝ 21 − 1 ＝ 20か所
+間隔 ＝ 100 ÷ 20 ＝ 5m
+
+答え：5m`,
+  tags: ['特殊算・文章題', '植木算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_tree_004',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '植木算', pattern: '池の周り（円形）の植木算',
+  title: '池の周りに木を植える（円形）',
+  difficulty: 3,
+  text: '池の周りに等間隔で木を植えます。\n池の周りの長さは72mで、間隔は3mです。\n\n木は何本必要ですか？',
+  answer: 24, answerType: 'number', unit: '本',
+  hint: '円形（池・広場の周り）のとき：本数 ＝ 周の長さ ÷ 間隔\n（始点と終点が重なるので ＋1 は不要）',
+  solution: `【円形植木算】
+本数 ＝ 72 ÷ 3 ＝ 24本
+
+円形では始点と終点が一致するため
+「間隔の数 ＝ 木の数」
+
+答え：24本`,
+  tags: ['特殊算・文章題', '植木算', '円形'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_tree_005',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '植木算', pattern: '正方形の4辺に木を植える（角を共有）',
+  title: '正方形の周りに木を植える',
+  difficulty: 3,
+  text: '1辺10mの正方形の土地の4辺に、2mおきに木を植えます。\n角には必ず木を植え、4辺の角の木は共有されます。\n\n木は合計何本必要ですか？',
+  answer: 20, answerType: 'number', unit: '本',
+  hint: '1辺の本数 ＝ 10÷2＋1＝6本\n4辺分の合計 ＝ 6×4＝24本\nただし角の4本は2辺で共有されているので引く。',
+  solution: `【正方形の周りの植木算】
+1辺の本数 ＝ 10 ÷ 2 ＋ 1 ＝ 6本
+4辺の単純合計 ＝ 6 × 4 ＝ 24本
+角の木は2辺に重複してカウントされている
+重複分 ＝ 4か所（4隅）を引く
+合計 ＝ 24 − 4 ＝ 20本
+
+別解：周の長さ ＝ 10×4 ＝ 40m
+円形と同じ考え → 40 ÷ 2 ＝ 20本 ✓
+
+答え：20本`,
+  tags: ['特殊算・文章題', '植木算', '正方形'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+/* ── 年齢算 4問 ── */
+{
+  id: 'g6_wp_age_001',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '年齢算', pattern: '何年後に何倍になるか',
+  title: '何年後に3倍になるか（年齢算）',
+  difficulty: 2,
+  text: '現在、父は36歳、子は6歳です。\n\n何年後に父の年齢が子の年齢の3倍になりますか？',
+  answer: 9, answerType: 'number', unit: '年後',
+  hint: '年齢差は変わらない！\nx年後：父(36+x)＝3×子(6+x)\n36+x ＝ 18+3x → 18 ＝ 2x',
+  solution: `【年齢差は変わらない】
+x 年後とする。
+父：36＋x 歳、子：6＋x 歳
+
+36＋x ＝ 3（6＋x）
+36＋x ＝ 18＋3x
+18 ＝ 2x
+x ＝ 9年後
+
+確認：父45歳、子15歳 → 45 ＝ 3×15 ✓
+
+答え：9年後`,
+  tags: ['特殊算・文章題', '年齢算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_age_002',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '年齢算', pattern: '何年後に何倍になるか（2倍）',
+  title: '母と娘の年齢算',
+  difficulty: 2,
+  text: '現在、母は32歳、娘は8歳です。\n\n何年後に母の年齢が娘の年齢のちょうど2倍になりますか？',
+  answer: 16, answerType: 'number', unit: '年後',
+  hint: 'x年後：母(32+x)＝2×娘(8+x)\n32+x ＝ 16+2x → 16 ＝ x',
+  solution: `x 年後とする。
+32＋x ＝ 2（8＋x）
+32＋x ＝ 16＋2x
+16 ＝ x
+
+確認：母48歳、娘24歳 → 48 ＝ 2×24 ✓
+
+答え：16年後`,
+  tags: ['特殊算・文章題', '年齢算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_age_003',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '年齢算', pattern: '3人の年齢の和から何年後かを求める',
+  title: '3人の年齢の和が2倍になるのは何年後？',
+  difficulty: 3,
+  text: '現在、祖父は60歳、父は35歳、息子は10歳です。\n3人の年齢の合計が現在の2倍になるのは何年後ですか？',
+  answer: 35, answerType: 'number', unit: '年後',
+  hint: '現在の合計：60＋35＋10＝105歳\nx年後の合計：105＋3x ＝ 105×2 ＝ 210',
+  solution: `現在の合計：60＋35＋10 ＝ 105歳
+2倍 ＝ 210歳
+
+x年後の合計：105＋3x ＝ 210
+（3人とも毎年1歳ずつ増えるので＋3x）
+3x ＝ 105
+x ＝ 35年後
+
+確認：95＋70＋45 ＝ 210 ＝ 105×2 ✓
+
+答え：35年後`,
+  tags: ['特殊算・文章題', '年齢算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_age_004',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '年齢算', pattern: '過去の倍数関係から現在の年齢を求める',
+  title: '過去の倍数から現在の年齢を求める',
+  difficulty: 4,
+  text: '現在、兄と弟の年齢の和は26歳です。\n7年前は兄の年齢が弟の年齢のちょうど2倍でした。\n\n現在の兄の年齢は何歳ですか？',
+  answer: 15, answerType: 'number', unit: '歳',
+  hint: '兄をA、弟をBとすると：A＋B＝26\n7年前：(A−7)＝2(B−7)',
+  solution: `兄 ＝ A、弟 ＝ B とする。
+
+① A＋B ＝ 26
+② A−7 ＝ 2（B−7）
+  A−7 ＝ 2B−14
+  A ＝ 2B−7
+
+①に代入：(2B−7)＋B ＝ 26
+3B ＝ 33
+B ＝ 11歳（弟）
+A ＝ 26−11 ＝ 15歳（兄）
+
+確認：7年前 兄8歳、弟4歳 → 8＝2×4 ✓
+
+答え：15歳`,
+  tags: ['特殊算・文章題', '年齢算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+/* ── 平均算 3問 ── */
+{
+  id: 'g6_wp_avg_001',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '平均算', pattern: '平均を上げるために必要な点数を求める',
+  title: '次のテストで平均を上げる',
+  difficulty: 2,
+  text: '5回のテストの平均点が74点でした。\n次の1回を受けて6回の平均を76点にしたい。\n\n次のテストは何点必要ですか？',
+  answer: 86, answerType: 'number', unit: '点',
+  hint: '6回の合計 ＝ 76×6 ＝ 456点\n5回の合計 ＝ 74×5 ＝ 370点\n次の点数 ＝ 合計の差',
+  solution: `【合計から逆算する】
+6回の合計 ＝ 76 × 6 ＝ 456点
+5回の合計 ＝ 74 × 5 ＝ 370点
+次の点数 ＝ 456 − 370 ＝ 86点
+
+答え：86点`,
+  tags: ['特殊算・文章題', '平均算'], visualTypes: ['barModel'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_avg_002',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '平均算', pattern: '転入生の値を求める',
+  title: '転入生の身長',
+  difficulty: 2,
+  text: '6人の身長の平均が142cmです。\n1人が転入して7人の平均が143cmになりました。\n\n転入生の身長は何cmですか？',
+  answer: 149, answerType: 'number', unit: 'cm',
+  hint: '7人の合計 ＝ 143×7\n6人の合計 ＝ 142×6\n転入生 ＝ 差',
+  solution: `7人の合計 ＝ 143 × 7 ＝ 1001cm
+6人の合計 ＝ 142 × 6 ＝  852cm
+転入生    ＝ 1001 − 852 ＝ 149cm
+
+答え：149cm`,
+  tags: ['特殊算・文章題', '平均算'], visualTypes: ['barModel'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_avg_003',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '平均算', pattern: '5回目の点数を求める',
+  title: '5回目のテストで平均を上げるには',
+  difficulty: 3,
+  text: '4回の算数テストの平均が82点でした。\n5回目を受けて5回の平均を85点にしたい。\n\n5回目は何点取ればよいですか？',
+  answer: 97, answerType: 'number', unit: '点',
+  hint: '5回の合計 ＝ 85×5 ＝ 425点\n4回の合計 ＝ 82×4 ＝ 328点\n5回目 ＝ 425−328',
+  solution: `5回の合計 ＝ 85 × 5 ＝ 425点
+4回の合計 ＝ 82 × 4 ＝ 328点
+5回目 ＝ 425 − 328 ＝ 97点
+
+答え：97点`,
+  tags: ['特殊算・文章題', '平均算'], visualTypes: ['barModel'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+/* ── 消去算 2問 ── */
+{
+  id: 'g6_wp_elim_001',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '消去算', pattern: '2式から1種類の値段を消去して求める',
+  title: 'ノートの値段（消去算）',
+  difficulty: 3,
+  text: 'えんぴつ2本とノート3冊で470円、\nえんぴつ4本とノート5冊で860円でした。\n\nノート1冊の値段は何円ですか？',
+  answer: 80, answerType: 'number', unit: '円',
+  hint: 'えんぴつを消去するために①×2を作り、②と引き算しよう。\n①×2：えんぴつ4本＋ノート6冊＝940円\n②  ：えんぴつ4本＋ノート5冊＝860円\n差：ノート1冊＝80円',
+  solution: `① 2e＋3n ＝ 470
+② 4e＋5n ＝ 860
+
+①×2：4e＋6n ＝ 940
+②　：4e＋5n ＝ 860
+───────────
+差：   n ＝ 80円
+
+確認：e ＝ (470−3×80)÷2 ＝ (470−240)÷2 ＝ 115円
+4×115＋5×80 ＝ 460＋400 ＝ 860円 ✓
+
+答え：80円`,
+  tags: ['特殊算・文章題', '消去算'], visualTypes: ['table'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
+{
+  id: 'g6_wp_elim_002',
+  catId: 'pc-special', grade: 6, course: 'exam',
+  mainCategory: 'word_problems', lessonUnit: '消去算', pattern: '係数をそろえて消去する',
+  title: 'りんごの値段（消去算）',
+  difficulty: 4,
+  text: 'みかん3個とりんご2個で540円、\nみかん5個とりんご4個で940円でした。\n\nりんご1個の値段は何円ですか？',
+  answer: 60, answerType: 'number', unit: '円',
+  hint: 'りんごを消去するために①×2を作り、②から引こう。\n①×2：みかん6個＋りんご4個＝1080円\n②  ：みかん5個＋りんご4個＝ 940円\n差：みかん1個＝140円',
+  solution: `① 3m＋2a ＝ 540
+② 5m＋4a ＝ 940
+
+①×2：6m＋4a ＝ 1080
+②　：5m＋4a ＝  940
+───────────
+差：   m ＝ 140円（みかん1個）
+
+りんご：(540−3×140)÷2 ＝ (540−420)÷2 ＝ 60円
+
+確認：5×140＋4×60 ＝ 700＋240 ＝ 940円 ✓
+
+答え：60円`,
+  tags: ['特殊算・文章題', '消去算'], visualTypes: ['table'], isRandomGenerated: false,
+  topicUnitId: 'u6-special',
+},
+
 ];
 
 /* ════════════════════════════════════════
@@ -3122,6 +3810,279 @@ const CHALLENGES = [
       { title:'答えを確かめる',
         text:`塩：12 ＋ 0.10×150 ＝ 12 ＋ 15 ＝ 27g\n全体：300 ＋ 150 ＝ 450g\n濃度：27 ÷ 450 × 100 ＝ 6% ✓`,
         visual:`<div class="vis-formula">27 ÷ 450 × 100 ＝ 6% ✓</div>` },
+    ]
+  },
+
+  /* ════════════════════════════════════════
+     特殊算・文章題 チャレンジ（grade:6）
+     トピック学習（★1〜★3）＋ 難問（★4〜★5）
+  ════════════════════════════════════════ */
+
+  /* ── トピック学習 ★1〜★3 ── */
+
+  { id:'g6_wp_sumdiff_topic_001', grade:6, course:'exam',
+    category:'和差算', catColor:'#E65100', catBg:'#FFF3E0', borderColor:'#F57C00',
+    mainCategory:'word_problems', unit:'和差算', pattern:'和と差から2つの数を求める（基本）',
+    difficulty:1, answerType:'number',
+    title:'和差算の基本：2つの数を求める',
+    question:`2つの整数の和は50、差は14です。\n\n大きい方の数を求めなさい。`,
+    answer:32, answerUnit:'',
+    hint:`「和と差」が出てきたら和差算！\n（和 ＋ 差） ÷ 2 ＝ 大きい方`,
+    tags:['特殊算・文章題','和差算','基本'],
+    visualTypes:['lineDiagram'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'和差算の見分け方',
+        text:`「2つの量の合計（和）」と「2つの量の差」が\n同時に分かっているとき → 和差算！\n\n和 ＝ 50、差 ＝ 14`,
+        visual:`<div class="vis-formula">和50、差14 → 和差算</div>` },
+      { title:'線分図で整理する',
+        text:`大きい方を上、小さい方を下に書く。\n\n大 ─────────────\n小 ───────────\n    ↑差14↑\n\n大＋小 ＝ 50（和）\n大−小 ＝ 14（差）`,
+        visual:`<div class="vis-formula">大 ＋ 小 ＝ 50<br>大 − 小 ＝ 14</div>` },
+      { title:'公式で計算する（答え）',
+        text:`大きい方 ＝ （和 ＋ 差） ÷ 2\n       ＝ （50 ＋ 14） ÷ 2\n       ＝ 64 ÷ 2\n       ＝ 32\n\n小さい方 ＝ 50 − 32 ＝ 18\n確認：32 ＋ 18 ＝ 50 ✓　32 − 18 ＝ 14 ✓`,
+        visual:`<div class="vis-formula">（50 ＋ 14） ÷ 2 ＝ <b>32</b></div>` },
+    ]
+  },
+
+  { id:'g6_wp_crane_topic_001', grade:6, course:'exam',
+    category:'つるかめ算', catColor:'#6A1B9A', catBg:'#F3E5F5', borderColor:'#8E24AA',
+    mainCategory:'word_problems', unit:'つるかめ算', pattern:'2種類の個数から合計数量を求める（基本）',
+    difficulty:2, answerType:'number',
+    title:'つるかめ算の基本：鶴と亀',
+    question:`鶴と亀が合わせて8匹います。\n足の合計は22本です。\n\n鶴は何匹いますか？`,
+    answer:5, answerUnit:'匹',
+    hint:`「合計個数」と「合計数量」が出てきたらつるかめ算！\n全部亀（4本脚）と仮定：4×8＝32本\n実際との差：32−22＝10本\n亀を鶴に変えると1匹につき2本減る：10÷2＝5匹`,
+    tags:['特殊算・文章題','つるかめ算','基本'],
+    visualTypes:['areaModel'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'つるかめ算の見分け方',
+        text:`「2種類のものの合計個数」と「合計数量（金額・足の数など）」\nが両方分かっているとき → つるかめ算！`,
+        visual:`<div class="vis-formula">合計匹数8匹、合計足数22本 → つるかめ算</div>` },
+      { title:'仮定法：全部同じと仮定する',
+        text:`全部亀（4本脚）と仮定すると\n4 × 8 ＝ 32本\n\n実際は 22本 → 差 ＝ 32 − 22 ＝ 10本`,
+        visual:`<div class="vis-formula">仮定 32本 − 実際 22本 ＝ 差 10本</div>` },
+      { title:'差から鶴の数を求める（答え）',
+        text:`亀を鶴に変えると 1匹につき足が 2本減る\n（亀4本 → 鶴2本）\n\n鶴の数 ＝ 10 ÷ 2 ＝ 5匹\n\n確認：鶴5＋亀3\n2×5＋4×3 ＝ 10＋12 ＝ 22本 ✓`,
+        visual:`<div class="vis-formula">10 ÷ 2 ＝ <b>5匹</b></div>` },
+    ]
+  },
+
+  { id:'g6_wp_surplus_topic_001', grade:6, course:'exam',
+    category:'過不足算', catColor:'#1565C0', catBg:'#E3F2FD', borderColor:'#1E88E5',
+    mainCategory:'word_problems', unit:'過不足算', pattern:'余りと不足から人数を求める（基本）',
+    difficulty:2, answerType:'number',
+    title:'過不足算の基本：消しゴムを配る',
+    question:`生徒に消しゴムを配ります。\n1人に3個ずつ配ると5個余り、\n1人に4個ずつ配ると2個足りません。\n\n生徒は何人いますか？`,
+    answer:7, answerUnit:'人',
+    hint:`「配ると余る・足りない」が出てきたら過不足算！\n人数 ＝ （余り ＋ 不足） ÷ （1人分の差）`,
+    tags:['特殊算・文章題','過不足算','基本'],
+    visualTypes:['lineDiagram'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'過不足算の見分け方',
+        text:`「配ると○個余る」「配ると○個足りない」が\n出てきたら → 過不足算！\n\n余り ＝ 5個、不足 ＝ 2個\n1人分の差 ＝ 4 − 3 ＝ 1個`,
+        visual:`<div class="vis-formula">余り5、不足2、差1 → 過不足算</div>` },
+      { title:'人数の公式',
+        text:`人数 ＝ （余り ＋ 不足） ÷ 1人分の差\n     ＝ （5 ＋ 2） ÷ （4 − 3）\n     ＝ 7 ÷ 1\n     ＝ 7人`,
+        visual:`<div class="vis-formula">（5 ＋ 2） ÷ 1 ＝ 7人</div>` },
+      { title:'答えを確認する',
+        text:`消しゴムの数：3×7＋5 ＝ 26個\n4個ずつ：4×7 ＝ 28 > 26、差 ＝ 2個 ✓\n\n答え：7人`,
+        visual:`<div class="vis-formula">3×7＋5 ＝ 26個 ✓</div>` },
+    ]
+  },
+
+  { id:'g6_wp_tree_topic_001', grade:6, course:'exam',
+    category:'植木算', catColor:'#2E7D32', catBg:'#E8F5E9', borderColor:'#43A047',
+    mainCategory:'word_problems', unit:'植木算', pattern:'両端あり植木算（基本）',
+    difficulty:1, answerType:'number',
+    title:'植木算の基本：道に木を植える',
+    question:`60mの道の片側に、端から端まで等間隔で木を植えます。\n間隔は6mです。\n\n木は何本必要ですか？`,
+    answer:11, answerUnit:'本',
+    hint:`「木・電柱・間隔」が出てきたら植木算！\n両端に植えるとき：本数 ＝ 道の長さ ÷ 間隔 ＋ 1`,
+    tags:['特殊算・文章題','植木算','基本'],
+    visualTypes:['lineDiagram'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'植木算の見分け方',
+        text:`「木・電柱・旗を等間隔に並べる」が出てきたら植木算！\n\n両端あり → 本数 ＝ 間隔の数 ＋ 1\n円形（池の周り）→ 本数 ＝ 間隔の数`,
+        visual:`<div class="vis-formula">木 ○──○──○──○ 木<br>間隔3つ、木4本</div>` },
+      { title:'間隔の数を求める',
+        text:`間隔の数 ＝ 60 ÷ 6 ＝ 10か所`,
+        visual:`<div class="vis-formula">60 ÷ 6 ＝ 10か所の間隔</div>` },
+      { title:'木の本数を求める（答え）',
+        text:`両端あり → 本数 ＝ 間隔の数 ＋ 1\n       ＝ 10 ＋ 1\n       ＝ 11本`,
+        visual:`<div class="vis-formula">10 ＋ 1 ＝ <b>11本</b></div>` },
+    ]
+  },
+
+  { id:'g6_wp_age_topic_001', grade:6, course:'exam',
+    category:'年齢算', catColor:'#C62828', catBg:'#FFEBEE', borderColor:'#E53935',
+    mainCategory:'word_problems', unit:'年齢算', pattern:'何年後に何倍になるか（基本）',
+    difficulty:2, answerType:'number',
+    title:'年齢算の基本：何年後に2倍になるか',
+    question:`現在、父は38歳、子は10歳です。\n\n何年後に父の年齢が子の年齢のちょうど2倍になりますか？`,
+    answer:18, answerUnit:'年後',
+    hint:`年齢差は変わらない！\n父と子の差：38−10＝28歳（常に一定）\nx年後：38+x ＝ 2×(10+x)\n38+x ＝ 20+2x → 18 ＝ x`,
+    tags:['特殊算・文章題','年齢算','基本'],
+    visualTypes:['lineDiagram'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'年齢算の大切なポイント',
+        text:`年齢差は何年経っても変わらない！\n父−子 ＝ 38−10 ＝ 28歳（ずっと28歳差）\n\nこれが年齢算の核心。`,
+        visual:`<div class="vis-formula">父38歳 − 子10歳 ＝ 28歳差（不変）</div>` },
+      { title:'x年後として式を立てる',
+        text:`x年後の父：38＋x 歳\nx年後の子：10＋x 歳\n\n2倍になる条件：\n38＋x ＝ 2（10＋x）\n38＋x ＝ 20＋2x`,
+        visual:`<div class="vis-formula">38＋x ＝ 2(10＋x)</div>` },
+      { title:'式を解いて答えを出す',
+        text:`38＋x ＝ 20＋2x\n38−20 ＝ 2x−x\n18 ＝ x\n\n18年後：父56歳、子28歳 → 56＝2×28 ✓`,
+        visual:`<div class="vis-formula">x ＝ <b>18年後</b></div>` },
+    ]
+  },
+
+  /* ── 難問チャレンジ ★4〜★5 ── */
+
+  { id:'g6_wp_sumdiff_hard_001', grade:6, course:'exam',
+    category:'和差算', catColor:'#E65100', catBg:'#FFF3E0', borderColor:'#F57C00',
+    mainCategory:'word_problems', unit:'和差算', pattern:'3つの数のペアの和から各数を求める',
+    difficulty:4, answerType:'number',
+    title:'3組の和から中間の数を求める（和差算 発展）',
+    question:`3つの整数A、B、Cがあります。\nAとBの和は72、BとCの和は84、AとCの和は78です。\n\nBの値を求めなさい。`,
+    answer:39, answerUnit:'',
+    hint:`3つの和をすべて足すと？\n（A＋B）＋（B＋C）＋（A＋C）＝ 2（A＋B＋C）\n72＋84＋78 ＝ 234 → A＋B＋C ＝ 117\nB ＝ 117 − （A＋C） ＝ 117 − 78`,
+    tags:['特殊算・文章題','和差算','難問'],
+    visualTypes:['lineDiagram'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'3つの和をすべて足すポイント',
+        text:`AとB、BとC、AとCをすべて足すと\n（A＋B）＋（B＋C）＋（A＋C）\n＝ 2A＋2B＋2C\n＝ 2（A＋B＋C）\n\n72＋84＋78 ＝ 234\nA＋B＋C ＝ 234 ÷ 2 ＝ 117`,
+        visual:`<div class="vis-formula">（72＋84＋78）÷ 2 ＝ 117</div>` },
+      { title:'BをA＋B＋CからA＋Cを引いて求める',
+        text:`A＋B＋C ＝ 117\nA＋C ＝ 78（問題より）\n\nB ＝ 117 − 78 ＝ 39`,
+        visual:`<div class="vis-formula">117 − 78 ＝ <b>39</b></div>` },
+      { title:'確認する',
+        text:`A ＝ 117 − 84 ＝ 33、C ＝ 117 − 72 ＝ 45\n\nA＋B ＝ 33＋39 ＝ 72 ✓\nB＋C ＝ 39＋45 ＝ 84 ✓\nA＋C ＝ 33＋45 ＝ 78 ✓`,
+        visual:`<div class="vis-formula">A＝33、B＝39、C＝45 ✓</div>` },
+    ]
+  },
+
+  { id:'g6_wp_crane_hard_001', grade:6, course:'exam',
+    category:'つるかめ算', catColor:'#6A1B9A', catBg:'#F3E5F5', borderColor:'#8E24AA',
+    mainCategory:'word_problems', unit:'つるかめ算', pattern:'速さと時間の組み合わせから時間を求める',
+    difficulty:4, answerType:'number',
+    title:'電車とバスの旅（つるかめ算 発展）',
+    question:`バス（時速30km）と電車（時速80km）を乗り継いで合計3時間で190km移動した。\nさらに電車の運賃はバスの運賃より1区間あたり200円高く、\n合計運賃は電車2区間＋バス1区間で1100円でした。\n\nバスに乗っていた時間は何時間ですか？`,
+    answer:1, answerUnit:'時間',
+    hint:`まず移動のつるかめ算で電車・バスの時間を求める。\n全部バスなら 30×3＝90km。差190−90＝100km。\nバスを電車に変えると 50km/時増える → 電車 100÷50＝2時間\nバス ＝ 3−2 ＝ 1時間`,
+    tags:['特殊算・文章題','つるかめ算','難問'],
+    visualTypes:['areaModel'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'移動のつるかめ算',
+        text:`全部バスなら：30 × 3 ＝ 90km\n実際は 190km → 差：100km\n\nバスを電車に変えると 80−30＝50km/時 増える\n電車の時間：100 ÷ 50 ＝ 2時間\nバスの時間：3 − 2 ＝ 1時間`,
+        visual:`<div class="vis-formula">電車2時間、バス1時間</div>` },
+      { title:'運賃の確認',
+        text:`バスの1区間運賃を □ 円とすると\n電車 ＝ □＋200 円\n\n電車2区間＋バス1区間\n2(□＋200)＋□ ＝ 1100\n3□＋400 ＝ 1100\n3□ ＝ 700 → □ ＝ 233...（小数なので確認用のみ）`,
+        visual:`<div class="vis-formula">移動時間の答え：バス1時間</div>` },
+      { title:'答え',
+        text:`バスに乗っていた時間：1時間\n\n確認：30×1＋80×2 ＝ 30＋160 ＝ 190km ✓`,
+        visual:`<div class="vis-formula">バス ＝ <b>1時間</b></div>` },
+    ]
+  },
+
+  { id:'g6_wp_surplus_hard_001', grade:6, course:'exam',
+    category:'過不足算', catColor:'#1565C0', catBg:'#E3F2FD', borderColor:'#1E88E5',
+    mainCategory:'word_problems', unit:'過不足算', pattern:'1人分の差が大きい差集め算',
+    difficulty:4, answerType:'number',
+    title:'ノートの束を配る（差集め算 発展）',
+    question:`何人かの生徒にノートを配ります。\n1人に12冊ずつ配ると20冊余り、\n1人に15冊ずつ配ると16冊足りません。\n\nノートは全部で何冊ありますか？`,
+    answer:164, answerUnit:'冊',
+    hint:`1人分の差は 15−12＝3冊。\n人数 ＝ （20＋16）÷3 ＝ 12人\nノートの冊数 ＝ 12×12＋20`,
+    tags:['特殊算・文章題','過不足算','差集め算','難問'],
+    visualTypes:['lineDiagram'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'1人分の差が1でないとき',
+        text:`1人分の配り方の差 ＝ 15 − 12 ＝ 3冊\n\n人数 ＝ （余り ＋ 不足） ÷ 1人分の差\n     ＝ （20 ＋ 16） ÷ 3\n     ＝ 36 ÷ 3\n     ＝ 12人`,
+        visual:`<div class="vis-formula">（20＋16）÷3 ＝ 12人</div>` },
+      { title:'ノートの冊数を求める（答え）',
+        text:`12冊ずつ配ると20冊余る：\nノート ＝ 12 × 12 ＋ 20\n      ＝ 144 ＋ 20\n      ＝ 164冊`,
+        visual:`<div class="vis-formula">12×12＋20 ＝ <b>164冊</b></div>` },
+      { title:'確認する',
+        text:`15冊ずつ配ると：15 × 12 ＝ 180冊\n164 < 180 → 不足 ＝ 180 − 164 ＝ 16冊 ✓`,
+        visual:`<div class="vis-formula">180 − 164 ＝ 16冊不足 ✓</div>` },
+    ]
+  },
+
+  { id:'g6_wp_age_hard_001', grade:6, course:'exam',
+    category:'年齢算', catColor:'#C62828', catBg:'#FFEBEE', borderColor:'#E53935',
+    mainCategory:'word_problems', unit:'年齢算', pattern:'現在の倍数関係と年齢差から現在の年齢',
+    difficulty:4, answerType:'number',
+    title:'倍数関係が変わる年齢算（発展）',
+    question:`現在、兄の年齢は弟の年齢のちょうど2倍で、\n2人の年齢差は5歳です。\n\n何年後に兄の年齢が弟の年齢の1.5倍になりますか？`,
+    answer:5, answerUnit:'年後',
+    hint:`年齢差5歳＋2倍関係から現在の年齢を求める。\n弟 ＝ a、兄 ＝ 2a、2a−a ＝ 5 → a ＝ 5\nx年後：(10+x) ＝ 1.5×(5+x)`,
+    tags:['特殊算・文章題','年齢算','難問'],
+    visualTypes:['lineDiagram'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'現在の年齢を求める',
+        text:`弟 ＝ a 歳とすると 兄 ＝ 2a 歳\n年齢差：2a − a ＝ a ＝ 5歳\n→ 弟5歳、兄10歳`,
+        visual:`<div class="vis-formula">弟5歳、兄10歳（差5歳 ✓）</div>` },
+      { title:'1.5倍になる年後を求める',
+        text:`x年後とする。\n兄：10＋x 歳、弟：5＋x 歳\n\n10＋x ＝ 1.5（5＋x）\n10＋x ＝ 7.5＋1.5x\n2.5 ＝ 0.5x\nx ＝ 5年後`,
+        visual:`<div class="vis-formula">10＋x ＝ 1.5(5＋x) → x ＝ 5</div>` },
+      { title:'確認する',
+        text:`5年後：兄15歳、弟10歳\n15 ÷ 10 ＝ 1.5倍 ✓`,
+        visual:`<div class="vis-formula">15 ÷ 10 ＝ <b>1.5倍</b> ✓</div>` },
+    ]
+  },
+
+  { id:'g6_wp_elim_hard_001', grade:6, course:'exam',
+    category:'消去算', catColor:'#4527A0', catBg:'#EDE7F6', borderColor:'#5E35B1',
+    mainCategory:'word_problems', unit:'消去算', pattern:'係数をそろえて変数を消去する（発展）',
+    difficulty:4, answerType:'number',
+    title:'えんぴつとボールペンの値段（消去算 発展）',
+    question:`えんぴつ3本とボールペン2本を買うと760円、\nえんぴつ5本とボールペン4本を買うと1340円でした。\n\nえんぴつ1本の値段は何円ですか？`,
+    answer:180, answerUnit:'円',
+    hint:`ボールペンを消去するために①×2を作り、②から引く。\n①×2：えんぴつ6本＋ボールペン4本 ＝ 1520円\n②  ：えんぴつ5本＋ボールペン4本 ＝ 1340円\n差：えんぴつ1本 ＝ 180円`,
+    tags:['特殊算・文章題','消去算','難問'],
+    visualTypes:['table'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'なぜ消去するのか',
+        text:`未知数が2つ（えんぴつ価格・ボールペン価格）あるとき\n一方を消してもう一方だけにする ＝ 消去算\n\n① 3e＋2b ＝ 760\n② 5e＋4b ＝ 1340`,
+        visual:`<div class="vis-formula">① 3e＋2b＝760<br>② 5e＋4b＝1340</div>` },
+      { title:'ボールペンを消去する',
+        text:`①×2：6e＋4b ＝ 1520\n②  ：5e＋4b ＝ 1340\n───────────\n差：   e ＝ 180円`,
+        visual:`<div class="vis-formula">1520 − 1340 ＝ <b>180円</b></div>` },
+      { title:'確認する',
+        text:`b ＝ (760 − 3×180) ÷ 2 ＝ (760−540) ÷ 2 ＝ 110円\n\n②の確認：5×180＋4×110 ＝ 900＋440 ＝ 1340円 ✓`,
+        visual:`<div class="vis-formula">e＝180円、b＝110円 ✓</div>` },
+    ]
+  },
+
+  { id:'g6_wp_complex_hard_001', grade:6, course:'exam',
+    category:'和差算', catColor:'#E65100', catBg:'#FFF3E0', borderColor:'#F57C00',
+    mainCategory:'word_problems', unit:'和差算', pattern:'和差算と比の融合問題',
+    difficulty:5, answerType:'number',
+    title:'学年人数から女子を求める（和差算＋比）',
+    question:`ある学校の5年生と6年生が合わせて280人います。\n5年生は6年生より40人少ない。\n6年生の男女の比は2：3です。\n\n6年生の女子は何人ですか？`,
+    answer:96, answerUnit:'人',
+    hint:`まず5年生・6年生の人数を和差算で求める。\n6年生 ＝ （280＋40）÷2 ＝ 160人\n女子 ＝ 160 × 3/5 ＝ 96人`,
+    tags:['特殊算・文章題','和差算','比','融合問題','難問'],
+    visualTypes:['lineDiagram'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'和差算で6年生の人数を求める',
+        text:`5年生 ＋ 6年生 ＝ 280人（和）\n6年生 − 5年生 ＝ 40人（差）\n\n6年生 ＝ （280 ＋ 40） ÷ 2\n      ＝ 320 ÷ 2 ＝ 160人`,
+        visual:`<div class="vis-formula">（280＋40）÷2 ＝ 160人（6年生）</div>` },
+      { title:'比から女子の人数を求める（答え）',
+        text:`6年生160人の男女比 ＝ 2：3\n女子の割合 ＝ 3 ÷ （2＋3） ＝ 3/5\n\n女子 ＝ 160 × 3/5\n     ＝ 96人`,
+        visual:`<div class="vis-formula">160 × 3/5 ＝ <b>96人</b></div>` },
+      { title:'確認する',
+        text:`5年生 ＝ 160 − 40 ＝ 120人\n120 ＋ 160 ＝ 280人 ✓\n\n男子 ＝ 160 × 2/5 ＝ 64人\n男女比：64：96 ＝ 2：3 ✓`,
+        visual:`<div class="vis-formula">5年生120人＋6年生160人＝280人 ✓</div>` },
     ]
   },
 

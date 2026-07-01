@@ -57,7 +57,10 @@ const EXAM_UNITS_G6 = [
     { id: 'u6-calc',    num: '①', icon: '🔢', title: '計算・数の処理',   sub: '逆算・条件付き計算・工夫した計算',            difficulty: 2, categories: ['計算'],                                    count: 0,  available: false },
     { id: 'u6-number',  num: '②', icon: '🔍', title: '数・規則・論理',   sub: '約数・余り・規則性・推理・場合分け',          difficulty: 4, categories: ['数の性質','規則性'],                       count: 0,  available: false },
     { id: 'u6-ratio',   num: '③', icon: '⚖️', title: '割合・比の完成',   sub: '連比・相当算・売買・濃度・比融合問題',        difficulty: 5, categories: ['割合','比','割合の基本','売買損益','相当算','倍数算','仕事算','ニュートン算'],  count: 20, available: true  },
-    { id: 'u6-salt',    num: '③+', icon: '🧪', title: '食塩水',          sub: '濃度計算・混合・蒸発・希釈',                  difficulty: 4, categories: ['食塩水'],                              count: 8,  available: true, topicScreen: 'salt' },
+    // u6-salt は u6-ratio の下位単元（食塩水専用トピック）。
+    // UIでは「割合・比」グループの一部として扱う（parentUnit: 'u6-ratio'）。
+    // mainCategory は 'ratio' であり、CATEGORIES の id:'ratio' に対応する。
+    { id: 'u6-salt',    num: '③+', icon: '🧪', title: '食塩水',          sub: '濃度計算・混合・蒸発・希釈',                  difficulty: 4, categories: ['食塩水'],                              count: 8,  available: true, topicScreen: 'salt', parentUnit: 'u6-ratio' },
     { id: 'u6-special', num: '④', icon: '📝', title: '特殊算・文章題',   sub: '和差算・つるかめ算・過不足算・植木算・年齢算・平均算・分配算・集合算・消去算', difficulty: 4, categories: ['和差算','つるかめ算','過不足算','植木算','年齢算','平均算','消去算','分配算','集合算','水槽','ニュートン算'], count: 36, available: true  },
     { id: 'u6-speed',   num: '⑤', icon: '🏃', title: '速さの完成',       sub: '旅人算・流水算・通過算・ダイヤグラム・速さと比', difficulty: 4, categories: ['速さ','流水算','通過算','時計算','ダイヤグラム','速さと比'], count: 30, available: true  },
     { id: 'u6-plane',   num: '⑥', icon: '📐', title: '平面図形の完成',   sub: '面積比・相似・円・移動・図形融合',            difficulty: 5, categories: ['平面図形'],                            count: 0,  available: false },
@@ -69,7 +72,7 @@ const EXAM_UNITS_G6 = [
 const PRACTICE_CATS = [
     { id: 'pc-calc',    icon: '🔢', title: '計算・数の処理',   sub: '工夫した計算・逆算',           unitId5: 'u5-calc',    unitId6: 'u6-calc'    },
     { id: 'pc-number',  icon: '🔍', title: '数の性質・規則性', sub: '約数・倍数・数列・周期',        unitId5: 'u5-number',  unitId6: 'u6-number'  },
-    { id: 'pc-ratio',   icon: '⚖️', title: '割合・比',          sub: '濃度・売買・比の利用',         unitId5: 'u5-ratio',   unitId6: 'u6-ratio'   },
+    { id: 'pc-ratio',   icon: '⚖️', title: '割合・比',          sub: '食塩水・濃度・売買・比の利用', unitId5: 'u5-ratio',   unitId6: 'u6-ratio'   },
     { id: 'pc-special', icon: '📝', title: '特殊算・文章題',   sub: '和差算・つるかめ算・仕事算',   unitId5: 'u5-special', unitId6: 'u6-special' },
     { id: 'pc-speed',   icon: '🏃', title: '速さ',              sub: '旅人算・流水算・通過算',       unitId5: 'u5-speed',   unitId6: 'u6-speed'   },
     { id: 'pc-plane',   icon: '📐', title: '平面図形',          sub: '面積・角度・相似・円',         unitId5: 'u5-plane',   unitId6: 'u6-plane'   },
@@ -79,14 +82,19 @@ const PRACTICE_CATS = [
 
 /* ════════════════════════════════════════
    CATEGORIES MASTER（8分野 正規ID）
+   problems.js の mainCategory 値との対応:
+     'ratio'          → id:'ratio'               割合・比・食塩水・売買損益・仕事算・ニュートン算を含む
+     'speed'          → id:'speed'               旅人算・通過算・流水算・時計算・ダイヤグラム・速さと比を含む
+     'word_problems'  → id:'word_problems'        和差算・つるかめ算・過不足算・植木算・年齢算・平均算・消去算・分配算・集合算を含む
+     'solid_geometry' → id:'solid_geometry'       水槽・立体図形を含む
 ════════════════════════════════════════ */
 const CATEGORIES = [
     { id: 'calculation',         name: '計算・数の処理',   priority: 'C' },
     { id: 'number_properties',   name: '数の性質・規則性', priority: 'B' },
-    { id: 'ratio',               name: '割合・比',          priority: 'A' },
-    { id: 'speed',               name: '速さ',              priority: 'A' },
-    { id: 'word_problems',       name: '特殊算・文章題',   priority: 'A' },
+    { id: 'ratio',               name: '割合・比',          priority: 'A' }, // mainCategory:'ratio'
+    { id: 'speed',               name: '速さ',              priority: 'A' }, // mainCategory:'speed'
+    { id: 'word_problems',       name: '特殊算・文章題',   priority: 'A' }, // mainCategory:'word_problems'
     { id: 'plane_geometry',      name: '平面図形',          priority: 'A' },
-    { id: 'solid_geometry',      name: '立体図形・水量',   priority: 'A' },
+    { id: 'solid_geometry',      name: '立体図形・水量',   priority: 'A' }, // mainCategory:'solid_geometry'
     { id: 'combinatorics_logic', name: '場合の数・論理',   priority: 'B' },
 ];

@@ -427,6 +427,9 @@ function showScreen(id, opts={}) {
     if (id === 'hard-challenge') { hcSwitchMode('all'); renderHardChallenge(); }
     if (id === 'weak-review')   { renderWeakReview(); }
     if (id === 'report')        { renderReport(); }
+    if (id === 'u6-ratio')   { initTopicTrial('u6-ratio'); }
+    if (id === 'u6-speed')   { initTopicTrial('u6-speed'); }
+    if (id === 'u6-special') { initTopicTrial('u6-special'); }
     if (id === 'challenges') {
         if (opts.unitTitle) document.getElementById('ch-screen-title').textContent = opts.unitTitle;
         else document.getElementById('ch-screen-title').textContent = '難問チャレンジ';
@@ -1569,6 +1572,211 @@ function renderReport() {
         </div>`);
 
     container.innerHTML = sections.join('');
+}
+
+/* ════════════════════════════════════════
+   TOPIC TRIAL (体験問題)
+════════════════════════════════════════ */
+
+// トピックごとの状態管理
+const trialState = {};
+
+/**
+ * 体験問題を初期化して描画する
+ * @param {string} topicUnitId - 'u6-ratio' | 'u6-speed' | 'u6-special'
+ */
+function initTopicTrial(topicUnitId) {
+    const container = document.getElementById('trial-' + topicUnitId);
+    const navCard   = document.getElementById(topicUnitId + '-nav');
+    if (!container) return;
+
+    // 対象問題を difficulty 1〜2 で最大3件取得
+    const problems = (typeof PRACTICE_PROBLEMS !== 'undefined' ? PRACTICE_PROBLEMS : [])
+        .filter(p => p.topicUnitId === topicUnitId && p.difficulty <= 2)
+        .slice(0, 3);
+
+    if (problems.length === 0) {
+        // 問題なし → セクション非表示、既存導線を表示
+        container.innerHTML = '';
+        if (navCard) navCard.style.display = '';
+        return;
+    }
+
+    // 問題あり → 既存導線を非表示
+    if (navCard) navCard.style.display = 'none';
+
+    // 状態リセット
+    trialState[topicUnitId] = {
+        problems,
+        current: 0,
+        answered: false,
+    };
+
+    renderTrialQuestion(topicUnitId);
+}
+
+/**
+ * 現在の問題を描画する
+ */
+function renderTrialQuestion(topicUnitId) {
+    const state     = trialState[topicUnitId];
+    const container = document.getElementById('trial-' + topicUnitId);
+    if (!state || !container) return;
+
+    const { problems, current } = state;
+    const prob = problems[current];
+    const total = problems.length;
+
+    // 選択肢を生成（4択）
+    const choices = generateChoices(prob);
+
+    const choicesHtml = choices.map((c, i) =>
+        `<button class="topic-trial-choice" onclick="checkTrialAnswer('${topicUnitId}', ${i}, ${JSON.stringify(c.value)}, ${c.isCorrect})">${escapeHtml(c.label)}</button>`
+    ).join('');
+
+    container.innerHTML = `
+        <div class="topic-trial-card">
+            <div class="topic-trial-header">
+                <span class="topic-trial-label">体験問題</span>
+                <span class="topic-trial-counter">${current + 1} / ${total}</span>
+            </div>
+            <div class="topic-trial-q">${escapeHtml(prob.text)}</div>
+            <div class="topic-trial-choices" id="trial-choices-${topicUnitId}">
+                ${choicesHtml}
+            </div>
+            <div id="trial-feedback-${topicUnitId}" style="display:none"></div>
+            <div id="trial-next-${topicUnitId}" style="display:none"></div>
+        </div>`;
+}
+
+/**
+ * 4択の選択肢を生成する
+ * answer が数値の場合は前後の差分値でダミーを作成
+ * answer が文字列の場合は同じ topicUnitId 内の他問題の answer からダミーを拝借
+ */
+function generateChoices(prob) {
+    const answer = prob.answer;
+    const unit   = prob.unit || '';
+
+    let choices = [];
+
+    if (typeof answer === 'number') {
+        // 数値の場合: 正解 ± 適当な差分でダミーを生成
+        const base = answer;
+        const step = Math.max(1, Math.round(Math.abs(base) * 0.25) || 1);
+        const candidates = [
+            base + step,
+            base - step,
+            base + step * 2,
+            base - step * 2,
+            base + step * 3,
+            base - step * 3,
+            base + 1,
+            base + 2,
+            base + 3,
+            base - 1,
+        ].filter(v => v !== base && v > 0);
+
+        // 重複排除して3つ選ぶ
+        const dummies = [...new Set(candidates)].slice(0, 3);
+
+        choices = [
+            { value: base, label: String(base) + (unit ? unit : ''), isCorrect: true },
+            ...dummies.map(d => ({ value: d, label: String(d) + (unit ? unit : ''), isCorrect: false })),
+        ];
+    } else {
+        // 文字列・その他: 全問題から同 topicUnitId 内の answer を流用してダミーを作成
+        const otherAnswers = (typeof PRACTICE_PROBLEMS !== 'undefined' ? PRACTICE_PROBLEMS : [])
+            .filter(p => p.topicUnitId === prob.topicUnitId && p.answer !== answer)
+            .map(p => p.answer);
+        const dummies = [...new Set(otherAnswers)].slice(0, 3);
+        choices = [
+            { value: answer, label: String(answer) + (unit ? unit : ''), isCorrect: true },
+            ...dummies.map(d => ({ value: d, label: String(d) + (unit ? unit : ''), isCorrect: false })),
+        ];
+    }
+
+    // シャッフル
+    for (let i = choices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [choices[i], choices[j]] = [choices[j], choices[i]];
+    }
+
+    return choices;
+}
+
+/**
+ * 選択肢クリック時の正誤判定
+ */
+function checkTrialAnswer(topicUnitId, choiceIdx, value, isCorrect) {
+    const state = trialState[topicUnitId];
+    if (!state || state.answered) return;
+    state.answered = true;
+
+    const prob    = state.problems[state.current];
+    const total   = state.problems.length;
+    const isLast  = state.current >= total - 1;
+
+    // ボタンを全て無効化し、選択したボタンと正解ボタンをマーク
+    const choicesContainer = document.getElementById('trial-choices-' + topicUnitId);
+    if (choicesContainer) {
+        const btns = choicesContainer.querySelectorAll('.topic-trial-choice');
+        btns.forEach((btn, i) => {
+            btn.disabled = true;
+            if (i === choiceIdx) {
+                btn.classList.add(isCorrect ? 'correct' : 'wrong');
+            }
+            // 不正解の場合はフィードバックエリアに正解を表示する（後述）
+        });
+    }
+
+    // フィードバック表示
+    const feedbackEl = document.getElementById('trial-feedback-' + topicUnitId);
+    if (feedbackEl) {
+        const rawSolution = prob.solution || prob.hint || '';
+        const solutionHtml = escapeHtml(rawSolution).replace(/\n/g, '<br>');
+        if (isCorrect) {
+            feedbackEl.className = 'topic-trial-feedback ok';
+            feedbackEl.innerHTML = `<b>正解！</b><br>${solutionHtml}`;
+        } else {
+            feedbackEl.className = 'topic-trial-feedback ng';
+            feedbackEl.innerHTML = `<b>不正解。正解は ${escapeHtml(String(prob.answer))}${escapeHtml(prob.unit || '')} です。</b><br>${solutionHtml}`;
+        }
+        feedbackEl.style.display = 'block';
+    }
+
+    // 次へボタン / 演習問題へ進むボタン
+    const nextEl = document.getElementById('trial-next-' + topicUnitId);
+    if (nextEl) {
+        if (isLast) {
+            nextEl.innerHTML = `<button class="topic-trial-next-btn" onclick="openUnitPractice('${topicUnitId}')">演習問題へ進む →</button>`;
+        } else {
+            nextEl.innerHTML = `<button class="topic-trial-next-btn" onclick="nextTrialQuestion('${topicUnitId}')">次の問題へ →</button>`;
+        }
+        nextEl.style.display = 'block';
+    }
+}
+
+/**
+ * 次の問題に進む
+ */
+function nextTrialQuestion(topicUnitId) {
+    const state = trialState[topicUnitId];
+    if (!state) return;
+    state.current++;
+    state.answered = false;
+    renderTrialQuestion(topicUnitId);
+}
+
+/**
+ * HTML エスケープ（既存に同名関数があれば不要だが安全のため定義）
+ */
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
 }
 
 /* ════════════════════════════════════════

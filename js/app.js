@@ -409,6 +409,7 @@ function showScreen(id, opts={}) {
     if (current) appState.previousScreen = current.id.replace('-screen', '');
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active', 'slide-in'));
     const next = document.getElementById(id + '-screen');
+    if (!next) { console.warn('showScreen: unknown screen id:', id); return; }
     next.classList.add('active');
     void next.offsetWidth;
     next.classList.add('slide-in');
@@ -825,7 +826,8 @@ function renderChallengeList() {
     let filtered = chState.filter === 'すべて' ? base : base.filter(c => c.category === chState.filter);
     document.getElementById('ch-cards-container').innerHTML = filtered.map(c => {
         const stars='★'.repeat(c.difficulty)+'☆'.repeat(5-c.difficulty);
-        const preview=c.question.replace(/\n/g,' ').slice(0,48)+'…';
+        const raw = c.question.replace(/\n/g,' ');
+        const preview = raw.length > 48 ? raw.slice(0,48)+'…' : raw;
         return `<div class="ch-card" style="border-left-color:${c.borderColor}" onclick="openChallenge('${c.id}')">
             <div class="ch-card-top"><span class="ch-cat-badge" style="background:${c.catBg};color:${c.catColor}">${c.category}</span><span class="ch-stars">${stars}</span></div>
             <div class="ch-card-title">${c.title}</div>
@@ -1109,6 +1111,4 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('ans-input').addEventListener('keydown', e => { if(e.key==='Enter') checkAnswer(); });
     document.getElementById('ch-ans-input').addEventListener('keydown', e => { if(e.key==='Enter') chSubmitAnswer(); });
     updateStarBadge();
-    updateLearn();
-    generateProblem();
 });

@@ -101,8 +101,26 @@
                     <div class="exam-mode-feat">ステップ別の丁寧な解説つき</div>
                 </div>
             </div>
+            <div class="exam-mode-card weak" onclick="showScreen('weak-review')">
+                <div class="exam-mode-card-title">弱点復習</div>
+                <div class="exam-mode-card-sub">苦手な分野を見つけて集中的に復習する</div>
+                <div class="exam-mode-feats">
+                    <div class="exam-mode-feat">苦手カテゴリ・単元を自動分析</div>
+                    <div class="exam-mode-feat">最近間違えた問題を一覧表示</div>
+                    <div class="exam-mode-feat">おすすめ復習単元へ即アクセス</div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+
+<!-- ════════ WEAK REVIEW SCREEN ════════ -->
+<div id="weak-review-screen" class="screen">
+    <div class="screen-header exam-header">
+        <button class="back-btn" onclick="showScreen('exam-mode')">← もどる</button>
+        <span class="screen-title">弱点復習</span>
+    </div>
+    <div class="wr-body" id="wr-body"><!-- populated by JS --></div>
 </div>
 
 <!-- ════════ PRACTICE SCREEN ════════ -->

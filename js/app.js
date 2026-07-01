@@ -425,6 +425,7 @@ function showScreen(id, opts={}) {
     if (id === 'practice')      renderPractice();
     if (id === 'watertank')  { updateLearn(); generateProblem(); }
     if (id === 'hard-challenge') { hcSwitchMode('all'); renderHardChallenge(); }
+    if (id === 'weak-review')   { renderWeakReview(); }
     if (id === 'challenges') {
         if (opts.unitTitle) document.getElementById('ch-screen-title').textContent = opts.unitTitle;
         else document.getElementById('ch-screen-title').textContent = '難問チャレンジ';
@@ -1119,6 +1120,221 @@ function showStreakPopup() {
     void el.offsetWidth;
     el.classList.add('in');
     setTimeout(() => el.classList.remove('in'), 2800);
+}
+
+/* ════════════════════════════════════════
+   WEAK REVIEW SCREEN
+════════════════════════════════════════ */
+
+/**
+ * PRACTICE_CATS の catId から catId を演習問題へのジャンプキーとして使う。
+ * vista_stats のキー形式: g{grade}_exam_{catId}
+ */
+function renderWeakReview() {
+    const g = appState.grade;
+    const container = document.getElementById('wr-body');
+    if (!container) return;
+
+    const stats   = JSON.parse(lsGet('vista_stats',   '{}'));
+    const history = JSON.parse(lsGet('vista_history', '{}'));
+
+    // 全体の解答数を集計（演習問題のみ: g{grade}_exam_*）
+    let totalAnswered = 0;
+    PRACTICE_CATS.forEach(cat => {
+        const key = `g${g}_exam_${cat.id}`;
+        if (stats[key]) totalAnswered += stats[key].total;
+    });
+    // history の問題数も加算（recordProblemAttempt で記録されるもの）
+    const historyProbs = Object.keys(history).length;
+
+    // データ不足判定（5問未満）
+    if (totalAnswered < 5 && historyProbs < 5) {
+        container.innerHTML = `
+            <div class="wr-no-data">
+                <div class="wr-no-data-icon">📊</div>
+                <div class="wr-no-data-title">まずは問題を解いてみよう！</div>
+                <div class="wr-no-data-sub">5問以上解くと、苦手分析が表示されます。<br>演習問題や難問チャレンジに挑戦してみてください。</div>
+            </div>`;
+        return;
+    }
+
+    const sections = [];
+
+    // ── セクション1: 苦手カテゴリ TOP3 ──
+    const catStats = PRACTICE_CATS.map(cat => {
+        const key = `g${g}_exam_${cat.id}`;
+        const s = stats[key];
+        if (!s || s.total === 0) return null;
+        const pct = Math.round(s.correct / s.total * 100);
+        return { cat, correct: s.correct, total: s.total, pct };
+    }).filter(Boolean);
+
+    catStats.sort((a, b) => a.pct - b.pct);
+    const weakCats = catStats.slice(0, 3);
+
+    if (weakCats.length > 0) {
+        const rows = weakCats.map((item, i) => {
+            const rankClass = ['rank1','rank2','rank3'][i] || '';
+            const barClass  = item.pct >= 80 ? '' : item.pct >= 50 ? 'mid' : 'low';
+            return `
+                <div class="wr-item">
+                    <div class="wr-item-rank ${rankClass}">${i+1}</div>
+                    <div class="wr-item-body">
+                        <div class="wr-item-title">${item.cat.icon} ${item.cat.title}</div>
+                        <div class="wr-acc-bar-wrap">
+                            <div class="wr-acc-bar-bg"><div class="wr-acc-bar-fill ${barClass}" style="width:${item.pct}%"></div></div>
+                            <span class="wr-acc-pct">${item.pct}%</span>
+                        </div>
+                        <div class="wr-item-meta">${item.correct}/${item.total}問 正解</div>
+                    </div>
+                    <button class="wr-review-btn" onclick="wrGoToCat('${item.cat.id}')">この分野を復習する</button>
+                </div>`;
+        }).join('');
+        sections.push(`
+            <div class="wr-section">
+                <div class="wr-section-title">苦手カテゴリ TOP3</div>
+                ${rows}
+            </div>`);
+    }
+
+    // ── セクション2: 苦手unit TOP3 ──
+    // vista_history から lessonUnit 別に正答率を集計
+    const unitAccMap = {}; // unitName -> { correct, total }
+    Object.entries(history).forEach(([probId, attempts]) => {
+        const prob = PRACTICE_PROBLEMS.find(p => p.id === probId);
+        if (!prob || !prob.lessonUnit) return;
+        const unit = prob.lessonUnit;
+        if (!unitAccMap[unit]) unitAccMap[unit] = { correct: 0, total: 0, catId: prob.catId };
+        attempts.forEach(ok => {
+            unitAccMap[unit].total++;
+            if (ok) unitAccMap[unit].correct++;
+        });
+    });
+
+    const unitStats = Object.entries(unitAccMap)
+        .filter(([, v]) => v.total >= 3)
+        .map(([name, v]) => ({ name, pct: Math.round(v.correct / v.total * 100), correct: v.correct, total: v.total, catId: v.catId }))
+        .sort((a, b) => a.pct - b.pct)
+        .slice(0, 3);
+
+    if (unitStats.length > 0) {
+        const rows = unitStats.map((item, i) => {
+            const rankClass = ['rank1','rank2','rank3'][i] || '';
+            const barClass  = item.pct >= 80 ? '' : item.pct >= 50 ? 'mid' : 'low';
+            return `
+                <div class="wr-item">
+                    <div class="wr-item-rank ${rankClass}">${i+1}</div>
+                    <div class="wr-item-body">
+                        <div class="wr-item-title">${item.name}</div>
+                        <div class="wr-acc-bar-wrap">
+                            <div class="wr-acc-bar-bg"><div class="wr-acc-bar-fill ${barClass}" style="width:${item.pct}%"></div></div>
+                            <span class="wr-acc-pct">${item.pct}%</span>
+                        </div>
+                        <div class="wr-item-meta">${item.correct}/${item.total}問 正解（3回以上挑戦）</div>
+                    </div>
+                    ${item.catId ? `<button class="wr-review-btn" onclick="wrGoToCat('${item.catId}')">復習する</button>` : ''}
+                </div>`;
+        }).join('');
+        sections.push(`
+            <div class="wr-section">
+                <div class="wr-section-title">苦手単元 TOP3</div>
+                ${rows}
+            </div>`);
+    }
+
+    // ── セクション3: 最近間違えた問題（最大5件）──
+    // history で最後の試行が false の問題を収集
+    const recentWrong = [];
+    Object.entries(history).forEach(([probId, attempts]) => {
+        if (!attempts.length) return;
+        const last = attempts[attempts.length - 1];
+        if (last === false) {
+            const prob = PRACTICE_PROBLEMS.find(p => p.id === probId);
+            if (prob) recentWrong.push(prob);
+        }
+    });
+    // 最大5件
+    const recentWrongSlice = recentWrong.slice(0, 5);
+
+    if (recentWrongSlice.length > 0) {
+        const rows = recentWrongSlice.map(prob => {
+            const cat = PRACTICE_CATS.find(c => c.id === prob.catId);
+            const catName = cat ? cat.title : prob.catId || '';
+            return `
+                <div class="wr-wrong-item">
+                    <div class="wr-wrong-badge">まちがい</div>
+                    <div class="wr-wrong-body">
+                        <div class="wr-wrong-title">${prob.title}</div>
+                        <div class="wr-wrong-cat">${catName}${prob.lessonUnit ? ' ／ ' + prob.lessonUnit : ''}</div>
+                    </div>
+                </div>`;
+        }).join('');
+        sections.push(`
+            <div class="wr-section">
+                <div class="wr-section-title">最近間違えた問題</div>
+                ${rows}
+            </div>`);
+    }
+
+    // ── セクション4&5: おすすめ復習単元 ──
+    let recommendHtml = '';
+    if (weakCats.length > 0) {
+        // 苦手カテゴリ TOP1 の lessonUnit の中で正答率が最も低いunitを推薦
+        const top1Cat = weakCats[0];
+        // top1Catの中でunitStatsから一致するものを探す
+        const recommendUnit = unitStats.find(u => u.catId === top1Cat.cat.id);
+
+        const recTitle     = recommendUnit ? recommendUnit.name : top1Cat.cat.title;
+        const recSub       = recommendUnit
+            ? `${top1Cat.cat.title} の中で最も苦手な単元です（正答率 ${recommendUnit.pct}%）`
+            : `正答率 ${top1Cat.pct}% — 集中的に取り組みましょう`;
+        const recCatId     = top1Cat.cat.id;
+        recommendHtml = `
+            <div class="wr-recommend">
+                <div class="wr-recommend-icon">🎯</div>
+                <div class="wr-recommend-body">
+                    <div class="wr-recommend-label">今すぐ復習すべき単元</div>
+                    <div class="wr-recommend-title">${recTitle}</div>
+                    <div class="wr-recommend-sub">${recSub}</div>
+                </div>
+                <button class="wr-recommend-btn" onclick="wrGoToCat('${recCatId}')">復習する →</button>
+            </div>`;
+    } else if (catStats.length === 0) {
+        // 挑戦ゼロの場合: 未挑戦カテゴリを表示
+        const untriedCat = PRACTICE_CATS.find(cat => {
+            const probs = PRACTICE_PROBLEMS.filter(p => p.catId === cat.id && p.grade === g);
+            return probs.length > 0;
+        });
+        if (untriedCat) {
+            recommendHtml = `
+                <div class="wr-recommend">
+                    <div class="wr-recommend-icon">🌱</div>
+                    <div class="wr-recommend-body">
+                        <div class="wr-recommend-label">まずはこの分野に挑戦</div>
+                        <div class="wr-recommend-title">${untriedCat.icon} ${untriedCat.title}</div>
+                        <div class="wr-recommend-sub">まだ挑戦していない分野です。最初の一歩を踏み出しましょう！</div>
+                    </div>
+                    <button class="wr-recommend-btn" onclick="wrGoToCat('${untriedCat.id}')">挑戦する →</button>
+                </div>`;
+        }
+    }
+
+    if (recommendHtml) sections.push(recommendHtml);
+
+    container.innerHTML = sections.join('');
+}
+
+/**
+ * 弱点復習から演習問題カテゴリへ遷移する
+ */
+function wrGoToCat(catId) {
+    // showScreen('practice') は renderPractice() → pracShowCats() の順で呼ぶ。
+    // pracShowCats() の後に pracOpenCat() を呼ぶことで、カテゴリ一覧をスキップして
+    // 直接問題リストへ遷移する。
+    pracState.currentCatId = catId;
+    showScreen('practice');
+    // renderPractice が同期的に pracShowCats を呼んだ後で pracOpenCat を実行する。
+    pracOpenCat(catId);
 }
 
 /* ════════════════════════════════════════

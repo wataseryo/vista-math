@@ -807,3 +807,65 @@
 
         /* ── Wrong Answer color ── */
         .wrong-encourage { font-size: .84rem; color: var(--exam-primary); font-weight: bold; margin-top: 6px; }
+
+        /* ══ WEAK REVIEW CARD (exam-mode-screen) ══ */
+        .exam-mode-card.weak { background: linear-gradient(135deg, #064E3B, #065F46); border-top: 5px solid #10B981; }
+        .exam-mode-card.weak .exam-mode-card-title { color: #fff; }
+        .exam-mode-card.weak .exam-mode-card-sub   { color: rgba(255,255,255,.85); }
+        .exam-mode-card.weak .exam-mode-feat        { color: rgba(255,255,255,.9); }
+
+        /* ══ WEAK REVIEW SCREEN ══ */
+        #weak-review-screen { background: #F0FDF4; }
+        .wr-body { flex: 1; overflow-y: auto; padding: 20px 16px 40px; display: flex; flex-direction: column; gap: 20px; max-width: 540px; margin: 0 auto; width: 100%; }
+
+        /* 全体メッセージ（データ不足時） */
+        .wr-no-data { background: #fff; border-radius: var(--radius-md); padding: 36px 20px; text-align: center; box-shadow: var(--shadow-sm); }
+        .wr-no-data-icon { font-size: 3rem; margin-bottom: 12px; }
+        .wr-no-data-title { font-size: 1.05rem; font-weight: bold; color: #065F46; margin-bottom: 8px; }
+        .wr-no-data-sub { font-size: .85rem; color: #888; line-height: 1.6; }
+
+        /* セクション共通 */
+        .wr-section { background: #fff; border-radius: var(--radius-md); padding: 18px 16px; box-shadow: var(--shadow-sm); }
+        .wr-section-title { font-size: .78rem; font-weight: bold; letter-spacing: .06em; color: #10B981; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+        .wr-section-title::before { content: ''; display: inline-block; width: 3px; height: 14px; background: #10B981; border-radius: 2px; }
+
+        /* 苦手カテゴリ・unit カード */
+        .wr-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #F0FDF4; }
+        .wr-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .wr-item-rank { font-size: .68rem; font-weight: bold; color: #fff; background: #10B981; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .wr-item-rank.rank1 { background: #DC2626; }
+        .wr-item-rank.rank2 { background: #D97706; }
+        .wr-item-rank.rank3 { background: #64748B; }
+        .wr-item-body { flex: 1; min-width: 0; }
+        .wr-item-title { font-size: .9rem; font-weight: bold; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .wr-item-meta { font-size: .75rem; color: #888; margin-top: 2px; }
+
+        /* 正答率バー */
+        .wr-acc-bar-wrap { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
+        .wr-acc-bar-bg { flex: 1; height: 6px; background: #E2E8F0; border-radius: 3px; overflow: hidden; }
+        .wr-acc-bar-fill { height: 100%; border-radius: 3px; background: #10B981; transition: width .4s ease; }
+        .wr-acc-bar-fill.low { background: #DC2626; }
+        .wr-acc-bar-fill.mid { background: #D97706; }
+        .wr-acc-pct { font-size: .78rem; font-weight: bold; color: var(--text-secondary); white-space: nowrap; }
+
+        /* 復習ボタン */
+        .wr-review-btn { background: linear-gradient(135deg, #059669, #065F46); color: #fff; border: none; border-radius: 8px; padding: 7px 13px; font-size: .78rem; font-weight: bold; font-family: inherit; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: opacity .15s, transform .15s; }
+        .wr-review-btn:hover { opacity: .88; transform: translateY(-1px); }
+
+        /* 最近間違えた問題 */
+        .wr-wrong-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid #F0FDF4; }
+        .wr-wrong-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .wr-wrong-badge { font-size: .65rem; color: #DC2626; font-weight: bold; background: #FEE2E2; border-radius: 4px; padding: 2px 6px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+        .wr-wrong-body { flex: 1; min-width: 0; }
+        .wr-wrong-title { font-size: .88rem; font-weight: bold; color: var(--text-primary); line-height: 1.4; }
+        .wr-wrong-cat { font-size: .73rem; color: #888; margin-top: 2px; }
+
+        /* おすすめ復習 */
+        .wr-recommend { background: linear-gradient(135deg, #ECFDF5, #D1FAE5); border: 1px solid #A7F3D0; border-radius: var(--radius-md); padding: 16px; display: flex; align-items: center; gap: 14px; }
+        .wr-recommend-icon { font-size: 2.2rem; flex-shrink: 0; }
+        .wr-recommend-body { flex: 1; min-width: 0; }
+        .wr-recommend-label { font-size: .72rem; font-weight: bold; color: #059669; letter-spacing: .05em; margin-bottom: 4px; }
+        .wr-recommend-title { font-size: 1rem; font-weight: bold; color: #064E3B; margin-bottom: 4px; }
+        .wr-recommend-sub { font-size: .78rem; color: #065F46; }
+        .wr-recommend-btn { background: #065F46; color: #fff; border: none; border-radius: 8px; padding: 9px 14px; font-size: .82rem; font-weight: bold; font-family: inherit; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: opacity .15s; }
+        .wr-recommend-btn:hover { opacity: .88; }

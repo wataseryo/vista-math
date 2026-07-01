@@ -167,7 +167,8 @@ function stdPracOpenProb(probId) {
         }
     }
     document.getElementById('std-prac-detail-body').scrollTop = 0;
-    document.getElementById('std-prac-ans-input').addEventListener('keydown', e => { if(e.key==='Enter') stdPracCheckAnswer(); });
+    const stdAnsInput = document.getElementById('std-prac-ans-input');
+    if (stdAnsInput) stdAnsInput.addEventListener('keydown', e => { if(e.key==='Enter') stdPracCheckAnswer(); });
 }
 
 function stdPracNextProblem() {
@@ -298,6 +299,7 @@ function pracOpenProb(probId) {
     const p   = PRACTICE_PROBLEMS.find(x => x.id === probId);
     if (!p) return;
     const cat = PRACTICE_CATS.find(c => c.id === p.catId);
+    if (!cat) { console.warn('pracOpenProb: cat not found for', p.catId); return; }
     const unitId = appState.grade === 5 ? cat.unitId5 : cat.unitId6;
     const units  = appState.grade === 5 ? EXAM_UNITS_G5 : EXAM_UNITS_G6;
     const unit   = units.find(u => u.id === unitId);
@@ -340,7 +342,8 @@ function pracOpenProb(probId) {
         }
     }
     body.scrollTop = 0;
-    document.getElementById('prac-ans-input').addEventListener('keydown', e => { if(e.key==='Enter') pracCheckAnswer(); });
+    const pracAnsInput = document.getElementById('prac-ans-input');
+    if (pracAnsInput) pracAnsInput.addEventListener('keydown', e => { if(e.key==='Enter') pracCheckAnswer(); });
 }
 
 function pracNextProblem() {
@@ -602,6 +605,20 @@ function saltSwitchTab(tab) {
     document.querySelectorAll('.salt-tab-content').forEach(c => c.style.display = 'none');
     document.getElementById('salt-tab-' + tab + '-btn').classList.add('active');
     document.getElementById('salt-tab-' + tab).style.display = 'block';
+}
+
+/* ── 各トピック画面から演習問題へ遷移 ── */
+// unitId: 'u6-ratio' | 'u6-speed' | 'u6-special'
+function openUnitPractice(unitId) {
+    const units = appState.grade === 5 ? EXAM_UNITS_G5 : EXAM_UNITS_G6;
+    const unit = units.find(u => u.id === unitId);
+    if (!unit) return;
+    showScreen('challenges', {
+        categories: unit.categories,
+        unitTitle: unit.title + ' — 演習問題',
+        tierMin: 1, tierMax: 3,
+        fromScreen: unitId,
+    });
 }
 
 function openSaltPractice() {
@@ -1108,7 +1125,9 @@ function showStreakPopup() {
    INIT
 ════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('ans-input').addEventListener('keydown', e => { if(e.key==='Enter') checkAnswer(); });
-    document.getElementById('ch-ans-input').addEventListener('keydown', e => { if(e.key==='Enter') chSubmitAnswer(); });
+    const ansInput = document.getElementById('ans-input');
+    if (ansInput) ansInput.addEventListener('keydown', e => { if(e.key==='Enter') checkAnswer(); });
+    const chAnsInput = document.getElementById('ch-ans-input');
+    if (chAnsInput) chAnsInput.addEventListener('keydown', e => { if(e.key==='Enter') chSubmitAnswer(); });
     updateStarBadge();
 });

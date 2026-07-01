@@ -440,6 +440,334 @@
     </div>
 </div>
 
+<!-- ════════ TOPIC: 割合・比の完成 ════════ -->
+<div id="u6-ratio-screen" class="screen">
+    <div class="screen-header exam-header">
+        <button class="back-btn" onclick="showScreen('exam')">← 単元一覧</button>
+        <span class="screen-title">⚖️ 割合・比の完成</span>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:16px">
+
+        <!-- 1. この単元で学ぶこと -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">この単元で学ぶこと</div>
+            <div class="topic-concept-text">
+                「全体の中での割合」と「2つの量の比」を使いこなします。<br>
+                食塩水の濃度・売買損益・相当算・倍数算など、入試頻出の問題を比の考え方で解けるようになることが目標です。
+            </div>
+        </div>
+
+        <!-- 2. 入試でどう出るか -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">入試でどう出るか</div>
+            <ul style="font-size:.88rem;color:#444;line-height:2;margin:0;padding-left:1.2em">
+                <li>食塩水の濃度・混合・蒸発（例：「8%と12%を混ぜて10%にするには…」）</li>
+                <li>売買損益（例：「定価の2割引きで売ると利益は何円か」）</li>
+                <li>相当算（例：「全体の3/5が60人のとき全体は何人か」）</li>
+                <li>倍数算（例：「AはBの3倍。2年後にBの2倍になるとき…」）</li>
+            </ul>
+        </div>
+
+        <!-- 3. 問題文の見分け方 -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">問題文の見分け方</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">
+                <span style="background:#E3F2FD;color:#1565C0;border-radius:20px;padding:4px 12px;font-size:.82rem;font-weight:bold">〜割</span>
+                <span style="background:#E3F2FD;color:#1565C0;border-radius:20px;padding:4px 12px;font-size:.82rem;font-weight:bold">〜%</span>
+                <span style="background:#E3F2FD;color:#1565C0;border-radius:20px;padding:4px 12px;font-size:.82rem;font-weight:bold">〜倍</span>
+                <span style="background:#E3F2FD;color:#1565C0;border-radius:20px;padding:4px 12px;font-size:.82rem;font-weight:bold">A：B ＝ 〜：〜</span>
+                <span style="background:#E3F2FD;color:#1565C0;border-radius:20px;padding:4px 12px;font-size:.82rem;font-weight:bold">全体の〜分の〜</span>
+            </div>
+            <div style="font-size:.82rem;color:#666;margin-top:10px">これらのキーワードが出たら割合・比の問題です。</div>
+        </div>
+
+        <!-- 4. 使う図・考え方 -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">使う図・考え方</div>
+            <div style="font-size:.85rem;color:#555;margin-bottom:10px">割合の問題では「数直線」か「面積図」を書くと整理しやすくなります。</div>
+            <!-- 数直線イメージ -->
+            <div style="background:#F3E5F5;border-radius:10px;padding:14px;font-size:.82rem;color:#6A1B9A;font-family:monospace;line-height:1.8">
+                <div style="font-weight:bold;margin-bottom:4px">数直線（例：全体の60%が300円）</div>
+                <div>0 ─────────────────── 全体</div>
+                <div style="padding-left:0">  |←───60%───→|</div>
+                <div>  0         300円      ?円</div>
+                <div style="margin-top:6px;font-family:inherit;font-size:.8rem">全体 ＝ 300 ÷ 0.6 ＝ 500円</div>
+            </div>
+        </div>
+
+        <!-- 5. よくあるミス -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">よくあるミス</div>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+                <div style="display:flex;align-items:flex-start;gap:10px">
+                    <span style="background:#FFEBEE;color:#C62828;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:bold;flex-shrink:0;margin-top:2px">!</span>
+                    <div style="font-size:.85rem;color:#444;line-height:1.6">%を小数に直し忘れる（60%のまま計算してしまう → 0.6 に直す）</div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:10px">
+                    <span style="background:#FFEBEE;color:#C62828;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:bold;flex-shrink:0;margin-top:2px">!</span>
+                    <div style="font-size:.85rem;color:#444;line-height:1.6">比の値（A÷B）と割合（A÷全体）を混同する</div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:10px">
+                    <span style="background:#FFEBEE;color:#C62828;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:bold;flex-shrink:0;margin-top:2px">!</span>
+                    <div style="font-size:.85rem;color:#444;line-height:1.6">「〜の3倍」と「〜より3倍多い」の区別がつかない</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. 基本例題 -->
+        <div class="topic-example-card">
+            <div class="topic-section-lbl">基本例題</div>
+            <div class="topic-example-q">
+                あるクラスの人数の40%が16人です。<br>クラス全体は何人ですか？
+            </div>
+            <div class="topic-steps">
+                <div class="topic-step">
+                    <div class="topic-step-num">1</div>
+                    <div class="topic-step-text">「40%が16人」→ 全体 × 0.4 ＝ 16人</div>
+                </div>
+                <div class="topic-step">
+                    <div class="topic-step-num">2</div>
+                    <div class="topic-step-text">全体 ＝ 16 ÷ 0.4 ＝ <b>40人</b></div>
+                </div>
+                <div class="topic-step">
+                    <div class="topic-step-num">3</div>
+                    <div class="topic-step-text">確認：40 × 0.4 ＝ 16人 ✓</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. 演習問題への導線 -->
+        <div class="topic-nav-card">
+            <div class="topic-nav-label">理解できたら演習問題に挑戦しよう</div>
+            <button class="topic-nav-btn prac" onclick="openUnitPractice('u6-ratio')">演習問題を解く →</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- ════════ TOPIC: 速さの完成 ════════ -->
+<div id="u6-speed-screen" class="screen">
+    <div class="screen-header exam-header">
+        <button class="back-btn" onclick="showScreen('exam')">← 単元一覧</button>
+        <span class="screen-title">🏃 速さの完成</span>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:16px">
+
+        <!-- 1. この単元で学ぶこと -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">この単元で学ぶこと</div>
+            <div class="topic-concept-text">
+                「速さ ＝ 距離 ÷ 時間」の基本から出発し、旅人算・流水算・通過算・ダイヤグラムなど入試頻出の応用問題を攻略します。<br>
+                「速さの和・差」「単位換算」を自在に使えることが目標です。
+            </div>
+        </div>
+
+        <!-- 2. 入試でどう出るか -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">入試でどう出るか</div>
+            <ul style="font-size:.88rem;color:#444;line-height:2;margin:0;padding-left:1.2em">
+                <li>旅人算 出会い型（例：「2人が向かい合って歩き出し、何分後に出会うか」）</li>
+                <li>旅人算 追いかけ型（例：「先に出発した弟を兄が追いかけ何分後に追いつくか」）</li>
+                <li>通過算（例：「長さ200mの電車が橋を渡り切るのに何秒かかるか」）</li>
+                <li>流水算（例：「川を上るのに3時間、下るのに1時間。川の速さは？」）</li>
+            </ul>
+        </div>
+
+        <!-- 3. 問題文の見分け方 -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">問題文の見分け方</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">
+                <span style="background:#E8F5E9;color:#1B5E20;border-radius:20px;padding:4px 12px;font-size:.82rem;font-weight:bold">時速〜km</span>
+                <span style="background:#E8F5E9;color:#1B5E20;border-radius:20px;padding:4px 12px;font-size:.82rem;font-weight:bold">〜分後に出会う</span>
+                <span style="background:#E8F5E9;color:#1B5E20;border-radius:20px;padding:4px 12px;font-size:.82rem;font-weight:bold">橋・トンネルを渡る</span>
+                <span style="background:#E8F5E9;color:#1B5E20;border-radius:20px;padding:4px 12px;font-size:.82rem;font-weight:bold">川を上る・下る</span>
+                <span style="background:#E8F5E9;color:#1B5E20;border-radius:20px;padding:4px 12px;font-size:.82rem;font-weight:bold">追いつく</span>
+            </div>
+            <div style="font-size:.82rem;color:#666;margin-top:10px">これらのキーワードが出たら速さの問題です。</div>
+        </div>
+
+        <!-- 4. 使う図・考え方 -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">使う図・考え方</div>
+            <div style="font-size:.85rem;color:#555;margin-bottom:10px">速さの問題は「線分図」か「ダイヤグラム（距離と時間のグラフ）」を書くと関係が見えます。</div>
+            <div style="background:#E8F5E9;border-radius:10px;padding:14px;font-size:.82rem;color:#2E7D32;font-family:monospace;line-height:1.8">
+                <div style="font-weight:bold;margin-bottom:4px">旅人算・線分図（出会い型）</div>
+                <div>A → → → → ←出会い→</div>
+                <div>B &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ← ← ← ←</div>
+                <div>|←──────距離──────→|</div>
+                <div style="margin-top:6px;font-family:inherit;font-size:.8rem">出会うまでの時間 ＝ 距離 ÷ (AとBの速さの和)</div>
+            </div>
+        </div>
+
+        <!-- 5. よくあるミス -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">よくあるミス</div>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+                <div style="display:flex;align-items:flex-start;gap:10px">
+                    <span style="background:#FFEBEE;color:#C62828;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:bold;flex-shrink:0;margin-top:2px">!</span>
+                    <div style="font-size:.85rem;color:#444;line-height:1.6">単位換算ミス（時速 km/h ↔ 分速 m/min ↔ 秒速 m/s の変換）</div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:10px">
+                    <span style="background:#FFEBEE;color:#C62828;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:bold;flex-shrink:0;margin-top:2px">!</span>
+                    <div style="font-size:.85rem;color:#444;line-height:1.6">出会いは速さの「和」、追いかけは速さの「差」で計算する（逆にしてしまうミス）</div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:10px">
+                    <span style="background:#FFEBEE;color:#C62828;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:bold;flex-shrink:0;margin-top:2px">!</span>
+                    <div style="font-size:.85rem;color:#444;line-height:1.6">通過算で「電車の長さ」を距離に加え忘れる</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. 基本例題 -->
+        <div class="topic-example-card">
+            <div class="topic-section-lbl">基本例題</div>
+            <div class="topic-example-q">
+                AとBが3600m離れた地点から向かい合って同時に歩き出しました。<br>
+                Aの速さは分速60m、Bの速さは分速30mです。<br>
+                2人が出会うのは何分後ですか？
+            </div>
+            <div class="topic-steps">
+                <div class="topic-step">
+                    <div class="topic-step-num">1</div>
+                    <div class="topic-step-text">向かい合って進むので、1分間に縮まる距離は速さの「和」<br>60 ＋ 30 ＝ 90 m/分</div>
+                </div>
+                <div class="topic-step">
+                    <div class="topic-step-num">2</div>
+                    <div class="topic-step-text">出会うまでの時間 ＝ 距離 ÷ 速さの和<br>3600 ÷ 90 ＝ <b>40分後</b></div>
+                </div>
+                <div class="topic-step">
+                    <div class="topic-step-num">3</div>
+                    <div class="topic-step-text">確認：A が 60×40＝2400m、B が 30×40＝1200m → 合計 3600m ✓</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. 演習問題への導線 -->
+        <div class="topic-nav-card">
+            <div class="topic-nav-label">理解できたら演習問題に挑戦しよう</div>
+            <button class="topic-nav-btn prac" onclick="openUnitPractice('u6-speed')">演習問題を解く →</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- ════════ TOPIC: 特殊算・文章題 ════════ -->
+<div id="u6-special-screen" class="screen">
+    <div class="screen-header exam-header">
+        <button class="back-btn" onclick="showScreen('exam')">← 単元一覧</button>
+        <span class="screen-title">📝 特殊算・文章題</span>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:16px">
+
+        <!-- 1. この単元で学ぶこと -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">この単元で学ぶこと</div>
+            <div class="topic-concept-text">
+                場面ごとに決まった「解法パターン」がある文章題を学びます。<br>
+                つるかめ算・和差算・過不足算・植木算・年齢算など、問題の「場面」を見てパターンを素早く見抜く力を養います。
+            </div>
+        </div>
+
+        <!-- 2. 入試でどう出るか -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">入試でどう出るか</div>
+            <ul style="font-size:.88rem;color:#444;line-height:2;margin:0;padding-left:1.2em">
+                <li>つるかめ算（例：「ツルとカメ合わせて10匹、足の合計が28本のとき…」）</li>
+                <li>和差算（例：「2つの数の和が50、差が10のとき2つの数を求めよ」）</li>
+                <li>年齢算（例：「現在父は40歳、子は10歳。父の年齢が子の3倍になるのは何年後？」）</li>
+                <li>植木算（例：「100mの道に20m間隔で木を植えると何本必要か」）</li>
+                <li>過不足算（例：「1人4個ずつ配ると8個余り、5個ずつだと2個足りない」）</li>
+            </ul>
+        </div>
+
+        <!-- 3. 問題文の見分け方 -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">問題文の見分け方（パターン診断）</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+                <div style="background:#FFF3E0;border-radius:8px;padding:10px;font-size:.83rem;color:#E65100">
+                    <b>2種類のものの合計が2つ</b>ある → つるかめ算
+                </div>
+                <div style="background:#F3E5F5;border-radius:8px;padding:10px;font-size:.83rem;color:#6A1B9A">
+                    <b>和と差</b>が与えられている → 和差算
+                </div>
+                <div style="background:#E8F5E9;border-radius:8px;padding:10px;font-size:.83rem;color:#1B5E20">
+                    <b>年齢・何年後・何年前</b>が出てくる → 年齢算（差は一定！）
+                </div>
+                <div style="background:#E3F2FD;border-radius:8px;padding:10px;font-size:.83rem;color:#1565C0">
+                    <b>配ると余る・足りない</b>が両方出てくる → 過不足算
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. 使う図・考え方 -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">使う図・考え方</div>
+            <div style="font-size:.85rem;color:#555;margin-bottom:10px">つるかめ算は「表」か「面積図」が最も使いやすい図です。</div>
+            <div style="background:#FFF3E0;border-radius:10px;padding:14px;font-size:.82rem;color:#BF360C;font-family:monospace;line-height:1.8">
+                <div style="font-weight:bold;margin-bottom:4px">つるかめ算・面積図のイメージ</div>
+                <div>全部カメ(4本)と仮定</div>
+                <div>足の合計：10匹×4本 ＝ 40本</div>
+                <div>実際との差：40−28 ＝ 12本 多い</div>
+                <div>1匹をツル(2本)に替えると 4−2＝2本 減る</div>
+                <div style="margin-top:4px;font-family:inherit">ツルの数 ＝ 12 ÷ 2 ＝ 6匹</div>
+            </div>
+        </div>
+
+        <!-- 5. よくあるミス -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">よくあるミス</div>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+                <div style="display:flex;align-items:flex-start;gap:10px">
+                    <span style="background:#FFEBEE;color:#C62828;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:bold;flex-shrink:0;margin-top:2px">!</span>
+                    <div style="font-size:.85rem;color:#444;line-height:1.6">パターンの誤認識（和差算なのにつるかめ算で解こうとするなど）</div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:10px">
+                    <span style="background:#FFEBEE;color:#C62828;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:bold;flex-shrink:0;margin-top:2px">!</span>
+                    <div style="font-size:.85rem;color:#444;line-height:1.6">植木算の「両端あり」と「両端なし」・「円形」の本数の数え方を混同する</div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:10px">
+                    <span style="background:#FFEBEE;color:#C62828;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:bold;flex-shrink:0;margin-top:2px">!</span>
+                    <div style="font-size:.85rem;color:#444;line-height:1.6">年齢算で「差は常に一定」というルールを忘れ、2人の年齢の比が変わらないと勘違いする</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. 基本例題 -->
+        <div class="topic-example-card">
+            <div class="topic-section-lbl">基本例題（つるかめ算）</div>
+            <div class="topic-example-q">
+                ツルとカメが合わせて8匹います。<br>
+                足の合計が24本のとき、ツルは何匹いますか？
+            </div>
+            <div class="topic-steps">
+                <div class="topic-step">
+                    <div class="topic-step-num">1</div>
+                    <div class="topic-step-text">全部カメ（4本足）と仮定すると、足の合計は 8 × 4 ＝ 32本</div>
+                </div>
+                <div class="topic-step">
+                    <div class="topic-step-num">2</div>
+                    <div class="topic-step-text">実際との差：32 − 24 ＝ 8本 多い</div>
+                </div>
+                <div class="topic-step">
+                    <div class="topic-step-num">3</div>
+                    <div class="topic-step-text">1匹をカメ→ツルに替えると 4 − 2 ＝ 2本 減る<br>ツルの数 ＝ 8 ÷ 2 ＝ <b>4匹</b></div>
+                </div>
+                <div class="topic-step">
+                    <div class="topic-step-num">4</div>
+                    <div class="topic-step-text">確認：ツル4匹(8本) ＋ カメ4匹(16本) ＝ 24本 ✓</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. 演習問題への導線 -->
+        <div class="topic-nav-card">
+            <div class="topic-nav-label">理解できたら演習問題に挑戦しよう</div>
+            <button class="topic-nav-btn prac" onclick="openUnitPractice('u6-special')">演習問題を解く →</button>
+        </div>
+
+    </div>
+</div>
+
 <!-- ════════ HARD CHALLENGE SCREEN ════════ -->
 <div id="hard-challenge-screen" class="screen">
     <div class="screen-header hard-header">

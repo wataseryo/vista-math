@@ -56,13 +56,13 @@ const EXAM_UNITS_G5 = [
 const EXAM_UNITS_G6 = [
     { id: 'u6-calc',    num: '①', icon: '🔢', title: '計算・数の処理',   sub: '逆算・条件付き計算・工夫した計算',            difficulty: 2, categories: ['計算'],                                    count: 0,  available: false },
     { id: 'u6-number',  num: '②', icon: '🔍', title: '数・規則・論理',   sub: '約数・余り・規則性・推理・場合分け',          difficulty: 4, categories: ['数の性質','規則性'],                       count: 0,  available: false },
-    { id: 'u6-ratio',   num: '③', icon: '⚖️', title: '割合・比の完成',   sub: '連比・相当算・売買・濃度・比融合問題',        difficulty: 5, categories: ['割合','比','割合の基本','売買損益','相当算','倍数算','仕事算','ニュートン算'],  count: 20, available: true  },
+    { id: 'u6-ratio',   num: '③', icon: '⚖️', title: '割合・比の完成',   sub: '連比・相当算・売買・濃度・比融合問題',        difficulty: 5, categories: ['割合','比','割合の基本','売買損益','相当算','倍数算','仕事算','ニュートン算'],  count: 20, available: true, topicScreen: 'u6-ratio'   },
     // u6-salt は u6-ratio の下位単元（食塩水専用トピック）。
     // UIでは「割合・比」グループの一部として扱う（parentUnit: 'u6-ratio'）。
     // mainCategory は 'ratio' であり、CATEGORIES の id:'ratio' に対応する。
     { id: 'u6-salt',    num: '③+', icon: '🧪', title: '食塩水',          sub: '濃度計算・混合・蒸発・希釈',                  difficulty: 4, categories: ['食塩水'],                              count: 8,  available: true, topicScreen: 'salt', parentUnit: 'u6-ratio' },
-    { id: 'u6-special', num: '④', icon: '📝', title: '特殊算・文章題',   sub: '和差算・つるかめ算・過不足算・植木算・年齢算・平均算・分配算・集合算・消去算', difficulty: 4, categories: ['和差算','つるかめ算','過不足算','植木算','年齢算','平均算','消去算','分配算','集合算','水槽','ニュートン算'], count: 36, available: true  },
-    { id: 'u6-speed',   num: '⑤', icon: '🏃', title: '速さの完成',       sub: '旅人算・流水算・通過算・ダイヤグラム・速さと比', difficulty: 4, categories: ['速さ','流水算','通過算','時計算','ダイヤグラム','速さと比'], count: 30, available: true  },
+    { id: 'u6-special', num: '④', icon: '📝', title: '特殊算・文章題',   sub: '和差算・つるかめ算・過不足算・植木算・年齢算・平均算・分配算・集合算・消去算', difficulty: 4, categories: ['和差算','つるかめ算','過不足算','植木算','年齢算','平均算','消去算','分配算','集合算','水槽','ニュートン算'], count: 36, available: true, topicScreen: 'u6-special' },
+    { id: 'u6-speed',   num: '⑤', icon: '🏃', title: '速さの完成',       sub: '旅人算・流水算・通過算・ダイヤグラム・速さと比', difficulty: 4, categories: ['速さ','流水算','通過算','時計算','ダイヤグラム','速さと比'], count: 30, available: true, topicScreen: 'u6-speed'  },
     { id: 'u6-plane',   num: '⑥', icon: '📐', title: '平面図形の完成',   sub: '面積比・相似・円・移動・図形融合',            difficulty: 5, categories: ['平面図形'],                            count: 0,  available: false },
     { id: 'u6-solid',   num: '⑦', icon: '📦', title: '立体図形の完成',   sub: '回転体・切断・体積比・投影図',                difficulty: 5, categories: ['立体'],                                count: 0,  available: false },
     { id: 'u6-cases',   num: '⑧', icon: '🎯', title: '場合の数・論理',   sub: '条件付き・道順・塗り分け・論理融合',         difficulty: 4, categories: ['場合の数'],                             count: 0,  available: false },

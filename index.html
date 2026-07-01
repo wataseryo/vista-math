@@ -111,7 +111,19 @@
                 </div>
             </div>
         </div>
+        <div class="exam-mode-links">
+            <button class="exam-mode-link-btn" onclick="showScreen('report')">📊 保護者・塾向けレポートを見る</button>
+        </div>
     </div>
+</div>
+
+<!-- ════════ REPORT SCREEN ════════ -->
+<div id="report-screen" class="screen">
+    <div class="screen-header exam-header">
+        <button class="back-btn" onclick="showScreen('exam-mode')">← もどる</button>
+        <span class="screen-title">学習レポート</span>
+    </div>
+    <div class="rpt-body" id="rpt-body"><!-- populated by JS --></div>
 </div>
 
 <!-- ════════ WEAK REVIEW SCREEN ════════ -->

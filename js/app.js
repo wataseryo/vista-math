@@ -426,6 +426,7 @@ function showScreen(id, opts={}) {
     if (id === 'watertank')  { updateLearn(); generateProblem(); }
     if (id === 'hard-challenge') { hcSwitchMode('all'); renderHardChallenge(); }
     if (id === 'weak-review')   { renderWeakReview(); }
+    if (id === 'report')        { renderReport(); }
     if (id === 'challenges') {
         if (opts.unitTitle) document.getElementById('ch-screen-title').textContent = opts.unitTitle;
         else document.getElementById('ch-screen-title').textContent = '難問チャレンジ';
@@ -1025,6 +1026,8 @@ function recordProblemAttempt(probId, correct) {
     if (!h[probId]) h[probId] = [];
     h[probId].push(correct);
     lsSet('vista_history', JSON.stringify(h));
+    // 最終学習日のタイムスタンプを別キーで記録（既存の true/false 配列構造を維持するため）
+    lsSet('vista_last_ts', String(Date.now()));
 }
 function getProblemHistory(probId) {
     return (JSON.parse(lsGet('vista_history', '{}')))[probId] || [];
@@ -1335,6 +1338,237 @@ function wrGoToCat(catId) {
     showScreen('practice');
     // renderPractice が同期的に pracShowCats を呼んだ後で pracOpenCat を実行する。
     pracOpenCat(catId);
+}
+
+/* ════════════════════════════════════════
+   REPORT SCREEN
+════════════════════════════════════════ */
+
+/**
+ * 保護者・塾向け簡易レポートを描画する。
+ * データソース:
+ *   - vista_stats  : { "g{grade}_exam_{catId}": { correct, total } }
+ *   - vista_history: { probId: [true/false, ...] }
+ *   - vista_last_ts: タイムスタンプ文字列（recordProblemAttempt が記録）
+ */
+function renderReport() {
+    const g = appState.grade;
+    const container = document.getElementById('rpt-body');
+    if (!container) return;
+
+    const stats   = JSON.parse(lsGet('vista_stats',   '{}'));
+    const history = JSON.parse(lsGet('vista_history', '{}'));
+    const lastTs  = lsGet('vista_last_ts', '');
+
+    // ── 全体集計 ──
+    let totalCorrect = 0, totalAll = 0;
+    PRACTICE_CATS.forEach(cat => {
+        const key = `g${g}_exam_${cat.id}`;
+        if (stats[key]) {
+            totalCorrect += stats[key].correct;
+            totalAll     += stats[key].total;
+        }
+    });
+    const historyProbs = Object.keys(history).length;
+
+    // データ不足判定（5問未満）
+    const isInsufficient = totalAll < 5 && historyProbs < 5;
+
+    // ── セクション1: 全体サマリー ──
+    const overallPct = totalAll > 0 ? Math.round(totalCorrect / totalAll * 100) : 0;
+    const lastDateStr = lastTs ? (() => {
+        const d = new Date(Number(lastTs));
+        return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
+    })() : '—';
+
+    const summaryHtml = `
+        <div class="rpt-summary">
+            <div class="rpt-summary-title">学習レポート（${g}年生）</div>
+            <div class="rpt-summary-grid">
+                <div class="rpt-summary-item">
+                    <div class="rpt-summary-val">${totalAll}</div>
+                    <div class="rpt-summary-label">解いた問題数</div>
+                </div>
+                <div class="rpt-summary-item">
+                    <div class="rpt-summary-val">${totalAll > 0 ? overallPct + '%' : '—'}</div>
+                    <div class="rpt-summary-label">全体正答率</div>
+                </div>
+                <div class="rpt-summary-item">
+                    <div class="rpt-summary-val" style="font-size:1rem;padding-top:4px">${lastDateStr}</div>
+                    <div class="rpt-summary-label">最終学習日</div>
+                </div>
+            </div>
+        </div>`;
+
+    if (isInsufficient) {
+        container.innerHTML = summaryHtml + `
+            <div class="rpt-no-data">
+                <div class="rpt-no-data-icon">📊</div>
+                <div class="rpt-no-data-title">まだ学習が始まったばかりです</div>
+                <div class="rpt-no-data-sub">5問以上解くと、詳細なレポートが表示されます。<br>まずは気軽に問題を解いてみましょう。</div>
+            </div>`;
+        return;
+    }
+
+    const sections = [summaryHtml];
+
+    // ── セクション2: カテゴリ別正答率（バーグラフ）──
+    const catRows = PRACTICE_CATS.map(cat => {
+        const key = `g${g}_exam_${cat.id}`;
+        const s = stats[key];
+        if (!s || s.total === 0) {
+            return `
+                <div class="rpt-cat-row">
+                    <div class="rpt-cat-name">${cat.icon} ${cat.title}</div>
+                    <div class="rpt-cat-bar-wrap">
+                        <div class="rpt-cat-bar-bg"><div class="rpt-cat-bar-fill" style="width:0%"></div></div>
+                        <span class="rpt-cat-pct rpt-cat-untried">未挑戦</span>
+                    </div>
+                </div>`;
+        }
+        const pct = Math.round(s.correct / s.total * 100);
+        const barClass = pct >= 80 ? '' : pct >= 50 ? 'mid' : 'low';
+        return `
+            <div class="rpt-cat-row">
+                <div class="rpt-cat-name">${cat.icon} ${cat.title}</div>
+                <div class="rpt-cat-bar-wrap">
+                    <div class="rpt-cat-bar-bg"><div class="rpt-cat-bar-fill ${barClass}" style="width:${pct}%"></div></div>
+                    <span class="rpt-cat-pct">${pct}%</span>
+                </div>
+            </div>`;
+    }).join('');
+
+    sections.push(`
+        <div class="rpt-section">
+            <div class="rpt-section-title">カテゴリ別正答率</div>
+            ${catRows}
+        </div>`);
+
+    // ── セクション3: 苦手単元 TOP3 (lessonUnit別) ──
+    const unitAccMap = {};
+    Object.entries(history).forEach(([probId, attempts]) => {
+        const prob = PRACTICE_PROBLEMS.find(p => p.id === probId);
+        if (!prob || !prob.lessonUnit) return;
+        const unit = prob.lessonUnit;
+        if (!unitAccMap[unit]) unitAccMap[unit] = { correct: 0, total: 0, catId: prob.catId };
+        attempts.forEach(ok => {
+            unitAccMap[unit].total++;
+            if (ok) unitAccMap[unit].correct++;
+        });
+    });
+
+    const weakUnits = Object.entries(unitAccMap)
+        .filter(([, v]) => v.total >= 3)
+        .map(([name, v]) => ({
+            name,
+            pct: Math.round(v.correct / v.total * 100),
+            correct: v.correct,
+            total: v.total,
+            catId: v.catId
+        }))
+        .sort((a, b) => a.pct - b.pct)
+        .slice(0, 3);
+
+    let topWeakUnit = null;
+    if (weakUnits.length > 0) {
+        topWeakUnit = weakUnits[0];
+        const weakUnitRows = weakUnits.map((item, i) => {
+            const rankClass = ['rank1','rank2','rank3'][i] || '';
+            return `
+                <div class="rpt-weak-item">
+                    <div class="rpt-weak-rank ${rankClass}">${i+1}</div>
+                    <div class="rpt-weak-body">
+                        <div class="rpt-weak-name">${item.name}</div>
+                        <div class="rpt-weak-meta">正答率 ${item.pct}%（${item.correct}/${item.total}問 正解）</div>
+                    </div>
+                </div>`;
+        }).join('');
+        sections.push(`
+            <div class="rpt-section">
+                <div class="rpt-section-title">苦手単元 TOP3</div>
+                ${weakUnitRows}
+            </div>`);
+    }
+
+    // ── セクション4: 最近間違えた問題（最大3件）──
+    const recentWrong = [];
+    Object.entries(history).forEach(([probId, attempts]) => {
+        if (!attempts.length) return;
+        if (attempts[attempts.length - 1] === false) {
+            const prob = PRACTICE_PROBLEMS.find(p => p.id === probId);
+            if (prob) recentWrong.push(prob);
+        }
+    });
+    const recentWrongSlice = recentWrong.slice(0, 3);
+    if (recentWrongSlice.length > 0) {
+        const wrongRows = recentWrongSlice.map(prob => {
+            const cat = PRACTICE_CATS.find(c => c.id === prob.catId);
+            const catName = cat ? cat.title : (prob.catId || '');
+            return `
+                <div class="rpt-wrong-item">
+                    <div class="rpt-wrong-badge">まちがい</div>
+                    <div>
+                        <div class="rpt-wrong-title">${prob.title}</div>
+                        <div class="rpt-wrong-cat">${catName}${prob.lessonUnit ? ' ／ ' + prob.lessonUnit : ''}</div>
+                    </div>
+                </div>`;
+        }).join('');
+        sections.push(`
+            <div class="rpt-section">
+                <div class="rpt-section-title">最近間違えた問題</div>
+                ${wrongRows}
+            </div>`);
+    }
+
+    // ── セクション5: 次に復習すべき単元（1件）──
+    // 苦手カテゴリ TOP1 を算出して表示
+    const catStatsArr = PRACTICE_CATS.map(cat => {
+        const key = `g${g}_exam_${cat.id}`;
+        const s = stats[key];
+        if (!s || s.total === 0) return null;
+        return { cat, pct: Math.round(s.correct / s.total * 100) };
+    }).filter(Boolean).sort((a, b) => a.pct - b.pct);
+
+    const topWeakCat = catStatsArr.length > 0 ? catStatsArr[0] : null;
+    const nextTitle = topWeakUnit ? topWeakUnit.name : (topWeakCat ? topWeakCat.cat.title : null);
+    const nextSub   = topWeakUnit
+        ? `${topWeakUnit.correct}/${topWeakUnit.total}問 正解（正答率 ${topWeakUnit.pct}%）`
+        : topWeakCat
+            ? `${topWeakCat.cat.icon} ${topWeakCat.cat.title}（正答率 ${topWeakCat.pct}%）`
+            : null;
+    const nextCatId = topWeakUnit ? topWeakUnit.catId : (topWeakCat ? topWeakCat.cat.id : null);
+
+    if (nextTitle) {
+        sections.push(`
+            <div class="rpt-next">
+                <div class="rpt-next-icon">📌</div>
+                <div class="rpt-next-body">
+                    <div class="rpt-next-label">次に復習すべき単元</div>
+                    <div class="rpt-next-title">${nextTitle}</div>
+                    ${nextSub ? `<div class="rpt-next-sub">${nextSub}</div>` : ''}
+                </div>
+                ${nextCatId ? `<button class="wr-recommend-btn" onclick="wrGoToCat('${nextCatId}')">復習する →</button>` : ''}
+            </div>`);
+    }
+
+    // ── セクション6: 保護者向け一言コメント（ルールベース）──
+    const weakCatName = topWeakCat ? topWeakCat.cat.title : (topWeakUnit ? topWeakUnit.name : '苦手分野');
+    let commentText = '';
+    if (overallPct >= 80) {
+        commentText = `全体的によく解けています。苦手な「${weakCatName}」をさらに強化しましょう。`;
+    } else if (overallPct >= 50) {
+        commentText = `着実に力がついています。「${weakCatName}」の復習を集中的にやってみましょう。`;
+    } else {
+        commentText = `「${weakCatName}」を中心に、基本問題から丁寧に取り組みましょう。`;
+    }
+
+    sections.push(`
+        <div class="rpt-comment">
+            <div class="rpt-comment-label">保護者・指導者へのコメント</div>
+            <div class="rpt-comment-text">${commentText}</div>
+        </div>`);
+
+    container.innerHTML = sections.join('');
 }
 
 /* ════════════════════════════════════════

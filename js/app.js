@@ -1,4 +1,20 @@
-const appState = { grade: 5 };
+/* ════════════════════════════════════════
+   LOCAL STORAGE SAFE WRAPPER
+   プライベートブラウジング等でのクラッシュを防ぐ
+════════════════════════════════════════ */
+function lsGet(key, fallback = null) {
+    try {
+        const val = localStorage.getItem(key);
+        return val !== null ? val : fallback;
+    } catch (e) {
+        return fallback;
+    }
+}
+function lsSet(key, value) {
+    try { localStorage.setItem(key, String(value)); } catch (e) { /* サイレント失敗 */ }
+}
+
+const appState = { grade: 5, previousScreen: 'std-mode' };
 const learn = { inflow:3, outflow:1, initial:50, current:50, simRunning:false, simTimer:null, simTime:0, capacity:100 };
 const quiz  = { level:1, correct:0, wrong:0, problem:null, hintVisible:false };
 const chState = { filter:'すべて', currentId:null, hintVisible:false, stepOpen:{}, tierMin:1, tierMax:5, fromScreen:'exam', mainCategory:null };
@@ -389,6 +405,8 @@ function pracGoBack() {
 }
 
 function showScreen(id, opts={}) {
+    const current = document.querySelector('.screen.active');
+    if (current) appState.previousScreen = current.id.replace('-screen', '');
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active', 'slide-in'));
     const next = document.getElementById(id + '-screen');
     next.classList.add('active');
@@ -427,6 +445,10 @@ function showScreen(id, opts={}) {
 
 function goBackFromChallenges() {
     showScreen(chState.fromScreen || 'exam');
+}
+
+function goBackFromWatertank() {
+    showScreen(appState.previousScreen || 'std-mode');
 }
 
 /* ════════════════════════════════════════
@@ -911,15 +933,15 @@ function chExpandAll() {
    PROGRESS TRACKING
 ════════════════════════════════════════ */
 function recordAnswer(key, correct) {
-    const stats = JSON.parse(localStorage.getItem('vista_stats') || '{}');
+    const stats = JSON.parse(lsGet('vista_stats', '{}'));
     if (!stats[key]) stats[key] = { correct: 0, total: 0 };
     stats[key].total++;
     if (correct) stats[key].correct++;
-    localStorage.setItem('vista_stats', JSON.stringify(stats));
+    lsSet('vista_stats', JSON.stringify(stats));
 }
 
 function getStatsForKey(key) {
-    const stats = JSON.parse(localStorage.getItem('vista_stats') || '{}');
+    const stats = JSON.parse(lsGet('vista_stats', '{}'));
     return stats[key] || null;
 }
 
@@ -933,7 +955,7 @@ function getAccuracyBadge(key) {
 }
 
 function getGradeCourseStats(grade, ...prefixes) {
-    const stats = JSON.parse(localStorage.getItem('vista_stats') || '{}');
+    const stats = JSON.parse(lsGet('vista_stats', '{}'));
     let total = 0, correct = 0;
     prefixes.forEach(pfx => {
         const key = `g${grade}_${pfx}_`;
@@ -966,7 +988,7 @@ function renderHomeProgress() {
    GAMIFICATION
 ════════════════════════════════════════ */
 const gameState = {
-    stars: parseInt(localStorage.getItem('math_stars') || '0'),
+    stars: Math.max(0, parseInt(lsGet('math_stars', '0'), 10) || 0),
     streak: 0,
 };
 
@@ -979,13 +1001,13 @@ function getWrongMsg() { return WRONG_MSGS[Math.floor(Math.random() * WRONG_MSGS
 
 /* ── Per-problem attempt history ── */
 function recordProblemAttempt(probId, correct) {
-    const h = JSON.parse(localStorage.getItem('vista_history') || '{}');
+    const h = JSON.parse(lsGet('vista_history', '{}'));
     if (!h[probId]) h[probId] = [];
     h[probId].push(correct);
-    localStorage.setItem('vista_history', JSON.stringify(h));
+    lsSet('vista_history', JSON.stringify(h));
 }
 function getProblemHistory(probId) {
-    return (JSON.parse(localStorage.getItem('vista_history') || '{}'))[probId] || [];
+    return (JSON.parse(lsGet('vista_history', '{}')))[probId] || [];
 }
 function getAttemptDots(probId) {
     const h = getProblemHistory(probId);
@@ -1022,7 +1044,7 @@ function revealAnswer(btn) {
 function addStar() {
     gameState.stars++;
     gameState.streak++;
-    localStorage.setItem('math_stars', gameState.stars);
+    lsSet('math_stars', gameState.stars);
     updateStarBadge();
     triggerStarBump();
     showFloatStar();

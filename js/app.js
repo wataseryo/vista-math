@@ -1032,6 +1032,10 @@ function recordProblemAttempt(probId, correct) {
     lsSet('vista_history', JSON.stringify(h));
     // 最終学習日のタイムスタンプを別キーで記録（既存の true/false 配列構造を維持するため）
     lsSet('vista_last_ts', String(Date.now()));
+    // 初回解答日を記録（未設定の場合のみ）
+    if (!lsGet('vista_first_ts', '')) {
+        lsSet('vista_first_ts', String(Date.now()));
+    }
 }
 function getProblemHistory(probId) {
     return (JSON.parse(lsGet('vista_history', '{}')))[probId] || [];
@@ -1535,9 +1539,10 @@ function renderReport() {
     const container = document.getElementById('rpt-body');
     if (!container) return;
 
-    const stats   = JSON.parse(lsGet('vista_stats',   '{}'));
-    const history = JSON.parse(lsGet('vista_history', '{}'));
-    const lastTs  = lsGet('vista_last_ts', '');
+    const stats    = JSON.parse(lsGet('vista_stats',   '{}'));
+    const history  = JSON.parse(lsGet('vista_history', '{}'));
+    const lastTs   = lsGet('vista_last_ts', '');
+    const firstTs  = lsGet('vista_first_ts', '');
 
     // ── 全体集計 ──
     let totalCorrect = 0, totalAll = 0;
@@ -1555,10 +1560,10 @@ function renderReport() {
 
     // ── セクション1: 全体サマリー ──
     const overallPct = totalAll > 0 ? Math.round(totalCorrect / totalAll * 100) : 0;
-    const lastDateStr = lastTs ? (() => {
-        const d = new Date(Number(lastTs));
-        return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
-    })() : '—';
+    const continueDays = firstTs
+        ? Math.ceil((Date.now() - Number(firstTs)) / 86400000)
+        : null;
+    const continueDaysStr = continueDays !== null ? `${continueDays}日` : '—';
 
     const summaryHtml = `
         <div class="rpt-summary">
@@ -1573,8 +1578,8 @@ function renderReport() {
                     <div class="rpt-summary-label">全体正答率</div>
                 </div>
                 <div class="rpt-summary-item">
-                    <div class="rpt-summary-val" style="font-size:1rem;padding-top:4px">${lastDateStr}</div>
-                    <div class="rpt-summary-label">最終学習日</div>
+                    <div class="rpt-summary-val">${continueDaysStr}</div>
+                    <div class="rpt-summary-label">学習継続日数</div>
                 </div>
             </div>
         </div>`;
@@ -1678,7 +1683,7 @@ function renderReport() {
             if (prob) recentWrong.push(prob);
         }
     });
-    const recentWrongSlice = recentWrong.slice(0, 3);
+    const recentWrongSlice = recentWrong.slice(0, 5);
     if (recentWrongSlice.length > 0) {
         const wrongRows = recentWrongSlice.map(prob => {
             const cat = PRACTICE_CATS.find(c => c.id === prob.catId);
@@ -1699,8 +1704,8 @@ function renderReport() {
             </div>`);
     }
 
-    // ── セクション5: 次に復習すべき単元（1件）──
-    // 苦手カテゴリ TOP1 を算出して表示
+    // ── セクション5: 次に復習すべき単元（最大2件）──
+    // 苦手カテゴリを正答率昇順で算出
     const catStatsArr = PRACTICE_CATS.map(cat => {
         const key = `g${g}_exam_${cat.id}`;
         const s = stats[key];
@@ -1709,25 +1714,55 @@ function renderReport() {
     }).filter(Boolean).sort((a, b) => a.pct - b.pct);
 
     const topWeakCat = catStatsArr.length > 0 ? catStatsArr[0] : null;
-    const nextTitle = topWeakUnit ? topWeakUnit.name : (topWeakCat ? topWeakCat.cat.title : null);
-    const nextSub   = topWeakUnit
-        ? `${topWeakUnit.correct}/${topWeakUnit.total}問 正解（正答率 ${topWeakUnit.pct}%）`
-        : topWeakCat
-            ? `${topWeakCat.cat.icon} ${topWeakCat.cat.title}（正答率 ${topWeakCat.pct}%）`
-            : null;
-    const nextCatId = topWeakUnit ? topWeakUnit.catId : (topWeakCat ? topWeakCat.cat.id : null);
 
-    if (nextTitle) {
-        sections.push(`
+    // 苦手 lessonUnit TOP2（試行数 >= 2, 正答率 < 70%）を優先
+    const qualifiedWeakUnits = Object.entries(unitAccMap)
+        .filter(([, v]) => v.total >= 2)
+        .map(([name, v]) => ({
+            name,
+            pct: Math.round(v.correct / v.total * 100),
+            correct: v.correct,
+            total: v.total,
+            catId: v.catId
+        }))
+        .filter(item => item.pct < 70)
+        .sort((a, b) => a.pct - b.pct)
+        .slice(0, 2);
+
+    // 候補リストを作成（lessonUnit 優先、不足分をカテゴリで補完）
+    const nextCandidates = [];
+    qualifiedWeakUnits.forEach(u => {
+        nextCandidates.push({
+            title: u.name,
+            sub: `${u.correct}/${u.total}問 正解（正答率 ${u.pct}%）`,
+            catId: u.catId
+        });
+    });
+    // lessonUnit が 2件に満たない場合、苦手カテゴリで補完（重複除外）
+    catStatsArr.forEach(cs => {
+        if (nextCandidates.length >= 2) return;
+        const alreadyIncluded = nextCandidates.some(nc => nc.catId === cs.cat.id);
+        if (!alreadyIncluded) {
+            nextCandidates.push({
+                title: `${cs.cat.icon} ${cs.cat.title}`,
+                sub: `正答率 ${cs.pct}%`,
+                catId: cs.cat.id
+            });
+        }
+    });
+
+    if (nextCandidates.length > 0) {
+        const nextCards = nextCandidates.slice(0, 2).map((nc, i) => `
             <div class="rpt-next">
-                <div class="rpt-next-icon">📌</div>
+                <div class="rpt-next-icon">${i === 0 ? '📌' : '📎'}</div>
                 <div class="rpt-next-body">
                     <div class="rpt-next-label">次に復習すべき単元</div>
-                    <div class="rpt-next-title">${nextTitle}</div>
-                    ${nextSub ? `<div class="rpt-next-sub">${nextSub}</div>` : ''}
+                    <div class="rpt-next-title">${nc.title}</div>
+                    <div class="rpt-next-sub">${nc.sub}</div>
                 </div>
-                ${nextCatId ? `<button class="wr-recommend-btn" onclick="wrGoToCat('${nextCatId}')">復習する →</button>` : ''}
-            </div>`);
+                ${nc.catId ? `<button class="wr-recommend-btn" onclick="wrGoToCat('${nc.catId}')">復習する →</button>` : ''}
+            </div>`).join('');
+        sections.push(nextCards);
     }
 
     // ── セクション6: 保護者向け一言コメント（ルールベース）──

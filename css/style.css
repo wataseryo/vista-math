@@ -580,6 +580,8 @@
         .topic-trial-feedback.ng  { background:#FFEBEE; color:#C62828; border-left:4px solid #E53935; }
         .topic-trial-next-btn { width:100%; padding:13px; border:none; border-radius:12px; font-size:.9rem; font-weight:bold; cursor:pointer; font-family:inherit; background:linear-gradient(135deg,#FF9A56,#E64A19); color:#fff; transition:all .18s; }
         .topic-trial-next-btn:hover { opacity:.9; transform:translateY(-2px); }
+        .topic-trial-reveal-btn { width:100%; padding:13px; border:2px solid #90A4AE; border-radius:12px; font-size:.9rem; font-weight:bold; cursor:pointer; font-family:inherit; background:#fff; color:#546E7A; transition:all .18s; margin-bottom:10px; }
+        .topic-trial-reveal-btn:hover { background:#ECEFF1; border-color:#607D8B; }
 
         /* ══ PRACTICE SCREEN ══ */
         #practice-screen { background: #FFF8F5; }

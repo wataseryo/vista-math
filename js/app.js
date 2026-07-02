@@ -1837,24 +1837,19 @@ function generateChoices(prob) {
     let choices = [];
 
     if (typeof answer === 'number') {
-        // 数値の場合: 正解 ± 適当な差分でダミーを生成
+        // 数値の場合: 正解値の 10〜30% をランダムな差分幅として使いダミーを生成
         const base = answer;
-        const step = Math.max(1, Math.round(Math.abs(base) * 0.25) || 1);
-        const candidates = [
-            base + step,
-            base - step,
-            base + step * 2,
-            base - step * 2,
-            base + step * 3,
-            base - step * 3,
-            base + 1,
-            base + 2,
-            base + 3,
-            base - 1,
-        ].filter(v => v !== base && v > 0);
+        const candidates = [];
+        // 異なるランダム差分を使って候補を生成（最大10回試行）
+        for (let attempt = 0; attempt < 10 && candidates.length < 6; attempt++) {
+            const pct = 0.1 + Math.random() * 0.2; // 10〜30%
+            const diff = Math.max(1, Math.round(Math.abs(base) * pct));
+            candidates.push(base + diff);
+            candidates.push(base - diff);
+        }
 
-        // 重複排除して3つ選ぶ
-        const dummies = [...new Set(candidates)].slice(0, 3);
+        // 重複排除して3つ選ぶ（負値・正解値と同じ値を除外）
+        const dummies = [...new Set(candidates)].filter(v => v !== base && v > 0).slice(0, 3);
 
         choices = [
             { value: base, label: String(base) + (unit ? unit : ''), isCorrect: true },
@@ -1888,12 +1883,13 @@ function checkTrialAnswer(topicUnitId, choiceIdx, value, isCorrect) {
     const state = trialState[topicUnitId];
     if (!state || state.answered) return;
     state.answered = true;
+    state.revealedAnswer = false;
 
     const prob    = state.problems[state.current];
     const total   = state.problems.length;
     const isLast  = state.current >= total - 1;
 
-    // ボタンを全て無効化し、選択したボタンと正解ボタンをマーク
+    // ボタンを全て無効化し、選択したボタンをマーク
     const choicesContainer = document.getElementById('trial-choices-' + topicUnitId);
     if (choicesContainer) {
         const btns = choicesContainer.querySelectorAll('.topic-trial-choice');
@@ -1902,8 +1898,8 @@ function checkTrialAnswer(topicUnitId, choiceIdx, value, isCorrect) {
             if (i === choiceIdx) {
                 btn.classList.add(isCorrect ? 'correct' : 'wrong');
             }
-            // 不正解の場合、正解ボタンもハイライト
-            if (!isCorrect && btn.dataset.isCorrect === 'true') {
+            // 正解の場合は正解ボタンをハイライト（不正解の場合は「答えを確認する」押下後まで待つ）
+            if (isCorrect && btn.dataset.isCorrect === 'true' && i !== choiceIdx) {
                 btn.classList.add('correct');
             }
         });
@@ -1917,14 +1913,63 @@ function checkTrialAnswer(topicUnitId, choiceIdx, value, isCorrect) {
         if (isCorrect) {
             feedbackEl.className = 'topic-trial-feedback ok';
             feedbackEl.innerHTML = `<b>正解！</b><br>${solutionHtml}`;
+            feedbackEl.style.display = 'block';
         } else {
+            // 不正解時は「もう一度考えてみよう」のみ表示。正解・解説は非表示
             feedbackEl.className = 'topic-trial-feedback ng';
-            feedbackEl.innerHTML = `<b>惜しい！正解は ${escapeHtml(String(prob.answer))}${escapeHtml(prob.unit || '')} です。</b><br>${solutionHtml}`;
+            feedbackEl.innerHTML = `<b>惜しい！もう一度考えてみよう</b>`;
+            feedbackEl.style.display = 'block';
         }
-        feedbackEl.style.display = 'block';
     }
 
     // 次へボタン / 演習問題へ進むボタン
+    const nextEl = document.getElementById('trial-next-' + topicUnitId);
+    if (nextEl) {
+        const nextBtnHtml = isLast
+            ? `<button class="topic-trial-next-btn" onclick="openUnitPractice('${topicUnitId}')">演習問題へ進む →</button>`
+            : `<button class="topic-trial-next-btn" onclick="nextTrialQuestion('${topicUnitId}')">次の問題へ →</button>`;
+
+        if (!isCorrect) {
+            // 不正解時: 「答えを確認する」ボタンと「次の問題へ」ボタンを両方表示
+            nextEl.innerHTML = `<button class="topic-trial-reveal-btn" onclick="revealTrialAnswer('${topicUnitId}')">答えを確認する</button>${nextBtnHtml}`;
+        } else {
+            nextEl.innerHTML = nextBtnHtml;
+        }
+        nextEl.style.display = 'block';
+    }
+}
+
+/**
+ * 不正解後に「答えを確認する」を押したときに正解・解説を表示する
+ */
+function revealTrialAnswer(topicUnitId) {
+    const state = trialState[topicUnitId];
+    if (!state || state.revealedAnswer) return;
+    state.revealedAnswer = true;
+
+    const prob = state.problems[state.current];
+    const total = state.problems.length;
+    const isLast = state.current >= total - 1;
+
+    // 正解ボタンをハイライト
+    const choicesContainer = document.getElementById('trial-choices-' + topicUnitId);
+    if (choicesContainer) {
+        choicesContainer.querySelectorAll('.topic-trial-choice').forEach(btn => {
+            if (btn.dataset.isCorrect === 'true') {
+                btn.classList.add('correct');
+            }
+        });
+    }
+
+    // 正解値・解説を表示
+    const feedbackEl = document.getElementById('trial-feedback-' + topicUnitId);
+    if (feedbackEl) {
+        const rawSolution = prob.solution || prob.hint || '';
+        const solutionHtml = escapeHtml(rawSolution).replace(/\n/g, '<br>');
+        feedbackEl.innerHTML = `<b>正解は ${escapeHtml(String(prob.answer))}${escapeHtml(prob.unit || '')} です。</b><br>${solutionHtml}`;
+    }
+
+    // 「答えを確認する」ボタンを非表示にして「次の問題へ」のみ残す
     const nextEl = document.getElementById('trial-next-' + topicUnitId);
     if (nextEl) {
         if (isLast) {
@@ -1932,7 +1977,6 @@ function checkTrialAnswer(topicUnitId, choiceIdx, value, isCorrect) {
         } else {
             nextEl.innerHTML = `<button class="topic-trial-next-btn" onclick="nextTrialQuestion('${topicUnitId}')">次の問題へ →</button>`;
         }
-        nextEl.style.display = 'block';
     }
 }
 
@@ -1944,6 +1988,7 @@ function nextTrialQuestion(topicUnitId) {
     if (!state) return;
     state.current++;
     state.answered = false;
+    state.revealedAnswer = false;
     renderTrialQuestion(topicUnitId);
 }
 

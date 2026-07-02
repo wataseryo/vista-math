@@ -425,8 +425,9 @@ function showScreen(id, opts={}) {
     if (id === 'practice')      renderPractice();
     if (id === 'watertank')  { updateLearn(); generateProblem(); }
     if (id === 'hard-challenge') { hcSwitchMode('all'); renderHardChallenge(); }
-    if (id === 'weak-review')   { renderWeakReview(); }
-    if (id === 'report')        { renderReport(); }
+    if (id === 'weak-review')          { renderWeakReview(); }
+    if (id === 'recommended-review')   { renderRecommendedReview(); }
+    if (id === 'report')               { renderReport(); }
     if (id === 'u6-ratio')   { initTopicTrial('u6-ratio'); }
     if (id === 'u6-speed')   { initTopicTrial('u6-speed'); }
     if (id === 'u6-special') { initTopicTrial('u6-special'); }
@@ -1341,6 +1342,181 @@ function wrGoToCat(catId) {
     showScreen('practice');
     // renderPractice が同期的に pracShowCats を呼んだ後で pracOpenCat を実行する。
     pracOpenCat(catId);
+}
+
+/* ════════════════════════════════════════
+   RECOMMENDED REVIEW SCREEN
+════════════════════════════════════════ */
+
+/** 遷移元を記録してから recommended-review-screen へ移動 */
+function openRecommendedReview(fromScreen) {
+    appState.recommendedReviewFrom = fromScreen || 'home';
+    showScreen('recommended-review');
+}
+
+/** 「もどる」ボタン: 遷移元へ戻る */
+function goBackFromRecommendedReview() {
+    showScreen(appState.recommendedReviewFrom || 'home');
+}
+
+/**
+ * おすすめ復習画面を描画する。
+ *
+ * 苦手判定ロジック:
+ *   - vista_history の probId → PRACTICE_PROBLEMS.lessonUnit 別に試行数・正解数を集計
+ *   - 試行数 >= 2 AND 正答率 < 70% → 苦手単元
+ *   - 正答率昇順、同率は試行数降順でソート → TOP3
+ *
+ * 全体正答率:
+ *   - appState.grade に一致する g{grade}_exam_* の vista_stats を全集計
+ */
+function renderRecommendedReview() {
+    const g = appState.grade;
+    const container = document.getElementById('rr-body');
+    if (!container) return;
+
+    const stats   = JSON.parse(lsGet('vista_stats',   '{}'));
+    const history = JSON.parse(lsGet('vista_history', '{}'));
+
+    // ── 全体正答率（g{grade}_exam_* キーを集計）──
+    let totalCorrect = 0, totalAll = 0;
+    const examPrefix = `g${g}_exam_`;
+    Object.entries(stats).forEach(([k, v]) => {
+        if (k.startsWith(examPrefix)) {
+            totalCorrect += v.correct;
+            totalAll     += v.total;
+        }
+    });
+    const overallPct = totalAll > 0 ? Math.round(totalCorrect / totalAll * 100) : null;
+    const overallHtml = `
+        <div class="rr-overall">
+            <div class="rr-overall-label">全体正答率</div>
+            <div class="rr-overall-value">${overallPct !== null ? overallPct + '%' : '---'}</div>
+            <div class="rr-overall-sub">${totalAll > 0 ? totalCorrect + '/' + totalAll + '問 正解' : 'まだ問題を解いていません'}</div>
+        </div>`;
+
+    // ── 苦手unit 判定（vista_history → lessonUnit 別集計）──
+    const unitAccMap = {}; // unitName -> { correct, total, catId }
+    Object.entries(history).forEach(([probId, attempts]) => {
+        const prob = PRACTICE_PROBLEMS.find(p => p.id === probId);
+        if (!prob || !prob.lessonUnit) return;
+        const unit = prob.lessonUnit;
+        if (!unitAccMap[unit]) unitAccMap[unit] = { correct: 0, total: 0, catId: prob.catId };
+        attempts.forEach(ok => {
+            unitAccMap[unit].total++;
+            if (ok) unitAccMap[unit].correct++;
+        });
+    });
+
+    // 試行数 >= 2 AND 正答率 < 70% の単元を苦手と判定
+    const weakUnits = Object.entries(unitAccMap)
+        .filter(([, v]) => v.total >= 2)
+        .map(([name, v]) => ({
+            name,
+            pct:     Math.round(v.correct / v.total * 100),
+            correct: v.correct,
+            total:   v.total,
+            catId:   v.catId,
+        }))
+        .filter(u => u.pct < 70)
+        // 正答率昇順、同率は試行数降順
+        .sort((a, b) => a.pct !== b.pct ? a.pct - b.pct : b.total - a.total)
+        .slice(0, 3);
+
+    // ── 苦手unit ごとに topicScreen を解決する ──
+    //   lessonUnit → catId → PRACTICE_CATS → EXAM_UNITS_G{grade} → topicScreen
+    const examUnits = g === 5 ? EXAM_UNITS_G5 : EXAM_UNITS_G6;
+
+    function resolveTopicScreen(catId) {
+        if (!catId) return null;
+        const cat = PRACTICE_CATS.find(c => c.id === catId);
+        if (!cat) return null;
+        // PRACTICE_CATS の unitId{grade} プロパティで EXAM_UNITS を特定
+        const unitId = g === 5 ? cat.unitId5 : cat.unitId6;
+        if (!unitId) return null;
+        const unit = examUnits.find(u => u.id === unitId);
+        return unit && unit.topicScreen ? unit.topicScreen : null;
+    }
+
+    const sections = [overallHtml];
+
+    // ── セクション: 苦手unit TOP3 ──
+    if (weakUnits.length > 0) {
+        const rows = weakUnits.map((item, i) => {
+            const rankClass = ['rank1','rank2','rank3'][i] || '';
+            const barClass  = item.pct >= 80 ? '' : item.pct >= 50 ? 'mid' : 'low';
+            const topicScreen = resolveTopicScreen(item.catId);
+            const topicBtn = topicScreen
+                ? `<button class="rr-action-btn rr-topic-btn" onclick="showScreen('${topicScreen}')">トピック学習へ</button>`
+                : '';
+            const pracBtn = item.catId
+                ? `<button class="rr-action-btn rr-prac-btn" onclick="wrGoToCat('${item.catId}')">演習問題へ</button>`
+                : '';
+            return `
+                <div class="wr-item">
+                    <div class="wr-item-rank ${rankClass}">${i + 1}</div>
+                    <div class="wr-item-body">
+                        <div class="wr-item-title">${item.name}</div>
+                        <div class="wr-acc-bar-wrap">
+                            <div class="wr-acc-bar-bg"><div class="wr-acc-bar-fill ${barClass}" style="width:${item.pct}%"></div></div>
+                            <span class="wr-acc-pct">${item.pct}%</span>
+                        </div>
+                        <div class="wr-item-meta">${item.correct}/${item.total}問 正解</div>
+                    </div>
+                    <div class="rr-action-btns">
+                        ${topicBtn}
+                        ${pracBtn}
+                    </div>
+                </div>`;
+        }).join('');
+        sections.push(`
+            <div class="wr-section">
+                <div class="wr-section-title">苦手単元 TOP3</div>
+                ${rows}
+            </div>`);
+    } else {
+        // 苦手unit が 0 件: ガイダンス表示
+        sections.push(`
+            <div class="wr-no-data">
+                <div class="wr-no-data-icon">📊</div>
+                <div class="wr-no-data-title">もう少し問題を解くとおすすめ復習が表示されます</div>
+                <div class="wr-no-data-sub">演習問題やトピック学習の練習問題を2問以上解くと、<br>苦手な単元を自動で見つけます。</div>
+            </div>`);
+    }
+
+    // ── セクション: 最近間違えた問題（最大5件）──
+    const recentWrong = [];
+    Object.entries(history).forEach(([probId, attempts]) => {
+        if (!attempts.length) return;
+        const last = attempts[attempts.length - 1];
+        if (last === false) {
+            const prob = PRACTICE_PROBLEMS.find(p => p.id === probId);
+            if (prob) recentWrong.push(prob);
+        }
+    });
+    const recentWrongSlice = recentWrong.slice(0, 5);
+
+    if (recentWrongSlice.length > 0) {
+        const rows = recentWrongSlice.map(prob => {
+            const cat = PRACTICE_CATS.find(c => c.id === prob.catId);
+            const catName = cat ? cat.title : (prob.catId || '');
+            return `
+                <div class="wr-wrong-item">
+                    <div class="wr-wrong-badge">まちがい</div>
+                    <div class="wr-wrong-body">
+                        <div class="wr-wrong-title">${prob.title}</div>
+                        <div class="wr-wrong-cat">${catName}${prob.lessonUnit ? ' ／ ' + prob.lessonUnit : ''}</div>
+                    </div>
+                </div>`;
+        }).join('');
+        sections.push(`
+            <div class="wr-section">
+                <div class="wr-section-title">最近間違えた問題</div>
+                ${rows}
+            </div>`);
+    }
+
+    container.innerHTML = sections.join('');
 }
 
 /* ════════════════════════════════════════

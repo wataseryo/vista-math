@@ -60,6 +60,9 @@
             <span class="cc-arrow">›</span>
         </div>
     </div>
+    <div class="home-links">
+        <button class="home-link-btn" onclick="openRecommendedReview('home')">おすすめ復習を見る</button>
+    </div>
 </div>
 
 <!-- ════════ STANDARD COURSE ════════ -->
@@ -112,6 +115,7 @@
             </div>
         </div>
         <div class="exam-mode-links">
+            <button class="exam-mode-link-btn" onclick="openRecommendedReview('exam-mode')">おすすめ復習を見る</button>
             <button class="exam-mode-link-btn" onclick="showScreen('report')">📊 保護者・塾向けレポートを見る</button>
         </div>
     </div>
@@ -124,6 +128,15 @@
         <span class="screen-title">学習レポート</span>
     </div>
     <div class="rpt-body" id="rpt-body"><!-- populated by JS --></div>
+</div>
+
+<!-- ════════ RECOMMENDED REVIEW SCREEN ════════ -->
+<div id="recommended-review-screen" class="screen">
+    <div class="screen-header exam-header">
+        <button class="back-btn" onclick="goBackFromRecommendedReview()">← もどる</button>
+        <span class="screen-title">おすすめ復習</span>
+    </div>
+    <div class="rr-body" id="rr-body"><!-- populated by JS --></div>
 </div>
 
 <!-- ════════ WEAK REVIEW SCREEN ════════ -->

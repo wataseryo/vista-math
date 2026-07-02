@@ -1807,7 +1807,7 @@ function renderTrialQuestion(topicUnitId) {
     const choices = generateChoices(prob);
 
     const choicesHtml = choices.map((c, i) =>
-        `<button class="topic-trial-choice" onclick="checkTrialAnswer('${topicUnitId}', ${i}, ${JSON.stringify(c.value)}, ${c.isCorrect})">${escapeHtml(c.label)}</button>`
+        `<button class="topic-trial-choice" data-is-correct="${c.isCorrect}" onclick="checkTrialAnswer('${topicUnitId}', ${i}, ${JSON.stringify(c.value)}, ${c.isCorrect})">${escapeHtml(c.label)}</button>`
     ).join('');
 
     container.innerHTML = `
@@ -1902,7 +1902,10 @@ function checkTrialAnswer(topicUnitId, choiceIdx, value, isCorrect) {
             if (i === choiceIdx) {
                 btn.classList.add(isCorrect ? 'correct' : 'wrong');
             }
-            // 不正解の場合はフィードバックエリアに正解を表示する（後述）
+            // 不正解の場合、正解ボタンもハイライト
+            if (!isCorrect && btn.dataset.isCorrect === 'true') {
+                btn.classList.add('correct');
+            }
         });
     }
 
@@ -1916,7 +1919,7 @@ function checkTrialAnswer(topicUnitId, choiceIdx, value, isCorrect) {
             feedbackEl.innerHTML = `<b>正解！</b><br>${solutionHtml}`;
         } else {
             feedbackEl.className = 'topic-trial-feedback ng';
-            feedbackEl.innerHTML = `<b>不正解。正解は ${escapeHtml(String(prob.answer))}${escapeHtml(prob.unit || '')} です。</b><br>${solutionHtml}`;
+            feedbackEl.innerHTML = `<b>惜しい！正解は ${escapeHtml(String(prob.answer))}${escapeHtml(prob.unit || '')} です。</b><br>${solutionHtml}`;
         }
         feedbackEl.style.display = 'block';
     }

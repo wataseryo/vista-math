@@ -2473,6 +2473,482 @@ x ＝ 4年前
   topicUnitId: 'u5-special',
 },
 
+/* ════════════════════════════════════════
+   平面図形 体験問題（topicUnitId: 'u6-plane'）
+   initTopicTrial('u6-plane') で最大3問表示
+════════════════════════════════════════ */
+
+{
+  id: 'u6_plane_trial_001',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '平行四辺形の面積', pattern: '底辺×高さ',
+  difficulty: 1, answerType: 'number', unit: 'cm²',
+  title: '平行四辺形の面積（基本）',
+  text: '底辺8cm、高さ5cmの平行四辺形の面積を求めなさい。',
+  answer: 40,
+  hint: '平行四辺形の面積 ＝ 底辺 × 高さ',
+  solution: `【平行四辺形の面積】
+底辺 × 高さ ＝ 8 × 5 ＝ 40cm²
+
+答え：40cm²`,
+  tags: ['平面図形', '平行四辺形', '面積'], visualTypes: ['barModel'], isRandomGenerated: false,
+  topicUnitId: 'u6-plane',
+},
+
+{
+  id: 'u6_plane_trial_002',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '三角形の面積', pattern: '底辺×高さ÷2',
+  difficulty: 1, answerType: 'number', unit: 'cm²',
+  title: '三角形の面積（基本）',
+  text: '底辺6cm、高さ4cmの三角形の面積を求めなさい。',
+  answer: 12,
+  hint: '三角形の面積 ＝ 底辺 × 高さ ÷ 2',
+  solution: `【三角形の面積】
+底辺 × 高さ ÷ 2 ＝ 6 × 4 ÷ 2 ＝ 12cm²
+
+答え：12cm²`,
+  tags: ['平面図形', '三角形', '面積'], visualTypes: ['barModel'], isRandomGenerated: false,
+  topicUnitId: 'u6-plane',
+},
+
+{
+  id: 'u6_plane_trial_003',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '台形の面積', pattern: '(上底+下底)×高さ÷2',
+  difficulty: 2, answerType: 'number', unit: 'cm²',
+  title: '台形の面積（基本）',
+  text: '上底3cm、下底7cm、高さ4cmの台形の面積を求めなさい。',
+  answer: 20,
+  hint: '台形の面積 ＝ (上底 ＋ 下底) × 高さ ÷ 2',
+  solution: `【台形の面積】
+(上底 ＋ 下底) × 高さ ÷ 2
+＝ (3 ＋ 7) × 4 ÷ 2
+＝ 10 × 4 ÷ 2
+＝ 20cm²
+
+答え：20cm²`,
+  tags: ['平面図形', '台形', '面積'], visualTypes: ['barModel'], isRandomGenerated: false,
+  topicUnitId: 'u6-plane',
+},
+
+{
+  id: 'u6_plane_trial_004',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '複合図形', pattern: '分割して合計',
+  difficulty: 2, answerType: 'number', unit: 'cm²',
+  title: '複合図形の面積（三角形2つ）',
+  text: '底辺10cm・高さ6cmの三角形と、底辺4cm・高さ6cmの三角形を合わせた図形の面積を求めなさい。',
+  answer: 42,
+  hint: '2つの三角形に分けて、それぞれの面積を求めて足す。\n三角形の面積 ＝ 底辺 × 高さ ÷ 2',
+  solution: `【複合図形 ＝ 分割して合計】
+①三角形1の面積：10 × 6 ÷ 2 ＝ 30cm²
+②三角形2の面積：4 × 6 ÷ 2 ＝ 12cm²
+
+③合計：30 ＋ 12 ＝ 42cm²
+
+答え：42cm²`,
+  tags: ['平面図形', '複合図形', '分割'], visualTypes: ['barModel'], isRandomGenerated: false,
+  topicUnitId: 'u6-plane',
+},
+
+/* ════════════════════════════════════════
+   平面図形 演習問題 Sprint 3 （grade:6, catId:'pc-plane'）
+════════════════════════════════════════ */
+
+/* ── 基礎公式 ★1〜2 ── */
+{
+  id: 'g6_plane_001',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '平行四辺形の面積', pattern: '公式適用',
+  difficulty: 1, answerType: 'number', unit: 'cm²',
+  title: '平行四辺形の面積（基本）',
+  text: '底辺12cm、高さ7cmの平行四辺形の面積を求めなさい。',
+  answer: 84,
+  hint: '平行四辺形の面積 ＝ 底辺 × 高さ',
+  solution: `【公式・考え方】
+  平行四辺形の面積 ＝ 底辺 × 高さ
+
+① 底辺：12cm
+② 高さ：7cm
+
+③ 面積を求める
+  12 × 7 ＝ 84cm²
+
+【確認】
+  底辺12cm × 高さ7cm ＝ 84cm² ✓
+
+答え：84cm²`,
+  tags: ['平面図形', '平行四辺形'], visualTypes: ['barModel'], isRandomGenerated: false,
+},
+
+{
+  id: 'g6_plane_002',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '三角形の面積', pattern: '公式適用',
+  difficulty: 1, answerType: 'number', unit: 'cm²',
+  title: '三角形の面積（基本）',
+  text: '底辺10cm、高さ8cmの三角形の面積を求めなさい。',
+  answer: 40,
+  hint: '三角形の面積 ＝ 底辺 × 高さ ÷ 2',
+  solution: `【公式・考え方】
+  三角形の面積 ＝ 底辺 × 高さ ÷ 2
+
+① 底辺：10cm
+② 高さ：8cm
+
+③ 面積を求める
+  10 × 8 ÷ 2 ＝ 40cm²
+
+【確認】
+  底辺10cm × 高さ8cm ÷ 2 ＝ 40cm² ✓
+
+答え：40cm²`,
+  tags: ['平面図形', '三角形'], visualTypes: ['barModel'], isRandomGenerated: false,
+},
+
+{
+  id: 'g6_plane_003',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '台形の面積', pattern: '公式適用',
+  difficulty: 2, answerType: 'number', unit: 'cm²',
+  title: '台形の面積（基本）',
+  text: '上底5cm、下底9cm、高さ6cmの台形の面積を求めなさい。',
+  answer: 42,
+  hint: '台形の面積 ＝ (上底 ＋ 下底) × 高さ ÷ 2',
+  solution: `【公式・考え方】
+  台形の面積 ＝ (上底 ＋ 下底) × 高さ ÷ 2
+
+① 上底：5cm、下底：9cm
+② 高さ：6cm
+
+③ 面積を求める
+  (5 ＋ 9) × 6 ÷ 2
+  ＝ 14 × 6 ÷ 2
+  ＝ 84 ÷ 2
+  ＝ 42cm²
+
+【確認】
+  (5＋9)×6÷2 ＝ 14×3 ＝ 42cm² ✓
+
+答え：42cm²`,
+  tags: ['平面図形', '台形'], visualTypes: ['barModel'], isRandomGenerated: false,
+},
+
+{
+  id: 'g6_plane_004',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '三角形の面積', pattern: '辺の逆算',
+  difficulty: 2, answerType: 'number', unit: 'cm',
+  title: '三角形の高さを求める',
+  text: '面積が36cm²の三角形があります。底辺が9cmのとき、高さは何cmですか？',
+  answer: 8,
+  hint: '面積 ＝ 底辺 × 高さ ÷ 2 を高さについて解く\n高さ ＝ 面積 × 2 ÷ 底辺',
+  solution: `【公式・考え方】
+  面積 ＝ 底辺 × 高さ ÷ 2
+  → 高さ ＝ 面積 × 2 ÷ 底辺
+
+① 面積：36cm²、底辺：9cm
+
+② 高さを求める
+  高さ ＝ 36 × 2 ÷ 9
+  ＝ 72 ÷ 9
+  ＝ 8cm
+
+【確認】
+  9 × 8 ÷ 2 ＝ 36cm² ✓
+
+答え：8cm`,
+  tags: ['平面図形', '三角形', '逆算'], visualTypes: ['areaReverse'], isRandomGenerated: false,
+},
+
+{
+  id: 'g6_plane_005',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '平行四辺形の面積', pattern: '辺の逆算',
+  difficulty: 2, answerType: 'number', unit: 'cm',
+  title: '平行四辺形の高さを求める',
+  text: '面積が60cm²の平行四辺形があります。底辺が12cmのとき、高さは何cmですか？',
+  answer: 5,
+  hint: '面積 ＝ 底辺 × 高さ を高さについて解く\n高さ ＝ 面積 ÷ 底辺',
+  solution: `【公式・考え方】
+  面積 ＝ 底辺 × 高さ
+  → 高さ ＝ 面積 ÷ 底辺
+
+① 面積：60cm²、底辺：12cm
+
+② 高さを求める
+  高さ ＝ 60 ÷ 12
+  ＝ 5cm
+
+【確認】
+  12 × 5 ＝ 60cm² ✓
+
+答え：5cm`,
+  tags: ['平面図形', '平行四辺形', '逆算'], visualTypes: ['areaReverse'], isRandomGenerated: false,
+},
+
+/* ── 複合図形・補助線 ★3 ── */
+{
+  id: 'g6_plane_006',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '複合図形', pattern: '引き算で求める',
+  difficulty: 3, answerType: 'number', unit: 'cm²',
+  title: '長方形から三角形を切り取る',
+  text: 'たて10cm・よこ8cmの長方形から、底辺4cm・高さ5cmの三角形を切り取りました。残りの図形の面積を求めなさい。',
+  answer: 70,
+  hint: '長方形の面積 − 三角形の面積\n三角形の面積 ＝ 底辺 × 高さ ÷ 2',
+  solution: `【公式・考え方】
+  残りの面積 ＝ 長方形の面積 − 三角形の面積
+
+① 長方形の面積：10 × 8 ＝ 80cm²
+
+② 三角形の面積：4 × 5 ÷ 2 ＝ 10cm²
+
+③ 残りの面積：80 − 10 ＝ 70cm²
+
+【確認】
+  80 − 10 ＝ 70cm² ✓
+
+答え：70cm²`,
+  tags: ['平面図形', '複合図形', '差'], visualTypes: ['areaDecompose'], isRandomGenerated: false,
+},
+
+{
+  id: 'g6_plane_007',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '複合図形', pattern: 'L字型',
+  difficulty: 3, answerType: 'number', unit: 'cm²',
+  title: 'L字型の図形の面積',
+  text: '下の図形（L字型）の面積を求めなさい。\n外側の長方形：たて8cm・よこ10cm\n切り取った長方形：たて3cm・よこ4cm',
+  answer: 68,
+  hint: '大きい長方形の面積 − 切り取った長方形の面積',
+  solution: `【公式・考え方】
+  L字型の面積 ＝ 大きい長方形 − 切り取った長方形
+
+① 大きい長方形の面積：8 × 10 ＝ 80cm²
+
+② 切り取った長方形の面積：3 × 4 ＝ 12cm²
+
+③ L字型の面積：80 − 12 ＝ 68cm²
+
+【確認】
+  80 − 12 ＝ 68cm² ✓
+
+答え：68cm²`,
+  tags: ['平面図形', '複合図形', 'L字型'], visualTypes: ['areaDecompose'], isRandomGenerated: false,
+},
+
+{
+  id: 'g6_plane_008',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '台形の面積', pattern: '辺の逆算',
+  difficulty: 3, answerType: 'number', unit: 'cm',
+  title: '台形の下底を求める',
+  text: '面積が48cm²の台形があります。上底4cm、高さ6cmのとき、下底は何cmですか？',
+  answer: 12,
+  hint: '面積 ＝ (上底 ＋ 下底) × 高さ ÷ 2 を下底について解く\n上底 ＋ 下底 ＝ 面積 × 2 ÷ 高さ',
+  solution: `【公式・考え方】
+  面積 ＝ (上底 ＋ 下底) × 高さ ÷ 2
+  → 上底 ＋ 下底 ＝ 面積 × 2 ÷ 高さ
+  → 下底 ＝ (面積 × 2 ÷ 高さ) − 上底
+
+① 面積：48cm²、上底：4cm、高さ：6cm
+
+② 上底 ＋ 下底 ＝ 48 × 2 ÷ 6 ＝ 96 ÷ 6 ＝ 16cm
+
+③ 下底 ＝ 16 − 4 ＝ 12cm
+
+【確認】
+  (4＋12)×6÷2 ＝ 16×3 ＝ 48cm² ✓
+
+答え：12cm`,
+  tags: ['平面図形', '台形', '逆算'], visualTypes: ['areaReverse'], isRandomGenerated: false,
+},
+
+{
+  id: 'g6_plane_009',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '補助線', pattern: '対角線で分割',
+  difficulty: 3, answerType: 'number', unit: 'cm²',
+  title: '平行四辺形を対角線で分ける',
+  text: '平行四辺形ABCDがあります。平行四辺形の底辺BCは10cm、高さは6cmです。\n対角線BDで2つの三角形に分けたとき、三角形ABDの面積を求めなさい。',
+  answer: 30,
+  hint: '平行四辺形を対角線で分けると、2つの三角形の面積は等しい\n三角形の面積 ＝ 平行四辺形の面積 ÷ 2',
+  solution: `【公式・考え方】
+  平行四辺形を対角線で分けると2つの合同な三角形ができる
+  三角形ABDの面積 ＝ 平行四辺形ABCD の面積 ÷ 2
+
+① 平行四辺形の面積：10 × 6 ＝ 60cm²
+
+② 三角形ABDの面積：60 ÷ 2 ＝ 30cm²
+
+【確認】
+  対角線で分けた三角形は必ず面積が等しい ✓
+
+答え：30cm²`,
+  tags: ['平面図形', '補助線', '平行四辺形'], visualTypes: ['auxiliaryLine'], isRandomGenerated: false,
+},
+
+{
+  id: 'g6_plane_010',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '補助線', pattern: '底辺の比と面積比',
+  difficulty: 3, answerType: 'number', unit: 'cm²',
+  title: '補助線で分けた三角形の面積',
+  text: '底辺12cm・高さ8cmの三角形の中に、頂点から底辺に補助線を引いて2つに分けました。\n補助線が底辺を3:1に分けるとき、大きい三角形の面積を求めなさい。',
+  answer: 36,
+  hint: '底辺の比 ＝ 3:1 → 面積の比も 3:1\n全体の面積 ＝ 12 × 8 ÷ 2 ＝ 48cm²\n大きい方 ＝ 48 × 3/4',
+  solution: `【公式・考え方】
+  高さが同じ三角形の面積比 ＝ 底辺の比
+
+① 全体の三角形の面積：12 × 8 ÷ 2 ＝ 48cm²
+
+② 底辺の比が 3:1 なので面積比も 3:1
+  全体を 3＋1＝4 に分ける
+
+③ 大きい三角形の面積：48 × 3/4 ＝ 36cm²
+
+【確認】
+  小さい方 ＝ 48 × 1/4 ＝ 12cm²
+  36 ＋ 12 ＝ 48cm² ✓
+
+答え：36cm²`,
+  tags: ['平面図形', '補助線', '面積比'], visualTypes: ['areaRatio', 'auxiliaryLine'], isRandomGenerated: false,
+},
+
+{
+  id: 'g6_plane_011',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '複合図形', pattern: '三角形＋台形',
+  difficulty: 3, answerType: 'number', unit: 'cm²',
+  title: '三角形と台形の複合図形',
+  text: '底辺14cm・高さ9cmの三角形と、上底3cm・下底7cm・高さ9cmの台形が合わさった図形の面積を求めなさい。',
+  answer: 108,
+  hint: '三角形の面積 ＋ 台形の面積\nそれぞれを公式で計算して足す',
+  solution: `【公式・考え方】
+  複合図形の面積 ＝ 三角形の面積 ＋ 台形の面積
+
+① 三角形の面積：14 × 9 ÷ 2 ＝ 63cm²
+
+② 台形の面積：(3＋7) × 9 ÷ 2 ＝ 10 × 9 ÷ 2 ＝ 45cm²
+
+③ 合計：63 ＋ 45 ＝ 108cm²
+
+【確認】
+  63 ＋ 45 ＝ 108cm² ✓
+
+答え：108cm²`,
+  tags: ['平面図形', '複合図形', '三角形', '台形'], visualTypes: ['areaDecompose'], isRandomGenerated: false,
+},
+
+/* ── 等積変形・面積比 ★4〜5 ── */
+{
+  id: 'g6_plane_012',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '等積変形', pattern: '等積変形',
+  difficulty: 4, answerType: 'number', unit: 'cm',
+  title: '等積変形で高さを求める',
+  text: '底辺8cm・高さ6cmの三角形と、面積が等しい平行四辺形を作ります。\n平行四辺形の底辺を8cmにするとき、高さは何cmですか？',
+  answer: 3,
+  hint: '三角形の面積 ＝ 平行四辺形の面積\n三角形: 8×6÷2＝24cm²\n平行四辺形の高さ ＝ 面積 ÷ 底辺',
+  solution: `【公式・考え方】
+  三角形の面積 ＝ 平行四辺形の面積 として高さを逆算する
+
+① 三角形の面積：8 × 6 ÷ 2 ＝ 24cm²
+
+② 平行四辺形の高さ：24 ÷ 8 ＝ 3cm
+
+【確認】
+  平行四辺形：8 × 3 ＝ 24cm²
+  三角形：8 × 6 ÷ 2 ＝ 24cm²（等しい） ✓
+
+答え：3cm`,
+  tags: ['平面図形', '等積変形'], visualTypes: ['equalArea'], isRandomGenerated: false,
+},
+
+{
+  id: 'g6_plane_013',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '面積比', pattern: '底辺の比と面積比',
+  difficulty: 4, answerType: 'number', unit: 'cm²',
+  title: '底辺の比から面積を求める',
+  text: '2つの三角形があります。三角形Aの底辺は三角形Bの底辺の2倍で、高さは同じです。\n三角形Bの面積が15cm²のとき、三角形Aの面積を求めなさい。',
+  answer: 30,
+  hint: '高さが同じなら、面積の比 ＝ 底辺の比\n底辺が2倍 → 面積も2倍',
+  solution: `【公式・考え方】
+  高さが同じ三角形：面積の比 ＝ 底辺の比
+
+① 三角形Aの底辺 ＝ 三角形Bの底辺 × 2
+  → 面積の比も 2:1
+
+② 三角形Aの面積 ＝ 三角形Bの面積 × 2
+  ＝ 15 × 2 ＝ 30cm²
+
+【確認】
+  底辺2倍・高さ同じ → 面積2倍
+  15 × 2 ＝ 30cm² ✓
+
+答え：30cm²`,
+  tags: ['平面図形', '面積比', '三角形'], visualTypes: ['areaRatio'], isRandomGenerated: false,
+},
+
+{
+  id: 'g6_plane_014',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '面積比', pattern: '相似と面積比',
+  difficulty: 4, answerType: 'number', unit: 'cm²',
+  title: '相似比と面積比',
+  text: '相似比が1:3の2つの正方形があります。小さい正方形の面積が4cm²のとき、大きい正方形の面積を求めなさい。',
+  answer: 36,
+  hint: '相似比が1:3 → 面積比は1²:3² ＝ 1:9\n大きい正方形の面積 ＝ 4 × 9',
+  solution: `【公式・考え方】
+  相似比が m:n → 面積比は m²:n²
+
+① 相似比 1:3 → 面積比 1²:3² ＝ 1:9
+
+② 大きい正方形の面積 ＝ 小さい正方形の面積 × 9
+  ＝ 4 × 9 ＝ 36cm²
+
+【確認】
+  相似比1:3 → 辺の長さも1:3
+  小の辺：√4 ＝ 2cm → 大の辺：2 × 3 ＝ 6cm
+  大の面積：6² ＝ 36cm² ✓
+
+答え：36cm²`,
+  tags: ['平面図形', '面積比', '相似'], visualTypes: ['areaRatio'], isRandomGenerated: false,
+},
+
+{
+  id: 'g6_plane_015',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '等積変形・面積比', pattern: '対角線で4分割',
+  difficulty: 5, answerType: 'number', unit: '%',
+  title: '対角線で4分割した三角形の面積比',
+  text: '底辺10cm・高さ8cmの平行四辺形があります。\n対角線で4つの三角形に分けたとき、向かい合う三角形の面積の和は全体の何%ですか？',
+  answer: 50,
+  hint: '対角線で分けると4つの三角形ができる\n向かい合う2つは合計で全体の半分になる',
+  solution: `【公式・考え方】
+  平行四辺形を2本の対角線で分けると4つの三角形ができ、
+  向かい合う三角形の面積の和は必ず等しい
+
+① 平行四辺形の面積：10 × 8 ＝ 80cm²
+
+② 2本の対角線で分けると4つの三角形になる
+  向かい合う三角形を（A,C）と（B,D）と呼ぶ
+
+③ A＋C ＝ B＋D ＝ 全体の半分
+  → 向かい合う2つの和 ＝ 80 ÷ 2 ＝ 40cm²
+
+④ 全体に対する割合：40 ÷ 80 × 100 ＝ 50%
+
+【確認】
+  対角線が交点で分ける比から証明できる ✓
+
+答え：50%`,
+  tags: ['平面図形', '面積比', '等積変形', '対角線'], visualTypes: ['areaRatio', 'auxiliaryLine'], isRandomGenerated: false,
+},
+
 ];
 
 /* ════════════════════════════════════════
@@ -4521,481 +4997,5 @@ const CHALLENGES = [
         visual:`<div class="vis-formula">6＋10＋4＋5 ＝ 25人 ✓</div>` },
     ]
   },
-
-/* ════════════════════════════════════════
-   平面図形 体験問題（topicUnitId: 'u6-plane'）
-   initTopicTrial('u6-plane') で最大3問表示
-════════════════════════════════════════ */
-
-{
-  id: 'u6_plane_trial_001',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '平行四辺形の面積', pattern: '底辺×高さ',
-  difficulty: 1, answerType: 'number', unit: 'cm²',
-  title: '平行四辺形の面積（基本）',
-  text: '底辺8cm、高さ5cmの平行四辺形の面積を求めなさい。',
-  answer: 40,
-  hint: '平行四辺形の面積 ＝ 底辺 × 高さ',
-  solution: `【平行四辺形の面積】
-底辺 × 高さ ＝ 8 × 5 ＝ 40cm²
-
-答え：40cm²`,
-  tags: ['平面図形', '平行四辺形', '面積'], visualTypes: ['barModel'], isRandomGenerated: false,
-  topicUnitId: 'u6-plane',
-},
-
-{
-  id: 'u6_plane_trial_002',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '三角形の面積', pattern: '底辺×高さ÷2',
-  difficulty: 1, answerType: 'number', unit: 'cm²',
-  title: '三角形の面積（基本）',
-  text: '底辺6cm、高さ4cmの三角形の面積を求めなさい。',
-  answer: 12,
-  hint: '三角形の面積 ＝ 底辺 × 高さ ÷ 2',
-  solution: `【三角形の面積】
-底辺 × 高さ ÷ 2 ＝ 6 × 4 ÷ 2 ＝ 12cm²
-
-答え：12cm²`,
-  tags: ['平面図形', '三角形', '面積'], visualTypes: ['barModel'], isRandomGenerated: false,
-  topicUnitId: 'u6-plane',
-},
-
-{
-  id: 'u6_plane_trial_003',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '台形の面積', pattern: '(上底+下底)×高さ÷2',
-  difficulty: 2, answerType: 'number', unit: 'cm²',
-  title: '台形の面積（基本）',
-  text: '上底3cm、下底7cm、高さ4cmの台形の面積を求めなさい。',
-  answer: 20,
-  hint: '台形の面積 ＝ (上底 ＋ 下底) × 高さ ÷ 2',
-  solution: `【台形の面積】
-(上底 ＋ 下底) × 高さ ÷ 2
-＝ (3 ＋ 7) × 4 ÷ 2
-＝ 10 × 4 ÷ 2
-＝ 20cm²
-
-答え：20cm²`,
-  tags: ['平面図形', '台形', '面積'], visualTypes: ['barModel'], isRandomGenerated: false,
-  topicUnitId: 'u6-plane',
-},
-
-{
-  id: 'u6_plane_trial_004',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '複合図形', pattern: '分割して合計',
-  difficulty: 2, answerType: 'number', unit: 'cm²',
-  title: '複合図形の面積（三角形2つ）',
-  text: '底辺10cm・高さ6cmの三角形と、底辺4cm・高さ6cmの三角形を合わせた図形の面積を求めなさい。',
-  answer: 42,
-  hint: '2つの三角形に分けて、それぞれの面積を求めて足す。\n三角形の面積 ＝ 底辺 × 高さ ÷ 2',
-  solution: `【複合図形 ＝ 分割して合計】
-①三角形1の面積：10 × 6 ÷ 2 ＝ 30cm²
-②三角形2の面積：4 × 6 ÷ 2 ＝ 12cm²
-
-③合計：30 ＋ 12 ＝ 42cm²
-
-答え：42cm²`,
-  tags: ['平面図形', '複合図形', '分割'], visualTypes: ['barModel'], isRandomGenerated: false,
-  topicUnitId: 'u6-plane',
-},
-
-/* ════════════════════════════════════════
-   平面図形 演習問題 Sprint 3 （grade:6, catId:'pc-plane'）
-════════════════════════════════════════ */
-
-/* ── 基礎公式 ★1〜2 ── */
-{
-  id: 'g6_plane_001',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '平行四辺形の面積', pattern: '公式適用',
-  difficulty: 1, answerType: 'number', unit: 'cm²',
-  title: '平行四辺形の面積（基本）',
-  text: '底辺12cm、高さ7cmの平行四辺形の面積を求めなさい。',
-  answer: 84,
-  hint: '平行四辺形の面積 ＝ 底辺 × 高さ',
-  solution: `【公式・考え方】
-  平行四辺形の面積 ＝ 底辺 × 高さ
-
-① 底辺：12cm
-② 高さ：7cm
-
-③ 面積を求める
-  12 × 7 ＝ 84cm²
-
-【確認】
-  底辺12cm × 高さ7cm ＝ 84cm² ✓
-
-答え：84cm²`,
-  tags: ['平面図形', '平行四辺形'], visualTypes: ['barModel'], isRandomGenerated: false,
-},
-
-{
-  id: 'g6_plane_002',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '三角形の面積', pattern: '公式適用',
-  difficulty: 1, answerType: 'number', unit: 'cm²',
-  title: '三角形の面積（基本）',
-  text: '底辺10cm、高さ8cmの三角形の面積を求めなさい。',
-  answer: 40,
-  hint: '三角形の面積 ＝ 底辺 × 高さ ÷ 2',
-  solution: `【公式・考え方】
-  三角形の面積 ＝ 底辺 × 高さ ÷ 2
-
-① 底辺：10cm
-② 高さ：8cm
-
-③ 面積を求める
-  10 × 8 ÷ 2 ＝ 40cm²
-
-【確認】
-  底辺10cm × 高さ8cm ÷ 2 ＝ 40cm² ✓
-
-答え：40cm²`,
-  tags: ['平面図形', '三角形'], visualTypes: ['barModel'], isRandomGenerated: false,
-},
-
-{
-  id: 'g6_plane_003',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '台形の面積', pattern: '公式適用',
-  difficulty: 2, answerType: 'number', unit: 'cm²',
-  title: '台形の面積（基本）',
-  text: '上底5cm、下底9cm、高さ6cmの台形の面積を求めなさい。',
-  answer: 42,
-  hint: '台形の面積 ＝ (上底 ＋ 下底) × 高さ ÷ 2',
-  solution: `【公式・考え方】
-  台形の面積 ＝ (上底 ＋ 下底) × 高さ ÷ 2
-
-① 上底：5cm、下底：9cm
-② 高さ：6cm
-
-③ 面積を求める
-  (5 ＋ 9) × 6 ÷ 2
-  ＝ 14 × 6 ÷ 2
-  ＝ 84 ÷ 2
-  ＝ 42cm²
-
-【確認】
-  (5＋9)×6÷2 ＝ 14×3 ＝ 42cm² ✓
-
-答え：42cm²`,
-  tags: ['平面図形', '台形'], visualTypes: ['barModel'], isRandomGenerated: false,
-},
-
-{
-  id: 'g6_plane_004',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '三角形の面積', pattern: '辺の逆算',
-  difficulty: 2, answerType: 'number', unit: 'cm',
-  title: '三角形の高さを求める',
-  text: '面積が36cm²の三角形があります。底辺が9cmのとき、高さは何cmですか？',
-  answer: 8,
-  hint: '面積 ＝ 底辺 × 高さ ÷ 2 を高さについて解く\n高さ ＝ 面積 × 2 ÷ 底辺',
-  solution: `【公式・考え方】
-  面積 ＝ 底辺 × 高さ ÷ 2
-  → 高さ ＝ 面積 × 2 ÷ 底辺
-
-① 面積：36cm²、底辺：9cm
-
-② 高さを求める
-  高さ ＝ 36 × 2 ÷ 9
-  ＝ 72 ÷ 9
-  ＝ 8cm
-
-【確認】
-  9 × 8 ÷ 2 ＝ 36cm² ✓
-
-答え：8cm`,
-  tags: ['平面図形', '三角形', '逆算'], visualTypes: ['areaReverse'], isRandomGenerated: false,
-},
-
-{
-  id: 'g6_plane_005',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '平行四辺形の面積', pattern: '辺の逆算',
-  difficulty: 2, answerType: 'number', unit: 'cm',
-  title: '平行四辺形の高さを求める',
-  text: '面積が60cm²の平行四辺形があります。底辺が12cmのとき、高さは何cmですか？',
-  answer: 5,
-  hint: '面積 ＝ 底辺 × 高さ を高さについて解く\n高さ ＝ 面積 ÷ 底辺',
-  solution: `【公式・考え方】
-  面積 ＝ 底辺 × 高さ
-  → 高さ ＝ 面積 ÷ 底辺
-
-① 面積：60cm²、底辺：12cm
-
-② 高さを求める
-  高さ ＝ 60 ÷ 12
-  ＝ 5cm
-
-【確認】
-  12 × 5 ＝ 60cm² ✓
-
-答え：5cm`,
-  tags: ['平面図形', '平行四辺形', '逆算'], visualTypes: ['areaReverse'], isRandomGenerated: false,
-},
-
-/* ── 複合図形・補助線 ★3 ── */
-{
-  id: 'g6_plane_006',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '複合図形', pattern: '引き算で求める',
-  difficulty: 3, answerType: 'number', unit: 'cm²',
-  title: '長方形から三角形を切り取る',
-  text: 'たて10cm・よこ8cmの長方形から、底辺4cm・高さ5cmの三角形を切り取りました。残りの図形の面積を求めなさい。',
-  answer: 70,
-  hint: '長方形の面積 − 三角形の面積\n三角形の面積 ＝ 底辺 × 高さ ÷ 2',
-  solution: `【公式・考え方】
-  残りの面積 ＝ 長方形の面積 − 三角形の面積
-
-① 長方形の面積：10 × 8 ＝ 80cm²
-
-② 三角形の面積：4 × 5 ÷ 2 ＝ 10cm²
-
-③ 残りの面積：80 − 10 ＝ 70cm²
-
-【確認】
-  80 − 10 ＝ 70cm² ✓
-
-答え：70cm²`,
-  tags: ['平面図形', '複合図形', '差'], visualTypes: ['areaDecompose'], isRandomGenerated: false,
-},
-
-{
-  id: 'g6_plane_007',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '複合図形', pattern: 'L字型',
-  difficulty: 3, answerType: 'number', unit: 'cm²',
-  title: 'L字型の図形の面積',
-  text: '下の図形（L字型）の面積を求めなさい。\n外側の長方形：たて8cm・よこ10cm\n切り取った長方形：たて3cm・よこ4cm',
-  answer: 68,
-  hint: '大きい長方形の面積 − 切り取った長方形の面積',
-  solution: `【公式・考え方】
-  L字型の面積 ＝ 大きい長方形 − 切り取った長方形
-
-① 大きい長方形の面積：8 × 10 ＝ 80cm²
-
-② 切り取った長方形の面積：3 × 4 ＝ 12cm²
-
-③ L字型の面積：80 − 12 ＝ 68cm²
-
-【確認】
-  80 − 12 ＝ 68cm² ✓
-
-答え：68cm²`,
-  tags: ['平面図形', '複合図形', 'L字型'], visualTypes: ['areaDecompose'], isRandomGenerated: false,
-},
-
-{
-  id: 'g6_plane_008',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '台形の面積', pattern: '辺の逆算',
-  difficulty: 3, answerType: 'number', unit: 'cm',
-  title: '台形の下底を求める',
-  text: '面積が48cm²の台形があります。上底4cm、高さ6cmのとき、下底は何cmですか？',
-  answer: 12,
-  hint: '面積 ＝ (上底 ＋ 下底) × 高さ ÷ 2 を下底について解く\n上底 ＋ 下底 ＝ 面積 × 2 ÷ 高さ',
-  solution: `【公式・考え方】
-  面積 ＝ (上底 ＋ 下底) × 高さ ÷ 2
-  → 上底 ＋ 下底 ＝ 面積 × 2 ÷ 高さ
-  → 下底 ＝ (面積 × 2 ÷ 高さ) − 上底
-
-① 面積：48cm²、上底：4cm、高さ：6cm
-
-② 上底 ＋ 下底 ＝ 48 × 2 ÷ 6 ＝ 96 ÷ 6 ＝ 16cm
-
-③ 下底 ＝ 16 − 4 ＝ 12cm
-
-【確認】
-  (4＋12)×6÷2 ＝ 16×3 ＝ 48cm² ✓
-
-答え：12cm`,
-  tags: ['平面図形', '台形', '逆算'], visualTypes: ['areaReverse'], isRandomGenerated: false,
-},
-
-{
-  id: 'g6_plane_009',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '補助線', pattern: '対角線で分割',
-  difficulty: 3, answerType: 'number', unit: 'cm²',
-  title: '平行四辺形を対角線で分ける',
-  text: '平行四辺形ABCDがあります。平行四辺形の底辺BCは10cm、高さは6cmです。\n対角線BDで2つの三角形に分けたとき、三角形ABDの面積を求めなさい。',
-  answer: 30,
-  hint: '平行四辺形を対角線で分けると、2つの三角形の面積は等しい\n三角形の面積 ＝ 平行四辺形の面積 ÷ 2',
-  solution: `【公式・考え方】
-  平行四辺形を対角線で分けると2つの合同な三角形ができる
-  三角形ABDの面積 ＝ 平行四辺形ABCD の面積 ÷ 2
-
-① 平行四辺形の面積：10 × 6 ＝ 60cm²
-
-② 三角形ABDの面積：60 ÷ 2 ＝ 30cm²
-
-【確認】
-  対角線で分けた三角形は必ず面積が等しい ✓
-
-答え：30cm²`,
-  tags: ['平面図形', '補助線', '平行四辺形'], visualTypes: ['auxiliaryLine'], isRandomGenerated: false,
-},
-
-{
-  id: 'g6_plane_010',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '補助線', pattern: '底辺の比と面積比',
-  difficulty: 3, answerType: 'number', unit: 'cm²',
-  title: '補助線で分けた三角形の面積',
-  text: '底辺12cm・高さ8cmの三角形の中に、頂点から底辺に補助線を引いて2つに分けました。\n補助線が底辺を3:1に分けるとき、大きい三角形の面積を求めなさい。',
-  answer: 36,
-  hint: '底辺の比 ＝ 3:1 → 面積の比も 3:1\n全体の面積 ＝ 12 × 8 ÷ 2 ＝ 48cm²\n大きい方 ＝ 48 × 3/4',
-  solution: `【公式・考え方】
-  高さが同じ三角形の面積比 ＝ 底辺の比
-
-① 全体の三角形の面積：12 × 8 ÷ 2 ＝ 48cm²
-
-② 底辺の比が 3:1 なので面積比も 3:1
-  全体を 3＋1＝4 に分ける
-
-③ 大きい三角形の面積：48 × 3/4 ＝ 36cm²
-
-【確認】
-  小さい方 ＝ 48 × 1/4 ＝ 12cm²
-  36 ＋ 12 ＝ 48cm² ✓
-
-答え：36cm²`,
-  tags: ['平面図形', '補助線', '面積比'], visualTypes: ['areaRatio', 'auxiliaryLine'], isRandomGenerated: false,
-},
-
-{
-  id: 'g6_plane_011',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '複合図形', pattern: '三角形＋台形',
-  difficulty: 3, answerType: 'number', unit: 'cm²',
-  title: '三角形と台形の複合図形',
-  text: '底辺14cm・高さ9cmの三角形と、上底3cm・下底7cm・高さ9cmの台形が合わさった図形の面積を求めなさい。',
-  answer: 108,
-  hint: '三角形の面積 ＋ 台形の面積\nそれぞれを公式で計算して足す',
-  solution: `【公式・考え方】
-  複合図形の面積 ＝ 三角形の面積 ＋ 台形の面積
-
-① 三角形の面積：14 × 9 ÷ 2 ＝ 63cm²
-
-② 台形の面積：(3＋7) × 9 ÷ 2 ＝ 10 × 9 ÷ 2 ＝ 45cm²
-
-③ 合計：63 ＋ 45 ＝ 108cm²
-
-【確認】
-  63 ＋ 45 ＝ 108cm² ✓
-
-答え：108cm²`,
-  tags: ['平面図形', '複合図形', '三角形', '台形'], visualTypes: ['areaDecompose'], isRandomGenerated: false,
-},
-
-/* ── 等積変形・面積比 ★4〜5 ── */
-{
-  id: 'g6_plane_012',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '等積変形', pattern: '等積変形',
-  difficulty: 4, answerType: 'number', unit: 'cm',
-  title: '等積変形で高さを求める',
-  text: '底辺8cm・高さ6cmの三角形と、面積が等しい平行四辺形を作ります。\n平行四辺形の底辺を8cmにするとき、高さは何cmですか？',
-  answer: 3,
-  hint: '三角形の面積 ＝ 平行四辺形の面積\n三角形: 8×6÷2＝24cm²\n平行四辺形の高さ ＝ 面積 ÷ 底辺',
-  solution: `【公式・考え方】
-  三角形の面積 ＝ 平行四辺形の面積 として高さを逆算する
-
-① 三角形の面積：8 × 6 ÷ 2 ＝ 24cm²
-
-② 平行四辺形の高さ：24 ÷ 8 ＝ 3cm
-
-【確認】
-  平行四辺形：8 × 3 ＝ 24cm²
-  三角形：8 × 6 ÷ 2 ＝ 24cm²（等しい） ✓
-
-答え：3cm`,
-  tags: ['平面図形', '等積変形'], visualTypes: ['equalArea'], isRandomGenerated: false,
-},
-
-{
-  id: 'g6_plane_013',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '面積比', pattern: '底辺の比と面積比',
-  difficulty: 4, answerType: 'number', unit: 'cm²',
-  title: '底辺の比から面積を求める',
-  text: '2つの三角形があります。三角形Aの底辺は三角形Bの底辺の2倍で、高さは同じです。\n三角形Bの面積が15cm²のとき、三角形Aの面積を求めなさい。',
-  answer: 30,
-  hint: '高さが同じなら、面積の比 ＝ 底辺の比\n底辺が2倍 → 面積も2倍',
-  solution: `【公式・考え方】
-  高さが同じ三角形：面積の比 ＝ 底辺の比
-
-① 三角形Aの底辺 ＝ 三角形Bの底辺 × 2
-  → 面積の比も 2:1
-
-② 三角形Aの面積 ＝ 三角形Bの面積 × 2
-  ＝ 15 × 2 ＝ 30cm²
-
-【確認】
-  底辺2倍・高さ同じ → 面積2倍
-  15 × 2 ＝ 30cm² ✓
-
-答え：30cm²`,
-  tags: ['平面図形', '面積比', '三角形'], visualTypes: ['areaRatio'], isRandomGenerated: false,
-},
-
-{
-  id: 'g6_plane_014',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '面積比', pattern: '相似と面積比',
-  difficulty: 4, answerType: 'number', unit: 'cm²',
-  title: '相似比と面積比',
-  text: '相似比が1:3の2つの正方形があります。小さい正方形の面積が4cm²のとき、大きい正方形の面積を求めなさい。',
-  answer: 36,
-  hint: '相似比が1:3 → 面積比は1²:3² ＝ 1:9\n大きい正方形の面積 ＝ 4 × 9',
-  solution: `【公式・考え方】
-  相似比が m:n → 面積比は m²:n²
-
-① 相似比 1:3 → 面積比 1²:3² ＝ 1:9
-
-② 大きい正方形の面積 ＝ 小さい正方形の面積 × 9
-  ＝ 4 × 9 ＝ 36cm²
-
-【確認】
-  相似比1:3 → 辺の長さも1:3
-  小の辺：√4 ＝ 2cm → 大の辺：2 × 3 ＝ 6cm
-  大の面積：6² ＝ 36cm² ✓
-
-答え：36cm²`,
-  tags: ['平面図形', '面積比', '相似'], visualTypes: ['areaRatio'], isRandomGenerated: false,
-},
-
-{
-  id: 'g6_plane_015',
-  catId: 'pc-plane', grade: 6, course: 'exam',
-  mainCategory: 'plane_geometry', lessonUnit: '等積変形・面積比', pattern: '対角線で4分割',
-  difficulty: 5, answerType: 'number', unit: '%',
-  title: '対角線で4分割した三角形の面積比',
-  text: '底辺10cm・高さ8cmの平行四辺形があります。\n対角線で4つの三角形に分けたとき、向かい合う三角形の面積の和は全体の何%ですか？',
-  answer: 50,
-  hint: '対角線で分けると4つの三角形ができる\n向かい合う2つは合計で全体の半分になる',
-  solution: `【公式・考え方】
-  平行四辺形を2本の対角線で分けると4つの三角形ができ、
-  向かい合う三角形の面積の和は必ず等しい
-
-① 平行四辺形の面積：10 × 8 ＝ 80cm²
-
-② 2本の対角線で分けると4つの三角形になる
-  向かい合う三角形を（A,C）と（B,D）と呼ぶ
-
-③ A＋C ＝ B＋D ＝ 全体の半分
-  → 向かい合う2つの和 ＝ 80 ÷ 2 ＝ 40cm²
-
-④ 全体に対する割合：40 ÷ 80 × 100 ＝ 50%
-
-【確認】
-  対角線が交点で分ける比から証明できる ✓
-
-答え：50%`,
-  tags: ['平面図形', '面積比', '等積変形', '対角線'], visualTypes: ['areaRatio', 'auxiliaryLine'], isRandomGenerated: false,
-},
 
 ];

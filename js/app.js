@@ -2088,7 +2088,10 @@ function switchPlaneTab(tabName) {
     resetPlaneAnim(tabName);
 }
 
+const planeAnimTimers = {};
+
 function playPlaneAnim(shape) {
+    clearTimeout(planeAnimTimers[shape]);
     if (shape === 'parallelogram') {
         const tri  = document.getElementById('pg-tri-left');
         const lbl  = document.getElementById('pg-base-label');
@@ -2096,7 +2099,7 @@ function playPlaneAnim(shape) {
         if (!tri) return;
         tri.style.transform = 'translateX(160px)';
         if (lbl) lbl.style.opacity = '1';
-        setTimeout(() => { if (form) form.classList.add('visible'); }, 1500);
+        planeAnimTimers[shape] = setTimeout(() => { if (form) form.classList.add('visible'); }, 1500);
     } else if (shape === 'triangle') {
         const tri2 = document.getElementById('tri-2');
         const lbl  = document.getElementById('tri-base-label');
@@ -2112,7 +2115,7 @@ function playPlaneAnim(shape) {
                 tri2.style.transform  = 'translateX(0)';
                 tri2.style.opacity    = '1';
                 if (lbl) { lbl.style.transition = 'opacity 0.5s 1.2s'; lbl.style.opacity = '1'; }
-                setTimeout(() => { if (form) form.classList.add('visible'); }, 1500);
+                planeAnimTimers[shape] = setTimeout(() => { if (form) form.classList.add('visible'); }, 1500);
             });
         });
     } else if (shape === 'trapezoid') {
@@ -2130,13 +2133,15 @@ function playPlaneAnim(shape) {
                 trap2.style.transform  = 'translateX(0)';
                 trap2.style.opacity    = '1';
                 if (lblCombined) { lblCombined.style.transition = 'opacity 0.5s 1.2s'; lblCombined.style.opacity = '1'; }
-                setTimeout(() => { if (form) form.classList.add('visible'); }, 1600);
+                planeAnimTimers[shape] = setTimeout(() => { if (form) form.classList.add('visible'); }, 1600);
             });
         });
     }
 }
 
 function resetPlaneAnim(shape) {
+    clearTimeout(planeAnimTimers[shape]);
+    planeAnimTimers[shape] = null;
     if (shape === 'parallelogram') {
         const tri  = document.getElementById('pg-tri-left');
         const lbl  = document.getElementById('pg-base-label');

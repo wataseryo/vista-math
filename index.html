@@ -767,8 +767,8 @@
                     <line x1="210" y1="20" x2="210" y2="110" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="3"/>
                     <line x1="10" y1="20"  x2="270" y2="20"  stroke="#e0e0e0" stroke-width="1" stroke-dasharray="3"/>
                     <line x1="10" y1="110" x2="270" y2="110" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="3"/>
-                    <!-- 中央の長方形部分 -->
-                    <rect id="pg-rect-body" x="50" y="20" width="160" height="90" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+                    <!-- 残りの部分（平行四辺形から左の三角形を除いた台形） -->
+                    <polygon id="pg-rect-body" points="50,20 210,20 170,110 50,110" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
                     <!-- 左の三角形（切り取る部分） -->
                     <polygon id="pg-tri-left" points="50,20 10,110 50,110" fill="#66BB6A" stroke="#2E7D32" stroke-width="2"
                              style="transition: transform 1.2s ease-in-out; transform-origin: 50px 65px;"/>
@@ -886,8 +886,8 @@
             </div>
             <div style="background:#F3F4F6;border-radius:10px;padding:12px;margin:10px 0;text-align:center;font-size:.82rem;color:#555">
                 <svg viewBox="0 0 220 120" width="100%" style="max-width:240px;display:block;margin:0 auto">
-                    <polygon points="30,100 190,100 190,20 70,20" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
-                    <polygon points="30,100 190,20 190,100" fill="#A5D6A7" stroke="#1B5E20" stroke-width="1.5" stroke-dasharray="5,3"/>
+                    <polygon points="30,100 160,100 190,20 60,20" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+                    <polygon points="30,100 190,20 160,100" fill="#A5D6A7" stroke="#1B5E20" stroke-width="1.5" stroke-dasharray="5,3"/>
                     <line x1="200" y1="20" x2="200" y2="100" stroke="#E53935" stroke-width="1.5" stroke-dasharray="4"/>
                     <text x="206" y="65" font-size="11" fill="#E53935">8cm</text>
                     <text x="105" y="115" font-size="11" fill="#1565C0" text-anchor="middle">12cm</text>

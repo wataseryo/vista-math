@@ -15,11 +15,12 @@ tools: Read, Write, Glob, Grep
 - 機能は「ユーザーが〇〇できる」形式で記述する
 - 曖昧な要件は仮定を明記した上で展開する
 - 1ファイル構成（index.html）を前提とした仕様にする
-- 必ず既存コードを確認してから仕様を策定する（index.html, data/problems.js, data/categories.js）
+- 必ず既存コードを確認してから仕様を策定する（index.html, data/problems/*.js, data/categories.js）
 
 ## プロジェクト構成（必読）
 - メインファイル: `index.html`（HTML/CSS/JS すべて含む単一ファイル）
-- 問題データ: `data/problems.js`（PRACTICE_PROBLEMS 配列 + CHALLENGES 配列）
+- 問題データ: `data/problems/*.js`（単元・タイプ別に分割。新規問題の追加先）
+  - `data/problems.js` は上記を結合するだけの集約専用ファイル（直接編集しない）
 - カテゴリデータ: `data/categories.js`（EXAM_UNITS_G6, EXAM_UNITS_G5, PRACTICE_CATS など）
 
 ## 出力形式

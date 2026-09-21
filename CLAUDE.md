@@ -189,7 +189,7 @@ Generator の実装を実際にブラウザで動作確認し、合否を判定�
 ### その他のルール
 
 - 開発依頼は必ず Planner から始める。直接実装しない
-- Generator は `index.html`, `data/problems.js`, `data/categories.js` を直接編集する
+- Generator は `index.html`, `data/problems/*.js`, `data/categories.js` を直接編集する（`data/problems.js` は集約専用ファイルで直接編集しない。詳細は次項）
 - 完了条件は「ユーザーが〇〇できる」の具体的な文にする
 - 修正サイクルが3回を超えたら Planner に仕様見直しを依頼する
 - TODO.md は完了したものを随時更新する
@@ -197,7 +197,9 @@ Generator の実装を実際にブラウザで動作確認し、合否を判定�
 
 ### 問題追加時のルール（必須）
 
-新しい問題を `data/problems.js` に追加するときは、以下のフォーマットを必ず守る。
+**`data/problems.js` は集約専用ファイル**（`PRACTICE_PROBLEMS`/`CHALLENGES` を分割ファイルから結合するだけ）。新しい問題はここに直接書かず、対象単元の分割ファイル（`data/problems/practice-g6-ratio.js` など）に追加する。該当する分割ファイルがない新単元の場合は新規ファイルを作り、`data/problems.js` の結合リストと `index.html` の `<script>` 読み込みに追加する。
+
+新しい問題を追加するときは、以下のフォーマットを必ず守る。
 
 #### `solution` フィールドのフォーマット
 

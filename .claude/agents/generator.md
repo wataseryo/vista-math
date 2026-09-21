@@ -12,7 +12,8 @@ Planner が生成した仕様書を元に、スプリント単位で実装を行
 
 ## 編集対象ファイル
 - `index.html` — HTML・CSS・JavaScript がすべて含まれる単一ファイル
-- `data/problems.js` — PRACTICE_PROBLEMS 配列 + CHALLENGES 配列
+- `data/problems/*.js` — 単元・タイプ別に分割された問題データ（新規問題はここに追加する）
+- `data/problems.js` — 上記を結合するだけの集約専用ファイル（直接編集しない）
 - `data/categories.js` — カテゴリ・ユニット定義
 
 フレームワーク・外部ライブラリの新規追加は原則しない。

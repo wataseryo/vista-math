@@ -1,0 +1,28 @@
+const CHALLENGE_G6_SALT_EXTRA = [
+  { id:'g6_ratio_salt_008', grade:6, course:'exam',
+    category:'食塩水', catColor:'#0277BD', catBg:'#E1F5FE', borderColor:'#039BE5',
+    mainCategory:'ratio', unit:'食塩水', pattern:'取り出して別の食塩水に加える',
+    difficulty:5, answerType:'number',
+    title:'一方から取り出して他方に加える',
+    question:`10%の食塩水200gと、4%の食塩水300gがあります。\n10%の食塩水から何gか取り出し、\nそれを4%の食塩水に加えたところ6%になりました。\n\n取り出した食塩水は何gですか。`,
+    answer:150, answerUnit:'g',
+    hint:`取り出した量をxgとしよう。\n4%食塩水300gにxgを加えた後の\n塩の量と全体の量を式にしよう。`,
+    tags:['割合・比','食塩水','取り出し','混合','方程式'],
+    visualTypes:['beaker','balance'],
+    isRandomGenerated:false,
+    explanation:[
+      { title:'取り出した食塩水の塩の量を表す',
+        text:`取り出すのは10%の食塩水なので\n取り出したxgの中の塩：x × 0.10 ＝ 0.10x g`,
+        visual:`<div class="vis-beakers"><div><div class="vis-beaker"><div class="vis-beaker-liq" style="height:65%;background:rgba(3,169,244,.65)"></div></div><div class="vis-beaker-lbl">10%・200g<br>→ x g取り出す</div></div></div><div class="vis-formula" style="margin-top:8px">取り出した塩 ＝ 0.10x g</div>` },
+      { title:'4%食塩水にxgを加えた後を計算する',
+        text:`4%食塩水300g の塩：300 × 0.04 ＝ 12g\n加えた後の塩：12 ＋ 0.10x\n加えた後の全体：300 ＋ x`,
+        visual:`<div class="vis-beakers"><div><div class="vis-beaker"><div class="vis-beaker-liq" style="height:65%;background:rgba(3,169,244,.25)"></div></div><div class="vis-beaker-lbl">4%・300g<br>塩12g</div></div><span style="font-size:1.5rem;color:#ccc;padding-bottom:20px">＋</span><div><div class="vis-beaker"><div class="vis-beaker-liq" style="height:65%;background:rgba(3,169,244,.65)"></div></div><div class="vis-beaker-lbl">10%・xg<br>塩0.10xg</div></div></div>` },
+      { title:'6%になる方程式を立てて解く',
+        text:`(12 ＋ 0.10x) ÷ (300 ＋ x) ＝ 0.06\n12 ＋ 0.10x ＝ 0.06(300 ＋ x)\n12 ＋ 0.10x ＝ 18 ＋ 0.06x\n0.04x ＝ 6\nx ＝ 150g`,
+        visual:`<div class="vis-formula">0.04x ＝ 6 → x ＝ <b>150g</b></div>` },
+      { title:'答えを確かめる',
+        text:`塩：12 ＋ 0.10×150 ＝ 12 ＋ 15 ＝ 27g\n全体：300 ＋ 150 ＝ 450g\n濃度：27 ÷ 450 × 100 ＝ 6% ✓`,
+        visual:`<div class="vis-formula">27 ÷ 450 × 100 ＝ 6% ✓</div>` },
+    ]
+  },
+];

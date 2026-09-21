@@ -12,8 +12,6 @@ const CHALLENGE_G6_SPEED = [
     answer:3, answerUnit:'分',
     hint:`時間 ＝ 距離 ÷ 速さ\n240 ÷ 80 ＝ ？`,
     tags:['速さ','速さの基本','三公式'],
-    visualTypes:['speedTriangle'],
-    isRandomGenerated:false,
     explanation:[
       { title:'速さ・時間・距離の三角形（みはじ）',
         text:`「みはじ」の公式を覚えよう。\n\n速さ（み）＝ 距離（は）÷ 時間（じ）\n時間（じ）＝ 距離（は）÷ 速さ（み）\n距離（は）＝ 速さ（み）× 時間（じ）`,
@@ -36,8 +34,6 @@ const CHALLENGE_G6_SPEED = [
     answer:45, answerUnit:'度',
     hint:`短針：1時間で30度、1分で0.5度動く。\n4時の短針位置：30×4＝120度\n30分後の短針：120＋0.5×30＝135度\n長針：6×30＝180度`,
     tags:['速さ','時計算','角度'],
-    visualTypes:['clockFace'],
-    isRandomGenerated:false,
     explanation:[
       { title:'時計の針の速さを整理する',
         text:`長針：1分で 360÷60 ＝ 6度 動く\n短針：1時間で 360÷12 ＝ 30度 動く\n    ＝ 1分で 30÷60 ＝ 0.5度 動く`,
@@ -60,8 +56,6 @@ const CHALLENGE_G6_SPEED = [
     answer:37, answerUnit:'分',
     hint:`8:10の時点で太郎さんはどこにいる？\n残り距離 ÷ (80＋70) で出会うまでの時間が分かる。`,
     tags:['速さ','ダイヤグラム','出会い'],
-    visualTypes:['xyGraph'],
-    isRandomGenerated:false,
     explanation:[
       { title:'8:10時点の太郎さんの位置',
         text:`太郎さんは8:00〜8:10（10分間）先に進んでいる。\n80 × 10 ＝ 800m（A地点から）`,
@@ -87,8 +81,6 @@ const CHALLENGE_G6_SPEED = [
     answer:8, answerUnit:'km',
     hint:`A:Bの速さの比 ＝ 3:4\n同じ時間に進む距離の比も 3:4。\nBが4進むとき Aは3進む → 差は1。\nこの「1」が2kmにあたる。`,
     tags:['速さ','速さと比','距離の比'],
-    visualTypes:['ratioBar'],
-    isRandomGenerated:false,
     explanation:[
       { title:'速さの比＝距離の比（同時間）',
         text:`同じ時間に進む距離の比は速さの比に等しい。\n\nA:B の速さの比 ＝ 3:4\n→ 同じ時間に進む距離の比も 3:4`,
@@ -118,8 +110,6 @@ const CHALLENGE_G6_SPEED = [
     answer:100, answerUnit:'分',
     hint:`n回目の出会いは合わせて (2n−1)×3000m 進んだとき。\n3回目：(2×3−1)×3000 ÷ (80＋70) ＝ ？`,
     tags:['速さ','旅人算','折り返し','難問'],
-    visualTypes:['numberLine'],
-    isRandomGenerated:false,
     explanation:[
       { title:'なぜ「(2n-1)×AB」公式が使えるのか',
         text:`2人が両端で折り返す往復問題では、\nどちらかが壁で向きを変えても「相対速度」は変わらない。\n→ 合計速度は常に 80＋70＝150m/分\n→ 1回目の出会いは 3000÷150＝20分後\n→ n回目は (2n-1)×3000÷150 分後`,
@@ -142,8 +132,6 @@ const CHALLENGE_G6_SPEED = [
     answer:4, answerUnit:'時間',
     hint:`兄が出発したとき、弟はすでに 4×2＝8km 先にいる。\n1時間で縮まる差：6−4＝2km/時\n8÷2＝？`,
     tags:['速さ','旅人算','追いつき算','難問'],
-    visualTypes:['numberLine'],
-    isRandomGenerated:false,
     explanation:[
       { title:'兄が出発したときの状況',
         text:`弟は2時間先に出発しているので\n弟の先行距離：4 × 2 ＝ 8km\n\n兄は8km後ろからスタートする。`,
@@ -169,8 +157,6 @@ const CHALLENGE_G6_SPEED = [
     answer:100, answerUnit:'m',
     hint:`電車の長さを L m、速さを V m/秒 とすると\nトンネル：(L＋500)÷V＝20 … ①\n橋：(L＋200)÷V＝10 … ②\n①÷② で V を消去できる。`,
     tags:['速さ','通過算','逆算','難問'],
-    visualTypes:['trainDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'なぜ方程式を2つ立てるのか',
         text:`未知数が L（長さ）と V（速さ）の2つあるので\n式も2つ必要。\n\nトンネル：L＋500 ＝ V×20 … ①\n橋：L＋200 ＝ V×10 … ②`,
@@ -193,8 +179,6 @@ const CHALLENGE_G6_SPEED = [
     answer:14, answerUnit:'km/時',
     hint:`下り速さ ＝ 48 ÷ 3 ＝ ? km/時\n上り速さ ＝ 48 ÷ 4 ＝ ? km/時\n静水速さ ＝ (下り速さ ＋ 上り速さ) ÷ 2`,
     tags:['速さ','流水算','往復','難問'],
-    visualTypes:['riverDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'下り速さと上り速さを求める',
         text:`下り速さ ＝ 距離 ÷ 時間\n       ＝ 48 ÷ 3 ＝ 16 km/時\n\n上り速さ ＝ 48 ÷ 4\n       ＝ 12 km/時`,
@@ -217,8 +201,6 @@ const CHALLENGE_G6_SPEED = [
     answer:37, answerUnit:'分',
     hint:`まず太郎さんがBに着く前に出会うか確認しよう。\n8:10時点：太郎800m、次郎4850m（B地点）\n近づく速さ：80＋70＝150m/分\n4050÷150＝27分後`,
     tags:['速さ','ダイヤグラム','折り返し','難問'],
-    visualTypes:['xyGraph'],
-    isRandomGenerated:false,
     explanation:[
       { title:'8:10時点の2人の状況',
         text:`太郎：80 × 10 ＝ 800m（A地点から）\n次郎：0m（B地点を出発したばかり）\n間の距離：4850 − 800 ＝ 4050m`,
@@ -241,8 +223,6 @@ const CHALLENGE_G6_SPEED = [
     answer:3, answerUnit:'km',
     hint:`距離を □ km とおく。\n弟の時間：□÷4 時間\n兄の時間：□÷18 時間\n差が 35/60 時間\n□/4 − □/18 ＝ 35/60`,
     tags:['速さ','速さと比','時間差','難問'],
-    visualTypes:['numberLine'],
-    isRandomGenerated:false,
     explanation:[
       { title:'なぜ方程式を立てるのか',
         text:`2人が同じ距離を違う速さで進むとき、\n「時間の差」から距離を逆算できる。\n\n距離を □ km とおく。\n弟の時間：□/4 時間\n兄の時間：□/18 時間`,

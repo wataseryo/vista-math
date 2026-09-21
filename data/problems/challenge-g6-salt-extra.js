@@ -8,8 +8,6 @@ const CHALLENGE_G6_SALT_EXTRA = [
     answer:150, answerUnit:'g',
     hint:`取り出した量をxgとしよう。\n4%食塩水300gにxgを加えた後の\n塩の量と全体の量を式にしよう。`,
     tags:['割合・比','食塩水','取り出し','混合','方程式'],
-    visualTypes:['beaker','balance'],
-    isRandomGenerated:false,
     explanation:[
       { title:'取り出した食塩水の塩の量を表す',
         text:`取り出すのは10%の食塩水なので\n取り出したxgの中の塩：x × 0.10 ＝ 0.10x g`,

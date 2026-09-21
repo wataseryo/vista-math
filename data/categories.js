@@ -6,7 +6,6 @@ const STANDARD_CHAPTERS = [
     { id: 'speed',    num: '第2章', title: '速さと時間',   sub: '速さ・時間・距離の関係',  tags: ['速さ計算', 'ダイヤグラム'], available: false },
     { id: 'ratio',    num: '第3章', title: '割合と比',     sub: '割合・面積図・比の利用',  tags: ['割合', '面積図', '比'], available: false },
     { id: 'cases',    num: '第4章', title: '場合の数',     sub: '順列・組み合わせ・樹形図', tags: ['樹形図', '組み合わせ'], available: false },
-    { id: 'figures',  num: '第5章', title: '図形の面積',   sub: '補助線・分割・移動',      tags: ['面積', '補助線'], available: false },
 ];
 
 /* ════════════════════════════════════════

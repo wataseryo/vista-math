@@ -15,8 +15,6 @@ const CHALLENGE_G6_SPECIAL = [
     answer:32, answerUnit:'',
     hint:`「和と差」が出てきたら和差算！\n（和 ＋ 差） ÷ 2 ＝ 大きい方`,
     tags:['特殊算・文章題','和差算','基本'],
-    visualTypes:['lineDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'和差算の見分け方',
         text:`「2つの量の合計（和）」と「2つの量の差」が\n同時に分かっているとき → 和差算！\n\n和 ＝ 50、差 ＝ 14`,
@@ -39,8 +37,6 @@ const CHALLENGE_G6_SPECIAL = [
     answer:5, answerUnit:'匹',
     hint:`「合計個数」と「合計数量」が出てきたらつるかめ算！\n全部亀（4本脚）と仮定：4×8＝32本\n実際との差：32−22＝10本\n亀を鶴に変えると1匹につき2本減る：10÷2＝5匹`,
     tags:['特殊算・文章題','つるかめ算','基本'],
-    visualTypes:['areaModel'],
-    isRandomGenerated:false,
     explanation:[
       { title:'つるかめ算の見分け方',
         text:`「2種類のものの合計個数」と「合計数量（金額・足の数など）」\nが両方分かっているとき → つるかめ算！`,
@@ -63,8 +59,6 @@ const CHALLENGE_G6_SPECIAL = [
     answer:7, answerUnit:'人',
     hint:`「配ると余る・足りない」が出てきたら過不足算！\n人数 ＝ （余り ＋ 不足） ÷ （1人分の差）`,
     tags:['特殊算・文章題','過不足算','基本'],
-    visualTypes:['lineDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'過不足算の見分け方',
         text:`「配ると○個余る」「配ると○個足りない」が\n出てきたら → 過不足算！\n\n余り ＝ 5個、不足 ＝ 2個\n1人分の差 ＝ 4 − 3 ＝ 1個`,
@@ -87,8 +81,6 @@ const CHALLENGE_G6_SPECIAL = [
     answer:11, answerUnit:'本',
     hint:`「木・電柱・間隔」が出てきたら植木算！\n両端に植えるとき：本数 ＝ 道の長さ ÷ 間隔 ＋ 1`,
     tags:['特殊算・文章題','植木算','基本'],
-    visualTypes:['lineDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'植木算の見分け方',
         text:`「木・電柱・旗を等間隔に並べる」が出てきたら植木算！\n\n両端あり → 本数 ＝ 間隔の数 ＋ 1\n円形（池の周り）→ 本数 ＝ 間隔の数`,
@@ -111,8 +103,6 @@ const CHALLENGE_G6_SPECIAL = [
     answer:18, answerUnit:'年後',
     hint:`年齢差は変わらない！\n父と子の差：38−10＝28歳（常に一定）\nx年後：38+x ＝ 2×(10+x)\n38+x ＝ 20+2x → 18 ＝ x`,
     tags:['特殊算・文章題','年齢算','基本'],
-    visualTypes:['lineDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'年齢算の大切なポイント',
         text:`年齢差は何年経っても変わらない！\n父−子 ＝ 38−10 ＝ 28歳（ずっと28歳差）\n\nこれが年齢算の核心。`,
@@ -137,8 +127,6 @@ const CHALLENGE_G6_SPECIAL = [
     answer:39, answerUnit:'',
     hint:`3つの和をすべて足すと？\n（A＋B）＋（B＋C）＋（A＋C）＝ 2（A＋B＋C）\n72＋84＋78 ＝ 234 → A＋B＋C ＝ 117\nB ＝ 117 − （A＋C） ＝ 117 − 78`,
     tags:['特殊算・文章題','和差算','難問'],
-    visualTypes:['lineDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'3つの和をすべて足すポイント',
         text:`AとB、BとC、AとCをすべて足すと\n（A＋B）＋（B＋C）＋（A＋C）\n＝ 2A＋2B＋2C\n＝ 2（A＋B＋C）\n\n72＋84＋78 ＝ 234\nA＋B＋C ＝ 234 ÷ 2 ＝ 117`,
@@ -161,8 +149,6 @@ const CHALLENGE_G6_SPECIAL = [
     answer:33, answerUnit:'問',
     hint:`全問正解なら 5×50＝250点。\n実際との差：250−131＝119点。\n正解を不正解に変えると 1問につき 5＋2＝7点 減る。\n119÷7＝17問が不正解。`,
     tags:['特殊算・文章題','つるかめ算','難問'],
-    visualTypes:['areaModel'],
-    isRandomGenerated:false,
     explanation:[
       { title:'仮定する（全問正解と仮定）',
         text:`全問正解なら：5 × 50 ＝ 250点\n実際は 131点\n差：250 − 131 ＝ 119点`,
@@ -185,8 +171,6 @@ const CHALLENGE_G6_SPECIAL = [
     answer:164, answerUnit:'冊',
     hint:`1人分の差は 15−12＝3冊。\n人数 ＝ （20＋16）÷3 ＝ 12人\nノートの冊数 ＝ 12×12＋20`,
     tags:['特殊算・文章題','過不足算','差集め算','難問'],
-    visualTypes:['lineDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'1人分の差が1でないとき',
         text:`1人分の配り方の差 ＝ 15 − 12 ＝ 3冊\n\n人数 ＝ （余り ＋ 不足） ÷ 1人分の差\n     ＝ （20 ＋ 16） ÷ 3\n     ＝ 36 ÷ 3\n     ＝ 12人`,
@@ -209,8 +193,6 @@ const CHALLENGE_G6_SPECIAL = [
     answer:5, answerUnit:'年後',
     hint:`年齢差5歳＋2倍関係から現在の年齢を求める。\n弟 ＝ a、兄 ＝ 2a、2a−a ＝ 5 → a ＝ 5\nx年後：(10+x) ＝ 1.5×(5+x)`,
     tags:['特殊算・文章題','年齢算','難問'],
-    visualTypes:['lineDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'現在の年齢を求める',
         text:`弟 ＝ a 歳とすると 兄 ＝ 2a 歳\n年齢差：2a − a ＝ a ＝ 5歳\n→ 弟5歳、兄10歳`,
@@ -233,8 +215,6 @@ const CHALLENGE_G6_SPECIAL = [
     answer:180, answerUnit:'円',
     hint:`ボールペンを消去するために①×2を作り、②から引く。\n①×2：えんぴつ6本＋ボールペン4本 ＝ 1520円\n②  ：えんぴつ5本＋ボールペン4本 ＝ 1340円\n差：えんぴつ1本 ＝ 180円`,
     tags:['特殊算・文章題','消去算','難問'],
-    visualTypes:['table'],
-    isRandomGenerated:false,
     explanation:[
       { title:'なぜ消去するのか',
         text:`未知数が2つ（えんぴつ価格・ボールペン価格）あるとき\n一方を消してもう一方だけにする ＝ 消去算\n\n① 3e＋2b ＝ 760\n② 5e＋4b ＝ 1340`,
@@ -257,8 +237,6 @@ const CHALLENGE_G6_SPECIAL = [
     answer:96, answerUnit:'人',
     hint:`まず5年生・6年生の人数を和差算で求める。\n6年生 ＝ （280＋40）÷2 ＝ 160人\n女子 ＝ 160 × 3/5 ＝ 96人`,
     tags:['特殊算・文章題','和差算','比','融合問題','難問'],
-    visualTypes:['lineDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'和差算で6年生の人数を求める',
         text:`5年生 ＋ 6年生 ＝ 280人（和）\n6年生 − 5年生 ＝ 40人（差）\n\n6年生 ＝ （280 ＋ 40） ÷ 2\n      ＝ 320 ÷ 2 ＝ 160人`,
@@ -283,8 +261,6 @@ const CHALLENGE_G6_SPECIAL = [
     answer:156, answerUnit:'cm',
     hint:`6人の合計 ＝ 151×6 ＝ 906cm\n5人の合計 ＝ 150×5 ＝ 750cm\n転入生 ＝ 906 − 750`,
     tags:['特殊算・文章題','平均算','基本'],
-    visualTypes:['barModel'],
-    isRandomGenerated:false,
     explanation:[
       { title:'平均算の考え方',
         text:`「合計 ＝ 平均 × 人数」を使う。\n\n6人の合計 ＝ 151 × 6 ＝ 906cm\n5人の合計 ＝ 150 × 5 ＝ 750cm`,
@@ -307,8 +283,6 @@ const CHALLENGE_G6_SPECIAL = [
     answer:60, answerUnit:'個',
     hint:`「AはBより○個多い」は和差算と同じ！\nA ＝ （合計 ＋ 差） ÷ 2\n  ＝ （100 ＋ 20） ÷ 2`,
     tags:['特殊算・文章題','分配算','基本'],
-    visualTypes:['lineDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'分配算とは',
         text:`「○個を何人かに分ける」問題。\n差が分かっているとき → 和差算の公式で解ける！\n\n和 ＝ 100、差 ＝ 20`,
@@ -331,8 +305,6 @@ const CHALLENGE_G6_SPECIAL = [
     answer:5, answerUnit:'人',
     hint:`少なくとも一方が好き ＝ 読書 ＋ スポーツ − 両方\n                  ＝ 16＋14−10 ＝ 20人\nどちらも好きでない ＝ 25 − 20`,
     tags:['特殊算・文章題','集合算','ベン図','基本'],
-    visualTypes:['vennDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'ベン図の見方',
         text:`ベン図は2つの円で表す。\n●読書のみ好き：16−10＝6人\n●スポーツのみ好き：14−10＝4人\n●両方好き：10人\n●どちらも好きでない：？人`,

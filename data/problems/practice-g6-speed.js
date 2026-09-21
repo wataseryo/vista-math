@@ -26,7 +26,7 @@ const PRACTICE_G6_SPEED = [
   40 km/時 × 3時間 ＝ 120km ✓
 
 答え：40 km/時`,
-  tags: ['速さ', '速さの基本'], visualTypes: ['speedTriangle'], isRandomGenerated: false,
+  tags: ['速さ', '速さの基本'],
   topicUnitId: 'u6-speed',
 },
 
@@ -52,7 +52,7 @@ const PRACTICE_G6_SPEED = [
   60 km/時 × 3時間 ＝ 180km ✓
 
 答え：3時間`,
-  tags: ['速さ', '速さの基本'], visualTypes: ['speedTriangle'], isRandomGenerated: false,
+  tags: ['速さ', '速さの基本'],
   topicUnitId: 'u6-speed',
 },
 
@@ -75,7 +75,7 @@ const PRACTICE_G6_SPEED = [
   80 × 15 ＝ 1200 m
 
 答え：1200m`,
-  tags: ['速さ', '速さの基本'], visualTypes: ['speedTriangle'], isRandomGenerated: false,
+  tags: ['速さ', '速さの基本'],
   topicUnitId: 'u6-speed',
 },
 
@@ -100,7 +100,7 @@ km → m に直すには × 1000
 時速90km ÷ 60 ＝ 分速1.5km ＝ 分速1500m
 
 答え：分速1500m`,
-  tags: ['速さ', '速さの基本', '単位変換'], visualTypes: ['speedTriangle'], isRandomGenerated: false,
+  tags: ['速さ', '速さの基本', '単位変換'],
   topicUnitId: 'u6-speed',
 },
 
@@ -132,7 +132,7 @@ km → m に直すには × 1000
 この式は使えません。
 
 答え：48 km/時`,
-  tags: ['速さ', '速さの基本', '平均の速さ'], visualTypes: ['speedTriangle'], isRandomGenerated: false,
+  tags: ['速さ', '速さの基本', '平均の速さ'],
   topicUnitId: 'u6-speed',
 },
 
@@ -159,7 +159,7 @@ km → m に直すには × 1000
   合計：1500 ＋ 2000 ＝ 3500m ✓
 
 答え：25分`,
-  tags: ['速さ', '旅人算', '出会い算'], visualTypes: ['numberLine'], isRandomGenerated: false,
+  tags: ['速さ', '旅人算', '出会い算'],
   topicUnitId: 'u6-speed',
 },
 
@@ -188,7 +188,7 @@ Bさんが出発したとき Aさんはすでに先行している。
   Aさん：600 ＋ 40 × 30 ＝ 1800m ✓
 
 答え：30分`,
-  tags: ['速さ', '旅人算', '追いつき算'], visualTypes: ['numberLine'], isRandomGenerated: false,
+  tags: ['速さ', '旅人算', '追いつき算'],
   topicUnitId: 'u6-speed',
 },
 
@@ -219,7 +219,7 @@ Bさんが出発したとき Aさんはすでに先行している。
   合計：1080 ＋ 1170 ＝ 2250m ✓
 
 答え：13分`,
-  tags: ['速さ', '旅人算', '出会い算'], visualTypes: ['numberLine'], isRandomGenerated: false,
+  tags: ['速さ', '旅人算', '出会い算'],
   topicUnitId: 'u6-speed',
 },
 
@@ -245,7 +245,7 @@ Bさんが出発したとき Aさんはすでに先行している。
   Aさん：1000 ＋ 50 × 40 ＝ 3000m ✓
 
 答え：40分`,
-  tags: ['速さ', '旅人算', '追いつき算'], visualTypes: ['numberLine'], isRandomGenerated: false,
+  tags: ['速さ', '旅人算', '追いつき算'],
   topicUnitId: 'u6-speed',
 },
 
@@ -275,7 +275,7 @@ Bさんが出発したとき Aさんはすでに先行している。
   3回目：15000÷100 ＝ 150分
 
 答え：90分`,
-  tags: ['速さ', '旅人算', '折り返し', '出会い算'], visualTypes: ['numberLine'], isRandomGenerated: false,
+  tags: ['速さ', '旅人算', '折り返し', '出会い算'],
   topicUnitId: 'u6-speed',
 },
 
@@ -313,7 +313,7 @@ Bさんが出発したとき Aさんはすでに先行している。
   弟：60 × 24 ＝ 1440m ✓
 
 答え：24分`,
-  tags: ['速さ', '旅人算', '折り返し', '追いつき算'], visualTypes: ['numberLine'], isRandomGenerated: false,
+  tags: ['速さ', '旅人算', '折り返し', '追いつき算'],
   topicUnitId: 'u6-speed',
 },
 
@@ -337,7 +337,7 @@ Bさんが出発したとき Aさんはすでに先行している。
   120 ÷ 15 ＝ 8 秒
 
 答え：8秒`,
-  tags: ['速さ', '通過算'], visualTypes: ['trainDiagram'], isRandomGenerated: false,
+  tags: ['速さ', '通過算'],
   topicUnitId: 'u6-speed',
 },
 
@@ -363,7 +363,7 @@ Bさんが出発したとき Aさんはすでに先行している。
 電車の最後尾がトンネルを出るまでの距離だから。
 
 答え：20秒`,
-  tags: ['速さ', '通過算', 'トンネル'], visualTypes: ['trainDiagram'], isRandomGenerated: false,
+  tags: ['速さ', '通過算', 'トンネル'],
   topicUnitId: 'u6-speed',
 },
 
@@ -387,7 +387,7 @@ Bさんが出発したとき Aさんはすでに先行している。
 ③ すれ違い時間：250 ÷ 50 ＝ 5 秒
 
 答え：5秒`,
-  tags: ['速さ', '通過算', 'すれ違い'], visualTypes: ['trainDiagram'], isRandomGenerated: false,
+  tags: ['速さ', '通過算', 'すれ違い'],
   topicUnitId: 'u6-speed',
 },
 
@@ -411,7 +411,7 @@ Bさんが出発したとき Aさんはすでに先行している。
 ③ 追い越し時間：420 ÷ 12 ＝ 35 秒
 
 答え：35秒`,
-  tags: ['速さ', '通過算', '追い越し'], visualTypes: ['trainDiagram'], isRandomGenerated: false,
+  tags: ['速さ', '通過算', '追い越し'],
   topicUnitId: 'u6-speed',
 },
 
@@ -443,7 +443,7 @@ V ＝ 160 ÷ 8 ＝ 20 m/秒
 橋：(160 ＋ 400) ÷ 20 ＝ 560 ÷ 20 ＝ 28秒 ✓
 
 答え：160m`,
-  tags: ['速さ', '通過算', '逆算'], visualTypes: ['trainDiagram'], isRandomGenerated: false,
+  tags: ['速さ', '通過算', '逆算'],
   topicUnitId: 'u6-speed',
 },
 
@@ -467,7 +467,7 @@ V ＝ 160 ÷ 8 ＝ 20 m/秒
 川が船を押してくれるので、静水時より流速分だけ速くなる。
 
 答え：10 km/時`,
-  tags: ['速さ', '流水算', '下り'], visualTypes: ['riverDiagram'], isRandomGenerated: false,
+  tags: ['速さ', '流水算', '下り'],
   topicUnitId: 'u6-speed',
 },
 
@@ -489,7 +489,7 @@ V ＝ 160 ÷ 8 ＝ 20 m/秒
 上りは川の流れに逆らうため、静水時より流速分だけ遅くなる。
 
 答え：9 km/時`,
-  tags: ['速さ', '流水算', '上り'], visualTypes: ['riverDiagram'], isRandomGenerated: false,
+  tags: ['速さ', '流水算', '上り'],
   topicUnitId: 'u6-speed',
 },
 
@@ -516,7 +516,7 @@ V ＝ 160 ÷ 8 ＝ 20 m/秒
   流速 ＝ (下り − 上り) ÷ 2 ＝ (14 − 8) ÷ 2 ＝ 3 km/時
 
 答え：11 km/時`,
-  tags: ['速さ', '流水算', '静水時の速さ'], visualTypes: ['riverDiagram'], isRandomGenerated: false,
+  tags: ['速さ', '流水算', '静水時の速さ'],
   topicUnitId: 'u6-speed',
 },
 
@@ -543,7 +543,7 @@ V ＝ 160 ÷ 8 ＝ 20 m/秒
   上り：16 − 4 ＝ 12 km/時 ✓
 
 答え：4 km/時`,
-  tags: ['速さ', '流水算', '流速'], visualTypes: ['riverDiagram'], isRandomGenerated: false,
+  tags: ['速さ', '流水算', '流速'],
   topicUnitId: 'u6-speed',
 },
 
@@ -570,7 +570,7 @@ V ＝ 160 ÷ 8 ＝ 20 m/秒
   上り：9 − 3 ＝ 6 km/時 → 60÷6＝10時間 ✓
 
 答え：9 km/時`,
-  tags: ['速さ', '流水算', '静水時の速さ', '往復'], visualTypes: ['riverDiagram'], isRandomGenerated: false,
+  tags: ['速さ', '流水算', '静水時の速さ', '往復'],
   topicUnitId: 'u6-speed',
 },
 
@@ -595,7 +595,7 @@ V ＝ 160 ÷ 8 ＝ 20 m/秒
 差：30 − 0 ＝ 30度
 
 答え：30度`,
-  tags: ['速さ', '時計算', '角度'], visualTypes: ['clockFace'], isRandomGenerated: false,
+  tags: ['速さ', '時計算', '角度'],
   topicUnitId: 'u6-speed',
 },
 
@@ -622,7 +622,7 @@ V ＝ 160 ÷ 8 ＝ 20 m/秒
 20度 < 180度 なので、小さいほうの角度は 20度
 
 答え：20度`,
-  tags: ['速さ', '時計算', '角度'], visualTypes: ['clockFace'], isRandomGenerated: false,
+  tags: ['速さ', '時計算', '角度'],
   topicUnitId: 'u6-speed',
 },
 
@@ -649,7 +649,7 @@ V ＝ 160 ÷ 8 ＝ 20 m/秒
 75度 < 180度 なので、小さいほうの角度は 75度
 
 答え：75度`,
-  tags: ['速さ', '時計算', '角度'], visualTypes: ['clockFace'], isRandomGenerated: false,
+  tags: ['速さ', '時計算', '角度'],
   topicUnitId: 'u6-speed',
 },
 
@@ -678,7 +678,7 @@ V ＝ 160 ÷ 8 ＝ 20 m/秒
 （「12時」は出発点に戻るので0時に相当し、12時間で数えると0時と12時の重なりはどちらか一方だけ）
 
 答え：11回`,
-  tags: ['速さ', '時計算', '重なり'], visualTypes: ['clockFace'], isRandomGenerated: false,
+  tags: ['速さ', '時計算', '重なり'],
   topicUnitId: 'u6-speed',
 },
 
@@ -707,7 +707,7 @@ V ＝ 160 ÷ 8 ＝ 20 m/秒
 ⑤ 出会う時刻：8:10 ＋ 12分 ＝ 8:22
 
 答え：8時22分（22分）`,
-  tags: ['速さ', 'ダイヤグラム', '出会い'], visualTypes: ['xyGraph'], isRandomGenerated: false,
+  tags: ['速さ', 'ダイヤグラム', '出会い'],
   topicUnitId: 'u6-speed',
 },
 
@@ -734,7 +734,7 @@ V ＝ 160 ÷ 8 ＝ 20 m/秒
 30分：家に戻る
 
 答え：30分`,
-  tags: ['速さ', 'ダイヤグラム', '折り返し'], visualTypes: ['xyGraph'], isRandomGenerated: false,
+  tags: ['速さ', 'ダイヤグラム', '折り返し'],
   topicUnitId: 'u6-speed',
 },
 
@@ -767,7 +767,7 @@ V ＝ 160 ÷ 8 ＝ 20 m/秒
 両者とも A地点から1200m の地点で出会う ✓
 
 答え：90分`,
-  tags: ['速さ', 'ダイヤグラム', '折り返し', '出会い'], visualTypes: ['xyGraph'], isRandomGenerated: false,
+  tags: ['速さ', 'ダイヤグラム', '折り返し', '出会い'],
   topicUnitId: 'u6-speed',
 },
 
@@ -798,7 +798,7 @@ Bが4進むとき Aは3 → 差は1
   差：8 − 6 ＝ 2km ✓
 
 答え：8km`,
-  tags: ['速さ', '速さと比', '距離の比'], visualTypes: ['ratioBar'], isRandomGenerated: false,
+  tags: ['速さ', '速さと比', '距離の比'],
   topicUnitId: 'u6-speed',
 },
 
@@ -831,7 +831,7 @@ Bが4進むとき Aは3 → 差は1
   差：45 − 10 ＝ 35分 ✓
 
 答え：3km`,
-  tags: ['速さ', '速さと比', '時間差'], visualTypes: ['numberLine'], isRandomGenerated: false,
+  tags: ['速さ', '速さと比', '時間差'],
   topicUnitId: 'u6-speed',
 },
 ];

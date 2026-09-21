@@ -24,7 +24,7 @@ const PRACTICE_G6_SPECIAL = [
 確認：35 ＋ 19 ＝ 54 ✓、35 − 19 ＝ 16 ✓
 
 答え：35`,
-  tags: ['特殊算・文章題', '和差算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '和差算'],
   topicUnitId: 'u6-special',
 },
 
@@ -46,7 +46,7 @@ B棚 ＝ （72 − 18） ÷ 2 ＝ 27冊
 確認：45 ＋ 27 ＝ 72 ✓、45 − 27 ＝ 18 ✓
 
 答え：45冊`,
-  tags: ['特殊算・文章題', '和差算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '和差算'],
   topicUnitId: 'u6-special',
 },
 
@@ -68,7 +68,7 @@ B棚 ＝ （72 − 18） ÷ 2 ＝ 27冊
 確認：22 ＋ 28 ＋ 40 ＝ 90 ✓
 
 答え：22`,
-  tags: ['特殊算・文章題', '和差算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '和差算'],
   topicUnitId: 'u6-special',
 },
 
@@ -90,7 +90,7 @@ B棚 ＝ （72 − 18） ÷ 2 ＝ 27冊
 確認：2100 − 1500 ＝ 600 ✓
 
 答え：2100円`,
-  tags: ['特殊算・文章題', '和差算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '和差算'],
   topicUnitId: 'u6-special',
 },
 
@@ -117,7 +117,7 @@ C ＝ 500円
 500＋680＋920 ＝ 2100 ✓
 
 答え：500円`,
-  tags: ['特殊算・文章題', '和差算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '和差算'],
   topicUnitId: 'u6-special',
 },
 
@@ -141,7 +141,7 @@ C ＝ 500円
 確認：鶴6＋亀4、足：6×2＋4×4 ＝ 12＋16 ＝ 28本 ✓
 
 答え：6匹`,
-  tags: ['特殊算・文章題', 'つるかめ算'], visualTypes: ['areaModel'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', 'つるかめ算'],
   topicUnitId: 'u6-special',
 },
 
@@ -164,7 +164,7 @@ C ＝ 500円
 確認：100円×9＋50円×11 ＝ 900＋550 ＝ 1450円 ✓
 
 答え：9枚`,
-  tags: ['特殊算・文章題', 'つるかめ算'], visualTypes: ['areaModel'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', 'つるかめ算'],
   topicUnitId: 'u6-special',
 },
 
@@ -188,7 +188,7 @@ C ＝ 500円
 確認：4×17 − 1×3 ＝ 68 − 3 ＝ 65点 ✓
 
 答え：17問`,
-  tags: ['特殊算・文章題', 'つるかめ算'], visualTypes: ['areaModel'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', 'つるかめ算'],
   topicUnitId: 'u6-special',
 },
 
@@ -211,7 +211,7 @@ C ＝ 500円
 確認：80×7＋50×11 ＝ 560＋550 ＝ 1110円 ✓
 
 答え：7個`,
-  tags: ['特殊算・文章題', 'つるかめ算'], visualTypes: ['areaModel'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', 'つるかめ算'],
   topicUnitId: 'u6-special',
 },
 
@@ -234,7 +234,7 @@ C ＝ 500円
 確認：4×9＋3×6 ＝ 36＋18 ＝ 54本 ✓
 
 答え：9脚`,
-  tags: ['特殊算・文章題', 'つるかめ算'], visualTypes: ['areaModel'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', 'つるかめ算'],
   topicUnitId: 'u6-special',
 },
 
@@ -258,7 +258,7 @@ C ＝ 500円
 確認：30×1＋80×2 ＝ 30＋160 ＝ 190km ✓
 
 答え：2時間`,
-  tags: ['特殊算・文章題', 'つるかめ算', '速さとの融合'], visualTypes: ['areaModel'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', 'つるかめ算', '速さとの融合'],
   topicUnitId: 'u6-special',
 },
 
@@ -281,7 +281,7 @@ C ＝ 500円
 確認：4×10＋6 ＝ 46本、5×10−4 ＝ 46本 ✓（鉛筆は46本）
 
 答え：10人`,
-  tags: ['特殊算・文章題', '過不足算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '過不足算'],
   topicUnitId: 'u6-special',
 },
 
@@ -303,7 +303,7 @@ C ＝ 500円
 確認：4×8 ＝ 32 > 29、差 ＝ 3個 ✓
 
 答え：8人`,
-  tags: ['特殊算・文章題', '過不足算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '過不足算'],
   topicUnitId: 'u6-special',
 },
 
@@ -326,7 +326,7 @@ C ＝ 500円
 確認：7×6 ＝ 42 > 40、差 ＝ 2枚 ✓
 
 答え：40枚`,
-  tags: ['特殊算・文章題', '過不足算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '過不足算'],
   topicUnitId: 'u6-special',
 },
 
@@ -356,7 +356,7 @@ C ＝ 500円
 5×9＋3 ＝ 45＋3 ＝ 48人 ✓
 
 答え：10脚`,
-  tags: ['特殊算・文章題', '過不足算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '過不足算'],
   topicUnitId: 'u6-special',
 },
 
@@ -379,7 +379,7 @@ C ＝ 500円
 確認：15 × 12 ＝ 180 > 164、差 ＝ 16枚 ✓
 
 答え：164枚`,
-  tags: ['特殊算・文章題', '過不足算', '差集め算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '過不足算', '差集め算'],
   topicUnitId: 'u6-special',
 },
 
@@ -399,7 +399,7 @@ C ＝ 500円
      ＝ 11本
 
 答え：11本`,
-  tags: ['特殊算・文章題', '植木算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '植木算'],
   topicUnitId: 'u6-special',
 },
 
@@ -417,7 +417,7 @@ C ＝ 500円
 両側の合計 ＝ 11 × 2 ＝ 22本
 
 答え：22本`,
-  tags: ['特殊算・文章題', '植木算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '植木算'],
   topicUnitId: 'u6-special',
 },
 
@@ -435,7 +435,7 @@ C ＝ 500円
 間隔 ＝ 100 ÷ 20 ＝ 5m
 
 答え：5m`,
-  tags: ['特殊算・文章題', '植木算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '植木算'],
   topicUnitId: 'u6-special',
 },
 
@@ -455,7 +455,7 @@ C ＝ 500円
 「間隔の数 ＝ 木の数」
 
 答え：24本`,
-  tags: ['特殊算・文章題', '植木算', '円形'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '植木算', '円形'],
   topicUnitId: 'u6-special',
 },
 
@@ -483,7 +483,7 @@ C ＝ 500円
 本数 ＝ 40 ÷ 2 ＝ 20本 ✓
 
 答え：20本`,
-  tags: ['特殊算・文章題', '植木算', '正方形'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '植木算', '正方形'],
   topicUnitId: 'u6-special',
 },
 
@@ -509,7 +509,7 @@ x ＝ 9年後
 確認：父45歳、子15歳 → 45 ＝ 3×15 ✓
 
 答え：9年後`,
-  tags: ['特殊算・文章題', '年齢算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '年齢算'],
   topicUnitId: 'u6-special',
 },
 
@@ -530,7 +530,7 @@ x ＝ 9年後
 確認：母48歳、娘24歳 → 48 ＝ 2×24 ✓
 
 答え：16年後`,
-  tags: ['特殊算・文章題', '年齢算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '年齢算'],
   topicUnitId: 'u6-special',
 },
 
@@ -554,7 +554,7 @@ x ＝ 35年後
 確認：95＋70＋45 ＝ 210 ＝ 105×2 ✓
 
 答え：35年後`,
-  tags: ['特殊算・文章題', '年齢算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '年齢算'],
   topicUnitId: 'u6-special',
 },
 
@@ -582,7 +582,7 @@ A ＝ 26−11 ＝ 15歳（兄）
 確認：7年前 兄8歳、弟4歳 → 8＝2×4 ✓
 
 答え：15歳`,
-  tags: ['特殊算・文章題', '年齢算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '年齢算'],
   topicUnitId: 'u6-special',
 },
 
@@ -602,7 +602,7 @@ A ＝ 26−11 ＝ 15歳（兄）
 次の点数 ＝ 456 − 370 ＝ 86点
 
 答え：86点`,
-  tags: ['特殊算・文章題', '平均算'], visualTypes: ['barModel'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '平均算'],
   topicUnitId: 'u6-special',
 },
 
@@ -620,7 +620,7 @@ A ＝ 26−11 ＝ 15歳（兄）
 転入生    ＝ 1001 − 852 ＝ 149cm
 
 答え：149cm`,
-  tags: ['特殊算・文章題', '平均算'], visualTypes: ['barModel'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '平均算'],
   topicUnitId: 'u6-special',
 },
 
@@ -638,7 +638,7 @@ A ＝ 26−11 ＝ 15歳（兄）
 5回目 ＝ 425 − 328 ＝ 97点
 
 答え：97点`,
-  tags: ['特殊算・文章題', '平均算'], visualTypes: ['barModel'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '平均算'],
   topicUnitId: 'u6-special',
 },
 
@@ -664,7 +664,7 @@ A ＝ 26−11 ＝ 15歳（兄）
 4×115＋5×80 ＝ 460＋400 ＝ 860円 ✓
 
 答え：80円`,
-  tags: ['特殊算・文章題', '消去算'], visualTypes: ['table'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '消去算'],
   topicUnitId: 'u6-special',
 },
 
@@ -690,7 +690,7 @@ A ＝ 26−11 ＝ 15歳（兄）
 確認：5×140＋4×60 ＝ 700＋240 ＝ 940円 ✓
 
 答え：60円`,
-  tags: ['特殊算・文章題', '消去算'], visualTypes: ['table'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '消去算'],
   topicUnitId: 'u6-special',
 },
 
@@ -713,7 +713,7 @@ B ＝ 300 − 180 ＝ 120個
 確認：180 − 120 ＝ 60個 ✓
 
 答え：180個`,
-  tags: ['特殊算・文章題', '分配算', '和差算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '分配算', '和差算'],
   topicUnitId: 'u6-special',
 },
 
@@ -739,7 +739,7 @@ C ＝ □、B ＝ □＋30、A ＝ □＋90
 130＋160＋220 ＝ 510 ✓
 
 答え：130円`,
-  tags: ['特殊算・文章題', '分配算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '分配算'],
   topicUnitId: 'u6-special',
 },
 
@@ -762,7 +762,7 @@ B ＝ 120 × 1/3 ＝ 40枚
 確認：80＋40 ＝ 120 ✓、80 ＝ 40×2 ✓
 
 答え：80枚`,
-  tags: ['特殊算・文章題', '分配算', '比'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '分配算', '比'],
   topicUnitId: 'u6-special',
 },
 
@@ -784,7 +784,7 @@ B ＝ 120 × 1/3 ＝ 40枚
 30 − 25 ＝ 5人
 
 答え：5人`,
-  tags: ['特殊算・文章題', '集合算', 'ベン図'], visualTypes: ['vennDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '集合算', 'ベン図'],
   topicUnitId: 'u6-special',
 },
 
@@ -810,7 +810,7 @@ B ＝ 120 × 1/3 ＝ 40枚
 ＝ 17＋12＋3＋8 ＝ 40人 ✓
 
 答え：3人`,
-  tags: ['特殊算・文章題', '集合算', 'ベン図'], visualTypes: ['vennDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '集合算', 'ベン図'],
   topicUnitId: 'u6-special',
 },
 
@@ -836,7 +836,7 @@ B ＝ 120 × 1/3 ＝ 40枚
 合計：22＋18＋10 ＝ 50人 ✓
 
 答え：10人`,
-  tags: ['特殊算・文章題', '集合算', 'ベン図', '最小'], visualTypes: ['vennDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '集合算', 'ベン図', '最小'],
   topicUnitId: 'u6-special',
 },
 ];

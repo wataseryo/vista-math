@@ -29,7 +29,7 @@ const PRACTICE_G6_RATIO = [
   60人 × 40% ＝ 60 × 0.4 ＝ 24人 ✓
 
 答え：40%`,
-  tags: ['割合の基本', '割合'], visualTypes: ['barModel'], isRandomGenerated: false,
+  tags: ['割合の基本', '割合'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -56,7 +56,7 @@ const PRACTICE_G6_RATIO = [
   50人 × 0.4 ＝ 20人（女子の人数） ✓
 
 答え：50人`,
-  tags: ['割合の基本', 'もとの量'], visualTypes: ['barModel'], isRandomGenerated: false,
+  tags: ['割合の基本', 'もとの量'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -84,7 +84,7 @@ const PRACTICE_G6_RATIO = [
   「10%引き」は上がった後の金額に対してかかるためです。
 
 答え：108%`,
-  tags: ['割合の基本', '割合変化', '2段階'], visualTypes: ['barModel'], isRandomGenerated: false,
+  tags: ['割合の基本', '割合変化', '2段階'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -111,7 +111,7 @@ const PRACTICE_G6_RATIO = [
   赤：青 ＝ 60：40 ＝ 3：2 ✓
 
 答え：40cm`,
-  tags: ['比の基本', '比'], visualTypes: ['ratioBar'], isRandomGenerated: false,
+  tags: ['比の基本', '比'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -141,7 +141,7 @@ const PRACTICE_G6_RATIO = [
   合計：1875 ＋ 1125 ＝ 3000円 ✓
 
 答え：1875円`,
-  tags: ['比の基本', '比', '配分'], visualTypes: ['ratioBar'], isRandomGenerated: false,
+  tags: ['比の基本', '比', '配分'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -171,7 +171,7 @@ const PRACTICE_G6_RATIO = [
 ⑤ A ＝ 10 × 3 ＝ 30
 
 答え：30`,
-  tags: ['比の基本', '比', '連比'], visualTypes: ['ratioBar'], isRandomGenerated: false,
+  tags: ['比の基本', '比', '連比'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -197,7 +197,7 @@ const PRACTICE_G6_RATIO = [
   200 ÷ 800 × 100 ＝ 25% ✓
 
 答え：1000円`,
-  tags: ['売買損益', '定価'], visualTypes: ['priceFlow'], isRandomGenerated: false,
+  tags: ['売買損益', '定価'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -223,7 +223,7 @@ const PRACTICE_G6_RATIO = [
   1200 − 180 ＝ 1020円 ✓
 
 答え：1020円`,
-  tags: ['売買損益', '割引'], visualTypes: ['priceFlow'], isRandomGenerated: false,
+  tags: ['売買損益', '割引'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -249,7 +249,7 @@ const PRACTICE_G6_RATIO = [
   630 − 500 ＝ 130円
 
 答え：130円`,
-  tags: ['売買損益', '2段階', '利益'], visualTypes: ['priceFlow'], isRandomGenerated: false,
+  tags: ['売買損益', '2段階', '利益'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -282,7 +282,7 @@ const PRACTICE_G6_RATIO = [
   利益：900 − 750 ＝ 150円 ✓
 
 答え：750円`,
-  tags: ['売買損益', '原価', '逆算'], visualTypes: ['priceFlow', 'barModel'], isRandomGenerated: false,
+  tags: ['売買損益', '原価', '逆算'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -306,7 +306,7 @@ const PRACTICE_G6_RATIO = [
   45 ÷ 300 × 100 ＝ 15% ✓
 
 答え：45g`,
-  tags: ['食塩水', '割合'], visualTypes: ['beaker'], isRandomGenerated: false,
+  tags: ['食塩水', '割合'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -334,7 +334,7 @@ const PRACTICE_G6_RATIO = [
   19 ÷ 500 × 100 ＝ 3.8%
 
 答え：3.8%`,
-  tags: ['食塩水', '混合'], visualTypes: ['beaker', 'balance'], isRandomGenerated: false,
+  tags: ['食塩水', '混合'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -365,7 +365,7 @@ const PRACTICE_G6_RATIO = [
   20 ÷ 400 × 100 ＝ 5% ✓
 
 答え：300g`,
-  tags: ['食塩水', '希釈'], visualTypes: ['beaker'], isRandomGenerated: false,
+  tags: ['食塩水', '希釈'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -397,7 +397,7 @@ const PRACTICE_G6_RATIO = [
   濃度：40 ÷ 500 × 100 ＝ 8% ✓
 
 答え：250g`,
-  tags: ['食塩水', '混合', '目標量'], visualTypes: ['beaker', 'balance'], isRandomGenerated: false,
+  tags: ['食塩水', '混合', '目標量'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -421,7 +421,7 @@ const PRACTICE_G6_RATIO = [
   200 × 0.30 ＝ 60 ✓
 
 答え：200`,
-  tags: ['相当算', '倍数算', '割合'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['相当算', '倍数算', '割合'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -451,7 +451,7 @@ const PRACTICE_G6_RATIO = [
   差：1500 − 900 ＝ 600円 ✓
 
 答え：1500円`,
-  tags: ['相当算', '比', '倍数算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['相当算', '比', '倍数算'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -484,7 +484,7 @@ const PRACTICE_G6_RATIO = [
   12年後：父 36歳、子 18歳（2倍）✓
 
 答え：6歳`,
-  tags: ['年齢算', '倍数算', '相当算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['年齢算', '倍数算', '相当算'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -512,7 +512,7 @@ const PRACTICE_G6_RATIO = [
   1 ÷ 1/6 ＝ 6日
 
 答え：6日`,
-  tags: ['仕事算', '割合'], visualTypes: ['workBar', 'lineDiagram'], isRandomGenerated: false,
+  tags: ['仕事算', '割合'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -544,7 +544,7 @@ const PRACTICE_G6_RATIO = [
   1 ÷ 1/12 ＝ 12日
 
 答え：12日`,
-  tags: ['仕事算', '割合', '逆算'], visualTypes: ['workBar', 'lineDiagram'], isRandomGenerated: false,
+  tags: ['仕事算', '割合', '逆算'],
   topicUnitId: 'u6-ratio',
 },
 
@@ -581,7 +581,7 @@ const PRACTICE_G6_RATIO = [
   t ＝ 24日
 
 答え：24日`,
-  tags: ['ニュートン算', '仕事算', '割合'], visualTypes: ['workBar', 'lineDiagram'], isRandomGenerated: false,
+  tags: ['ニュートン算', '仕事算', '割合'],
   topicUnitId: 'u6-ratio',
 },
 ];

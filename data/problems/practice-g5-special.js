@@ -17,7 +17,7 @@ const PRACTICE_G5_SPECIAL = [
 確認：18＋12＝30 ✓、18−12＝6 ✓
 
 答え：18`,
-  tags: ['特殊算・文章題', '和差算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '和差算'],
   topicUnitId: 'u5-special',
 },
 
@@ -35,7 +35,7 @@ B ＝ 50 − 30 ＝ 20枚
 確認：30＋20＝50 ✓、30−20＝10 ✓
 
 答え：30枚`,
-  tags: ['特殊算・文章題', '和差算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '和差算'],
   topicUnitId: 'u5-special',
 },
 
@@ -55,7 +55,7 @@ B ＝ 50 − 30 ＝ 20枚
 確認：3×2＋3×4 ＝ 6＋12 ＝ 18本 ✓
 
 答え：3匹`,
-  tags: ['特殊算・文章題', 'つるかめ算'], visualTypes: ['areaModel'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', 'つるかめ算'],
   topicUnitId: 'u5-special',
 },
 
@@ -75,7 +75,7 @@ B ＝ 50 − 30 ＝ 20枚
 確認：50×7＋10×5 ＝ 350＋50 ＝ 400円 ✓
 
 答え：7枚`,
-  tags: ['特殊算・文章題', 'つるかめ算'], visualTypes: ['areaModel'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', 'つるかめ算'],
   topicUnitId: 'u5-special',
 },
 
@@ -95,7 +95,7 @@ B ＝ 50 − 30 ＝ 20枚
 確認：3×6 ＝ 18 > 16、差 ＝ 2個 ✓
 
 答え：6人`,
-  tags: ['特殊算・文章題', '過不足算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '過不足算'],
   topicUnitId: 'u5-special',
 },
 
@@ -118,7 +118,7 @@ B ＝ 50 − 30 ＝ 20枚
 確認：7 × 5 ＝ 35 > 34、差 ＝ 1個 ✓
 
 答え：34個`,
-  tags: ['特殊算・文章題', '過不足算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '過不足算'],
   topicUnitId: 'u5-special',
 },
 
@@ -134,7 +134,7 @@ B ＝ 50 − 30 ＝ 20枚
   solution: `本数 ＝ 20 ÷ 4 ＋ 1 ＝ 5 ＋ 1 ＝ 6本
 
 答え：6本`,
-  tags: ['特殊算・文章題', '植木算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '植木算'],
   topicUnitId: 'u5-special',
 },
 
@@ -161,7 +161,7 @@ B ＝ 50 − 30 ＝ 20枚
          ＝ 45m
 
 答え：45m`,
-  tags: ['特殊算・文章題', '植木算', '円形'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '植木算', '円形'],
   topicUnitId: 'u5-special',
 },
 
@@ -183,7 +183,7 @@ x ＝ 12年後
 確認：父45歳、子15歳 → 45 ＝ 3×15 ✓
 
 答え：12年後`,
-  tags: ['特殊算・文章題', '年齢算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '年齢算'],
   topicUnitId: 'u5-special',
 },
 
@@ -204,7 +204,7 @@ x ＝ 4年前
 確認：兄12歳、弟6歳 → 12 ＝ 2×6 ✓
 
 答え：4年前`,
-  tags: ['特殊算・文章題', '年齢算'], visualTypes: ['lineDiagram'], isRandomGenerated: false,
+  tags: ['特殊算・文章題', '年齢算'],
   topicUnitId: 'u5-special',
 },
 ];

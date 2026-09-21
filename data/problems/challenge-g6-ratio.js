@@ -13,8 +13,6 @@ const CHALLENGE_G6_RATIO = [
     answer:5.6, answerUnit:'%',
     hint:`先に「塩の重さ」をそれぞれ求めよう。\n塩の重さ ＝ 食塩水の重さ × 濃度（÷100）\n2つの塩を合わせて、全体の重さで割ると濃度が出るよ。`,
     tags:['割合・比','食塩水','混合'],
-    visualTypes:['beaker','balance'],
-    isRandomGenerated:false,
     explanation:[
       { title:'なぜ「塩の重さ」から考えるのか',
         text:`濃度は「塩が全体の何%か」を表します。\n混ぜると食塩水の量は変わりますが、\n塩の重さは変わらず足し算できます。\nだから先に「塩の重さ」をそれぞれ求めます。`,
@@ -41,8 +39,6 @@ const CHALLENGE_G6_RATIO = [
     answer:620, answerUnit:'円',
     hint:`「利益を見込む」とは、仕入れ値に利益分を足すことだよ。\n定価 ＝ 仕入れ値 × (1 ＋ 利益率)`,
     tags:['割合・比','売買損益','定価'],
-    visualTypes:['priceFlow','barModel'],
-    isRandomGenerated:false,
     explanation:[
       { title:'「利益を見込む」とはどういう意味か',
         text:`仕入れ値に「いくら儲けたいか」を上乗せしたのが定価です。\n24%の利益 ＝ 仕入れ値の24%分を上乗せ\nつまり定価は仕入れ値の 100% ＋ 24% ＝ 124% になります。`,
@@ -69,8 +65,6 @@ const CHALLENGE_G6_RATIO = [
     answer:90, answerUnit:'個',
     hint:`比 3：5 は「全体を8に分けたとき、Aが3つ分・Bが5つ分」ということだよ。\nAの量 ＝ 全体 × 3/(3+5)`,
     tags:['割合・比','比','比から量を求める'],
-    visualTypes:['ratioBar'],
-    isRandomGenerated:false,
     explanation:[
       { title:'比が表す意味を理解する',
         text:`3：5 は「Aが3、Bが5の割合」という意味です。\n合わせると 3＋5＝8 の部分になります。\nつまり全体240個を8等分したとき、Aは3つ分もらえます。`,
@@ -101,8 +95,6 @@ const CHALLENGE_G6_RATIO = [
     answer:20, answerUnit:'%',
     hint:`割合 ＝ 比べる量 ÷ もとにする量\n「全体40個がもと」「赤い8個が比べる量」だよ。\n最後に×100すると%になるよ。`,
     tags:['割合・比','割合の基本','百分率'],
-    visualTypes:['barModel'],
-    isRandomGenerated:false,
     explanation:[
       { title:'「割合」とは何か',
         text:`割合とは、「全体（もと）に対して、比べる量がどれくらいか」を表す数です。\n\n今回は「40個のうち8個が赤い」なので\nもとの量 ＝ 40個\n比べる量 ＝ 8個`,
@@ -125,8 +117,6 @@ const CHALLENGE_G6_RATIO = [
     answer:14, answerUnit:'人',
     hint:`比べる量 ＝ もとにする量 × 割合\n35% ＝ 0.35 として計算しよう。`,
     tags:['割合・比','割合の基本','百分率'],
-    visualTypes:['barModel'],
-    isRandomGenerated:false,
     explanation:[
       { title:'何を求めるか整理する',
         text:`もとの量（全体） ＝ 40人\n割合 ＝ 35% ＝ 0.35\n求めるもの ＝ 電車通学の人数（比べる量）`,
@@ -149,8 +139,6 @@ const CHALLENGE_G6_RATIO = [
     answer:80, answerUnit:'',
     hint:`比べる量 ÷ 割合 ＝ もとの量\n「48が60%にあたる」から\nもとの量 ＝ 48 ÷ 0.6 で求められるよ。`,
     tags:['割合・比','割合の基本','逆算'],
-    visualTypes:['barModel'],
-    isRandomGenerated:false,
     explanation:[
       { title:'「60%が48」という関係を図にする',
         text:`全体（もと）が□のとき、その60%が48です。\nつまり □ × 0.6 ＝ 48 という式になります。`,
@@ -173,8 +161,6 @@ const CHALLENGE_G6_RATIO = [
     answer:18, answerUnit:'人',
     hint:`まず「今年の入学者数」を求めて、\nその20%を計算しよう。\n2段階に分けて落ち着いて計算しよう。`,
     tags:['割合・比','割合の基本','2段階'],
-    visualTypes:['barModel'],
-    isRandomGenerated:false,
     explanation:[
       { title:'入学者数を求める（1段階目）',
         text:`定員120人の75%が入学したので\n入学者 ＝ 120 × 0.75 ＝ 90人`,
@@ -194,8 +180,6 @@ const CHALLENGE_G6_RATIO = [
     answer:7, answerUnit:'%',
     hint:`増えた割合 ＝ 増えた人数 ÷ 去年の人数 × 100\n「去年の人数」がもとの量だよ。`,
     tags:['割合・比','割合の基本','増減'],
-    visualTypes:['barModel'],
-    isRandomGenerated:false,
     explanation:[
       { title:'「何%増え」とはどういう意味か',
         text:`「去年より7%増え」とは、\n「去年の人口を100%としたとき、\n　増えた分が7%」という意味です。\n\n増えた割合 ＝ 増えた量 ÷ もとの量（去年）`,
@@ -222,8 +206,6 @@ const CHALLENGE_G6_RATIO = [
     answer:20, answerUnit:'冊',
     hint:`比 1：3 は「Bが3のとき、Aが1」という関係だよ。\nBの60冊が比の「3」にあたるから\n「1」はいくつになるか考えよう。`,
     tags:['割合・比','比','比から量を求める'],
-    visualTypes:['ratioBar'],
-    isRandomGenerated:false,
     explanation:[
       { title:'比の意味を確認する',
         text:`A：B ＝ 1：3 は「Bがの量の3倍がB」という関係です。\nまた「1つ分の量」を決めれば両方が分かります。`,
@@ -246,8 +228,6 @@ const CHALLENGE_G6_RATIO = [
     answer:30, answerUnit:'枚',
     hint:`3つの比の合計 ＝ 2＋3＋5 ＝ 10（全体）\nBは「10のうちの3」にあたるよ。`,
     tags:['割合・比','比','3数の比'],
-    visualTypes:['ratioBar'],
-    isRandomGenerated:false,
     explanation:[
       { title:'比の合計を求める',
         text:`2：3：5 の合計は\n2＋3＋5 ＝ 10（つ分）\n全体100枚を「10等分」したのが1つ分です。`,
@@ -270,8 +250,6 @@ const CHALLENGE_G6_RATIO = [
     answer:40, answerUnit:'枚',
     hint:`AはBより「比の差（5－3）＝2つ分」だけ多い。\n2つ分が16枚なら、1つ分はいくつ？\n→ Aは5つ分だから…`,
     tags:['割合・比','比','差から求める'],
-    visualTypes:['ratioBar'],
-    isRandomGenerated:false,
     explanation:[
       { title:'「差」が何つ分かを考える',
         text:`A：B ＝ 5：3 のとき\nAとBの差は 5－3 ＝ 2（つ分）\nこの「2つ分」がちょうど16枚にあたります。`,
@@ -297,8 +275,6 @@ const CHALLENGE_G6_RATIO = [
     answer:24, answerUnit:'',
     hint:`「B」を共通の数にそろえると\nA：B：C がひとつの比で表せるよ。\nBを 3：4 の「4」と 2：5 の「2」の\n最小公倍数「8」にそろえよう。`,
     tags:['割合・比','比','連比'],
-    visualTypes:['ratioBar'],
-    isRandomGenerated:false,
     explanation:[
       { title:'Bを共通の数にそろえる',
         text:`A：B ＝ 3：4\nB：C ＝ 2：5\nBの「4」と「2」の最小公倍数は「8」です。\nA：B ＝ 6：8（両方を×2）\nB：C ＝ 8：20（両方を×4）`,
@@ -328,8 +304,6 @@ const CHALLENGE_G6_RATIO = [
     answer:640, answerUnit:'円',
     hint:`20%引き ＝ 定価の（100－20）% ＝ 80% で売るということ。\n売値 ＝ 定価 × 0.8`,
     tags:['割合・比','売買損益','割引'],
-    visualTypes:['priceFlow','barModel'],
-    isRandomGenerated:false,
     explanation:[
       { title:'「20%引き」を式で表す',
         text:`「20%引き」とは、定価から20%分を引いて売ること。\n定価の100% − 20% ＝ 80% で売るということです。`,
@@ -349,8 +323,6 @@ const CHALLENGE_G6_RATIO = [
     answer:1200, answerUnit:'円',
     hint:`定価 ＝ 原価 × (1＋0.25) ＝ 原価 × 1.25\nこれを逆算すると\n原価 ＝ 定価 ÷ 1.25`,
     tags:['割合・比','売買損益','原価','逆算'],
-    visualTypes:['priceFlow','barModel'],
-    isRandomGenerated:false,
     explanation:[
       { title:'定価と原価の関係を式にする',
         text:`「原価の25%の利益」を乗せると定価になるので\n定価 ＝ 原価 × (1＋0.25) ＝ 原価 × 1.25\nつまり　原価 × 1.25 ＝ 1500`,
@@ -373,8 +345,6 @@ const CHALLENGE_G6_RATIO = [
     answer:156, answerUnit:'円',
     hint:`まず定価を求めて、次に割引後の売値を求めよう。\n利益 ＝ 売値 − 仕入れ値`,
     tags:['割合・比','売買損益','定価','割引','利益'],
-    visualTypes:['priceFlow'],
-    isRandomGenerated:false,
     explanation:[
       { title:'定価を求める',
         text:`仕入れ値600円に40%の利益を乗せると\n定価 ＝ 600 × 1.4 ＝ 840円`,
@@ -397,8 +367,6 @@ const CHALLENGE_G6_RATIO = [
     answer:190, answerUnit:'円',
     hint:`売値 ＝ 定価 × (1－0.15) ＝ 定価 × 0.85\n利益 ＝ 売値 − 仕入れ値`,
     tags:['割合・比','売買損益','定価','割引','利益'],
-    visualTypes:['priceFlow'],
-    isRandomGenerated:false,
     explanation:[
       { title:'15%引きの売値を求める',
         text:`定価1400円の15%引き\n売値 ＝ 1400 × (1－0.15)\n　　 ＝ 1400 × 0.85\n　　 ＝ 1190円`,
@@ -422,8 +390,6 @@ const CHALLENGE_G6_RATIO = [
     answer:50, answerUnit:'g',
     hint:`塩の重さは変わらない！\n加えた後の食塩水全体の重さを□として\n塩の重さ ÷ □ ＝ 8% で式を立てよう。`,
     tags:['割合・比','食塩水','希釈'],
-    visualTypes:['beaker'],
-    isRandomGenerated:false,
     explanation:[
       { title:'塩の重さを求める（水を加えても変わらない）',
         text:`10%の食塩水200gの塩の重さ：\n塩 ＝ 200 × 0.10 ＝ 20g\n\n水を加えても塩の重さは20gのまま変わりません。`,
@@ -449,8 +415,6 @@ const CHALLENGE_G6_RATIO = [
     answer:6.25, answerUnit:'%',
     hint:`蒸発するのは水だけ。塩の重さは変わらないよ。\n蒸発後の食塩水の重さ ＝ 300 − 60 ＝ 240g`,
     tags:['割合・比','食塩水','蒸発'],
-    visualTypes:['beaker'],
-    isRandomGenerated:false,
     explanation:[
       { title:'もとの塩の重さを求める',
         text:`5%の食塩水300gの塩の重さ：\n塩 ＝ 300 × 0.05 ＝ 15g`,
@@ -473,8 +437,6 @@ const CHALLENGE_G6_RATIO = [
     answer:6.4, answerUnit:'%',
     hint:`取り出した50gの中にも8%の塩が含まれているよ。\n残った塩の量を正確に求めよう。`,
     tags:['割合・比','食塩水','取り出し','置き換え'],
-    visualTypes:['beaker'],
-    isRandomGenerated:false,
     explanation:[
       { title:'もとの塩の重さを求める',
         text:`8%の食塩水250gの塩の重さ：\n塩 ＝ 250 × 0.08 ＝ 20g`,
@@ -500,8 +462,6 @@ const CHALLENGE_G6_RATIO = [
     answer:50, answerUnit:'g',
     hint:`3つの塩の合計 ＝ 混ぜた全体 × 10%\nという方程式を立てよう。\n「塩の合計」と「食塩水の合計」をそれぞれ□で表す。`,
     tags:['割合・比','食塩水','混合','方程式'],
-    visualTypes:['beaker','balance'],
-    isRandomGenerated:false,
     explanation:[
       { title:'それぞれの塩の重さを表す',
         text:`4%の食塩水100g  → 塩：100×0.04 ＝ 4g\n12%の食塩水100g → 塩：100×0.12 ＝ 12g\n18%の食塩水□g  → 塩：□×0.18 g`,
@@ -531,8 +491,6 @@ const CHALLENGE_G6_RATIO = [
     answer:50, answerUnit:'人',
     hint:`「3/5 が30人」ということは\n全体を5等分したうちの3つが30人だよ。\n1つ分の人数を求めてから、5つ分を出そう。`,
     tags:['割合・比','相当算','分数'],
-    visualTypes:['lineDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'「3/5が30人」を図にする',
         text:`全体を5等分したとき、3つ分が30人という意味です。\n1つ分の人数 ＝ 30 ÷ 3 ＝ 10人`,
@@ -552,8 +510,6 @@ const CHALLENGE_G6_RATIO = [
     answer:270, answerUnit:'円',
     hint:`姉が「4つ分」＝360円から「1つ分」を求め\n妹の「3つ分」を計算しよう。`,
     tags:['割合・比','比','倍数算'],
-    visualTypes:['lineDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'1つ分の金額を求める',
         text:`姉の360円が「4つ分」にあたるので\n1つ分 ＝ 360 ÷ 4 ＝ 90円`,
@@ -573,8 +529,6 @@ const CHALLENGE_G6_RATIO = [
     answer:3000, answerUnit:'円',
     hint:`使ったのが 2/5 なら、残りは（1 − 2/5）＝ 3/5 だよ。\n3/5 が1800円にあたるから全体を求めよう。`,
     tags:['割合・比','相当算','残りの割合'],
-    visualTypes:['lineDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'残りの割合を求める',
         text:`使った割合：2/5\n残りの割合：1 − 2/5 ＝ 3/5\nこの 3/5 が1800円にあたります。`,
@@ -597,8 +551,6 @@ const CHALLENGE_G6_RATIO = [
     answer:20, answerUnit:'年後',
     hint:`□年後の父：40＋□　息子：10＋□\n「父が息子の2倍」という式を立てよう。\n40＋□ ＝ 2×(10＋□)`,
     tags:['割合・比','倍数算','年齢算'],
-    visualTypes:['lineDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'□年後の年齢を式にする',
         text:`□年後の父の年齢：40＋□\n□年後の息子の年齢：10＋□\n\n父が息子の2倍なので\n40＋□ ＝ 2 × (10＋□)`,
@@ -621,8 +573,6 @@ const CHALLENGE_G6_RATIO = [
     answer:1600, answerUnit:'円',
     hint:`「残りの1/4を使った」ということは「残りの3/4が750円」だよ。\n後ろから順番に逆算していこう。`,
     tags:['割合・比','相当算','逆算','2段階'],
-    visualTypes:['lineDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'「残りの3/4が750円」から逆算する',
         text:`残りの1/4を使った → 残りの3/4が750円\n600円を使った後の残り（A）は\nA × 3/4 ＝ 750\nA ＝ 750 ÷ 3/4 ＝ 750 × 4/3 ＝ 1000円`,
@@ -649,8 +599,6 @@ const CHALLENGE_G6_RATIO = [
     answer:2, answerUnit:'日',
     hint:`全体の仕事量を「1」として\n1日にできる量をそれぞれ分数で表そう。\nA の1日分：1/6　B の1日分：1/3`,
     tags:['割合・比','仕事算','全体を1'],
-    visualTypes:['workBar'],
-    isRandomGenerated:false,
     explanation:[
       { title:'全体の仕事を「1」として考える',
         text:`仕事算のコツは全体を「1」にすること。\n1日でできる仕事量を分数で表します。\n\nA：6日で全体 → 1日で 1/6\nB：3日で全体 → 1日で 1/3`,
@@ -673,8 +621,6 @@ const CHALLENGE_G6_RATIO = [
     answer:15, answerUnit:'日',
     hint:`AとBの1日の合計 ＝ 1/6\nAの1日 ＝ 1/10\nBの1日 ＝ 合計 − Aで求められるよ。`,
     tags:['割合・比','仕事算','引き算で求める'],
-    visualTypes:['workBar'],
-    isRandomGenerated:false,
     explanation:[
       { title:'1日の仕事量を式で表す',
         text:`A＋B の1日の仕事量 ＝ 1/6\nA の1日の仕事量    ＝ 1/10`,
@@ -697,8 +643,6 @@ const CHALLENGE_G6_RATIO = [
     answer:30, answerUnit:'人',
     hint:`「最初の行列数＋増えた人数 ＝ 処理した人数」\n2つの場合でそれぞれ式を立てて\n引き算して窓口の速さを求めよう。`,
     tags:['割合・比','ニュートン算','窓口'],
-    visualTypes:['lineDiagram'],
-    isRandomGenerated:false,
     explanation:[
       { title:'2つの式を立てる',
         text:`窓口1つの処理速度をx人/分、最初の行列をQ人とします。\n\n窓口1つで20分：Q ＋ 20×10 ＝ x×20\n窓口2つで 8分：Q ＋ 8×10  ＝ 2x×8`,
@@ -721,8 +665,6 @@ const CHALLENGE_G6_RATIO = [
     answer:10, answerUnit:'頭',
     hint:`最初の草の量と毎日生える量を求めよう。\n「毎日生える量だけ食べる頭数」が答えだよ。`,
     tags:['割合・比','ニュートン算','牧場'],
-    visualTypes:['workBar'],
-    isRandomGenerated:false,
     explanation:[
       { title:'2つの式を立てる',
         text:`1頭が1日に食べる量を1、最初の草をS、\n毎日生える量をrとします。\n\n30頭24日：S ＋ 24r ＝ 30×24 ＝ 720\n20頭48日：S ＋ 48r ＝ 20×48 ＝ 960`,
@@ -745,8 +687,6 @@ const CHALLENGE_G6_RATIO = [
     answer:8, answerUnit:'日',
     hint:`まず A＋B＋C、A＋B、B＋C の1日量を分数で表そう。\nCの1日量 ＝ (A＋B＋C) − (A＋B)\nBの1日量 ＝ (B＋C) − C\nAの1日量 ＝ (A＋B) − B`,
     tags:['割合・比','仕事算','3人','難問'],
-    visualTypes:['workBar'],
-    isRandomGenerated:false,
     explanation:[
       { title:'3つの1日の仕事量を整理する',
         text:`A＋B＋C の1日 ＝ 1/4\nA＋B　  の1日 ＝ 1/6\nB＋C　  の1日 ＝ 1/8`,
@@ -776,8 +716,6 @@ const CHALLENGE_G6_RATIO = [
     answer:30, answerUnit:'g',
     hint:`塩を加えると「塩の量」と「食塩水の重さ」が両方増えるよ。\n加える塩を□gとすると\n（もとの塩＋□）÷（食塩水全体＋□）＝ 0.20\nという式が立てられるね。`,
     tags:['割合・比','食塩水','食塩を加える','方程式'],
-    visualTypes:['beaker','balance'],
-    isRandomGenerated:false,
     explanation:[
       { title:'なぜこの問題が難しいのか',
         text:`水を加えるときは「食塩水の重さだけ」増えます。\nしかし塩を加えると「塩の量」と「食塩水の重さ」が\n同時に増えるため、式が複雑になります。`,
@@ -806,8 +744,6 @@ const CHALLENGE_G6_RATIO = [
     answer:150, answerUnit:'g',
     hint:`6%の食塩水をxg使うとすると\n14%の食塩水は（300−x）g。\n「塩の合計」で方程式を作ろう。`,
     tags:['割合・比','食塩水','混合','目標濃度'],
-    visualTypes:['beaker','balance'],
-    isRandomGenerated:false,
     explanation:[
       { title:'状況を整理する',
         text:`6%食塩水：x g 使う\n14%食塩水：(300 − x) g 使う\n混ぜた後：10%の食塩水 300g`,
@@ -837,8 +773,6 @@ const CHALLENGE_G6_RATIO = [
     answer:12, answerUnit:'個',
     hint:`A:B=2:3 と B:C=4:5 の2つの比を\nひとつにまとめよう。\nBの数字をそろえるには\n3と4の最小公倍数（12）を使うよ。`,
     tags:['割合・比','比','連比','難問'],
-    visualTypes:['ratioBar'],
-    isRandomGenerated:false,
     explanation:[
       { title:'なぜ2つの比を1つにまとめるのか',
         text:`A:B と B:C の比には「B」が共通しています。\nBを共通の数にそろえれば、\nA・B・CをひとつのA:B:Cの比で表せます。\n\nBの3と4を最小公倍数12にそろえます。`,
@@ -867,8 +801,6 @@ const CHALLENGE_G6_RATIO = [
     answer:600, answerUnit:'円',
     hint:`仕入れ値を□とおいて\n定価 ＝ □ × 1.3\n売値 ＝ 定価 × 0.9 ＝ □ × 1.3 × 0.9\nこれが702円だから□を求めよう。`,
     tags:['割合・比','割合の基本','売買損益','逆算','難問'],
-    visualTypes:['barModel'],
-    isRandomGenerated:false,
     explanation:[
       { title:'なぜこの問題が難しいのか',
         text:`「30%増し」「10%引き」と2回割合が変わります。\n順番に1.3倍→0.9倍とかけていき、\n最後に逆算（÷）して仕入れ値を求めます。\nこの「2段階逆算」が★4のポイントです。`,

@@ -17,7 +17,7 @@ const PRACTICE_G6_PLANE = [
 底辺 × 高さ ＝ 8 × 5 ＝ 40cm²
 
 答え：40cm²`,
-  tags: ['平面図形', '平行四辺形', '面積'], visualTypes: ['barModel'], isRandomGenerated: false,
+  tags: ['平面図形', '平行四辺形', '面積'],
   topicUnitId: 'u6-plane',
 },
 
@@ -34,7 +34,7 @@ const PRACTICE_G6_PLANE = [
 底辺 × 高さ ÷ 2 ＝ 6 × 4 ÷ 2 ＝ 12cm²
 
 答え：12cm²`,
-  tags: ['平面図形', '三角形', '面積'], visualTypes: ['barModel'], isRandomGenerated: false,
+  tags: ['平面図形', '三角形', '面積'],
   topicUnitId: 'u6-plane',
 },
 
@@ -54,7 +54,7 @@ const PRACTICE_G6_PLANE = [
 ＝ 20cm²
 
 答え：20cm²`,
-  tags: ['平面図形', '台形', '面積'], visualTypes: ['barModel'], isRandomGenerated: false,
+  tags: ['平面図形', '台形', '面積'],
   topicUnitId: 'u6-plane',
 },
 
@@ -74,7 +74,7 @@ const PRACTICE_G6_PLANE = [
 ③合計：30 ＋ 12 ＝ 42cm²
 
 答え：42cm²`,
-  tags: ['平面図形', '複合図形', '分割'], visualTypes: ['barModel'], isRandomGenerated: false,
+  tags: ['平面図形', '複合図形', '分割'],
   topicUnitId: 'u6-plane',
   diagram: {
     kind: 'svg',
@@ -121,7 +121,7 @@ const PRACTICE_G6_PLANE = [
   底辺12cm × 高さ7cm ＝ 84cm² ✓
 
 答え：84cm²`,
-  tags: ['平面図形', '平行四辺形'], visualTypes: ['barModel'], isRandomGenerated: false,
+  tags: ['平面図形', '平行四辺形'],
 },
 
 {
@@ -146,7 +146,7 @@ const PRACTICE_G6_PLANE = [
   底辺10cm × 高さ8cm ÷ 2 ＝ 40cm² ✓
 
 答え：40cm²`,
-  tags: ['平面図形', '三角形'], visualTypes: ['barModel'], isRandomGenerated: false,
+  tags: ['平面図形', '三角形'],
 },
 
 {
@@ -174,7 +174,7 @@ const PRACTICE_G6_PLANE = [
   (5＋9)×6÷2 ＝ 14×3 ＝ 42cm² ✓
 
 答え：42cm²`,
-  tags: ['平面図形', '台形'], visualTypes: ['barModel'], isRandomGenerated: false,
+  tags: ['平面図形', '台形'],
 },
 
 {
@@ -201,7 +201,7 @@ const PRACTICE_G6_PLANE = [
   9 × 8 ÷ 2 ＝ 36cm² ✓
 
 答え：8cm`,
-  tags: ['平面図形', '三角形', '逆算'], visualTypes: ['areaReverse'], isRandomGenerated: false,
+  tags: ['平面図形', '三角形', '逆算'],
 },
 
 {
@@ -227,7 +227,7 @@ const PRACTICE_G6_PLANE = [
   12 × 5 ＝ 60cm² ✓
 
 答え：5cm`,
-  tags: ['平面図形', '平行四辺形', '逆算'], visualTypes: ['areaReverse'], isRandomGenerated: false,
+  tags: ['平面図形', '平行四辺形', '逆算'],
 },
 
 /* ── 複合図形・補助線 ★3 ── */
@@ -253,7 +253,7 @@ const PRACTICE_G6_PLANE = [
   80 − 10 ＝ 70cm² ✓
 
 答え：70cm²`,
-  tags: ['平面図形', '複合図形', '差'], visualTypes: ['areaDecompose'], isRandomGenerated: false,
+  tags: ['平面図形', '複合図形', '差'],
   diagram: {
     kind: 'svg',
     markup: `<svg viewBox="0 0 300 235" width="100%" style="max-width:320px;display:block;margin:0 auto" role="img" aria-label="たて10cm・よこ8cmの長方形の左下角から、底辺4cm・高さ5cmの三角形を切り取った残りの図形">
@@ -302,7 +302,7 @@ const PRACTICE_G6_PLANE = [
   80 − 12 ＝ 68cm² ✓
 
 答え：68cm²`,
-  tags: ['平面図形', '複合図形', 'L字型'], visualTypes: ['areaDecompose'], isRandomGenerated: false,
+  tags: ['平面図形', '複合図形', 'L字型'],
   diagram: {
     kind: 'svg',
     markup: `<svg viewBox="0 0 300 220" width="100%" style="max-width:320px;display:block;margin:0 auto" role="img" aria-label="外側たて8cm・よこ10cmの長方形の右上角から、たて3cm・よこ4cmの長方形を切り取ったL字型の図">
@@ -353,7 +353,7 @@ const PRACTICE_G6_PLANE = [
   (4＋12)×6÷2 ＝ 16×3 ＝ 48cm² ✓
 
 答え：12cm`,
-  tags: ['平面図形', '台形', '逆算'], visualTypes: ['areaReverse'], isRandomGenerated: false,
+  tags: ['平面図形', '台形', '逆算'],
 },
 
 {
@@ -377,7 +377,7 @@ const PRACTICE_G6_PLANE = [
   対角線で分けた三角形は必ず面積が等しい ✓
 
 答え：30cm²`,
-  tags: ['平面図形', '補助線', '平行四辺形'], visualTypes: ['auxiliaryLine'], isRandomGenerated: false,
+  tags: ['平面図形', '補助線', '平行四辺形'],
   diagram: {
     kind: 'svg',
     markup: `<svg viewBox="0 0 320 210" width="100%" style="max-width:320px;display:block;margin:0 auto" role="img" aria-label="平行四辺形ABCDに対角線BDを引き、三角形ABDを示した図">
@@ -422,7 +422,7 @@ const PRACTICE_G6_PLANE = [
   36 ＋ 12 ＝ 48cm² ✓
 
 答え：36cm²`,
-  tags: ['平面図形', '補助線', '面積比'], visualTypes: ['areaRatio', 'auxiliaryLine'], isRandomGenerated: false,
+  tags: ['平面図形', '補助線', '面積比'],
   diagram: {
     kind: 'svg',
     markup: `<svg viewBox="0 0 290 225" width="100%" style="max-width:300px;display:block;margin:0 auto" role="img" aria-label="底辺12cm・高さ8cmの三角形を、頂点からの補助線で底辺を3:1に分けた図">
@@ -465,7 +465,7 @@ const PRACTICE_G6_PLANE = [
   63 ＋ 45 ＝ 108cm² ✓
 
 答え：108cm²`,
-  tags: ['平面図形', '複合図形', '三角形', '台形'], visualTypes: ['areaDecompose'], isRandomGenerated: false,
+  tags: ['平面図形', '複合図形', '三角形', '台形'],
   diagram: {
     kind: 'svg',
     markup: `<svg viewBox="0 0 400 225" width="100%" style="max-width:340px;display:block;margin:0 auto" role="img" aria-label="底辺14cm・高さ9cmの三角形と、上底3cm・下底7cm・高さ9cmの台形が、境界を共有して並んでいる図">
@@ -512,7 +512,7 @@ const PRACTICE_G6_PLANE = [
   三角形：8 × 6 ÷ 2 ＝ 24cm²（等しい） ✓
 
 答え：3cm`,
-  tags: ['平面図形', '等積変形'], visualTypes: ['equalArea'], isRandomGenerated: false,
+  tags: ['平面図形', '等積変形'],
 },
 
 {
@@ -538,7 +538,7 @@ const PRACTICE_G6_PLANE = [
   15 × 2 ＝ 30cm² ✓
 
 答え：30cm²`,
-  tags: ['平面図形', '面積比', '三角形'], visualTypes: ['areaRatio'], isRandomGenerated: false,
+  tags: ['平面図形', '面積比', '三角形'],
 },
 
 {
@@ -564,7 +564,7 @@ const PRACTICE_G6_PLANE = [
   大の面積：6² ＝ 36cm² ✓
 
 答え：36cm²`,
-  tags: ['平面図形', '面積比', '相似'], visualTypes: ['areaRatio'], isRandomGenerated: false,
+  tags: ['平面図形', '面積比', '相似'],
 },
 
 {
@@ -595,7 +595,7 @@ const PRACTICE_G6_PLANE = [
   20 × 2 ＝ 40cm² → 40 ÷ 80 × 100 ＝ 50% ✓
 
 答え：50%`,
-  tags: ['平面図形', '面積比', '等積変形', '対角線'], visualTypes: ['areaRatio', 'auxiliaryLine'], isRandomGenerated: false,
+  tags: ['平面図形', '面積比', '等積変形', '対角線'],
   diagram: {
     kind: 'svg',
     markup: `<svg viewBox="0 0 320 220" width="100%" style="max-width:320px;display:block;margin:0 auto" role="img" aria-label="平行四辺形ABCDに対角線ACとBDを引き、交点をOとした図">

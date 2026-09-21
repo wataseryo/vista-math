@@ -1,8 +1,16 @@
 ---
 created: "2026-06-28"
 project: "ファイル分割・8分野スキーマ整理"
-status: in_progress
+status: done
 sprints_total: 2
+completed: "2026-09-21"
+completion_note: >
+  Codexによる構造整理調査（2026-09-21）を経て、当初の計画とは異なる形で完了。
+  実際の分割・改名内容は sprints/structure-cleanup/sprint-1〜3-*.md を参照。
+  主な差分: type フィールドは追加せず配列（PRACTICE_PROBLEMS/CHALLENGES）で型を区別。
+  answerUnit/categoryLabelは計画通り導入したが、subUnit/patternは既存のlessonUnit/pattern
+  をそのまま維持（catId/mainCategory/categoryは統合せず別物として維持、という
+  2026-09-21のCodex調査結果を優先したため）。
 ---
 
 # 製品仕様書: ファイル分割 & 8分野スキーマ整理

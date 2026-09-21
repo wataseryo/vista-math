@@ -141,7 +141,7 @@ function stdPracOpenProb(probId) {
         <div class="prac-detail-q">${p.text}</div>
         <div class="prac-ans-row">
             <input class="prac-ans-input" id="std-prac-ans-input" type="number" placeholder="答えを入力" />
-            <span class="prac-ans-unit">${p.unit}</span>
+            <span class="prac-ans-unit">${p.answerUnit}</span>
             <button class="prac-check-btn" style="background:linear-gradient(135deg,#42A5F5,#1976D2)" onclick="stdPracCheckAnswer()">答え合わせ</button>
         </div>
         <div id="std-prac-result-box" style="display:none;background:#E8F5E9;border-radius:10px;padding:12px;margin-bottom:14px;font-weight:bold;font-size:.9rem"></div>
@@ -198,7 +198,7 @@ function stdPracCheckAnswer() {
         { const _k=`g${appState.grade}_std_${stdPracState.currentCatId}`; const _s=getStatsForKey(_k); const _ch=(appState.grade===5?STANDARD_CHAPTERS_G5:STANDARD_CHAPTERS_G6).find(c=>c.id===stdPracState.currentCatId); if(_s) showAccuracyCard(_ch?_ch.title:'標準演習', _s.correct, _s.total); }
     } else {
         rb.style.background = '#FFEBEE'; rb.style.color = '#C62828';
-        rb.innerHTML = `<div>❌ ${getWrongMsg()}</div><button class="reveal-ans-btn" data-answer="${p.answer}" data-unit="${p.unit}" onclick="revealAnswer(this)">解答を確認する</button><button class="retry-btn" onclick="stdPracRetry()">もう一度解く</button>`;
+        rb.innerHTML = `<div>❌ ${getWrongMsg()}</div><button class="reveal-ans-btn" data-answer="${p.answer}" data-unit="${p.answerUnit}" onclick="revealAnswer(this)">解答を確認する</button><button class="retry-btn" onclick="stdPracRetry()">もう一度解く</button>`;
         recordProblemAttempt(pid, false);
         recordAnswer(`g${appState.grade}_std_${stdPracState.currentCatId}`, false);
         resetStreak();
@@ -317,7 +317,7 @@ function pracOpenProb(probId) {
         ${renderProblemDiagram(p)}
         <div class="prac-ans-row">
             <input class="prac-ans-input" id="prac-ans-input" type="number" placeholder="答えを入力" />
-            <span class="prac-ans-unit">${p.unit}</span>
+            <span class="prac-ans-unit">${p.answerUnit}</span>
             <button class="prac-check-btn" onclick="pracCheckAnswer()">答え合わせ</button>
         </div>
         <div id="prac-result-box" style="display:none;background:#E8F5E9;border-radius:10px;padding:12px;margin-bottom:14px;font-weight:bold;font-size:.9rem"></div>
@@ -377,7 +377,7 @@ function pracCheckAnswer() {
         { const _k=`g${appState.grade}_exam_${pracState.currentCatId}`; const _s=getStatsForKey(_k); const _cat=PRACTICE_CATS.find(c=>c.id===pracState.currentCatId); if(_s) showAccuracyCard(_cat?_cat.title:'受験演習', _s.correct, _s.total); }
     } else {
         rb.style.background = '#FFEBEE'; rb.style.color = '#C62828';
-        rb.innerHTML = `<div>❌ ${getWrongMsg()}</div><button class="reveal-ans-btn" data-answer="${p.answer}" data-unit="${p.unit}" onclick="revealAnswer(this)">解答を確認する</button><button class="retry-btn" onclick="pracRetry()">もう一度解く</button>`;
+        rb.innerHTML = `<div>❌ ${getWrongMsg()}</div><button class="reveal-ans-btn" data-answer="${p.answer}" data-unit="${p.answerUnit}" onclick="revealAnswer(this)">解答を確認する</button><button class="retry-btn" onclick="pracRetry()">もう一度解く</button>`;
         recordProblemAttempt(pid, false);
         recordAnswer(`g${appState.grade}_exam_${pracState.currentCatId}`, false);
         resetStreak();
@@ -858,10 +858,10 @@ function getCurrentChallengesFiltered() {
     if (chState.mainCategory) {
         base = base.filter(c => c.mainCategory === chState.mainCategory);
     } else if (chState.unitCategories) {
-        base = base.filter(c => chState.unitCategories.includes(c.category));
+        base = base.filter(c => chState.unitCategories.includes(c.categoryLabel));
     }
     base = base.filter(c => c.difficulty >= chState.tierMin && c.difficulty <= chState.tierMax);
-    return chState.filter === 'すべて' ? base : base.filter(c => c.category === chState.filter);
+    return chState.filter === 'すべて' ? base : base.filter(c => c.categoryLabel === chState.filter);
 }
 
 function chNextProblem() {
@@ -876,21 +876,21 @@ function renderChallengeList() {
     if (chState.mainCategory) {
         base = base.filter(c => c.mainCategory === chState.mainCategory);
     } else if (chState.unitCategories) {
-        base = base.filter(c => chState.unitCategories.includes(c.category));
+        base = base.filter(c => chState.unitCategories.includes(c.categoryLabel));
     }
     base = base.filter(c => c.difficulty >= chState.tierMin && c.difficulty <= chState.tierMax);
-    const availCats = ['すべて', ...new Set(base.map(c => c.category))];
+    const availCats = ['すべて', ...new Set(base.map(c => c.categoryLabel))];
     if (!availCats.includes(chState.filter)) chState.filter = 'すべて';
     document.getElementById('ch-filter-row').innerHTML = availCats.map(cat =>
         `<button class="ch-filter-btn${chState.filter===cat?' active':''}" onclick="chSetFilter('${cat}')">${cat}</button>`
     ).join('');
-    let filtered = chState.filter === 'すべて' ? base : base.filter(c => c.category === chState.filter);
+    let filtered = chState.filter === 'すべて' ? base : base.filter(c => c.categoryLabel === chState.filter);
     document.getElementById('ch-cards-container').innerHTML = filtered.map(c => {
         const stars='★'.repeat(c.difficulty)+'☆'.repeat(5-c.difficulty);
-        const raw = c.question.replace(/\n/g,' ');
+        const raw = c.text.replace(/\n/g,' ');
         const preview = raw.length > 48 ? raw.slice(0,48)+'…' : raw;
         return `<div class="ch-card" style="border-left-color:${c.borderColor}" onclick="openChallenge('${c.id}')">
-            <div class="ch-card-top"><span class="ch-cat-badge" style="background:${c.catBg};color:${c.catColor}">${c.category}</span><span class="ch-stars">${stars}</span></div>
+            <div class="ch-card-top"><span class="ch-cat-badge" style="background:${c.catBg};color:${c.catColor}">${c.categoryLabel}</span><span class="ch-stars">${stars}</span></div>
             <div class="ch-card-title">${c.title}</div>
             <div class="ch-card-preview">${preview}</div>
             ${getAttemptDots(c.id)}
@@ -916,9 +916,9 @@ function openChallenge(id) {
     }
     const stars='★'.repeat(ch.difficulty)+'☆'.repeat(5-ch.difficulty);
     const badge=document.getElementById('ch-prob-cat-badge');
-    badge.textContent=ch.category; badge.style.cssText=`background:${ch.catBg};color:${ch.catColor}`;
+    badge.textContent=ch.categoryLabel; badge.style.cssText=`background:${ch.catBg};color:${ch.catColor}`;
     document.getElementById('ch-prob-stars').textContent=stars;
-    document.getElementById('ch-prob-text').textContent=ch.question;
+    document.getElementById('ch-prob-text').textContent=ch.text;
     document.getElementById('ch-ans-input').value='';
     document.getElementById('ch-ans-input').className='ch-ans-input';
     document.getElementById('ch-ans-unit').textContent=ch.answerUnit;
@@ -961,14 +961,14 @@ function chSubmitAnswer() {
         document.getElementById('ch-result-hl').textContent='⭕ 正解！';
         document.getElementById('ch-result-msg').innerHTML=`<div>ステップ解説で解法を確認せよ。</div><button class="retry-btn" onclick="chRetry()">もう一度解く</button>`;
         recordProblemAttempt(ch.id, true);
-        recordAnswer(`g${appState.grade}_ch_${ch.category}`, true);
+        recordAnswer(`g${appState.grade}_ch_${ch.categoryLabel}`, true);
         addStar();
-        { const _k=`g${appState.grade}_ch_${ch.category}`; const _s=getStatsForKey(_k); if(_s) showAccuracyCard(ch.category, _s.correct, _s.total); }
+        { const _k=`g${appState.grade}_ch_${ch.categoryLabel}`; const _s=getStatsForKey(_k); if(_s) showAccuracyCard(ch.categoryLabel, _s.correct, _s.total); }
     } else {
         document.getElementById('ch-result-hl').textContent='❌ ' + getWrongMsg();
         document.getElementById('ch-result-msg').innerHTML=`<div>ヒントまたはステップ解説で確認せよ。</div><button class="reveal-ans-btn" data-answer="${ch.answer}" data-unit="${ch.answerUnit}" onclick="revealAnswer(this)">解答を確認する</button><button class="retry-btn" onclick="chRetry()">もう一度解く</button>`;
         recordProblemAttempt(ch.id, false);
-        recordAnswer(`g${appState.grade}_ch_${ch.category}`, false);
+        recordAnswer(`g${appState.grade}_ch_${ch.categoryLabel}`, false);
         resetStreak();
     }
     rb.style.display='block';
@@ -1906,7 +1906,7 @@ function renderTrialQuestion(topicUnitId) {
  */
 function generateChoices(prob) {
     const answer = prob.answer;
-    const unit   = prob.unit || '';
+    const unit   = prob.answerUnit || '';
 
     let choices = [];
 
@@ -2040,7 +2040,7 @@ function revealTrialAnswer(topicUnitId) {
     if (feedbackEl) {
         const rawSolution = prob.solution || prob.hint || '';
         const solutionHtml = escapeHtml(rawSolution).replace(/\n/g, '<br>');
-        feedbackEl.innerHTML = `<b>正解は ${escapeHtml(String(prob.answer))}${escapeHtml(prob.unit || '')} です。</b><br>${solutionHtml}`;
+        feedbackEl.innerHTML = `<b>正解は ${escapeHtml(String(prob.answer))}${escapeHtml(prob.answerUnit || '')} です。</b><br>${solutionHtml}`;
     }
 
     // 「答えを確認する」ボタンを非表示にして「次の問題へ」のみ残す

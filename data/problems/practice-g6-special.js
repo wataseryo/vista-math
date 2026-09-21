@@ -12,7 +12,7 @@ const PRACTICE_G6_SPECIAL = [
   title: '2つの数を求める（和差算 基本）',
   difficulty: 1,
   text: '2つの整数の和は54、差は16です。\n\n大きい方の数を求めなさい。',
-  answer: 35, answerType: 'number', unit: '',
+  answer: 35, answerType: 'number', answerUnit: '',
   hint: '和と差が出てきたら和差算！\n（和＋差）÷2 ＝ 大きい方の数',
   solution: `【和差算の公式】
 大きい方 ＝ （和 ＋ 差） ÷ 2
@@ -35,7 +35,7 @@ const PRACTICE_G6_SPECIAL = [
   title: '本の冊数（和差算）',
   difficulty: 1,
   text: 'A棚とB棚に本が合わせて72冊あります。\nA棚はB棚より18冊多い。\n\nA棚の本は何冊ですか？',
-  answer: 45, answerType: 'number', unit: '冊',
+  answer: 45, answerType: 'number', answerUnit: '冊',
   hint: '大きい方（A棚）＝（和＋差）÷2',
   solution: `【和差算】
 A棚 ＝ （72 ＋ 18） ÷ 2
@@ -57,7 +57,7 @@ B棚 ＝ （72 − 18） ÷ 2 ＝ 27冊
   title: '3つの数の和差算',
   difficulty: 2,
   text: '3つの整数の和は90です。\n最大は最小より18大きく、中間は最小より6大きい。\n\n最小の数を求めなさい。',
-  answer: 22, answerType: 'number', unit: '',
+  answer: 22, answerType: 'number', answerUnit: '',
   hint: '最小の数を□とすると\n中間 ＝ □＋6、最大 ＝ □＋18\n3つの和 ＝ □＋（□＋6）＋（□＋18）＝ 90',
   solution: `【最小を□とおく】
 □ ＋ (□＋6) ＋ (□＋18) ＝ 90
@@ -79,7 +79,7 @@ B棚 ＝ （72 − 18） ÷ 2 ＝ 27冊
   title: '姉と妹の所持金',
   difficulty: 3,
   text: '姉と妹の所持金の合計は3600円です。\n姉は妹より600円多く持っています。\n\n姉の所持金は何円ですか？',
-  answer: 2100, answerType: 'number', unit: '円',
+  answer: 2100, answerType: 'number', answerUnit: '円',
   hint: '姉 ＝ （合計 ＋ 差） ÷ 2',
   solution: `【和差算】
 姉 ＝ （3600 ＋ 600） ÷ 2
@@ -101,7 +101,7 @@ B棚 ＝ （72 − 18） ÷ 2 ＝ 27冊
   title: '3人の所持金（和差算）',
   difficulty: 3,
   text: 'A、B、Cの3人の所持金の合計は2100円です。\nAはBより240円多く、BはCより180円多い。\n\nCの所持金は何円ですか？',
-  answer: 500, answerType: 'number', unit: '円',
+  answer: 500, answerType: 'number', answerUnit: '円',
   hint: 'Cを□とすると B＝□＋180、A＝□＋180＋240＝□＋420\n3人の合計 ＝ □＋(□＋180)＋(□＋420)＝2100',
   solution: `【Cを□とおく】
 AはBより240円多い → A ＝ B＋240
@@ -129,7 +129,7 @@ C ＝ 500円
   title: '鶴と亀の足の数（基本）',
   difficulty: 1,
   text: '鶴と亀が合わせて10匹います。\n足の合計は28本です。\n\n鶴は何匹いますか？',
-  answer: 6, answerType: 'number', unit: '匹',
+  answer: 6, answerType: 'number', answerUnit: '匹',
   hint: '全部が亀（4本足）なら 4×10＝40本。\n実際との差 40−28＝12本。\n亀1匹を鶴1匹に変えると足が 4−2＝2本減る。\n12÷2＝6匹が鶴。',
   solution: `【仮定法（つるかめ算）】
 全部が亀なら：4 × 10 ＝ 40本
@@ -152,7 +152,7 @@ C ＝ 500円
   title: '100円玉と50円玉',
   difficulty: 2,
   text: '100円硬貨と50円硬貨が合わせて20枚あります。\n合計金額は1450円です。\n\n100円硬貨は何枚ですか？',
-  answer: 9, answerType: 'number', unit: '枚',
+  answer: 9, answerType: 'number', answerUnit: '枚',
   hint: '全部50円なら 50×20＝1000円。\n実際との差：1450−1000＝450円。\n50円を100円に変えると1枚につき50円増える。\n450÷50＝9枚',
   solution: `【仮定法】
 全部 50円なら：50 × 20 ＝ 1000円
@@ -175,7 +175,7 @@ C ＝ 500円
   title: 'テストの正解数（つるかめ算）',
   difficulty: 2,
   text: '20問のテストで、正解すると4点、不正解だと1点引かれます。\n合計が65点でした。\n\n正解した問題数は何問ですか？',
-  answer: 17, answerType: 'number', unit: '問',
+  answer: 17, answerType: 'number', answerUnit: '問',
   hint: '全問正解なら 4×20＝80点。\n実際との差：80−65＝15点。\n正解を不正解に変えると 1問につき 4＋1＝5点減る。\n15÷5＝3問が不正解。',
   solution: `【仮定法】
 全問正解なら：4 × 20 ＝ 80点
@@ -199,7 +199,7 @@ C ＝ 500円
   title: 'りんごとみかんの個数',
   difficulty: 3,
   text: 'りんご1個80円、みかん1個50円です。\n合わせて18個買ったら合計金額は1110円でした。\n\nりんごは何個ですか？',
-  answer: 7, answerType: 'number', unit: '個',
+  answer: 7, answerType: 'number', answerUnit: '個',
   hint: '全部みかんなら 50×18＝900円。\n実際との差：1110−900＝210円。\nみかんをりんごに変えると 1個につき 80−50＝30円増える。\n210÷30＝7個',
   solution: `【仮定法】
 全部みかんなら：50 × 18 ＝ 900円
@@ -222,7 +222,7 @@ C ＝ 500円
   title: '椅子と机の脚の数',
   difficulty: 3,
   text: '椅子（4本脚）と机（3本脚）が合わせて15脚あります。\n脚の合計は54本です。\n\n椅子は何脚ありますか？',
-  answer: 9, answerType: 'number', unit: '脚',
+  answer: 9, answerType: 'number', answerUnit: '脚',
   hint: '全部机（3本脚）なら 3×15＝45本。\n実際との差：54−45＝9本。\n机を椅子に変えると 1脚につき 4−3＝1本増える。\n9÷1＝9脚が椅子。',
   solution: `【仮定法】
 全部机なら：3 × 15 ＝ 45本
@@ -245,7 +245,7 @@ C ＝ 500円
   title: '電車とバスで旅行（つるかめ算）',
   difficulty: 4,
   text: 'バス（時速30km）と電車（時速80km）を乗り継いで旅行した。\n合計3時間で190km移動した。\n\n電車に乗っていた時間は何時間ですか？',
-  answer: 2, answerType: 'number', unit: '時間',
+  answer: 2, answerType: 'number', answerUnit: '時間',
   hint: '全部バスなら 30×3＝90km。\n実際との差：190−90＝100km。\nバスを電車に変えると 1時間につき 80−30＝50km増える。\n100÷50＝2時間が電車。',
   solution: `【仮定法】
 全部バスなら：30 × 3 ＝ 90km
@@ -270,7 +270,7 @@ C ＝ 500円
   title: '鉛筆を配る（過不足算 基本）',
   difficulty: 2,
   text: '生徒に鉛筆を配ります。\n1人4本ずつ配ると6本余り、\n1人5本ずつ配ると4本足りません。\n\n生徒は何人いますか？',
-  answer: 10, answerType: 'number', unit: '人',
+  answer: 10, answerType: 'number', answerUnit: '人',
   hint: '配る余り・不足が出てきたら過不足算！\n人数 ＝ （余り ＋ 不足） ÷ （多い方 − 少ない方）',
   solution: `【過不足算の公式】
 人数 ＝ （余り ＋ 不足） ÷ （1人分の差）
@@ -292,7 +292,7 @@ C ＝ 500円
   title: 'おかしを配る（過不足算）',
   difficulty: 2,
   text: 'おかしを何人かに配ります。\n1人3個ずつ配ると5個余り、\n1人4個ずつ配ると3個足りません。\n\n子どもは何人いますか？',
-  answer: 8, answerType: 'number', unit: '人',
+  answer: 8, answerType: 'number', answerUnit: '人',
   hint: '人数 ＝ （余り ＋ 不足） ÷ （1人分の差）\n      ＝ （5 ＋ 3） ÷ （4 − 3）',
   solution: `【過不足算】
 人数 ＝ （5 ＋ 3） ÷ （4 − 3）
@@ -314,7 +314,7 @@ C ＝ 500円
   title: 'カードを配る（人数と枚数）',
   difficulty: 3,
   text: 'カードを何人かに配ります。\n1人6枚ずつ配ると4枚余り、\n1人7枚ずつ配ると2枚足りません。\n\nカードは全部で何枚ありますか？',
-  answer: 40, answerType: 'number', unit: '枚',
+  answer: 40, answerType: 'number', answerUnit: '枚',
   hint: 'まず人数を求めよう。\n人数 ＝ （4 ＋ 2） ÷ （7 − 6） ＝ 6人\nカードの枚数 ＝ 6×6＋4 ＝ ?',
   solution: `【人数を求める】
 人数 ＝ （4 ＋ 2） ÷ （7 − 6）
@@ -337,7 +337,7 @@ C ＝ 500円
   title: '長椅子の数（過不足算）',
   difficulty: 3,
   text: '長椅子に生徒が座ります。\n1脚に4人ずつ座ると8人が座れません。\n1脚に5人ずつ座ると、最後の1脚だけ3人で残り2席が空きます。\n\n長椅子は何脚ありますか？',
-  answer: 10, answerType: 'number', unit: '脚',
+  answer: 10, answerType: 'number', answerUnit: '脚',
   hint: '椅子の数を n 脚とする。\n4人ずつ：全員 ＝ 4n＋8\n5人ずつで最後の椅子が3人（2席空き）：全員 ＝ 5(n−1)＋3 ＝ 5n−2\n4n＋8 ＝ 5n−2 を解く',
   solution: `【方程式で解く】
 椅子の数を n 脚とする。
@@ -367,7 +367,7 @@ C ＝ 500円
   title: '折り紙を配る（差集め算）',
   difficulty: 4,
   text: '何人かの子どもに折り紙を配ります。\n1人に12枚ずつ配ると20枚余り、\n1人に15枚ずつ配ると16枚足りません。\n\n折り紙は全部で何枚ですか？',
-  answer: 164, answerType: 'number', unit: '枚',
+  answer: 164, answerType: 'number', answerUnit: '枚',
   hint: '1人分の差が 15−12＝3枚。\n人数 ＝ （余り ＋ 不足） ÷ 差 ＝ （20＋16）÷3 ＝ 12人\n折り紙 ＝ 12×12＋20',
   solution: `【差集め算】
 人数 ＝ （20 ＋ 16） ÷ （15 − 12）
@@ -391,7 +391,7 @@ C ＝ 500円
   title: '道路に木を植える（基本）',
   difficulty: 1,
   text: '道の片側に、端から端まで5mおきに木を植えます。\n道の長さは50mです。\n\n木は何本必要ですか？',
-  answer: 11, answerType: 'number', unit: '本',
+  answer: 11, answerType: 'number', answerUnit: '本',
   hint: '木・電柱・間隔が出てきたら植木算！\n両端に植えるとき：本数 ＝ 道の長さ ÷ 間隔 ＋ 1',
   solution: `【両端あり植木算】
 本数 ＝ 50 ÷ 5 ＋ 1
@@ -410,7 +410,7 @@ C ＝ 500円
   title: '道路の両側に木を植える',
   difficulty: 2,
   text: '40mの道路の両側に、端から端まで4mおきに木を植えます。\n\n木は合計何本必要ですか？',
-  answer: 22, answerType: 'number', unit: '本',
+  answer: 22, answerType: 'number', answerUnit: '本',
   hint: '片側の本数 ＝ 40÷4＋1 ＝ 11本\n両側なので 11×2 ＝ 22本',
   solution: `【片側の本数を求め、2倍する】
 片側の本数 ＝ 40 ÷ 4 ＋ 1 ＝ 11本
@@ -428,7 +428,7 @@ C ＝ 500円
   title: '電柱の間隔を求める',
   difficulty: 2,
   text: '100mの道の片側に端から端まで等間隔に電柱を立てます。\n電柱は全部で21本です。\n\n電柱の間隔は何mですか？',
-  answer: 5, answerType: 'number', unit: 'm',
+  answer: 5, answerType: 'number', answerUnit: 'm',
   hint: '電柱21本なら間隔は 21−1＝20か所。\n間隔 ＝ 道の長さ ÷ 間隔の数',
   solution: `【逆算】
 間隔の数 ＝ 21 − 1 ＝ 20か所
@@ -446,7 +446,7 @@ C ＝ 500円
   title: '池の周りに木を植える（円形）',
   difficulty: 3,
   text: '池の周りに等間隔で木を植えます。\n池の周りの長さは72mで、間隔は3mです。\n\n木は何本必要ですか？',
-  answer: 24, answerType: 'number', unit: '本',
+  answer: 24, answerType: 'number', answerUnit: '本',
   hint: '円形（池・広場の周り）のとき：本数 ＝ 周の長さ ÷ 間隔\n（始点と終点が重なるので ＋1 は不要）',
   solution: `【円形植木算】
 本数 ＝ 72 ÷ 3 ＝ 24本
@@ -466,7 +466,7 @@ C ＝ 500円
   title: '正方形の周りに木を植える',
   difficulty: 3,
   text: '1辺10mの正方形の土地の4辺に、2mおきに木を植えます。\n角には必ず木を植え、4辺の角の木は共有されます。\n\n木は合計何本必要ですか？',
-  answer: 20, answerType: 'number', unit: '本',
+  answer: 20, answerType: 'number', answerUnit: '本',
   hint: '1辺の本数 ＝ 10÷2＋1＝6本\n4辺分の合計 ＝ 6×4＝24本\nただし角の4本は2辺で共有されているので引く。',
   solution: `【正方形の周りの植木算】
 1辺の本数 ＝ 10 ÷ 2 ＋ 1 ＝ 6本
@@ -495,7 +495,7 @@ C ＝ 500円
   title: '何年後に3倍になるか（年齢算）',
   difficulty: 2,
   text: '現在、父は36歳、子は6歳です。\n\n何年後に父の年齢が子の年齢の3倍になりますか？',
-  answer: 9, answerType: 'number', unit: '年後',
+  answer: 9, answerType: 'number', answerUnit: '年後',
   hint: '年齢差は変わらない！\nx年後：父(36+x)＝3×子(6+x)\n36+x ＝ 18+3x → 18 ＝ 2x',
   solution: `【年齢差は変わらない】
 x 年後とする。
@@ -520,7 +520,7 @@ x ＝ 9年後
   title: '母と娘の年齢算',
   difficulty: 2,
   text: '現在、母は32歳、娘は8歳です。\n\n何年後に母の年齢が娘の年齢のちょうど2倍になりますか？',
-  answer: 16, answerType: 'number', unit: '年後',
+  answer: 16, answerType: 'number', answerUnit: '年後',
   hint: 'x年後：母(32+x)＝2×娘(8+x)\n32+x ＝ 16+2x → 16 ＝ x',
   solution: `x 年後とする。
 32＋x ＝ 2（8＋x）
@@ -541,7 +541,7 @@ x ＝ 9年後
   title: '3人の年齢の和が2倍になるのは何年後？',
   difficulty: 3,
   text: '現在、祖父は60歳、父は35歳、息子は10歳です。\n3人の年齢の合計が現在の2倍になるのは何年後ですか？',
-  answer: 35, answerType: 'number', unit: '年後',
+  answer: 35, answerType: 'number', answerUnit: '年後',
   hint: '現在の合計：60＋35＋10＝105歳\nx年後の合計：105＋3x ＝ 105×2 ＝ 210',
   solution: `現在の合計：60＋35＋10 ＝ 105歳
 2倍 ＝ 210歳
@@ -565,7 +565,7 @@ x ＝ 35年後
   title: '過去の倍数から現在の年齢を求める',
   difficulty: 4,
   text: '現在、兄と弟の年齢の和は26歳です。\n7年前は兄の年齢が弟の年齢のちょうど2倍でした。\n\n現在の兄の年齢は何歳ですか？',
-  answer: 15, answerType: 'number', unit: '歳',
+  answer: 15, answerType: 'number', answerUnit: '歳',
   hint: '兄をA、弟をBとすると：A＋B＝26\n7年前：(A−7)＝2(B−7)',
   solution: `兄 ＝ A、弟 ＝ B とする。
 
@@ -594,7 +594,7 @@ A ＝ 26−11 ＝ 15歳（兄）
   title: '次のテストで平均を上げる',
   difficulty: 2,
   text: '5回のテストの平均点が74点でした。\n次の1回を受けて6回の平均を76点にしたい。\n\n次のテストは何点必要ですか？',
-  answer: 86, answerType: 'number', unit: '点',
+  answer: 86, answerType: 'number', answerUnit: '点',
   hint: '6回の平均を76点にするには、6回の合計は何点になる？\n5回の合計は？　差が次のテストの点数！',
   solution: `【合計から逆算する】
 6回の合計 ＝ 76 × 6 ＝ 456点
@@ -613,7 +613,7 @@ A ＝ 26−11 ＝ 15歳（兄）
   title: '転入生の身長',
   difficulty: 2,
   text: '6人の身長の平均が142cmです。\n1人が転入して7人の平均が143cmになりました。\n\n転入生の身長は何cmですか？',
-  answer: 149, answerType: 'number', unit: 'cm',
+  answer: 149, answerType: 'number', answerUnit: 'cm',
   hint: '7人の合計 ＝ 143×7\n6人の合計 ＝ 142×6\n転入生 ＝ 差',
   solution: `7人の合計 ＝ 143 × 7 ＝ 1001cm
 6人の合計 ＝ 142 × 6 ＝  852cm
@@ -631,7 +631,7 @@ A ＝ 26−11 ＝ 15歳（兄）
   title: '5回目のテストで平均を上げるには',
   difficulty: 3,
   text: '4回の算数テストの平均が82点でした。\n5回目を受けて5回の平均を85点にしたい。\n\n5回目は何点取ればよいですか？',
-  answer: 97, answerType: 'number', unit: '点',
+  answer: 97, answerType: 'number', answerUnit: '点',
   hint: '5回の合計 ＝ 85×5 ＝ 425点\n4回の合計 ＝ 82×4 ＝ 328点\n5回目 ＝ 425−328',
   solution: `5回の合計 ＝ 85 × 5 ＝ 425点
 4回の合計 ＝ 82 × 4 ＝ 328点
@@ -650,7 +650,7 @@ A ＝ 26−11 ＝ 15歳（兄）
   title: 'ノートの値段（消去算）',
   difficulty: 3,
   text: 'えんぴつ2本とノート3冊で470円、\nえんぴつ4本とノート5冊で860円でした。\n\nノート1冊の値段は何円ですか？',
-  answer: 80, answerType: 'number', unit: '円',
+  answer: 80, answerType: 'number', answerUnit: '円',
   hint: 'えんぴつを消去するために①×2を作り、②と引き算しよう。\n①×2：えんぴつ4本＋ノート6冊＝940円\n②  ：えんぴつ4本＋ノート5冊＝860円\n差：ノート1冊＝80円',
   solution: `① 2e＋3n ＝ 470
 ② 4e＋5n ＝ 860
@@ -675,7 +675,7 @@ A ＝ 26−11 ＝ 15歳（兄）
   title: 'りんごの値段（消去算）',
   difficulty: 4,
   text: 'みかん3個とりんご2個で540円、\nみかん5個とりんご4個で940円でした。\n\nりんご1個の値段は何円ですか？',
-  answer: 60, answerType: 'number', unit: '円',
+  answer: 60, answerType: 'number', answerUnit: '円',
   hint: 'りんごを消去するために①×2を作り、②から引こう。\n①×2：みかん6個＋りんご4個＝1080円\n②  ：みかん5個＋りんご4個＝ 940円\n差：みかん1個＝140円',
   solution: `① 3m＋2a ＝ 540
 ② 5m＋4a ＝ 940
@@ -702,7 +702,7 @@ A ＝ 26−11 ＝ 15歳（兄）
   title: 'キャンディを2人で分ける（分配算）',
   difficulty: 2,
   text: '300個のキャンディをAとBで分けます。\nAはBより60個多くなるように分けると、\n\nAは何個になりますか？',
-  answer: 180, answerType: 'number', unit: '個',
+  answer: 180, answerType: 'number', answerUnit: '個',
   hint: '「AはBより□多い」→ 和差算と同じ考え方！\nA ＝ （合計 ＋ 差） ÷ 2\n  ＝ （300 ＋ 60） ÷ 2',
   solution: `【分配算 → 和差算で解く】
 A ＝ （300 ＋ 60） ÷ 2
@@ -724,7 +724,7 @@ B ＝ 300 − 180 ＝ 120個
   title: '3人でお金を分ける（分配算）',
   difficulty: 3,
   text: '510円をA、B、Cの3人で分けます。\nAはBより60円多く、BはCより30円多い。\n\nCは何円もらいますか？',
-  answer: 130, answerType: 'number', unit: '円',
+  answer: 130, answerType: 'number', answerUnit: '円',
   hint: 'Cを□とすると B＝□＋30、A＝□＋90\nC＋B＋A ＝ □＋（□＋30）＋（□＋90）＝ 510',
   solution: `【Cを□とおく】
 C ＝ □、B ＝ □＋30、A ＝ □＋90
@@ -750,7 +750,7 @@ C ＝ □、B ＝ □＋30、A ＝ □＋90
   title: 'カードを2倍の比で分ける（分配算）',
   difficulty: 3,
   text: '120枚のカードをAとBで分けます。\nAがBの2倍になるように分けると、\n\nAは何枚になりますか？',
-  answer: 80, answerType: 'number', unit: '枚',
+  answer: 80, answerType: 'number', answerUnit: '枚',
   hint: 'A：B ＝ 2：1 なので\nA ＝ 120 × 2/(2+1) ＝ 120 × 2/3',
   solution: `【比で分ける】
 A：B ＝ 2：1
@@ -774,7 +774,7 @@ B ＝ 120 × 1/3 ＝ 40枚
   title: '算数と理科が好きな人（集合算 基本）',
   difficulty: 2,
   text: '30人のクラスで、算数が好きな人は18人、\n理科が好きな人は15人、両方好きな人は8人です。\n\nどちらも好きでない人は何人ですか？',
-  answer: 5, answerType: 'number', unit: '人',
+  answer: 5, answerType: 'number', answerUnit: '人',
   hint: 'ベン図で考える！\n少なくとも一方が好き ＝ 算数 ＋ 理科 − 両方\n                 ＝ 18 ＋ 15 − 8 ＝ 25人\nどちらも好きでない ＝ 全体 − 25',
   solution: `【ベン図で考える】
 少なくとも一方が好きな人：
@@ -795,7 +795,7 @@ B ＝ 120 × 1/3 ＝ 40枚
   title: '犬と猫を飼っている人（集合算）',
   difficulty: 3,
   text: '40人のクラスで、犬を飼っている人は20人、\n猫を飼っている人は15人、\nどちらも飼っていない人は8人です。\n\n犬と猫の両方を飼っている人は何人ですか？',
-  answer: 3, answerType: 'number', unit: '人',
+  answer: 3, answerType: 'number', answerUnit: '人',
   hint: '少なくとも一方を飼っている ＝ 40 − 8 ＝ 32人\n両方 ＝ 犬 ＋ 猫 − 少なくとも一方\n     ＝ 20 ＋ 15 − 32',
   solution: `【ベン図で考える】
 少なくとも一方を飼っている人：
@@ -821,7 +821,7 @@ B ＝ 120 × 1/3 ＝ 40枚
   title: '運動と音楽が好きな人（集合算 応用）',
   difficulty: 3,
   text: '50人のクラスで、運動が好きな人は32人、\n音楽が好きな人は28人います。\n\n両方好きな人は最少で何人ですか？',
-  answer: 10, answerType: 'number', unit: '人',
+  answer: 10, answerType: 'number', answerUnit: '人',
   hint: '全員（50人）が少なくとも一方が好きと仮定すると\n両方 ＝ 32 ＋ 28 − 50 ＝ 10人\nこれが最少（重複が最小のケース）',
   solution: `【「両方の最少」を求める】
 全員が少なくとも一方を好きと仮定すると

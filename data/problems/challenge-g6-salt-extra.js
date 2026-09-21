@@ -1,10 +1,10 @@
 const CHALLENGE_G6_SALT_EXTRA = [
   { id:'g6_ratio_salt_008', grade:6, course:'exam',
-    category:'食塩水', catColor:'#0277BD', catBg:'#E1F5FE', borderColor:'#039BE5',
-    mainCategory:'ratio', unit:'食塩水', pattern:'取り出して別の食塩水に加える',
+    categoryLabel:'食塩水', catColor:'#0277BD', catBg:'#E1F5FE', borderColor:'#039BE5',
+    mainCategory:'ratio', lessonUnit:'食塩水', pattern:'取り出して別の食塩水に加える',
     difficulty:5, answerType:'number',
     title:'一方から取り出して他方に加える',
-    question:`10%の食塩水200gと、4%の食塩水300gがあります。\n10%の食塩水から何gか取り出し、\nそれを4%の食塩水に加えたところ6%になりました。\n\n取り出した食塩水は何gですか。`,
+    text:`10%の食塩水200gと、4%の食塩水300gがあります。\n10%の食塩水から何gか取り出し、\nそれを4%の食塩水に加えたところ6%になりました。\n\n取り出した食塩水は何gですか。`,
     answer:150, answerUnit:'g',
     hint:`取り出した量をxgとしよう。\n4%食塩水300gにxgを加えた後の\n塩の量と全体の量を式にしよう。`,
     tags:['割合・比','食塩水','取り出し','混合','方程式'],

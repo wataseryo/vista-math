@@ -11,7 +11,7 @@ const PRACTICE_G6_RATIO = [
   title: '割合を求める（基本）',
   difficulty: 1,
   text: 'クラス60人のうち、24人が眼鏡をかけています。\n眼鏡をかけている人は、クラス全体の何%ですか？',
-  answer: 40, answerType: 'number', unit: '%',
+  answer: 40, answerType: 'number', answerUnit: '%',
   hint: '割合 ＝ 比べる量 ÷ もとにする量\n「比べる量」は眼鏡をかけている人数、\n「もとにする量」はクラス全体の人数です。',
   solution: `【割合の公式】
   割合(%) ＝ 比べる量 ÷ もとにする量 × 100
@@ -41,7 +41,7 @@ const PRACTICE_G6_RATIO = [
   title: 'もとの量を求める',
   difficulty: 2,
   text: 'あるクラスの女子の人数はクラス全体の40%で、女子は20人です。\nクラス全体の人数は何人ですか？',
-  answer: 50, answerType: 'number', unit: '人',
+  answer: 50, answerType: 'number', answerUnit: '人',
   hint: 'もとにする量 ＝ 比べる量 ÷ 割合\n40%を小数に直してから割り算します。',
   solution: `【もとの量を求める公式】
   もとにする量 ＝ 比べる量 ÷ 割合
@@ -68,7 +68,7 @@ const PRACTICE_G6_RATIO = [
   title: '2段階の割合変化',
   difficulty: 3,
   text: 'ある商品の値段を最初に20%上げてから、その後10%下げました。\nもとの値段に対して、最終的な値段は何%になりますか？',
-  answer: 108, answerType: 'number', unit: '%',
+  answer: 108, answerType: 'number', answerUnit: '%',
   hint: '最初の値段を100%として計算します。\n「20%上げる」→ × 1.2\n「10%下げる」→ × 0.9\n2つをかけ算します。',
   solution: `【ポイント】
   もとの値段を 100% として計算する
@@ -96,7 +96,7 @@ const PRACTICE_G6_RATIO = [
   title: '比から量を求める',
   difficulty: 1,
   text: '赤いリボンと青いリボンの長さの比は 3:2 です。\n赤いリボンが 60cm のとき、青いリボンは何cm ですか？',
-  answer: 40, answerType: 'number', unit: 'cm',
+  answer: 40, answerType: 'number', answerUnit: 'cm',
   hint: '比の「1の値」を求めましょう。\n赤が3にあたるとき、60cm ÷ 3 で 1 の値が出ます。',
   solution: `【比から量を求める方法】
 
@@ -123,7 +123,7 @@ const PRACTICE_G6_RATIO = [
   title: '比で分ける',
   difficulty: 2,
   text: '3000円を兄と弟で 5:3 に分けます。\n兄の取り分は何円ですか？',
-  answer: 1875, answerType: 'number', unit: '円',
+  answer: 1875, answerType: 'number', answerUnit: '円',
   hint: '全体の比の合計（5＋3）を求めてから、\n1 にあたる量を計算しましょう。',
   solution: `【配分の方法】
 
@@ -153,7 +153,7 @@ const PRACTICE_G6_RATIO = [
   title: '連比の問題',
   difficulty: 3,
   text: 'A と B の比は 3:4、B と C の比は 2:3 です。\nA＋B＋C の合計が 130 のとき、A はいくつですか？',
-  answer: 30, answerType: 'number', unit: '',
+  answer: 30, answerType: 'number', answerUnit: '',
   hint: 'B を共通の数にそろえて A:B:C を1つの比にまとめます。\nB は「4と2の最小公倍数」にそろえましょう。',
   solution: `【連比のそろえ方】
 
@@ -183,7 +183,7 @@ const PRACTICE_G6_RATIO = [
   title: '定価を求める',
   difficulty: 1,
   text: '原価 800円の商品に、原価の 25% の利益を上乗せして定価をつけました。\n定価は何円ですか？',
-  answer: 1000, answerType: 'number', unit: '円',
+  answer: 1000, answerType: 'number', answerUnit: '円',
   hint: '定価 ＝ 原価 × (1 ＋ 利益率)\n25%の利益 → 原価の 1.25倍',
   solution: `【定価の公式】
   定価 ＝ 原価 × (1 ＋ 利益の割合)
@@ -209,7 +209,7 @@ const PRACTICE_G6_RATIO = [
   title: '割引後の売値',
   difficulty: 2,
   text: '定価 1200円の商品を 15% 引きで売りました。\n売値は何円ですか？',
-  answer: 1020, answerType: 'number', unit: '円',
+  answer: 1020, answerType: 'number', answerUnit: '円',
   hint: '15%引き ＝ 定価の (100−15)% ＝ 85% で売る\n1200 × 0.85 ＝ ?',
   solution: `【割引の計算】
   売値 ＝ 定価 × (1 − 値引きの割合)
@@ -235,7 +235,7 @@ const PRACTICE_G6_RATIO = [
   title: '2段階売買の利益',
   difficulty: 2,
   text: '原価 500円の商品に 40% の利益を上乗せして定価をつけ、\nその定価の 10% 引きで売りました。\n利益は何円ですか？',
-  answer: 130, answerType: 'number', unit: '円',
+  answer: 130, answerType: 'number', answerUnit: '円',
   hint: '①定価を求める  ②売値を求める  ③利益 ＝ 売値 − 原価',
   solution: `【2段階の計算】
 
@@ -261,7 +261,7 @@ const PRACTICE_G6_RATIO = [
   title: '原価を求める',
   difficulty: 3,
   text: 'ある商品に定価をつけ、定価の 20% 引きで売ったところ、\n原価より 150円 多く売れました。\n定価は原価の 1.5倍 です。\n原価はいくらですか？',
-  answer: 750, answerType: 'number', unit: '円',
+  answer: 750, answerType: 'number', answerUnit: '円',
   hint: '原価を□円として式を立てます。\n定価 ＝ □ × 1.5\n売値 ＝ 定価 × 0.8\n売値 ＝ 原価 ＋ 150',
   solution: `【原価を□として式を立てる】
 
@@ -294,7 +294,7 @@ const PRACTICE_G6_RATIO = [
   title: '食塩水に含まれる塩の量',
   difficulty: 2,
   text: '15%の食塩水 300g に含まれる塩の量は何gですか？',
-  answer: 45, answerType: 'number', unit: 'g',
+  answer: 45, answerType: 'number', answerUnit: 'g',
   hint: '塩の量 ＝ 食塩水の量 × 濃度（%を小数に直す）\n15% → 0.15',
   solution: `【公式】
   塩の量 ＝ 食塩水の量 × 濃度
@@ -318,7 +318,7 @@ const PRACTICE_G6_RATIO = [
   title: '食塩水を混ぜる（濃度）',
   difficulty: 2,
   text: '8%の食塩水 150g と 2%の食塩水 350g を混ぜました。\n混ぜた後の濃度は何%ですか？',
-  answer: 3.8, answerType: 'number', unit: '%',
+  answer: 3.8, answerType: 'number', answerUnit: '%',
   hint: '①それぞれの塩の量を求める\n②塩の合計 ÷ 食塩水の合計 × 100',
   solution: `【手順】
 
@@ -346,7 +346,7 @@ const PRACTICE_G6_RATIO = [
   title: '水を加えて薄める',
   difficulty: 3,
   text: '20%の食塩水 100g に水を加えて、5%の食塩水を作ります。\n水を何g加えればよいですか？',
-  answer: 300, answerType: 'number', unit: 'g',
+  answer: 300, answerType: 'number', answerUnit: 'g',
   hint: '塩の量は変わりません。\n「塩の量 ÷ 全体 ＝ 5%」として全体を求め、\nそこから水の量を出します。',
   solution: `【ポイント：水を加えても塩の量は変わらない】
 
@@ -377,7 +377,7 @@ const PRACTICE_G6_RATIO = [
   title: '2種類を混ぜて目標量を作る',
   difficulty: 3,
   text: '12%の食塩水と 4%の食塩水を混ぜて、\n8%の食塩水を 500g 作りたいです。\n12%の食塩水は何g必要ですか？',
-  answer: 250, answerType: 'number', unit: 'g',
+  answer: 250, answerType: 'number', answerUnit: 'g',
   hint: '12%の食塩水を□g とおいて式を立てます。\n塩の量が等しいという条件を使います。',
   solution: `【式を立てる】
 
@@ -409,7 +409,7 @@ const PRACTICE_G6_RATIO = [
   title: '相当算の基本',
   difficulty: 2,
   text: 'ある数の 30% は 60 です。\nある数はいくつですか？',
-  answer: 200, answerType: 'number', unit: '',
+  answer: 200, answerType: 'number', answerUnit: '',
   hint: 'もとにする量 ＝ 比べる量 ÷ 割合\n30% を小数に直して計算します。',
   solution: `【相当算の公式】
   もとの量 ＝ 部分の量 ÷ 割合
@@ -433,7 +433,7 @@ const PRACTICE_G6_RATIO = [
   title: '比の差から求める',
   difficulty: 3,
   text: '姉と妹のお金の比は 5:3 です。\n姉は妹より 600円 多く持っています。\n姉のお金はいくらですか？',
-  answer: 1500, answerType: 'number', unit: '円',
+  answer: 1500, answerType: 'number', answerUnit: '円',
   hint: '比の差（5−3＝2）が 600円 にあたります。\n比の「1」にあたる金額を求めてから姉の金額を出します。',
   solution: `【比の差を使う方法】
 
@@ -463,7 +463,7 @@ const PRACTICE_G6_RATIO = [
   title: '年齢算',
   difficulty: 4,
   text: '現在、父の年齢は子の年齢の 4倍 です。\n12年後には父の年齢が子の年齢の 2倍 になります。\n現在の子の年齢は何歳ですか？',
-  answer: 6, answerType: 'number', unit: '歳',
+  answer: 6, answerType: 'number', answerUnit: '歳',
   hint: '現在の子の年齢を□歳とおきます。\n父は□×4歳。12年後の関係式を作ります。',
   solution: `【方程式を立てる】
 
@@ -496,7 +496,7 @@ const PRACTICE_G6_RATIO = [
   title: '仕事算の基本',
   difficulty: 3,
   text: 'ある仕事を A 一人でやると 10日、\nB 一人でやると 15日かかります。\nA と B の 2人で一緒にやると何日で終わりますか？',
-  answer: 6, answerType: 'number', unit: '日',
+  answer: 6, answerType: 'number', answerUnit: '日',
   hint: '全体の仕事量を「1」として、\n1日にできる量（仕事の速さ）を分数で表します。',
   solution: `【仕事算の考え方】
   全体の仕事量を「1」とする
@@ -524,7 +524,7 @@ const PRACTICE_G6_RATIO = [
   title: '3人の仕事算',
   difficulty: 4,
   text: 'ある仕事を A・B・C の 3人でやると 6日かかります。\nA と B の 2人でやると 10日、\nB と C の 2人でやると 12日 かかります。\nA 一人でやると何日かかりますか？',
-  answer: 12, answerType: 'number', unit: '日',
+  answer: 12, answerType: 'number', answerUnit: '日',
   hint: '全体を1として1日の仕事量を求めます。\nA＋B＋C、A＋B、B＋C がわかれば C と A を求められます。',
   solution: `【手順】
   全体の仕事量を「1」とする
@@ -556,7 +556,7 @@ const PRACTICE_G6_RATIO = [
   title: 'ニュートン算',
   difficulty: 4,
   text: '牧場に牧草があり、毎日一定量の草が生えています。\n48頭の牛が食べると 8日 で食べ尽くし、\n36頭の牛が食べると 12日 で食べ尽くします。\n24頭の牛が食べると、何日で食べ尽くしますか？',
-  answer: 24, answerType: 'number', unit: '日',
+  answer: 24, answerType: 'number', answerUnit: '日',
   hint: '牛1頭が1日に食べる草の量を「1」として、\n最初の草量と毎日生える量を求めます。\n2つの条件から連立方程式を作ります。',
   solution: `【ニュートン算の立て方】
   牛1頭が1日食べる量 ＝ 1 とする

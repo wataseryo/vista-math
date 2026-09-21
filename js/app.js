@@ -314,6 +314,7 @@ function pracOpenProb(probId) {
     const body = document.getElementById('prac-detail-body');
     body.innerHTML = `
         <div class="prac-detail-q">${p.text}</div>
+        ${renderProblemDiagram(p)}
         <div class="prac-ans-row">
             <input class="prac-ans-input" id="prac-ans-input" type="number" placeholder="答えを入力" />
             <span class="prac-ans-unit">${p.unit}</span>
@@ -1889,6 +1890,7 @@ function renderTrialQuestion(topicUnitId) {
                 <span class="topic-trial-counter">${current + 1} / ${total}</span>
             </div>
             <div class="topic-trial-q">${escapeHtml(prob.text)}</div>
+            ${renderProblemDiagram(prob)}
             <div class="topic-trial-choices" id="trial-choices-${topicUnitId}">
                 ${choicesHtml}
             </div>
@@ -2062,6 +2064,15 @@ function nextTrialQuestion(topicUnitId) {
     state.answered = false;
     state.revealedAnswer = false;
     renderTrialQuestion(topicUnitId);
+}
+
+/**
+ * 問題データの diagram フィールドから図の HTML を生成する。
+ * diagram が無ければ空文字を返す（既存表示は変化しない）。
+ */
+function renderProblemDiagram(problem) {
+    if (!problem || !problem.diagram || !problem.diagram.markup) return '';
+    return `<div class="problem-diagram">${problem.diagram.markup}</div>`;
 }
 
 /**

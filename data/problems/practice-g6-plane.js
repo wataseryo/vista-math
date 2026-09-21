@@ -19,6 +19,20 @@ const PRACTICE_G6_PLANE = [
 答え：40cm²`,
   tags: ['平面図形', '平行四辺形', '面積'],
   topicUnitId: 'u6-plane',
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 268 160" width="100%" style="max-width:268px;display:block;margin:0 auto" role="img" aria-label="平行四辺形の図">
+      <polygon points="66,40 178,40 152,110 40,110" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+      <line x1="40" y1="124" x2="152" y2="124" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="118" x2="40" y2="130" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="152" y1="118" x2="152" y2="130" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="96" y="144" font-size="12" fill="#1565C0" text-anchor="middle">底辺 8cm</text>
+      <line x1="168" y1="40" x2="168" y2="110" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="162" y1="40" x2="174" y2="40" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="162" y1="110" x2="174" y2="110" stroke="#E53935" stroke-width="1.5"/>
+      <text x="186" y="75" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 186 75)">高さ 5cm</text>
+    </svg>`,
+  },
 },
 
 {
@@ -36,6 +50,20 @@ const PRACTICE_G6_PLANE = [
 答え：12cm²`,
   tags: ['平面図形', '三角形', '面積'],
   topicUnitId: 'u6-plane',
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 214 146" width="100%" style="max-width:214px;display:block;margin:0 auto" role="img" aria-label="三角形の図">
+      <polygon points="40,96 124,96 82,40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+      <line x1="40" y1="110" x2="124" y2="110" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="104" x2="40" y2="116" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="124" y1="104" x2="124" y2="116" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="82" y="130" font-size="12" fill="#1565C0" text-anchor="middle">底辺 6cm</text>
+      <line x1="140" y1="40" x2="140" y2="96" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="134" y1="40" x2="146" y2="40" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="134" y1="96" x2="146" y2="96" stroke="#E53935" stroke-width="1.5"/>
+      <text x="158" y="68" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 158 68)">高さ 4cm</text>
+    </svg>`,
+  },
 },
 
 {
@@ -56,6 +84,24 @@ const PRACTICE_G6_PLANE = [
 答え：20cm²`,
   tags: ['平面図形', '台形', '面積'],
   topicUnitId: 'u6-plane',
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 228 146" width="100%" style="max-width:228px;display:block;margin:0 auto" role="img" aria-label="台形の図">
+      <polygon points="40,40 82,40 138,96 40,96" fill="#FFB74D" stroke="#E65100" stroke-width="2"/>
+      <line x1="40" y1="26" x2="82" y2="26" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="20" x2="40" y2="32" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="82" y1="20" x2="82" y2="32" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="61" y="16" font-size="11" fill="#1565C0" text-anchor="middle">上底3cm</text>
+      <line x1="40" y1="110" x2="138" y2="110" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="104" x2="40" y2="116" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="138" y1="104" x2="138" y2="116" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="89" y="130" font-size="12" fill="#1565C0" text-anchor="middle">下底7cm</text>
+      <line x1="154" y1="40" x2="154" y2="96" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="148" y1="40" x2="160" y2="40" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="148" y1="96" x2="160" y2="96" stroke="#E53935" stroke-width="1.5"/>
+      <text x="172" y="68" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 172 68)">高さ4cm</text>
+    </svg>`,
+  },
 },
 
 {
@@ -122,6 +168,20 @@ const PRACTICE_G6_PLANE = [
 
 答え：84cm²`,
   tags: ['平面図形', '平行四辺形'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 324 188" width="100%" style="max-width:320px;display:block;margin:0 auto" role="img" aria-label="平行四辺形の図">
+      <polygon points="66,40 234,40 208,138 40,138" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+      <line x1="40" y1="152" x2="208" y2="152" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="146" x2="40" y2="158" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="208" y1="146" x2="208" y2="158" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="124" y="172" font-size="12" fill="#1565C0" text-anchor="middle">底辺 12cm</text>
+      <line x1="224" y1="40" x2="224" y2="138" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="218" y1="40" x2="230" y2="40" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="218" y1="138" x2="230" y2="138" stroke="#E53935" stroke-width="1.5"/>
+      <text x="242" y="89" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 242 89)">高さ 7cm</text>
+    </svg>`,
+  },
 },
 
 {
@@ -147,6 +207,20 @@ const PRACTICE_G6_PLANE = [
 
 答え：40cm²`,
   tags: ['平面図形', '三角形'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 270 202" width="100%" style="max-width:270px;display:block;margin:0 auto" role="img" aria-label="三角形の図">
+      <polygon points="40,152 180,152 110,40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+      <line x1="40" y1="166" x2="180" y2="166" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="160" x2="40" y2="172" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="180" y1="160" x2="180" y2="172" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="110" y="186" font-size="12" fill="#1565C0" text-anchor="middle">底辺 10cm</text>
+      <line x1="196" y1="40" x2="196" y2="152" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="190" y1="40" x2="202" y2="40" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="190" y1="152" x2="202" y2="152" stroke="#E53935" stroke-width="1.5"/>
+      <text x="214" y="96" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 214 96)">高さ 8cm</text>
+    </svg>`,
+  },
 },
 
 {
@@ -175,6 +249,24 @@ const PRACTICE_G6_PLANE = [
 
 答え：42cm²`,
   tags: ['平面図形', '台形'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 256 174" width="100%" style="max-width:256px;display:block;margin:0 auto" role="img" aria-label="台形の図">
+      <polygon points="40,40 110,40 166,124 40,124" fill="#FFB74D" stroke="#E65100" stroke-width="2"/>
+      <line x1="40" y1="26" x2="110" y2="26" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="20" x2="40" y2="32" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="110" y1="20" x2="110" y2="32" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="75" y="16" font-size="11" fill="#1565C0" text-anchor="middle">上底5cm</text>
+      <line x1="40" y1="138" x2="166" y2="138" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="132" x2="40" y2="144" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="166" y1="132" x2="166" y2="144" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="103" y="158" font-size="12" fill="#1565C0" text-anchor="middle">下底9cm</text>
+      <line x1="182" y1="40" x2="182" y2="124" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="176" y1="40" x2="188" y2="40" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="176" y1="124" x2="188" y2="124" stroke="#E53935" stroke-width="1.5"/>
+      <text x="200" y="82" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 200 82)">高さ6cm</text>
+    </svg>`,
+  },
 },
 
 {
@@ -202,6 +294,21 @@ const PRACTICE_G6_PLANE = [
 
 答え：8cm`,
   tags: ['平面図形', '三角形', '逆算'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 256 202" width="100%" style="max-width:256px;display:block;margin:0 auto" role="img" aria-label="三角形の図">
+      <polygon points="40,152 166,152 103,40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+      <text x="103" y="116.16" font-size="12" fill="#1a1a2e" text-anchor="middle" font-weight="bold">面積36cm²</text>
+      <line x1="40" y1="166" x2="166" y2="166" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="160" x2="40" y2="172" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="166" y1="160" x2="166" y2="172" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="103" y="186" font-size="12" fill="#1565C0" text-anchor="middle">底辺 9cm</text>
+      <line x1="182" y1="40" x2="182" y2="152" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="176" y1="40" x2="188" y2="40" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="176" y1="152" x2="188" y2="152" stroke="#E53935" stroke-width="1.5"/>
+      <text x="200" y="96" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 200 96)">高さ ？</text>
+    </svg>`,
+  },
 },
 
 {
@@ -228,6 +335,21 @@ const PRACTICE_G6_PLANE = [
 
 答え：5cm`,
   tags: ['平面図形', '平行四辺形', '逆算'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 324 160" width="100%" style="max-width:320px;display:block;margin:0 auto" role="img" aria-label="平行四辺形の図">
+      <polygon points="66,40 234,40 208,110 40,110" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+      <text x="137" y="79" font-size="12" fill="#1a1a2e" text-anchor="middle" font-weight="bold">面積60cm²</text>
+      <line x1="40" y1="124" x2="208" y2="124" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="118" x2="40" y2="130" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="208" y1="118" x2="208" y2="130" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="124" y="144" font-size="12" fill="#1565C0" text-anchor="middle">底辺 12cm</text>
+      <line x1="224" y1="40" x2="224" y2="110" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="218" y1="40" x2="230" y2="40" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="218" y1="110" x2="230" y2="110" stroke="#E53935" stroke-width="1.5"/>
+      <text x="242" y="75" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 242 75)">高さ ？</text>
+    </svg>`,
+  },
 },
 
 /* ── 複合図形・補助線 ★3 ── */
@@ -354,6 +476,25 @@ const PRACTICE_G6_PLANE = [
 
 答え：12cm`,
   tags: ['平面図形', '台形', '逆算'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 298 174" width="100%" style="max-width:298px;display:block;margin:0 auto" role="img" aria-label="台形の図">
+      <polygon points="40,40 96,40 208,124 40,124" fill="#FFB74D" stroke="#E65100" stroke-width="2"/>
+      <text x="96" y="86" font-size="12" fill="#1a1a2e" text-anchor="middle" font-weight="bold">面積48cm²</text>
+      <line x1="40" y1="26" x2="96" y2="26" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="20" x2="40" y2="32" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="96" y1="20" x2="96" y2="32" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="68" y="16" font-size="11" fill="#1565C0" text-anchor="middle">上底4cm</text>
+      <line x1="40" y1="138" x2="208" y2="138" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="132" x2="40" y2="144" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="208" y1="132" x2="208" y2="144" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="124" y="158" font-size="12" fill="#1565C0" text-anchor="middle">下底 ？</text>
+      <line x1="224" y1="40" x2="224" y2="124" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="218" y1="40" x2="230" y2="40" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="218" y1="124" x2="230" y2="124" stroke="#E53935" stroke-width="1.5"/>
+      <text x="242" y="82" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 242 82)">高さ6cm</text>
+    </svg>`,
+  },
 },
 
 {
@@ -513,6 +654,31 @@ const PRACTICE_G6_PLANE = [
 
 答え：3cm`,
   tags: ['平面図形', '等積変形'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 460 200" width="100%" style="max-width:420px;display:block;margin:0 auto" role="img" aria-label="底辺8cm高さ6cmの三角形と、面積が等しい底辺8cmの平行四辺形（高さは？）の図。図の縦横比は実際の比率とは異なります">
+      <polygon points="40,124 152,124 96,40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+      <line x1="40" y1="138" x2="152" y2="138" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="132" x2="40" y2="144" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="152" y1="132" x2="152" y2="144" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="96" y="158" font-size="12" fill="#1565C0" text-anchor="middle">底辺8cm</text>
+      <line x1="168" y1="40" x2="168" y2="124" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="162" y1="40" x2="174" y2="40" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="162" y1="124" x2="174" y2="124" stroke="#E53935" stroke-width="1.5"/>
+      <text x="186" y="82" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 186 82)">高さ6cm</text>
+      <text x="205" y="90" font-size="22" fill="#555" text-anchor="middle">＝</text>
+      <polygon points="246,40 358,40 332,124 220,124" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+      <line x1="220" y1="138" x2="332" y2="138" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="220" y1="132" x2="220" y2="144" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="332" y1="132" x2="332" y2="144" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="276" y="158" font-size="12" fill="#1565C0" text-anchor="middle">底辺8cm</text>
+      <line x1="348" y1="40" x2="348" y2="124" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="342" y1="40" x2="354" y2="40" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="342" y1="124" x2="354" y2="124" stroke="#E53935" stroke-width="1.5"/>
+      <text x="366" y="82" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 366 82)">高さ ？</text>
+      <text x="230" y="184" font-size="10" fill="#888" text-anchor="middle">※ 図の高さは実際の比率ではありません</text>
+    </svg>`,
+  },
 },
 
 {
@@ -539,6 +705,21 @@ const PRACTICE_G6_PLANE = [
 
 答え：30cm²`,
   tags: ['平面図形', '面積比', '三角形'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 300 170" width="100%" style="max-width:300px;display:block;margin:0 auto" role="img" aria-label="三角形Bと、底辺が2倍で高さが同じ三角形Aの図。Bの面積は15cm2、Aの面積は？">
+      <text x="70" y="20" font-size="10" fill="#555" text-anchor="middle">三角形B</text>
+      <polygon points="40,130 100,130 70,40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+      <text x="70" y="95" font-size="11" fill="#1a1a2e" text-anchor="middle" font-weight="bold">15cm²</text>
+      <text x="70" y="148" font-size="11" fill="#1565C0" text-anchor="middle">底辺</text>
+      <text x="200" y="20" font-size="10" fill="#555" text-anchor="middle">三角形A</text>
+      <polygon points="140,130 260,130 200,40" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
+      <text x="200" y="95" font-size="13" fill="#1a1a2e" text-anchor="middle" font-weight="bold">？</text>
+      <text x="200" y="148" font-size="11" fill="#1565C0" text-anchor="middle">底辺 × 2</text>
+      <line x1="70" y1="40" x2="200" y2="40" stroke="#E53935" stroke-width="1.5" stroke-dasharray="3"/>
+      <text x="135" y="32" font-size="10" fill="#E53935" text-anchor="middle">高さは同じ</text>
+    </svg>`,
+  },
 },
 
 {
@@ -565,6 +746,17 @@ const PRACTICE_G6_PLANE = [
 
 答え：36cm²`,
   tags: ['平面図形', '面積比', '相似'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 280 170" width="100%" style="max-width:280px;display:block;margin:0 auto" role="img" aria-label="相似比1:3の正方形2つの図。小さい正方形の面積は4cm2、大きい正方形の面積は？">
+      <rect x="40" y="100" width="40" height="40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+      <text x="60" y="124" font-size="11" fill="#1a1a2e" text-anchor="middle" font-weight="bold">4cm²</text>
+      <text x="60" y="156" font-size="11" fill="#555" text-anchor="middle">比 1</text>
+      <rect x="120" y="20" width="120" height="120" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
+      <text x="180" y="86" font-size="15" fill="#1a1a2e" text-anchor="middle" font-weight="bold">？</text>
+      <text x="180" y="156" font-size="11" fill="#555" text-anchor="middle">比 3</text>
+    </svg>`,
+  },
 },
 
 {

@@ -1,0 +1,14 @@
+{
+  "name": "vista-math",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "validate:content": "node scripts/validate-content.cjs",
+    "test": "node --test tests/*.test.cjs",
+    "test:browser": "playwright test",
+    "check": "npm run validate:content && npm test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.0"
+  }
+}

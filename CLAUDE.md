@@ -265,3 +265,8 @@ VISTAの差別化はインタラクティブな視覚化にある。**以下4つ
    - 次のスプリント: [機能名]
    ```
 3. `TODO.md` も同様に更新する
+
+
+## 2026-10-12 基盤強化後の補足（先行する旧構成記述より優先）
+
+実構成はindex.html・css/style.css・js/app.js・js/storage.js・js/catalog.js・js/navigation.js・data/の分割構成。1ファイル維持の旧記述は現状に適用しない。問題追加・変更前にはdocs/development-workflow.mdとdocs/content-authoring.mdを読み、構造チェックと回帰テストを行う。Codex用Planner/Generator/Evaluatorの指示はdocs/codex-agents/を参照する。通常の窓口はClaude、実装はCodex、独立レビューはClaude。今回のみユーザー明示によりCodex単独チームで実施。

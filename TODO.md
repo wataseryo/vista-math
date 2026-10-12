@@ -168,3 +168,10 @@
 - [x] u6-plane（平面図形）全19問に図(SVG)を追加、難易度4問是正（2026-09-21）
 - [x] data/problems.js を単元別10ファイルに物理分割、死んだフィールド削除、
       フィールド名統一（unit→answerUnit等）（2026-09-21、Structure Cleanup Sprint 1-3）
+
+## 2026-10-12 11:54 BST / 問題追加前の基盤強化
+
+保存保護・バックアップ復元・教材カタログ/構造検証・問題への帰還/戻る進む・重複採点防止・学年別レポートを実装。仕様と運用境界はdocs/foundation-audit.md、追加手順はdocs/content-authoring.md、Codexの役割定義はdocs/codex-agents/を参照。旧チェックリストは履歴として保持する。最終評価結果は.company/engineering/sprints/vista-foundation/に保存する。
+
+- [ ] 複数生徒・端末間同期を始める前に認証とサーバー保存を設計する（今回の静的基盤とは別工程）。
+- [ ] 旧解説書式75件を問題追加/改修時に段階的に統一し、数学的な独立確認を行う。

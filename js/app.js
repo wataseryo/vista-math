@@ -2,19 +2,7 @@
    LOCAL STORAGE SAFE WRAPPER
    プライベートブラウジング等でのクラッシュを防ぐ
 ════════════════════════════════════════ */
-function lsGet(key, fallback = null) {
-    try {
-        const val = localStorage.getItem(key);
-        return val !== null ? val : fallback;
-    } catch (e) {
-        return fallback;
-    }
-}
-function lsSet(key, value) {
-    try { localStorage.setItem(key, String(value)); } catch (e) { /* サイレント失敗 */ }
-}
-
-const appState = { grade: 5, previousScreen: 'std-mode' };
+const appState = { grade: 5, course: 'std', previousScreen: 'std-mode' };
 const learn = { inflow:3, outflow:1, initial:50, current:50, simRunning:false, simTimer:null, simTime:0, capacity:100 };
 const quiz  = { level:1, correct:0, wrong:0, problem:null, hintVisible:false };
 const chState = { filter:'すべて', currentId:null, hintVisible:false, stepOpen:{}, tierMin:1, tierMax:5, fromScreen:'exam', mainCategory:null };
@@ -125,13 +113,16 @@ function stdPracOpenCat(chapterId) {
 }
 
 function stdPracOpenProb(probId) {
-    stdPracState.currentProbId = probId;
     const p = PRACTICE_PROBLEMS.find(x => x.id === probId);
-    if (!p) return;
+    if (!p || p.grade !== appState.grade || p.course !== 'std') return;
+    stdPracState.currentCatId = p.chapterId;
+    stdPracState.currentProbId = probId;
+    stdPracState.answered = false;
     const g = appState.grade;
     const chapters = g === 5 ? STANDARD_CHAPTERS_G5 : STANDARD_CHAPTERS_G6;
     const ch = chapters.find(c => c.id === p.chapterId);
     const probs = PRACTICE_PROBLEMS.filter(q => q.chapterId === stdPracState.currentCatId && q.grade === g && q.course === 'std');
+    const topicScreen = VistaCatalog.problemTopic(p, g);
     const currentIdx = probs.findIndex(q => q.id === probId);
     document.getElementById('std-prac-prob-view').style.display   = 'none';
     document.getElementById('std-prac-detail-view').style.display = 'flex';
@@ -147,10 +138,10 @@ function stdPracOpenProb(probId) {
         <div id="std-prac-result-box" style="display:none;background:#E8F5E9;border-radius:10px;padding:12px;margin-bottom:14px;font-weight:bold;font-size:.9rem"></div>
         <div class="prac-detail-actions">
             <button class="prac-detail-btn btn-prac-sol" onclick="stdPracToggleSolution()">💡 解説を見る</button>
-            ${ch ? `<button class="prac-detail-btn" style="background:#E3F2FD;color:#1565C0" onclick="showScreen('standard')">トピックで学ぶ</button>` : ''}
+            ${topicScreen ? `<button class="prac-detail-btn" style="background:#E3F2FD;color:#1565C0" onclick="showScreen('${topicScreen}')">トピックで学ぶ</button>` : ''}
         </div>
         <div id="std-prac-sol-box" class="prac-sol-box" style="display:none">${p.solution || '解説を準備中です。'}</div>
-        ${ch ? `<div class="prac-topic-link" style="border-color:var(--std-primary)" onclick="showScreen('standard')">
+        ${topicScreen ? `<div class="prac-topic-link" style="border-color:var(--std-primary)" onclick="showScreen('${topicScreen}')">
             <div class="prac-topic-link-body">
                 <div class="prac-topic-link-title" style="color:var(--std-primary)">${ch.num} ${ch.title}</div>
                 <div class="prac-topic-link-sub">ステップ解説でじっくり学ぼう →</div>
@@ -180,10 +171,12 @@ function stdPracNextProblem() {
 }
 
 function stdPracCheckAnswer() {
+    if (stdPracState.answered) return;
     const p = PRACTICE_PROBLEMS.find(x => x.id === stdPracState.currentProbId);
-    if (!p) return;
+    if (!p || p.grade !== appState.grade || p.course !== 'std') return;
     const val = parseFloat(document.getElementById('std-prac-ans-input').value);
-    if (isNaN(val)) return;
+    if (!Number.isFinite(val)) return;
+    stdPracState.answered = true;
     const ok = Math.abs(val - p.answer) < 0.01;
     document.getElementById('std-prac-ans-input').className = 'prac-ans-input ' + (ok ? 'correct' : 'wrong');
     const rb = document.getElementById('std-prac-result-box');
@@ -250,7 +243,7 @@ function pracShowCats() {
     document.getElementById('prac-cat-grid').innerHTML = PRACTICE_CATS.map(cat => {
         const unitId = g === 5 ? cat.unitId5 : cat.unitId6;
         const unit   = units.find(u => u.id === unitId);
-        const probs  = PRACTICE_PROBLEMS.filter(p => p.catId === cat.id && p.grade === g);
+        const probs  = PRACTICE_PROBLEMS.filter(p => p.catId === cat.id && p.grade === g && p.course === 'exam');
         const count  = probs.length;
         const avail  = count > 0;
         const accBadge = avail ? getAccuracyBadge(`g${g}_exam_${cat.id}`) : '';
@@ -269,7 +262,7 @@ function pracShowCats() {
 function pracOpenCat(catId) {
     pracState.currentCatId = catId;
     const cat   = PRACTICE_CATS.find(c => c.id === catId);
-    const probs = PRACTICE_PROBLEMS.filter(p => p.catId === catId && p.grade === appState.grade);
+    const probs = PRACTICE_PROBLEMS.filter(p => p.catId === catId && p.grade === appState.grade && p.course === 'exam');
     document.getElementById('prac-cat-view').style.display  = 'none';
     document.getElementById('prac-prob-view').style.display = 'flex';
     document.getElementById('prac-detail-view').style.display = 'none';
@@ -295,15 +288,17 @@ function pracOpenCat(catId) {
 }
 
 function pracOpenProb(probId) {
-    pracState.currentProbId = probId;
     const p   = PRACTICE_PROBLEMS.find(x => x.id === probId);
-    if (!p) return;
+    if (!p || p.grade !== appState.grade || p.course !== 'exam') return;
+    pracState.currentCatId = p.catId;
+    pracState.currentProbId = probId;
+    pracState.answered = false;
     const cat = PRACTICE_CATS.find(c => c.id === p.catId);
     if (!cat) { console.warn('pracOpenProb: cat not found for', p.catId); return; }
     const unitId = appState.grade === 5 ? cat.unitId5 : cat.unitId6;
     const units  = appState.grade === 5 ? EXAM_UNITS_G5 : EXAM_UNITS_G6;
     const unit   = units.find(u => u.id === unitId);
-    const probs  = PRACTICE_PROBLEMS.filter(q => q.catId === pracState.currentCatId && q.grade === appState.grade);
+    const probs  = PRACTICE_PROBLEMS.filter(q => q.catId === pracState.currentCatId && q.grade === appState.grade && q.course === 'exam');
     const currentIdx = probs.findIndex(q => q.id === probId);
 
     document.getElementById('prac-prob-view').style.display   = 'none';
@@ -311,6 +306,7 @@ function pracOpenProb(probId) {
     document.getElementById('prac-detail-cat-label').textContent = cat ? cat.title : '';
     document.getElementById('prac-screen-title').textContent  = p.title;
 
+    const topicScreen = VistaCatalog.problemTopic(p, appState.grade);
     const body = document.getElementById('prac-detail-body');
     body.innerHTML = `
         <div class="prac-detail-q">${p.text}</div>
@@ -321,7 +317,7 @@ function pracOpenProb(probId) {
             <button class="prac-check-btn" onclick="pracCheckAnswer()">答え合わせ</button>
         </div>
         <div id="prac-result-box" style="display:none;background:#E8F5E9;border-radius:10px;padding:12px;margin-bottom:14px;font-weight:bold;font-size:.9rem"></div>
-        ${unit ? `<div class="prac-detail-actions">
+        ${topicScreen ? `<div class="prac-detail-actions">
             <button class="prac-detail-btn btn-prac-topic" onclick="pracGoToTopic('${unitId}')">トピックで学ぶ</button>
         </div>` : ''}
         <div id="prac-steps-card" class="prac-steps-card">
@@ -330,7 +326,7 @@ function pracOpenProb(probId) {
             </div>
             ${renderSolutionSteps(p.solution)}
         </div>
-        ${unit ? `<div class="prac-topic-link" onclick="pracGoToTopic('${unitId}')">
+        ${topicScreen ? `<div class="prac-topic-link" onclick="pracGoToTopic('${unitId}')">
             <div class="prac-topic-link-body">
                 <div class="prac-topic-link-title">${unit.num} ${unit.title}</div>
                 <div class="prac-topic-link-sub">ステップ解説でじっくり学ぼう →</div>
@@ -352,17 +348,19 @@ function pracOpenProb(probId) {
 }
 
 function pracNextProblem() {
-    const probs = PRACTICE_PROBLEMS.filter(p => p.catId === pracState.currentCatId && p.grade === appState.grade);
+    const probs = PRACTICE_PROBLEMS.filter(p => p.catId === pracState.currentCatId && p.grade === appState.grade && p.course === 'exam');
     const idx = probs.findIndex(p => p.id === pracState.currentProbId);
     if (idx + 1 < probs.length) pracOpenProb(probs[idx + 1].id);
     else pracShowCats();
 }
 
 function pracCheckAnswer() {
+    if (pracState.answered) return;
     const p = PRACTICE_PROBLEMS.find(x => x.id === pracState.currentProbId);
-    if (!p) return;
+    if (!p || p.grade !== appState.grade || p.course !== 'exam') return;
     const val = parseFloat(document.getElementById('prac-ans-input').value);
-    if (isNaN(val)) return;
+    if (!Number.isFinite(val)) return;
+    pracState.answered = true;
     const ok = Math.abs(val - p.answer) < 0.01;
     document.getElementById('prac-ans-input').className = 'prac-ans-input ' + (ok ? 'correct' : 'wrong');
     const rb = document.getElementById('prac-result-box');
@@ -428,9 +426,11 @@ function renderSolutionSteps(solution) {
 }
 
 function pracGoToTopic(unitId) {
-    // exam-mode → exam → unit の challenges へ遷移
+    const problem = PRACTICE_PROBLEMS.find(p => p.id === pracState.currentProbId);
+    const screen = VistaCatalog.problemTopic(problem, appState.grade);
+    if (!screen) return;
     appState.pracReturnCatId = pracState.currentCatId;
-    openUnit(unitId);
+    showScreen(screen);
 }
 
 function pracShowProbs() {
@@ -450,9 +450,9 @@ function pracGoBack() {
 function showScreen(id, opts={}) {
     const current = document.querySelector('.screen.active');
     if (current) appState.previousScreen = current.id.replace('-screen', '');
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active', 'slide-in'));
     const next = document.getElementById(id + '-screen');
     if (!next) { console.warn('showScreen: unknown screen id:', id); return; }
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active', 'slide-in'));
     next.classList.add('active');
     void next.offsetWidth;
     next.classList.add('slide-in');
@@ -468,6 +468,7 @@ function showScreen(id, opts={}) {
     if (id === 'weak-review')          { renderWeakReview(); }
     if (id === 'recommended-review')   { renderRecommendedReview(); }
     if (id === 'report')               { renderReport(); }
+    if (id === 'salt') { saltConfirmState.answered = false; document.getElementById('salt-quiz-result').style.display = 'none'; }
     if (id === 'u6-ratio')   { initTopicTrial('u6-ratio'); }
     if (id === 'u6-speed')   { initTopicTrial('u6-speed'); }
     if (id === 'u6-plane')   { initTopicTrial('u6-plane'); switchPlaneTab('parallelogram'); }
@@ -509,8 +510,9 @@ function renderStandardCourse() {
     const chapters = appState.grade === 5 ? STANDARD_CHAPTERS_G5 : STANDARD_CHAPTERS_G6;
     const el = document.getElementById('std-chapter-list');
     el.innerHTML = chapters.map((ch, i) => {
-        if (ch.available) {
-            return `<div class="chapter-card available" onclick="showScreen('watertank')">
+        const topicScreen = VistaCatalog.standardTopic(appState.grade, ch.id);
+        if (topicScreen) {
+            return `<div class="chapter-card available" onclick="showScreen('${topicScreen}')">
                 <div class="chapter-card-inner">
                     <div class="chapter-num-badge">
                         <span class="chapter-num-label">第${i+1}章</span>
@@ -524,8 +526,8 @@ function renderStandardCourse() {
                     <span class="chapter-arrow">›</span>
                 </div>
                 <div class="chapter-card-footer">
-                    <button class="chapter-action-btn btn-learn" onclick="event.stopPropagation();showScreen('watertank');switchTab('learn')">📖 学ぶ</button>
-                    <button class="chapter-action-btn btn-practice" onclick="event.stopPropagation();showScreen('watertank');switchTab('quiz')">✏️ 練習</button>
+                    <button class="chapter-action-btn btn-learn" onclick="event.stopPropagation();showScreen('${topicScreen}')${topicScreen === 'watertank' ? ";switchTab('learn')" : ''}">📖 学ぶ</button>
+                    <button class="chapter-action-btn btn-practice" onclick="event.stopPropagation();showScreen('${topicScreen}')${topicScreen === 'watertank' ? ";switchTab('quiz')" : ''}">✏️ 練習</button>
                 </div>
             </div>`;
         } else {
@@ -564,7 +566,7 @@ function renderExamCourse() {
                         <div class="unit-sub">${u.sub}</div>
                         <div class="unit-meta">
                             <span class="unit-stars">${stars}</span>
-                            <span class="unit-count">${u.count}問</span>
+                            <span class="unit-count">チャレンジ ${VistaCatalog.unitCount(appState.grade, u.id)}問</span>
                         </div>
                     </div>
                     <span class="unit-arrow">›</span>
@@ -585,7 +587,7 @@ function renderExamCourse() {
         }
     }).join('');
     // ヘッダーのstat更新
-    const total = units.reduce((s,u) => s + u.count, 0);
+    const total = CHALLENGES.filter(p => p.grade === appState.grade).length;
     const el2 = document.getElementById('exam-stat-problems');
     if (el2) el2.textContent = total;
 }
@@ -683,22 +685,31 @@ function openSaltChallenge() {
     });
 }
 
+const saltConfirmState = { answered: false };
+function saltConfirmRetry() {
+    saltConfirmState.answered = false;
+    document.getElementById('salt-quiz-input').value = '';
+    document.getElementById('salt-quiz-result').style.display = 'none';
+}
 function checkSaltConfirm() {
+    if (saltConfirmState.answered) return;
     const raw = document.getElementById('salt-quiz-input').value
         .replace(/[０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0)).trim();
     const val = parseFloat(raw);
     const el = document.getElementById('salt-quiz-result');
-    if (isNaN(val)) return;
+    if (!Number.isFinite(val)) return;
+    saltConfirmState.answered = true;
     const ok = Math.abs(val - 20) < 0.01;
     el.style.display = 'block';
     if (ok) {
         el.innerHTML = `<div class="ch-result-box ok"><div class="ch-result-hl">⭕ 正解！</div><div class="ch-result-msg">250 × 0.08 ＝ 20g　よくできました！<br><button class="topic-nav-btn prac" style="margin-top:10px" onclick="openSaltPractice()">演習問題に進む →</button></div></div>`;
-        recordAnswer('g' + appState.grade + '_salt_topic', true);
+        recordAnswer('g' + appState.grade + '_exam_salt_topic', true);
         addStar();
     } else {
         el.innerHTML = `<div class="ch-result-box ng"><div class="ch-result-hl">❌ もう一度考えよう</div><div class="ch-result-msg">塩の重さ ＝ 食塩水の重さ × 濃度<br>＝ 250 × 0.08 で計算してみよう。</div></div>`;
-        recordAnswer('g' + appState.grade + '_salt_topic', false);
+        recordAnswer('g' + appState.grade + '_exam_salt_topic', false);
     }
+    el.innerHTML += `<button class="retry-btn" onclick="saltConfirmRetry()">もう一度解く</button>`;
 }
 
 /* ════════════════════════════════════════
@@ -777,11 +788,16 @@ const generators = {
     3() {
         const full=ri(3,15)*10, type=Math.random()<.5?'full':'empty';
         if (type==='full') {
-            const initial=ri(1,Math.floor(full/2/10))*10, net=ri(2,8), inflow=net+ri(1,4), outflow=inflow-net, remain=full-initial, time=Math.ceil(remain/net);
+            const initial=ri(1,Math.floor(full/2/10))*10, remain=full-initial;
+            // Choose an exact divisor: this level asks for an integer time, not rounding.
+            const rates = [2,3,4,5,6,7,8].filter(rate => remain % rate === 0);
+            const net=rates[ri(0,rates.length-1)], inflow=net+ri(1,4), outflow=inflow-net, time=remain/net;
             return { text:`容量 ${full}L の水槽に、今 ${initial}L の水があります。\n毎分 ${inflow}L 入り、毎分 ${outflow}L 出ていきます。\n\n何分後に満水（${full}L）になりますか？`, inflow, outflow, initial,
                 answer:time, unit:'分', hint:`1分で ${net}L 増える\n満水まであと ${remain}L\n${remain}÷${net}=？分`, exp:`1分で ${net}L 増える\n満水まであと ${remain}L\n${remain}÷${net}=${time}分` };
         } else {
-            const initial=ri(3,8)*10, net=ri(2,6), outflow=net+ri(1,3), inflow=outflow-net, time=Math.ceil(initial/net);
+            const initial=ri(3,8)*10;
+            const rates = [2,3,4,5,6].filter(rate => initial % rate === 0);
+            const net=rates[ri(0,rates.length-1)], outflow=net+ri(1,3), inflow=outflow-net, time=initial/net;
             return { text:`水槽に ${initial}L の水があります。\n毎分 ${inflow}L 入り、毎分 ${outflow}L 出ていきます。\n\n何分後に空になりますか？`, inflow, outflow, initial,
                 answer:time, unit:'分', hint:`1分で ${net}L 減る\n残り ${initial}L\n${initial}÷${net}=？分`, exp:`1分で ${net}L 減る\n残り ${initial}L\n${initial}÷${net}=${time}分` };
         }
@@ -797,6 +813,7 @@ function setLevel(lv) {
 }
 
 function generateProblem() {
+    quiz.answered = false;
     const p=generators[quiz.level]();
     quiz.problem=p; quiz.hintVisible=false;
     document.getElementById('prob-badge').textContent='レベル'+quiz.level;
@@ -818,8 +835,10 @@ function generateProblem() {
 }
 
 function checkAnswer() {
+    if (quiz.answered) return;
     const p=quiz.problem, val=parseFloat(document.getElementById('ans-input').value);
-    if (isNaN(val)) return;
+    if (!Number.isFinite(val)) return;
+    quiz.answered = true;
     const ok=Math.abs(val-p.answer)<0.01;
     document.getElementById('ans-input').className='answer-input '+(ok?'correct':'wrong');
     const rb=document.getElementById('result-box');
@@ -828,15 +847,15 @@ function checkAnswer() {
         rb.className='result-box ok';
         document.getElementById('result-headline').textContent='⭕ 正解！';
         document.getElementById('result-msg').innerHTML='';
-        recordAnswer('watertank', true);
+        recordAnswer(`g${appState.grade}_std_watertank`, true);
         addStar();
-        { const s = getStatsForKey('watertank'); if(s) showAccuracyCard('水そう練習', s.correct, s.total); }
+        { const s = getStatsForKey(`g${appState.grade}_std_watertank`); if(s) showAccuracyCard('水そう練習', s.correct, s.total); }
     } else {
         quiz.wrong++; document.getElementById('score-ng').textContent=quiz.wrong;
         rb.className='result-box ng';
         document.getElementById('result-headline').textContent='❌ ' + getWrongMsg();
         document.getElementById('result-msg').innerHTML=`<button class="reveal-ans-btn" data-answer="${p.answer}" data-unit="${p.unit}" onclick="revealAnswer(this)">解答を確認する</button>`;
-        recordAnswer('watertank', false);
+        recordAnswer(`g${appState.grade}_std_watertank`, false);
         resetStreak();
     }
     document.getElementById('result-exp').textContent=p.exp;
@@ -885,6 +904,10 @@ function renderChallengeList() {
         `<button class="ch-filter-btn${chState.filter===cat?' active':''}" onclick="chSetFilter('${cat}')">${cat}</button>`
     ).join('');
     let filtered = chState.filter === 'すべて' ? base : base.filter(c => c.categoryLabel === chState.filter);
+    if (filtered.length === 0) {
+        document.getElementById('ch-cards-container').innerHTML = `<div class="prac-empty-msg">この条件のチャレンジ問題は準備中です。<br>別の単元を選んでください。<br><button class="retry-btn" onclick="goBackFromChallenges()">単元選択へ戻る</button></div>`;
+        return;
+    }
     document.getElementById('ch-cards-container').innerHTML = filtered.map(c => {
         const stars='★'.repeat(c.difficulty)+'☆'.repeat(5-c.difficulty);
         const raw = c.text.replace(/\n/g,' ');
@@ -901,7 +924,8 @@ function renderChallengeList() {
 function chSetFilter(cat) { chState.filter=cat; renderChallengeList(); }
 
 function openChallenge(id) {
-    const ch=CHALLENGES.find(c=>c.id===id); if (!ch) return;
+    const ch=CHALLENGES.find(c=>c.id===id); if (!ch || ch.grade !== appState.grade) return;
+    chState.answered = false;
     chState.currentId=id; chState.hintVisible=false; chState.stepOpen={};
     document.getElementById('ch-list-view').style.display='none';
     document.getElementById('ch-detail-view').classList.add('active');
@@ -949,10 +973,12 @@ function closeChallenge() {
 }
 
 function chSubmitAnswer() {
-    const ch=CHALLENGES.find(c=>c.id===chState.currentId); if (!ch) return;
+    if (chState.answered) return;
+    const ch=CHALLENGES.find(c=>c.id===chState.currentId); if (!ch || ch.grade !== appState.grade) return;
     const raw=document.getElementById('ch-ans-input').value
         .replace(/[０-９]/g,s=>String.fromCharCode(s.charCodeAt(0)-0xFEE0)).trim();
-    const val=parseFloat(raw); if (isNaN(val)) return;
+    const val=parseFloat(raw); if (!Number.isFinite(val)) return;
+    chState.answered = true;
     const ok=Math.abs(val-ch.answer)<0.01;
     document.getElementById('ch-ans-input').className='ch-ans-input '+(ok?'correct':'wrong');
     const rb=document.getElementById('ch-result-box');
@@ -988,7 +1014,7 @@ function chToggleStep(i) {
 }
 
 function chExpandAll() {
-    const ch=CHALLENGES.find(c=>c.id===chState.currentId); if (!ch) return;
+    const ch=CHALLENGES.find(c=>c.id===chState.currentId); if (!ch || ch.grade !== appState.grade) return;
     ch.explanation.forEach((_,i)=>{ chState.stepOpen[i]=true; document.getElementById('ch-step-bd-'+i).classList.add('open'); document.getElementById('ch-chev-'+i).classList.add('open'); });
 }
 
@@ -1001,6 +1027,8 @@ function recordAnswer(key, correct) {
     stats[key].total++;
     if (correct) stats[key].correct++;
     lsSet('vista_stats', JSON.stringify(stats));
+    lsSet('vista_last_ts', String(Date.now()));
+    if (!lsGet('vista_first_ts', '')) lsSet('vista_first_ts', String(Date.now()));
 }
 
 function getStatsForKey(key) {
@@ -1068,6 +1096,7 @@ function recordProblemAttempt(probId, correct) {
     if (!h[probId]) h[probId] = [];
     h[probId].push(correct);
     lsSet('vista_history', JSON.stringify(h));
+    recordAttemptTimestamp(probId);
     // 最終学習日のタイムスタンプを別キーで記録（既存の true/false 配列構造を維持するため）
     lsSet('vista_last_ts', String(Date.now()));
     // 初回解答日を記録（未設定の場合のみ）
@@ -1081,24 +1110,27 @@ function getProblemHistory(probId) {
 function getAttemptDots(probId) {
     const h = getProblemHistory(probId);
     if (!h.length) return '';
-    const dots = h.map(ok => `<span class="att-dot ${ok?'ok':'ng'}">${ok?'✓':'✗'}</span>`).join('');
+    const dots = h.slice(-10).map(ok => `<span class="att-dot ${ok?'ok':'ng'}">${ok?'✓':'✗'}</span>`).join('');
     return `<div class="att-dots">${dots}</div>`;
 }
 
 /* ── Retry (re-attempt same problem) ── */
 function stdPracRetry() {
+    stdPracState.answered = false;
     const inp = document.getElementById('std-prac-ans-input');
     if (inp) { inp.value = ''; inp.className = 'prac-ans-input'; inp.focus(); }
     const rb = document.getElementById('std-prac-result-box');
     if (rb) rb.style.display = 'none';
 }
 function pracRetry() {
+    pracState.answered = false;
     const inp = document.getElementById('prac-ans-input');
     if (inp) { inp.value = ''; inp.className = 'prac-ans-input'; inp.focus(); }
     const rb = document.getElementById('prac-result-box');
     if (rb) rb.style.display = 'none';
 }
 function chRetry() {
+    chState.answered = false;
     const inp = document.getElementById('ch-ans-input');
     if (inp) { inp.value = ''; inp.className = 'ch-ans-input'; inp.focus(); }
     const rb = document.getElementById('ch-result-box');
@@ -1179,13 +1211,30 @@ function showStreakPopup() {
  * PRACTICE_CATS の catId から catId を演習問題へのジャンプキーとして使う。
  * vista_stats のキー形式: g{grade}_exam_{catId}
  */
+function selectedExamHistory(grade) {
+    const history = JSON.parse(lsGet('vista_history', '{}'));
+    const ids = new Set(PRACTICE_PROBLEMS.filter(p => p.grade === grade && p.course === 'exam').map(p => p.id));
+    return Object.fromEntries(Object.entries(history).filter(([id]) => ids.has(id)));
+}
+function challengeSummary(grade) {
+    return getGradeCourseStats(grade, 'ch');
+}
+function challengeSummaryHtml(grade) {
+    const summary = challengeSummary(grade);
+    return `<div class="wr-section"><div class="wr-section-title">難問チャレンジの学習記録（${grade}年生）</div><p>${summary.total}回解答・${summary.correct}回正解${summary.total ? `・正答率${Math.round(summary.correct / summary.total * 100)}%` : ''}</p><p>以下の単元別分析・最近の誤答は受験コースの演習問題が対象です。</p></div>`;
+}
+function sortRecentProblems(problems) {
+    const times = JSON.parse(lsGet('vista_attempt_ts', '{}'));
+    return problems.sort((a, b) => (times[b.id] || 0) - (times[a.id] || 0));
+}
+
 function renderWeakReview() {
     const g = appState.grade;
     const container = document.getElementById('wr-body');
     if (!container) return;
 
     const stats   = JSON.parse(lsGet('vista_stats',   '{}'));
-    const history = JSON.parse(lsGet('vista_history', '{}'));
+    const history = selectedExamHistory(g);
 
     // 全体の解答数を集計（演習問題のみ: g{grade}_exam_*）
     let totalAnswered = 0;
@@ -1198,7 +1247,7 @@ function renderWeakReview() {
 
     // データ不足判定（5問未満）
     if (totalAnswered < 5 && historyProbs < 5) {
-        container.innerHTML = `
+        container.innerHTML = challengeSummaryHtml(g) + `
             <div class="wr-no-data">
                 <div class="wr-no-data-icon">📊</div>
                 <div class="wr-no-data-title">まずは問題を解いてみよう！</div>
@@ -1207,7 +1256,7 @@ function renderWeakReview() {
         return;
     }
 
-    const sections = [];
+    const sections = [challengeSummaryHtml(g)];
 
     // ── セクション1: 苦手カテゴリ TOP3 ──
     const catStats = PRACTICE_CATS.map(cat => {
@@ -1303,7 +1352,7 @@ function renderWeakReview() {
         }
     });
     // 最大5件
-    const recentWrongSlice = recentWrong.slice(0, 5);
+    const recentWrongSlice = sortRecentProblems(recentWrong).slice(0, 5);
 
     if (recentWrongSlice.length > 0) {
         const rows = recentWrongSlice.map(prob => {
@@ -1320,7 +1369,7 @@ function renderWeakReview() {
         }).join('');
         sections.push(`
             <div class="wr-section">
-                <div class="wr-section-title">最近間違えた問題</div>
+                <div class="wr-section-title">直近の解答が不正解の問題</div><p>新しい解答順で表示します。更新前の記録は解答日時がないため順序不明です。</p>
                 ${rows}
             </div>`);
     }
@@ -1351,7 +1400,7 @@ function renderWeakReview() {
     } else if (catStats.length === 0) {
         // 挑戦ゼロの場合: 未挑戦カテゴリを表示
         const untriedCat = PRACTICE_CATS.find(cat => {
-            const probs = PRACTICE_PROBLEMS.filter(p => p.catId === cat.id && p.grade === g);
+            const probs = PRACTICE_PROBLEMS.filter(p => p.catId === cat.id && p.grade === g && p.course === 'exam');
             return probs.length > 0;
         });
         if (untriedCat) {
@@ -1418,9 +1467,9 @@ function renderRecommendedReview() {
     if (!container) return;
 
     const stats   = JSON.parse(lsGet('vista_stats',   '{}'));
-    const history = JSON.parse(lsGet('vista_history', '{}'));
+    const history = selectedExamHistory(g);
 
-    // ── 全体正答率（g{grade}_exam_* キーを集計）──
+    // ── 演習・確認問題の正答率（g{grade}_exam_* キーを集計）──
     let totalCorrect = 0, totalAll = 0;
     const examPrefix = `g${g}_exam_`;
     Object.entries(stats).forEach(([k, v]) => {
@@ -1432,7 +1481,7 @@ function renderRecommendedReview() {
     const overallPct = totalAll > 0 ? Math.round(totalCorrect / totalAll * 100) : null;
     const overallHtml = `
         <div class="rr-overall">
-            <div class="rr-overall-label">全体正答率</div>
+            <div class="rr-overall-label">演習・確認問題の正答率</div>
             <div class="rr-overall-value">${overallPct !== null ? overallPct + '%' : '---'}</div>
             <div class="rr-overall-sub">${totalAll > 0 ? totalCorrect + '/' + totalAll + '問 正解' : 'まだ問題を解いていません'}</div>
         </div>`;
@@ -1480,7 +1529,7 @@ function renderRecommendedReview() {
         return unit && unit.topicScreen ? unit.topicScreen : null;
     }
 
-    const sections = [overallHtml];
+    const sections = [overallHtml, challengeSummaryHtml(g)];
 
     // ── セクション: 苦手unit TOP3 ──
     if (weakUnits.length > 0) {
@@ -1536,7 +1585,7 @@ function renderRecommendedReview() {
             if (prob) recentWrong.push(prob);
         }
     });
-    const recentWrongSlice = recentWrong.slice(0, 5);
+    const recentWrongSlice = sortRecentProblems(recentWrong).slice(0, 5);
 
     if (recentWrongSlice.length > 0) {
         const rows = recentWrongSlice.map(prob => {
@@ -1553,7 +1602,7 @@ function renderRecommendedReview() {
         }).join('');
         sections.push(`
             <div class="wr-section">
-                <div class="wr-section-title">最近間違えた問題</div>
+                <div class="wr-section-title">直近の解答が不正解の問題</div><p>新しい解答順で表示します。更新前の記録は解答日時がないため順序不明です。</p>
                 ${rows}
             </div>`);
     }
@@ -1578,7 +1627,7 @@ function renderReport() {
     if (!container) return;
 
     const stats    = JSON.parse(lsGet('vista_stats',   '{}'));
-    const history  = JSON.parse(lsGet('vista_history', '{}'));
+    const history = selectedExamHistory(g);
     const lastTs   = lsGet('vista_last_ts', '');
     const firstTs  = lsGet('vista_first_ts', '');
 
@@ -1599,31 +1648,31 @@ function renderReport() {
     // ── セクション1: 全体サマリー ──
     const overallPct = totalAll > 0 ? Math.round(totalCorrect / totalAll * 100) : 0;
     const continueDays = firstTs
-        ? Math.ceil((Date.now() - Number(firstTs)) / 86400000)
+        ? Math.max(1, Math.floor((Date.now() - Number(firstTs)) / 86400000) + 1)
         : null;
     const continueDaysStr = continueDays !== null ? `${continueDays}日` : '—';
 
     const summaryHtml = `
         <div class="rpt-summary">
-            <div class="rpt-summary-title">学習レポート（${g}年生）</div>
+            <div class="rpt-summary-title">学習レポート（${g}年生・受験コース）</div>
             <div class="rpt-summary-grid">
                 <div class="rpt-summary-item">
                     <div class="rpt-summary-val">${totalAll}</div>
-                    <div class="rpt-summary-label">解いた問題数</div>
+                    <div class="rpt-summary-label">演習の解答回数</div>
                 </div>
                 <div class="rpt-summary-item">
                     <div class="rpt-summary-val">${totalAll > 0 ? overallPct + '%' : '—'}</div>
-                    <div class="rpt-summary-label">全体正答率</div>
+                    <div class="rpt-summary-label">演習の正答率</div>
                 </div>
                 <div class="rpt-summary-item">
                     <div class="rpt-summary-val">${continueDaysStr}</div>
-                    <div class="rpt-summary-label">学習継続日数</div>
+                    <div class="rpt-summary-label">学習開始からの日数（全学年共通）</div>
                 </div>
             </div>
         </div>`;
 
     if (isInsufficient) {
-        container.innerHTML = summaryHtml + `
+        container.innerHTML = summaryHtml + challengeSummaryHtml(g) + `
             <div class="rpt-no-data">
                 <div class="rpt-no-data-icon">📊</div>
                 <div class="rpt-no-data-title">まだ学習が始まったばかりです</div>
@@ -1632,7 +1681,7 @@ function renderReport() {
         return;
     }
 
-    const sections = [summaryHtml];
+    const sections = [summaryHtml, challengeSummaryHtml(g)];
 
     // ── セクション2: カテゴリ別正答率（バーグラフ）──
     const catRows = PRACTICE_CATS.map(cat => {
@@ -1721,7 +1770,7 @@ function renderReport() {
             if (prob) recentWrong.push(prob);
         }
     });
-    const recentWrongSlice = recentWrong.slice(0, 5);
+    const recentWrongSlice = sortRecentProblems(recentWrong).slice(0, 5);
     if (recentWrongSlice.length > 0) {
         const wrongRows = recentWrongSlice.map(prob => {
             const cat = PRACTICE_CATS.find(c => c.id === prob.catId);
@@ -1737,7 +1786,7 @@ function renderReport() {
         }).join('');
         sections.push(`
             <div class="rpt-section">
-                <div class="rpt-section-title">最近間違えた問題</div>
+                <div class="rpt-section-title">直近の解答が不正解の問題</div><p>新しい解答順で表示します。更新前の記録は解答日時がないため順序不明です。</p>
                 ${wrongRows}
             </div>`);
     }
@@ -1841,7 +1890,7 @@ function initTopicTrial(topicUnitId) {
 
     // 対象問題を difficulty 1〜2 で最大3件取得
     const problems = (typeof PRACTICE_PROBLEMS !== 'undefined' ? PRACTICE_PROBLEMS : [])
-        .filter(p => p.topicUnitId === topicUnitId && p.difficulty <= 2)
+        .filter(p => p.topicUnitId === topicUnitId && p.grade === appState.grade && p.course === 'exam' && p.difficulty <= 2)
         .slice(0, 3);
 
     if (problems.length === 0) {
@@ -1854,7 +1903,11 @@ function initTopicTrial(topicUnitId) {
     // 問題あり → 既存導線を非表示
     if (navCard) navCard.style.display = 'none';
 
-    // 状態リセット
+    // Keep an in-progress trial when visiting another screen and returning.
+    if (trialState[topicUnitId] && trialState[topicUnitId].problems.map(p => p.id).join() === problems.map(p => p.id).join()) {
+        renderTrialQuestion(topicUnitId);
+        return;
+    }
     trialState[topicUnitId] = {
         problems,
         current: 0,
@@ -1877,7 +1930,11 @@ function renderTrialQuestion(topicUnitId) {
     const total = problems.length;
 
     // 選択肢を生成（4択）
-    const choices = generateChoices(prob);
+    if (state.choicesFor !== prob.id || !Array.isArray(state.choices)) {
+        state.choices = generateChoices(prob);
+        state.choicesFor = prob.id;
+    }
+    const choices = state.choices;
 
     const choicesHtml = choices.map((c, i) =>
         `<button class="topic-trial-choice" data-is-correct="${c.isCorrect}" onclick="checkTrialAnswer('${topicUnitId}', ${i}, ${JSON.stringify(c.value)}, ${c.isCorrect})">${escapeHtml(c.label)}</button>`
@@ -1897,6 +1954,10 @@ function renderTrialQuestion(topicUnitId) {
             <div id="trial-feedback-${topicUnitId}" style="display:none"></div>
             <div id="trial-next-${topicUnitId}" style="display:none"></div>
         </div>`;
+    if (state.answered) {
+        renderTrialFeedback(topicUnitId, state.choiceIdx, state.isCorrect);
+        if (state.revealedAnswer) { state.revealedAnswer = false; revealTrialAnswer(topicUnitId); }
+    }
 }
 
 /**
@@ -1956,9 +2017,22 @@ function generateChoices(prob) {
 function checkTrialAnswer(topicUnitId, choiceIdx, value, isCorrect) {
     const state = trialState[topicUnitId];
     if (!state || state.answered) return;
+    const prob = state.problems[state.current];
+    if (!prob || prob.grade !== appState.grade || prob.course !== 'exam') return;
+    recordProblemAttempt(prob.id, !!isCorrect);
+    recordAnswer(`g${appState.grade}_exam_${prob.catId}`, !!isCorrect);
+    if (isCorrect) addStar(); else resetStreak();
     state.answered = true;
     state.revealedAnswer = false;
+    state.choiceIdx = choiceIdx;
+    state.isCorrect = isCorrect;
+    renderTrialFeedback(topicUnitId, choiceIdx, isCorrect);
+}
 
+// Rendering is separate from grading: restoring a route never records an answer.
+function renderTrialFeedback(topicUnitId, choiceIdx, isCorrect) {
+    const state = trialState[topicUnitId];
+    if (!state) return;
     const prob    = state.problems[state.current];
     const total   = state.problems.length;
     const isLast  = state.current >= total - 1;

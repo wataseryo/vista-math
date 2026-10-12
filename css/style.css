@@ -728,11 +728,11 @@
             80% { transform: translateX(-3px); }
         }
 
-        /* Screen slide transition */
+        /* Fade without horizontal overflow, including narrow mobile viewports. */
         .screen.slide-in { animation: screen-slide .2s cubic-bezier(0.22, 1, 0.36, 1); }
         @keyframes screen-slide {
-            0% { opacity: 0; transform: translateX(20px); }
-            100% { opacity: 1; transform: translateX(0); }
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         /* ── Star/XP Counter Badge (dark game style) ── */

@@ -2,7 +2,7 @@
    STANDARD COURSE DATA
 ════════════════════════════════════════ */
 const STANDARD_CHAPTERS = [
-    { id: 'watertank', num: '第1章', title: '水と量の問題', sub: '水槽・流量・仕事算の基礎', tags: ['水槽問題', '流量計算'], available: true },
+    { id: 'watertank', topicScreen: 'watertank', num: '第1章', title: '水と量の問題', sub: '水槽・流量・仕事算の基礎', tags: ['水槽問題', '流量計算'], available: true },
     { id: 'speed',    num: '第2章', title: '速さと時間',   sub: '速さ・時間・距離の関係',  tags: ['速さ計算', 'ダイヤグラム'], available: false },
     { id: 'ratio',    num: '第3章', title: '割合と比',     sub: '割合・面積図・比の利用',  tags: ['割合', '面積図', '比'], available: false },
     { id: 'cases',    num: '第4章', title: '場合の数',     sub: '順列・組み合わせ・樹形図', tags: ['樹形図', '組み合わせ'], available: false },
@@ -26,14 +26,14 @@ const EXAM_UNITS = [
    GRADE-SPECIFIC DATA
 ════════════════════════════════════════ */
 const STANDARD_CHAPTERS_G5 = [
-    { id: 'watertank', num: '第1章', title: '水と量の問題',  sub: '水槽・流量の基礎', tags: ['水槽問題', '流量計算'], available: true },
+    { id: 'watertank', topicScreen: 'watertank', num: '第1章', title: '水と量の問題',  sub: '水槽・流量の基礎', tags: ['水槽問題', '流量計算'], available: true },
     { id: 'speed-g5',  num: '第2章', title: '速さと時間',    sub: '速さ・時間・距離の三角形（みはじ）', tags: ['速さ計算', 'みはじ'], available: false },
     { id: 'ratio-g5',  num: '第3章', title: '割合と百分率',  sub: '何%・何倍の問題', tags: ['割合', '百分率'], available: false },
     { id: 'cases-g5',  num: '第4章', title: '場合の数',      sub: '順序よく数える・樹形図', tags: ['樹形図', '数え方'], available: false },
     { id: 'figures-g5',num: '第5章', title: '図形の面積',    sub: '三角形・台形・平行四辺形', tags: ['面積', '補助線'], available: false },
 ];
 const STANDARD_CHAPTERS_G6 = [
-    { id: 'watertank', num: '第1章', title: '水と量・仕事算', sub: '複数の管・仕事算・ニュートン算入門', tags: ['水槽問題', '仕事算'], available: true },
+    { id: 'watertank', topicScreen: 'watertank', num: '第1章', title: '水と量・仕事算', sub: '複数の管・仕事算・ニュートン算入門', tags: ['水槽問題', '仕事算'], available: true },
     { id: 'speed-g6',  num: '第2章', title: '速さの応用',    sub: '旅人算・通過算・流水算', tags: ['旅人算', '速さ応用'], available: false },
     { id: 'ratio-g6',  num: '第3章', title: '割合と比の応用', sub: '食塩水・売買損益・相当算', tags: ['食塩水', '比の利用'], available: false },
     { id: 'cases-g6',  num: '第4章', title: '場合の数 応用', sub: '順列・組み合わせ・確率入門', tags: ['順列', '組み合わせ'], available: false },

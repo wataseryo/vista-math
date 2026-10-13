@@ -317,9 +317,6 @@ function pracOpenProb(probId) {
             <button class="prac-check-btn" onclick="pracCheckAnswer()">答え合わせ</button>
         </div>
         <div id="prac-result-box" style="display:none;background:#E8F5E9;border-radius:10px;padding:12px;margin-bottom:14px;font-weight:bold;font-size:.9rem"></div>
-        ${topicScreen ? `<div class="prac-detail-actions">
-            <button class="prac-detail-btn btn-prac-topic" onclick="pracGoToTopic('${unitId}')">トピックで学ぶ</button>
-        </div>` : ''}
         <div id="prac-steps-card" class="prac-steps-card">
             <div class="prac-steps-hd">
                 <div class="prac-steps-title">📝 ステップ解説</div>

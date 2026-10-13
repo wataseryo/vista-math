@@ -138,7 +138,6 @@ function stdPracOpenProb(probId) {
         <div id="std-prac-result-box" style="display:none;background:#E8F5E9;border-radius:10px;padding:12px;margin-bottom:14px;font-weight:bold;font-size:.9rem"></div>
         <div class="prac-detail-actions">
             <button class="prac-detail-btn btn-prac-sol" onclick="stdPracToggleSolution()">💡 解説を見る</button>
-            ${topicScreen ? `<button class="prac-detail-btn" style="background:#E3F2FD;color:#1565C0" onclick="showScreen('${topicScreen}')">トピックで学ぶ</button>` : ''}
         </div>
         <div id="std-prac-sol-box" class="prac-sol-box" style="display:none">${p.solution || '解説を準備中です。'}</div>
         ${topicScreen ? `<div class="prac-topic-link" style="border-color:var(--std-primary)" onclick="showScreen('${topicScreen}')">

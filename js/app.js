@@ -477,6 +477,7 @@ function showScreen(id, opts={}) {
         chState.tierMin = opts.tierMin !== undefined ? opts.tierMin : 1;
         chState.tierMax = opts.tierMax !== undefined ? opts.tierMax : 5;
         chState.fromScreen = opts.fromScreen || 'exam';
+        chState.fromHcMode = opts.fromHcMode || null;
         chState.filter = 'すべて';
         document.getElementById('ch-list-view').style.display = 'block';
         document.getElementById('ch-detail-view').classList.remove('active');
@@ -495,11 +496,12 @@ function goBackFromChallenges() {
     showScreen(chState.fromScreen || 'exam');
 }
 
-/* 分野へボタン: 難問チャレンジの単元別タブへ、他はfromScreenそのまま */
+/* 難問チャレンジへボタン: 入ってきたタブ(総合/単元別)へ、他はfromScreenそのまま */
 function chGoToCategoryPicker() {
     const fromHardChallenge = chState.fromScreen === 'hard-challenge';
+    const hcMode = chState.fromHcMode;
     showScreen(chState.fromScreen || 'exam');
-    if (fromHardChallenge) hcSwitchMode('cat');
+    if (fromHardChallenge && hcMode) hcSwitchMode(hcMode);
 }
 
 function goBackFromWatertank() {
@@ -640,6 +642,7 @@ function hcStartAll() {
         unitTitle: '総合チャレンジ ★4〜★5',
         tierMin: 4, tierMax: 5,
         fromScreen: 'hard-challenge',
+        fromHcMode: 'all',
     });
 }
 
@@ -649,6 +652,7 @@ function hcOpenCat(mainCatId, title) {
         unitTitle: title + ' 難問チャレンジ',
         tierMin: 4, tierMax: 5,
         fromScreen: 'hard-challenge',
+        fromHcMode: 'cat',
     });
 }
 

@@ -495,6 +495,13 @@ function goBackFromChallenges() {
     showScreen(chState.fromScreen || 'exam');
 }
 
+/* 分野へボタン: 難問チャレンジの単元別タブへ、他はfromScreenそのまま */
+function chGoToCategoryPicker() {
+    const fromHardChallenge = chState.fromScreen === 'hard-challenge';
+    showScreen(chState.fromScreen || 'exam');
+    if (fromHardChallenge) hcSwitchMode('cat');
+}
+
 function goBackFromWatertank() {
     showScreen(appState.previousScreen || 'std-mode');
 }

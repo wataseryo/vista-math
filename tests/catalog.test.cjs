@@ -13,7 +13,7 @@ function fixture(t) {
  t.after(()=>fs.rmSync(dir,{recursive:true,force:true}));return dir;
 }
 function edit(dir,file,fn){const p=path.join(dir,file);fs.writeFileSync(p,fn(fs.readFileSync(p,'utf8')));}
-test('all current 202 problems pass structural validation',()=>{const r=validate(root);assert.equal(r.count,202);assert.deepEqual(r.errors,[]);});
+test('all current 211 problems pass structural validation',()=>{const r=validate(root);assert.equal(r.count,211);assert.deepEqual(r.errors,[]);});
 test('missing script is rejected with file diagnostics',t=>{const d=fixture(t);edit(d,'index.html',s=>s.replace('<script src="data/problems/practice-g6-plane.js"></script>',''));assert(validate(d).errors.some(e=>e.includes('practice-g6-plane.js')&&e.includes('script loading')));});
 test('unaggregated source is rejected',t=>{const d=fixture(t);edit(d,'data/problems.js',s=>s.replace('...PRACTICE_G6_PLANE,',''));assert(validate(d).errors.some(e=>e.includes('practice-g6-plane.js')&&e.includes('aggregation')));});
 for(const [name,from,to,reason] of [

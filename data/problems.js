@@ -5,6 +5,7 @@
 ════════════════════════════════════════ */
 
 const PRACTICE_PROBLEMS = [
+  ...PRACTICE_G6_CALC,
   ...PRACTICE_G6_RATIO,
   ...PRACTICE_G6_SPEED,
   ...PRACTICE_G6_SPECIAL,

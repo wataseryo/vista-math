@@ -50,6 +50,7 @@ const EXAM_UNITS_G5 = [
     { id: 'u5-plane',   num: '⑥', icon: '📐', title: '平面図形',          sub: '面積・角度・円・相似・図形移動',          difficulty: 4, categories: ['平面図形'],                                      count: 0,  available: false },
     { id: 'u5-solid',   num: '⑦', icon: '📦', title: '立体図形・水量',   sub: '体積・表面積・水そう・水深グラフ',        difficulty: 4, categories: ['水槽','立体'],                                   count: 0,  available: false },
     { id: 'u5-cases',   num: '⑧', icon: '🎯', title: '場合の数・論理',   sub: '順列・組合せ・樹形図・条件整理',         difficulty: 3, categories: ['場合の数'],                                      count: 0,  available: false },
+    { id: 'u5-graph',   num: '⑨', icon: '📈', title: '変化・グラフ・データ', sub: '準備中',                              difficulty: 3, categories: ['変化・グラフ'],                                  count: 0,  available: false },
 ];
 /* 8分野構成 ── 6年生 */
 const EXAM_UNITS_G6 = [
@@ -65,6 +66,7 @@ const EXAM_UNITS_G6 = [
     { id: 'u6-plane',   num: '⑥', icon: '📐', title: '平面図形の完成',   sub: '面積比・相似・円・移動・図形融合',            difficulty: 5, categories: ['平面図形'],                            count: 15, available: true,  topicScreen: 'u6-plane' },
     { id: 'u6-solid',   num: '⑦', icon: '📦', title: '立体図形の完成',   sub: '回転体・切断・体積比・投影図',                difficulty: 5, categories: ['立体'],                                count: 0,  available: false },
     { id: 'u6-cases',   num: '⑧', icon: '🎯', title: '場合の数・論理',   sub: '条件付き・道順・塗り分け・論理融合',         difficulty: 4, categories: ['場合の数'],                             count: 0,  available: false },
+    { id: 'u6-graph',   num: '⑨', icon: '📈', title: '変化・グラフ・データ', sub: '比例反比例・グラフ読解・代表値',          difficulty: 4, categories: ['変化・グラフ'],                         count: 0,  available: false },
 ];
 
 /* 演習問題 8分野カテゴリ定義 */
@@ -77,6 +79,7 @@ const PRACTICE_CATS = [
     { id: 'pc-plane',   icon: '📐', title: '平面図形',          sub: '面積・角度・相似・円',         unitId5: 'u5-plane',   unitId6: 'u6-plane'   },
     { id: 'pc-solid',   icon: '📦', title: '立体図形・水量',   sub: '体積・水そう・水深グラフ',     unitId5: 'u5-solid',   unitId6: 'u6-solid'   },
     { id: 'pc-cases',   icon: '🎯', title: '場合の数・論理',   sub: '順列・組合せ・条件整理',      unitId5: 'u5-cases',   unitId6: 'u6-cases'   },
+    { id: 'pc-graph',   icon: '📈', title: '変化・グラフ・データ', sub: '比例反比例・表とグラフ',  unitId5: 'u5-graph',   unitId6: 'u6-graph'   },
 ];
 
 /* ════════════════════════════════════════
@@ -96,4 +99,5 @@ const CATEGORIES = [
     { id: 'plane_geometry',      name: '平面図形',          priority: 'A' },
     { id: 'solid_geometry',      name: '立体図形・水量',   priority: 'A' }, // mainCategory:'solid_geometry'
     { id: 'combinatorics_logic', name: '場合の数・論理',   priority: 'B' },
+    { id: 'graph_data',          name: '変化・グラフ・データ', priority: 'B' }, // mainCategory:'graph_data'(新設、2026-10-15)
 ];

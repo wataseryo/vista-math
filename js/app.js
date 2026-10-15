@@ -1895,10 +1895,10 @@ function initTopicTrial(topicUnitId) {
     const navCard   = document.getElementById(topicUnitId + '-nav');
     if (!container) return;
 
-    // 対象問題を difficulty 1〜2 で最大3件取得
+    // 対象問題を difficulty 1〜2 で取得(通常は最大3件、u6-planeのみ4件)
     const problems = (typeof PRACTICE_PROBLEMS !== 'undefined' ? PRACTICE_PROBLEMS : [])
         .filter(p => p.topicUnitId === topicUnitId && p.grade === appState.grade && p.course === 'exam' && p.difficulty <= 2)
-        .slice(0, 3);
+        .slice(0, topicUnitId === 'u6-plane' ? 4 : 3);
 
     if (problems.length === 0) {
         // 問題なし → セクション非表示、既存導線を表示

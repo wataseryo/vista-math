@@ -465,7 +465,7 @@ function showScreen(id, opts={}) {
     if (id === 'recommended-review')   { renderRecommendedReview(); }
     if (id === 'report')               { renderReport(); }
     if (id === 'salt') { saltConfirmState.answered = false; document.getElementById('salt-quiz-result').style.display = 'none'; }
-    if (id === 'u6-calc')    { initTopicTrial('u6-calc'); initCalcExample(); }
+    if (id === 'u6-calc')    { initTopicTrial('u6-calc'); initCalcExample(); resetCalcComparison(); }
     if (id === 'u6-ratio')   { initTopicTrial('u6-ratio'); }
     if (id === 'u6-speed')   { initTopicTrial('u6-speed'); }
     if (id === 'u6-plane')   { initTopicTrial('u6-plane'); switchPlaneTab('parallelogram'); }
@@ -2277,56 +2277,98 @@ document.addEventListener('DOMContentLoaded', () => {
     updateStarBadge();
 });
 
-// 計算・数の処理：予測してから、自分のペースで3段階を確かめる。
-const calcExampleState = { prediction: null, step: 0 };
+// 再利用できる段階表示。再実行時には古いコールバックを必ず取り消す。
+function createTopicSequence() {
+    let timers = [];
+    return {
+        cancel() { timers.forEach(clearTimeout); timers = []; },
+        after(delay, action) { timers.push(setTimeout(action, delay)); }
+    };
+}
+const calcPairSequence = createTopicSequence();
+const calcComparisonSequence = createTopicSequence();
+const calcExampleState = { selected: [] };
+const topicReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function initCalcExample() {
-    calcExampleState.prediction = null;
-    calcExampleState.step = 0;
-    document.querySelectorAll('[data-calc-pair]').forEach(button => {
+function initCalcExample(focusFirst = false) {
+    calcPairSequence.cancel();
+    calcExampleState.selected = [];
+    document.querySelectorAll('[data-calc-number]').forEach(button => {
         button.setAttribute('aria-pressed', 'false');
-        button.disabled = false;
+        button.classList.remove('topic-pair-merge');
     });
-    const confirm = document.getElementById('calc-confirm-btn');
-    confirm.disabled = true;
-    confirm.hidden = false;
-    confirm.textContent = '予測を選んで答え合わせ';
+    document.getElementById('calc-product-preview').textContent = '数字を2つ選ぼう';
+    document.getElementById('calc-prediction-feedback').textContent = 'どの組み合わせが、きりのよい数になるかな？';
+    document.getElementById('calc-discovery').hidden = true;
     document.getElementById('calc-example-reveal').hidden = true;
-    for (let step = 1; step <= 3; step++) document.getElementById('calc-example-step-' + step).hidden = true;
-    document.getElementById('calc-example-formula').innerHTML = '<span class="calc-factor">25</span> × 13 × <span class="calc-factor">4</span>';
-    const next = document.getElementById('calc-next-btn');
-    next.hidden = false;
-    next.textContent = '次へ：25 × 4 を計算';
+    if (focusFirst) document.querySelector('[data-calc-number]').focus();
 }
 
-function selectCalcPrediction(pair) {
-    if (calcExampleState.step !== 0) return;
-    calcExampleState.prediction = pair;
-    document.querySelectorAll('[data-calc-pair]').forEach(button => {
-        button.setAttribute('aria-pressed', String(button.dataset.calcPair === pair));
-    });
-    const confirm = document.getElementById('calc-confirm-btn');
-    confirm.disabled = false;
-    confirm.textContent = '答え合わせ：楽な組み合わせを見る';
-}
-
-function advanceCalcExample() {
-    if (!calcExampleState.prediction || calcExampleState.step >= 3) return;
-    const step = ++calcExampleState.step;
-    document.getElementById('calc-example-reveal').hidden = false;
-    document.getElementById('calc-example-step-' + step).hidden = false;
-    const next = document.getElementById('calc-next-btn');
-    if (step === 1) {
-        document.getElementById('calc-confirm-btn').hidden = true;
-        document.querySelectorAll('[data-calc-pair]').forEach(button => { button.disabled = true; });
-        document.getElementById('calc-prediction-feedback').textContent =
-            (calcExampleState.prediction === '25-4' ? 'その通り！' : 'その順番でも計算できます。もっと楽にするには、') +
-            '25と4に注目。先にかけると、きりのよい数になります。';
-    } else if (step === 2) {
-        document.getElementById('calc-example-formula').innerHTML = '<span class="calc-factor">100</span> × 13';
-        next.textContent = '次へ：100 × 13 と答えを確認';
-    } else {
-        document.getElementById('calc-example-formula').textContent = '100 × 13 ＝ 1300';
-        next.hidden = true;
+function selectCalcNumber(number) {
+    calcPairSequence.cancel();
+    const selected = calcExampleState.selected;
+    const index = selected.indexOf(number);
+    if (index >= 0) selected.splice(index, 1);
+    else {
+        // 2つ選択済みなら、新しくタップした数字から次のペアを探せる。
+        if (selected.length === 2) selected.length = 0;
+        selected.push(number);
     }
+    document.querySelectorAll('[data-calc-number]').forEach(button => {
+        button.setAttribute('aria-pressed', String(selected.includes(Number(button.dataset.calcNumber))));
+        button.classList.remove('topic-pair-merge');
+    });
+    document.getElementById('calc-discovery').hidden = true;
+    document.getElementById('calc-example-reveal').hidden = true;
+    const preview = document.getElementById('calc-product-preview');
+    const feedback = document.getElementById('calc-prediction-feedback');
+    if (selected.length < 2) {
+        preview.textContent = selected.length ? selected[0] + ' × …' : '数字を2つ選ぼう';
+        feedback.textContent = selected.length ? 'あと1つ選んでみよう。' : 'どの組み合わせが、きりのよい数になるかな？';
+        return;
+    }
+    const product = selected[0] * selected[1];
+    preview.textContent = selected.join(' × ') + ' ＝ ' + product;
+    if (product !== 100) {
+        feedback.textContent = product + '。間違いではないけれど、きりのよい数じゃないね。他の組み合わせも試してみよう。数字をタップして選び直せるよ。';
+        return;
+    }
+    feedback.textContent = '25と4で、きりのよい100ができた！';
+    if (!topicReducedMotion()) document.querySelectorAll('[data-calc-number][aria-pressed="true"]').forEach(button => button.classList.add('topic-pair-merge'));
+    const reveal = () => {
+        document.querySelectorAll('[data-calc-number]').forEach(button => button.classList.remove('topic-pair-merge'));
+        document.getElementById('calc-discovery').hidden = false;
+        document.getElementById('calc-example-reveal').hidden = false;
+    };
+    if (topicReducedMotion()) reveal();
+    else calcPairSequence.after(480, reveal);
 }
+
+function resetCalcComparison() {
+    calcComparisonSequence.cancel();
+    document.querySelectorAll('#calc-comparison [data-comparison-stage]').forEach(stage => { stage.hidden = true; });
+    document.getElementById('calc-comparison-play').textContent = '順番に見てみよう';
+}
+
+function playCalcComparison() {
+    resetCalcComparison();
+    document.getElementById('calc-comparison-play').textContent = 'もう一度見る';
+    const stages = [...document.querySelectorAll('#calc-comparison [data-comparison-stage]')];
+    // 通常の手順はゆっくり、くふうの手順は軽やかに。同じ2段階を順に見せる。
+    const delays = [0, 650, 1600, 2600, 2780, 2960, 3450];
+    stages.forEach((stage, index) => {
+        if (topicReducedMotion() || index === 0) stage.hidden = false;
+        else calcComparisonSequence.after(delays[index], () => { stage.hidden = false; });
+    });
+}
+
+// 移動後に画面外の演出を進めない。復帰時はopenUnitの初期化から再開する。
+document.addEventListener('DOMContentLoaded', () => {
+    const screen = document.getElementById('u6-calc-screen');
+    new MutationObserver(() => {
+        if (!screen.classList.contains('active')) {
+            calcPairSequence.cancel();
+            calcComparisonSequence.cancel();
+        }
+    }).observe(screen, { attributes: true, attributeFilter: ['class'] });
+});

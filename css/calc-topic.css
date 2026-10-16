@@ -18,3 +18,24 @@
 #u6-calc-screen .calc-factor { display: inline-block; background: #fff1b8; color: #754900; border: 2px solid #e0a800; padding: 0 8px; border-radius: 8px; }
 #u6-calc-screen .calc-reset-btn { margin-top: 8px; font-size: .85rem; }
 #u6-calc-screen [hidden] { display: none !important; }
+/* 汎用のペア発見・段階比較パターン。適用は計算画面内に限定する。 */
+#u6-calc-screen .topic-pair-tiles { justify-content: center; gap: 16px; }
+#u6-calc-screen .topic-pair-tiles button { min-width: 64px; min-height: 64px; font-size: 1.4rem; font-weight: bold; }
+#u6-calc-screen .topic-pair-status { min-height: 110px; }
+#u6-calc-screen .topic-discovery { position: relative; display: flex; align-items: center; gap: 8px; padding: 12px; margin: 8px 0; border-radius: 10px; background: #fff1b8; color: #754900; line-height: 1.7; }
+#u6-calc-screen .topic-discovery-character { display: inline-block; font-size: 1.7rem; animation: topic-discovery-bounce 600ms ease-out; }
+#u6-calc-screen .topic-discovery-sparkle { position: absolute; right: 8px; top: -12px; color: #754900; opacity: 0; pointer-events: none; animation: topic-discovery-sparkle 900ms ease-out; }
+#u6-calc-screen .topic-pair-merge { animation: topic-pair-merge 480ms ease-in-out; --pair-shift: 38px; }
+#u6-calc-screen .topic-pair-merge[data-calc-number="4"] { --pair-shift: -38px; }
+#u6-calc-screen .topic-comparison > div { margin-top: 16px; padding: 12px; border-radius: 10px; background: #f3f9ff; }
+#u6-calc-screen .topic-comparison [data-comparison-stage]:not([hidden]) { animation: topic-stage-appear 240ms ease-out; }
+@keyframes topic-pair-merge { 60% { transform: translateX(var(--pair-shift)) scale(.88); } }
+@keyframes topic-discovery-bounce { 40% { transform: translateY(-8px) rotate(8deg); } }
+@keyframes topic-discovery-sparkle { 20%, 65% { opacity: 1; } 100% { opacity: 0; transform: translateY(-10px); } }
+@keyframes topic-stage-appear { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+    #u6-calc-screen .topic-pair-merge,
+    #u6-calc-screen .topic-discovery-character,
+    #u6-calc-screen .topic-discovery-sparkle,
+    #u6-calc-screen .topic-comparison [data-comparison-stage]:not([hidden]) { animation: none; }
+}

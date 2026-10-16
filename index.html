@@ -560,25 +560,52 @@
             <div class="topic-section-lbl">基本例題</div>
             <div class="topic-example-q">25 × 13 × 4 を、くふうして計算しよう。</div>
             <div class="calc-predict-card">
-                <p><b>どうなると思う？</b><br>どの2つを先にかけると楽？ 自分で予測して選ぼう。</p>
-                <div class="calc-predict-options" role="group" aria-label="先にかける2つの数">
-                    <button type="button" onclick="selectCalcPrediction('25-13')" aria-pressed="false" data-calc-pair="25-13">25 × 13</button>
-                    <button type="button" onclick="selectCalcPrediction('25-4')" aria-pressed="false" data-calc-pair="25-4">25 × 4</button>
-                    <button type="button" onclick="selectCalcPrediction('13-4')" aria-pressed="false" data-calc-pair="13-4">13 × 4</button>
+                <p><b>どうなると思う？</b><br>先にかけたい数字を2つタップしよう。もう一度タップすると選び直せます。</p>
+                <div class="calc-predict-options topic-pair-tiles" role="group" aria-label="先にかける2つの数字">
+                    <button type="button" onclick="selectCalcNumber(25)" aria-pressed="false" data-calc-number="25">25</button>
+                    <button type="button" onclick="selectCalcNumber(13)" aria-pressed="false" data-calc-number="13">13</button>
+                    <button type="button" onclick="selectCalcNumber(4)" aria-pressed="false" data-calc-number="4">4</button>
                 </div>
-                <button id="calc-confirm-btn" class="topic-nav-btn prac" type="button" onclick="advanceCalcExample()" disabled>予測を選んで答え合わせ</button>
+                <div class="topic-pair-status" role="status" aria-live="polite" aria-atomic="true">
+                    <div id="calc-product-preview" class="calc-example-formula">数字を2つ選ぼう</div>
+                    <p id="calc-prediction-feedback">どの組み合わせが、きりのよい数になるかな？</p>
+                </div>
+                <div id="calc-discovery" class="topic-discovery" hidden>
+                    <span class="topic-discovery-character" aria-hidden="true">😊</span>
+                    <span>いい発見！ 100にまとまったね。</span>
+                    <span class="topic-discovery-sparkle" aria-hidden="true">✦ ✧ ✦</span>
+                </div>
+                <button class="calc-reset-btn" type="button" onclick="initCalcExample(true)">もう一度見る</button>
             </div>
             <div id="calc-example-reveal" hidden>
-                <div id="calc-example-formula" class="calc-example-formula" aria-label="25と4を先にかける"><span class="calc-factor">25</span> × 13 × <span class="calc-factor">4</span></div>
-                <div class="topic-steps" aria-live="polite">
-                    <div class="topic-step" id="calc-example-step-1" hidden><div class="topic-step-num">1</div><div class="topic-step-text" id="calc-prediction-feedback"></div></div>
-                    <div class="topic-step" id="calc-example-step-2" hidden><div class="topic-step-num">2</div><div class="topic-step-text">25 × 4 ＝ <b>100</b>。かけ算は順番やまとめ方を変えても答えは同じです。</div></div>
-                    <div class="topic-step" id="calc-example-step-3" hidden><div class="topic-step-num">3</div><div class="topic-step-text">100 × 13 ＝ <b>1300</b>。100をかけるだけなので簡単！<br>確認：25×13＝325、325×4＝1300。同じ答えです。<br><b>広げてみよう：</b>3つ以上の数のかけ算では、125×8など、きりのよい数になる組み合わせを探しましょう。</div></div>
+                <div class="topic-steps">
+                    <div class="topic-step"><div class="topic-step-num">1</div><div class="topic-step-text">25 × 4 ＝ <b>100</b>。かけ算は順番やまとめ方を変えても答えは同じです。</div></div>
+                    <div class="topic-step"><div class="topic-step-num">2</div><div class="topic-step-text">残りの計算は 100 × 13 ＝ <b>1300</b>。100をかけるだけなので簡単！<br>確認：25×13＝325、325×4＝1300。同じ答えです。<br><b>広げてみよう：</b>3つ以上の数のかけ算では、125×8など、きりのよい数になる組み合わせを探しましょう。</div></div>
                 </div>
-                <button id="calc-next-btn" class="topic-nav-btn prac" type="button" onclick="advanceCalcExample()">次へ：25 × 4 を計算</button>
-                <button class="calc-reset-btn" type="button" onclick="initCalcExample()">もう一度予測する</button>
             </div>
         </div>
+        <section class="topic-example-card" aria-labelledby="calc-comparison-title">
+            <div id="calc-comparison-title" class="topic-section-lbl">大変さのビフォーアフター</div>
+            <p class="calc-thinking">25 × 13 × 4。同じ計算でも、数のまとめ方で頭の中の大変さが変わります。</p>
+            <button id="calc-comparison-play" class="calc-reset-btn" type="button" onclick="playCalcComparison()">順番に見てみよう</button>
+            <div id="calc-comparison" class="topic-comparison" aria-live="polite" aria-atomic="false">
+                <div data-comparison-stage hidden>
+                    <div class="topic-concept-title"><span aria-hidden="true">🏋️</span> ふつうに解くと…</div>
+                    <div class="topic-steps">
+                        <div class="topic-step" data-comparison-stage hidden><div class="topic-step-num">1</div><div class="topic-step-text">25 × 13 ＝ <b>325</b><br>2けた同士をかけて、くり上がりも考える。</div></div>
+                        <div class="topic-step" data-comparison-stage hidden><div class="topic-step-num">2</div><div class="topic-step-text">325 × 4 ＝ <b>1300</b><br>3けたの数をかけて、またくり上がりを考える。</div></div>
+                    </div>
+                </div>
+                <div data-comparison-stage hidden>
+                    <div class="topic-concept-title"><span aria-hidden="true">🪶</span> くふうすると…</div>
+                    <div class="topic-steps">
+                        <div class="topic-step" data-comparison-stage hidden><div class="topic-step-num">1</div><div class="topic-step-text">25 × 4 ＝ <b>100</b><br>きりのよい組み合わせを見つける。</div></div>
+                        <div class="topic-step" data-comparison-stage hidden><div class="topic-step-num">2</div><div class="topic-step-text">100 × 13 ＝ <b>1300</b><br>100をかけるだけ！</div></div>
+                    </div>
+                </div>
+                <p class="calc-diagram" data-comparison-stage hidden>同じ2stepでも、頭の中の大変さはぜんぜん違う</p>
+            </div>
+        </section>
         <div id="trial-u6-calc"></div>
         <!-- 7. 演習問題への導線 -->
         <div id="u6-calc-nav" class="topic-nav-card">

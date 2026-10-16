@@ -47,7 +47,14 @@ test('comparison appears normal then clever, supports replay and retains exercis
     await expect(stages.nth(6)).toBeHidden();
     await expect(stages.nth(3)).toBeHidden();
     await expect(page.locator('#trial-u6-calc')).toContainText('体験');
-    await page.locator('#u6-calc-nav button').click();
+    // While trial problems exist, the static #u6-calc-nav card is intentionally
+    // hidden by the shared initTopicTrial() engine (see js/app.js); the route to
+    // practice goes through the trial flow's own "演習問題へ進む" link instead.
+    await expect(page.locator('#u6-calc-nav')).toBeHidden();
+    for (let i = 0; i < 3; i++) {
+        await page.locator('#trial-u6-calc .topic-trial-choice[data-is-correct="true"]').click();
+        await page.locator('#trial-next-u6-calc .topic-trial-next-btn').click();
+    }
     await expect(page.locator('#prac-prob-list-body')).toBeVisible();
 });
 

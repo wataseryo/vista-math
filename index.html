@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VISTA — 算数を、見える化する。</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calc-topic.css">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-39SS7PNZZC"></script>
     <script>
@@ -499,6 +500,90 @@
             </div>
             <button class="ch-submit-btn" onclick="checkSaltConfirm()">解答する</button>
             <div id="salt-quiz-result" style="display:none;margin-top:12px"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ════════ TOPIC: 計算・数の処理 ════════ -->
+<div id="u6-calc-screen" class="screen">
+    <div class="screen-header exam-header">
+        <button class="back-btn" onclick="vistaNavigation.back('exam')">← 単元一覧</button>
+        <span class="screen-title">🔢 計算・数の処理</span>
+    </div>
+    <div class="calc-topic-content">
+        <!-- 1. この単元で学ぶこと -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">この単元で学ぶこと</div>
+            <div class="topic-concept-text">計算を正確に、素早く行うための「くふう」と「逆算」を身につけます。四則混合の順序、通分・約分、概数・見積もり、単位換算、単位量あたりの考え方など、どの単元でも土台になる計算力をまとめて鍛えましょう。</div>
+        </div>
+        <!-- 2. 入試でどう出るか -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">入試でどう出るか</div>
+            <ul class="calc-topic-list">
+                <li>四則混合の計算（例：1.2＋3/4×8－2.5）</li>
+                <li>くふうして計算（例：25×13×4）</li>
+                <li>□を求める逆算（例：□×6－9＝39）</li>
+                <li>概数・見積もり（例：十の位まで四捨五入して380になる整数のうち、いちばん大きい数は？）</li>
+                <li>単位換算・単位量あたり（例：2.5m²は何cm²？／1m²あたりの肥料の量は？）</li>
+            </ul>
+        </div>
+        <!-- 3. 問題文の見分け方 -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">問題文の見分け方</div>
+            <div class="calc-topic-chips">
+                <span>くふうして</span><span>□にあてはまる数</span><span>四捨五入して</span><span>概数で</span><span>1m²あたり</span><span>何cm²・cm³</span><span>通分すると</span>
+            </div>
+        </div>
+        <!-- 4. 使う図・考え方 -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">使う図・考え方</div>
+            <div class="calc-thinking">
+                <p><b>くふう算：</b>かけると10・100・1000になる組み合わせを探そう。<br>25×4、125×8、50×2、20×5が役立ちます。</p>
+                <p><b>逆算：</b>着る順と脱ぐ順が逆になるように、式の「最後の操作」から戻します。</p>
+                <div class="calc-diagram" aria-label="逆算の流れ">□ → ×6 → −9 → 39<br>□ ← ÷6 ← ＋9 ← 39</div>
+                <p><b>単位換算：</b>1m＝100cm。面積は縦・横の2回、体積は縦・横・高さの3回かけます。</p>
+                <div class="calc-diagram">長さ　1m → 100cm<br>面積　1m² → 100×100＝10,000cm²<br>体積　1m³ → 100×100×100＝1,000,000cm³</div>
+            </div>
+        </div>
+        <!-- 5. よくあるミス -->
+        <div class="topic-concept-card">
+            <div class="topic-concept-title">よくあるミス</div>
+            <ul class="calc-mistakes">
+                <li>❗ かけ算・わり算を後回しにして、左から計算してしまう（かっこ→かけ算・わり算→たし算・ひき算の順）。</li>
+                <li>❗ 四捨五入の境界を見落とす（十の位までの概数では、385は切り上げて390になる）。</li>
+                <li>❗ 面積・体積も100倍にしてしまう（m²→cm²は10,000倍、m³→cm³は1,000,000倍）。</li>
+                <li>❗ 逆算を最初の操作から戻してしまう（最後の操作から戻そう）。</li>
+            </ul>
+        </div>
+        <!-- 6. 基本例題・予測→確認 -->
+        <div class="topic-example-card">
+            <div class="topic-section-lbl">基本例題</div>
+            <div class="topic-example-q">25 × 13 × 4 を、くふうして計算しよう。</div>
+            <div class="calc-predict-card">
+                <p><b>どうなると思う？</b><br>どの2つを先にかけると楽？ 自分で予測して選ぼう。</p>
+                <div class="calc-predict-options" role="group" aria-label="先にかける2つの数">
+                    <button type="button" onclick="selectCalcPrediction('25-13')" aria-pressed="false" data-calc-pair="25-13">25 × 13</button>
+                    <button type="button" onclick="selectCalcPrediction('25-4')" aria-pressed="false" data-calc-pair="25-4">25 × 4</button>
+                    <button type="button" onclick="selectCalcPrediction('13-4')" aria-pressed="false" data-calc-pair="13-4">13 × 4</button>
+                </div>
+                <button id="calc-confirm-btn" class="topic-nav-btn prac" type="button" onclick="advanceCalcExample()" disabled>予測を選んで答え合わせ</button>
+            </div>
+            <div id="calc-example-reveal" hidden>
+                <div id="calc-example-formula" class="calc-example-formula" aria-label="25と4を先にかける"><span class="calc-factor">25</span> × 13 × <span class="calc-factor">4</span></div>
+                <div class="topic-steps" aria-live="polite">
+                    <div class="topic-step" id="calc-example-step-1" hidden><div class="topic-step-num">1</div><div class="topic-step-text" id="calc-prediction-feedback"></div></div>
+                    <div class="topic-step" id="calc-example-step-2" hidden><div class="topic-step-num">2</div><div class="topic-step-text">25 × 4 ＝ <b>100</b>。かけ算は順番やまとめ方を変えても答えは同じです。</div></div>
+                    <div class="topic-step" id="calc-example-step-3" hidden><div class="topic-step-num">3</div><div class="topic-step-text">100 × 13 ＝ <b>1300</b>。100をかけるだけなので簡単！<br>確認：25×13＝325、325×4＝1300。同じ答えです。<br><b>広げてみよう：</b>3つ以上の数のかけ算では、125×8など、きりのよい数になる組み合わせを探しましょう。</div></div>
+                </div>
+                <button id="calc-next-btn" class="topic-nav-btn prac" type="button" onclick="advanceCalcExample()">次へ：25 × 4 を計算</button>
+                <button class="calc-reset-btn" type="button" onclick="initCalcExample()">もう一度予測する</button>
+            </div>
+        </div>
+        <div id="trial-u6-calc"></div>
+        <!-- 7. 演習問題への導線 -->
+        <div id="u6-calc-nav" class="topic-nav-card">
+            <div class="topic-nav-label">理解できたら演習問題に挑戦しよう</div>
+            <button class="topic-nav-btn prac" onclick="openUnitPractice('u6-calc')">演習問題を解く →</button>
         </div>
     </div>
 </div>

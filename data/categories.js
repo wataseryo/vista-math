@@ -54,7 +54,7 @@ const EXAM_UNITS_G5 = [
 ];
 /* 8分野構成 ── 6年生 */
 const EXAM_UNITS_G6 = [
-    { id: 'u6-calc',    num: '①', icon: '🔢', title: '計算・数の処理',   sub: '逆算・条件付き計算・工夫した計算',            difficulty: 2, categories: ['計算'],                                    count: 0,  available: false },
+    { id: 'u6-calc',    num: '①', icon: '🔢', title: '計算・数の処理',   sub: '逆算・条件付き計算・工夫した計算',            difficulty: 2, categories: ['計算'],                                    count: 0,  available: true, topicScreen: 'u6-calc' },
     { id: 'u6-number',  num: '②', icon: '🔍', title: '数・規則・論理',   sub: '約数・余り・規則性・推理・場合分け',          difficulty: 4, categories: ['数の性質','規則性'],                       count: 0,  available: false },
     { id: 'u6-ratio',   num: '③', icon: '⚖️', title: '割合・比の完成',   sub: '連比・相当算・売買・濃度・比融合問題',        difficulty: 5, categories: ['割合','比','割合の基本','売買損益','相当算','倍数算','仕事算','ニュートン算'],  count: 20, available: true, topicScreen: 'u6-ratio'   },
     // u6-salt は u6-ratio の下位単元（食塩水専用トピック）。

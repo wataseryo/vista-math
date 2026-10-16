@@ -465,6 +465,7 @@ function showScreen(id, opts={}) {
     if (id === 'recommended-review')   { renderRecommendedReview(); }
     if (id === 'report')               { renderReport(); }
     if (id === 'salt') { saltConfirmState.answered = false; document.getElementById('salt-quiz-result').style.display = 'none'; }
+    if (id === 'u6-calc')    { initTopicTrial('u6-calc'); initCalcExample(); }
     if (id === 'u6-ratio')   { initTopicTrial('u6-ratio'); }
     if (id === 'u6-speed')   { initTopicTrial('u6-speed'); }
     if (id === 'u6-plane')   { initTopicTrial('u6-plane'); switchPlaneTab('parallelogram'); }
@@ -2275,3 +2276,57 @@ document.addEventListener('DOMContentLoaded', () => {
     if (chAnsInput) chAnsInput.addEventListener('keydown', e => { if(e.key==='Enter') chSubmitAnswer(); });
     updateStarBadge();
 });
+
+// 計算・数の処理：予測してから、自分のペースで3段階を確かめる。
+const calcExampleState = { prediction: null, step: 0 };
+
+function initCalcExample() {
+    calcExampleState.prediction = null;
+    calcExampleState.step = 0;
+    document.querySelectorAll('[data-calc-pair]').forEach(button => {
+        button.setAttribute('aria-pressed', 'false');
+        button.disabled = false;
+    });
+    const confirm = document.getElementById('calc-confirm-btn');
+    confirm.disabled = true;
+    confirm.hidden = false;
+    confirm.textContent = '予測を選んで答え合わせ';
+    document.getElementById('calc-example-reveal').hidden = true;
+    for (let step = 1; step <= 3; step++) document.getElementById('calc-example-step-' + step).hidden = true;
+    document.getElementById('calc-example-formula').innerHTML = '<span class="calc-factor">25</span> × 13 × <span class="calc-factor">4</span>';
+    const next = document.getElementById('calc-next-btn');
+    next.hidden = false;
+    next.textContent = '次へ：25 × 4 を計算';
+}
+
+function selectCalcPrediction(pair) {
+    if (calcExampleState.step !== 0) return;
+    calcExampleState.prediction = pair;
+    document.querySelectorAll('[data-calc-pair]').forEach(button => {
+        button.setAttribute('aria-pressed', String(button.dataset.calcPair === pair));
+    });
+    const confirm = document.getElementById('calc-confirm-btn');
+    confirm.disabled = false;
+    confirm.textContent = '答え合わせ：楽な組み合わせを見る';
+}
+
+function advanceCalcExample() {
+    if (!calcExampleState.prediction || calcExampleState.step >= 3) return;
+    const step = ++calcExampleState.step;
+    document.getElementById('calc-example-reveal').hidden = false;
+    document.getElementById('calc-example-step-' + step).hidden = false;
+    const next = document.getElementById('calc-next-btn');
+    if (step === 1) {
+        document.getElementById('calc-confirm-btn').hidden = true;
+        document.querySelectorAll('[data-calc-pair]').forEach(button => { button.disabled = true; });
+        document.getElementById('calc-prediction-feedback').textContent =
+            (calcExampleState.prediction === '25-4' ? 'その通り！' : 'その順番でも計算できます。もっと楽にするには、') +
+            '25と4に注目。先にかけると、きりのよい数になります。';
+    } else if (step === 2) {
+        document.getElementById('calc-example-formula').innerHTML = '<span class="calc-factor">100</span> × 13';
+        next.textContent = '次へ：100 × 13 と答えを確認';
+    } else {
+        document.getElementById('calc-example-formula').textContent = '100 × 13 ＝ 1300';
+        next.hidden = true;
+    }
+}

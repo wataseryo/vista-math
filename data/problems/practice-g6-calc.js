@@ -32,6 +32,7 @@ const PRACTICE_G6_CALC = [
   3/4 ＝ 0.75 として計算しても 1.2 ＋ 0.75×8 － 2.5 ＝ 1.2＋6－2.5 ＝ 4.7 ✓
 
 答え：4.7`,
+  topicUnitId: 'u6-calc',
   tags: ['計算', '四則混合'],
 },
 
@@ -66,6 +67,7 @@ const PRACTICE_G6_CALC = [
   10/12 を約分すると 10÷2/12÷2 ＝ 5/6 ✓
 
 答え：12`,
+  topicUnitId: 'u6-calc',
   tags: ['計算', '通分'],
 },
 
@@ -100,6 +102,7 @@ const PRACTICE_G6_CALC = [
   ÷1/2 は「2倍すること」と同じなので、4÷1/2＝8 は正しい ✓
 
 答え：16`,
+  topicUnitId: 'u6-calc',
   tags: ['計算', '逆数', 'かっこ'],
 },
 
@@ -130,6 +133,7 @@ const PRACTICE_G6_CALC = [
   ふつうの順番で計算しても 25×13＝325、325×4＝1300 ✓ 同じ答えになる
 
 答え：1300`,
+  topicUnitId: 'u6-calc',
   tags: ['計算', 'くふう算'],
 },
 
@@ -163,6 +167,7 @@ const PRACTICE_G6_CALC = [
   8×6－9＝48－9＝39 ✓
 
 答え：8`,
+  topicUnitId: 'u6-calc',
   tags: ['計算', '逆算'],
 },
 
@@ -196,6 +201,7 @@ const PRACTICE_G6_CALC = [
   385を四捨五入→一の位5は切り上げ→390（条件に合わない）
 
 答え：384`,
+  topicUnitId: 'u6-calc',
   tags: ['計算', '概数', '四捨五入'],
 },
 
@@ -226,6 +232,7 @@ const PRACTICE_G6_CALC = [
   25000cm² ÷ 10000 ＝ 2.5m² ✓
 
 答え：25000cm²`,
+  topicUnitId: 'u6-calc',
   tags: ['計算', '単位換算', '面積'],
 },
 
@@ -257,6 +264,7 @@ const PRACTICE_G6_CALC = [
   実際に198×51を計算すると10098になり、見積もりの10000に近い数になる ✓
 
 答え：10000`,
+  topicUnitId: 'u6-calc',
   tags: ['計算', '見積もり', '概数'],
 },
 
@@ -288,6 +296,7 @@ const PRACTICE_G6_CALC = [
   5kg × 60m² ＝ 300kg ✓
 
 答え：5kg`,
+  topicUnitId: 'u6-calc',
   tags: ['計算', '単位量あたり'],
 },
 

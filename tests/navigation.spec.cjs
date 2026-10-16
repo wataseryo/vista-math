@@ -26,7 +26,7 @@ test.describe('learning routes', () => {
             const title = await page.locator('#prac-screen-title').textContent();
             await page.locator('#prac-ans-input').fill('123');
             const before = await records(page);
-            await page.locator('.btn-prac-topic').click();
+            await page.locator('.prac-topic-link').click();
             const back = page.locator('#problem-return-button');
             await expect(back).toBeVisible();
             const box = await back.boundingBox();
@@ -47,7 +47,7 @@ test.describe('learning routes', () => {
             const before = await records(page);
             expect(Object.values(JSON.parse(before.vista_stats)).reduce((total, row) => total + row.total, 0)).toBe(1);
             expect(Object.values(JSON.parse(before.vista_history)).reduce((total, row) => total + row.length, 0)).toBe(1);
-            await page.locator('.btn-prac-topic').click();
+            await page.locator('.prac-topic-link').click();
             await page.locator('#problem-return-button').click();
             await expect(page.locator('#prac-result-box')).toBeVisible();
             await expect(page.locator('#prac-result-box')).toContainText('正解');

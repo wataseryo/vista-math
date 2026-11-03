@@ -1026,3 +1026,22 @@
         }
         .plane-predict-icon { font-size:1.4rem; line-height:1; flex-shrink:0; }
         .plane-predict-text { font-size:.88rem; color:#5D4037; line-height:1.7; }
+
+/* 平行線にはさまれた折れ角。既存の面積タブとは独立した追加例題。 */
+#plane-angle-example [hidden] { display:none !important; }
+.plane-angle-svg { width:100%; max-width:400px; display:block; margin:0 auto; background:#f8fafc; border-radius:12px; }
+.plane-angle-status { font-size:.88rem; line-height:1.6; color:#475569; }
+.plane-angle-actions { display:flex; flex-wrap:wrap; gap:4px; margin:12px 0; }
+.plane-angle-actions button { min-height:44px; margin:0; }
+.plane-angle-actions button:focus-visible { outline:3px solid #7c3aed; outline-offset:3px; }
+.plane-angle-actions button:disabled { background:#e2e8f0; color:#475569; cursor:default; }
+.plane-angle-comparison { margin-top:18px; border-top:1px solid #e2e8f0; padding-top:16px; }
+.plane-angle-comparison-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; font-size:.85rem; line-height:1.65; }
+.plane-angle-before, .plane-angle-after { padding:12px; border-radius:10px; }
+.plane-angle-before { background:#f1f5f9; color:#334155; }
+.plane-angle-after { background:#ecfdf5; color:#14532d; }
+.plane-angle-comparison p { margin:8px 0 0; }
+.plane-angle-drawing .plane-angle-guide-line { animation:plane-angle-line .6s ease-out both; }
+@keyframes plane-angle-line { from { clip-path:inset(0 100% 0 0); } to { clip-path:inset(0 0 0 0); } }
+@media (max-width:480px) { .plane-angle-comparison-grid { grid-template-columns:1fr; } }
+@media (prefers-reduced-motion:reduce) { .plane-angle-drawing .plane-angle-guide-line { animation:none; } }

@@ -1031,6 +1031,67 @@
             </div>
         </div>
 
+        <!-- 追加基本例題: 平行線にはさまれた折れ角 -->
+        <section id="plane-angle-example" class="topic-example-card" aria-labelledby="plane-angle-title">
+            <div class="topic-section-lbl">基本例題</div>
+            <h2 id="plane-angle-title" class="topic-concept-title">平行線にはさまれた折れ角</h2>
+            <p class="topic-example-q">2本の平行な直線ℓ、mの間で道が折れ曲がっています。曲がり角xは何度ですか。</p>
+            <div class="plane-predict-card">
+                <span class="plane-predict-icon" aria-hidden="true">🤔</span>
+                <div class="plane-predict-text"><b>どうなると思う？</b><br>曲がり角を通る平行な補助線を引くと、角xはどう分かれるか。</div>
+            </div>
+            <p id="plane-angle-status" class="plane-angle-status" role="status" aria-live="polite">ふつうに求めようとすると… 角xの手がかりがない。</p>
+            <svg id="plane-angle-svg" class="plane-angle-svg" viewBox="0 0 360 300" role="img" aria-labelledby="plane-angle-svg-title plane-angle-svg-desc">
+                <title id="plane-angle-svg-title">平行線ℓ、mにはさまれた折れ角x</title>
+                <desc id="plane-angle-svg-desc">上の直線ℓとの角は50度、下の直線mとの角は35度。折れ線の曲がり角xを求める。</desc>
+                <g fill="none" stroke="#475569" stroke-width="2.5">
+                    <path d="M25 40 H330 M25 260 H330"/>
+                    <path d="M128 40 L220 150 L63 260" stroke="#334155" stroke-width="4" stroke-linejoin="round"/>
+                    <path d="M158 40 A30 30 0 0 1 147.3 63" stroke="#1565c0"/>
+                    <path d="M93 260 A30 30 0 0 0 87.6 242.8" stroke="#a84900"/>
+                </g>
+                <g font-size="19" font-weight="bold">
+                    <text x="337" y="46" fill="#334155">ℓ</text><text x="337" y="266" fill="#334155">m</text>
+                    <text x="167" y="65" fill="#1565c0">50°</text><text x="103" y="246" fill="#a84900">35°</text>
+                </g>
+                <g id="plane-angle-guide" hidden>
+                    <path class="plane-angle-guide-line" d="M25 150 H330" fill="none" stroke="#7c3aed" stroke-width="2.5" stroke-dasharray="7 5"/>
+                    <text x="270" y="138" fill="#6d28d9" font-size="14">補助線</text>
+                </g>
+                <g id="plane-angle-split" hidden>
+                    <path d="M220 150 L194.3 119.4 A40 40 0 0 0 180 150 Z" fill="#dbeafe" stroke="#1565c0" stroke-width="2"/>
+                    <path d="M220 150 H180 A40 40 0 0 0 187.2 172.9 Z" fill="#ffedd5" stroke="#a84900" stroke-width="2"/>
+                    <text x="153" y="130" fill="#1565c0" font-size="17" font-weight="bold">50°</text>
+                    <text x="145" y="185" fill="#a84900" font-size="17" font-weight="bold">35°</text>
+                </g>
+                <path d="M178.2 100.2 A65 65 0 0 0 166.8 187.3" fill="none" stroke="#be185d" stroke-width="2"/>
+                <text x="130" y="158" fill="#be185d" font-size="23" font-weight="bold">x</text>
+                <text x="270" y="289" fill="#64748b" font-size="13">ℓ ∥ m</text>
+            </svg>
+            <div class="plane-angle-actions">
+                <button id="plane-angle-play" class="plane-anim-btn play" type="button" onclick="playPlaneAngleExample()" aria-controls="plane-angle-reveal" aria-expanded="false">補助線を引いてみる</button>
+                <button id="plane-angle-reset" class="plane-anim-btn reset" type="button" onclick="resetPlaneAngleExample(true)">もう一度見る</button>
+            </div>
+            <div id="plane-angle-discovery" class="topic-discovery" role="status" hidden>
+                <span class="topic-discovery-character" aria-hidden="true">🦉</span><span>角が2つに分かれた！</span><span class="topic-discovery-sparkle" aria-hidden="true">✦ ✧ ✦</span>
+            </div>
+            <div id="plane-angle-reveal" hidden>
+                <div class="topic-steps">
+                    <div class="topic-step"><div class="topic-step-num">①</div><div class="topic-step-text">曲がり角を通り、ℓ、mに平行な補助線を引く。</div></div>
+                    <div class="topic-step"><div class="topic-step-num">②</div><div class="topic-step-text">上側の角は、50°の角と錯角なので<b>50°</b>。</div></div>
+                    <div class="topic-step"><div class="topic-step-num">③</div><div class="topic-step-text">下側の角は、35°の角と錯角なので<b>35°</b>。</div></div>
+                    <div class="topic-step"><div class="topic-step-num">④</div><div class="topic-step-text">2つの角を足す。<b>x＝50＋35＝85°</b>。</div></div>
+                </div>
+            </div>
+            <section class="plane-angle-comparison" aria-labelledby="plane-angle-comparison-title">
+                <h3 id="plane-angle-comparison-title" class="topic-concept-title">大変さのビフォーアフター</h3>
+                <div class="plane-angle-comparison-grid">
+                    <div class="plane-angle-before"><b>補助線なし → 手がかりなし</b><p>角xに使える角が見つからず、手が止まる。</p></div>
+                    <div class="plane-angle-after"><b>補助線あり → 2step</b><p id="plane-angle-comparison-pending">補助線による角の分かれ方を確認すると、手順が表示される。</p><div id="plane-angle-comparison-after" hidden><p>1. 錯角から、50°と35°が分かる。</p><p>2. 2つの角を足す。50＋35＝85°。</p></div></div>
+                </div>
+            </section>
+        </section>
+
         <!-- 体験問題セクション -->
         <div id="trial-u6-plane"></div>
 

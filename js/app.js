@@ -468,7 +468,7 @@ function showScreen(id, opts={}) {
     if (id === 'u6-calc')    { initTopicTrial('u6-calc'); initCalcExample(); resetCalcComparison(); }
     if (id === 'u6-ratio')   { initTopicTrial('u6-ratio'); }
     if (id === 'u6-speed')   { initTopicTrial('u6-speed'); }
-    if (id === 'u6-plane')   { initTopicTrial('u6-plane'); switchPlaneTab('parallelogram'); }
+    if (id === 'u6-plane')   { initTopicTrial('u6-plane'); switchPlaneTab('parallelogram'); resetPlaneAngleExample(); }
     if (id === 'u6-special') { initTopicTrial('u6-special'); }
     if (id === 'challenges') {
         if (opts.unitTitle) document.getElementById('ch-screen-title').textContent = opts.unitTitle;
@@ -2370,5 +2370,53 @@ document.addEventListener('DOMContentLoaded', () => {
             calcPairSequence.cancel();
             calcComparisonSequence.cancel();
         }
+    }).observe(screen, { attributes: true, attributeFilter: ['class'] });
+});
+
+// 折れ角は、補助線を引く段階と錯角を確認する段階に分ける。
+const planeAngleSequence = createTopicSequence();
+function resetPlaneAngleExample(focusFirst = false) {
+    planeAngleSequence.cancel();
+    ['plane-angle-guide', 'plane-angle-split', 'plane-angle-discovery', 'plane-angle-reveal', 'plane-angle-comparison-after'].forEach(id => {
+        document.getElementById(id).toggleAttribute('hidden', true);
+    });
+    document.getElementById('plane-angle-comparison-pending').toggleAttribute('hidden', false);
+    document.getElementById('plane-angle-svg').classList.remove('plane-angle-drawing');
+    document.getElementById('plane-angle-svg-desc').textContent = '上の直線ℓとの角は50度、下の直線mとの角は35度。折れ線の曲がり角xを求める。';
+    document.getElementById('plane-angle-status').textContent = 'ふつうに求めようとすると… 角xの手がかりがない。';
+    const play = document.getElementById('plane-angle-play');
+    play.disabled = false;
+    play.setAttribute('aria-expanded', 'false');
+    if (focusFirst) play.focus();
+}
+function playPlaneAngleExample() {
+    resetPlaneAngleExample();
+    const play = document.getElementById('plane-angle-play');
+    play.disabled = true;
+    document.getElementById('plane-angle-guide').toggleAttribute('hidden', false);
+    document.getElementById('plane-angle-status').textContent = '① 曲がり角を通る、ℓ、mに平行な補助線。';
+    const split = () => {
+        document.getElementById('plane-angle-split').toggleAttribute('hidden', false);
+        document.getElementById('plane-angle-status').textContent = '②・③ 錯角で、上側は50°、下側は35°。';
+    };
+    const reveal = () => {
+        ['plane-angle-discovery', 'plane-angle-reveal', 'plane-angle-comparison-after'].forEach(id => { document.getElementById(id).toggleAttribute('hidden', false); });
+        document.getElementById('plane-angle-comparison-pending').toggleAttribute('hidden', true);
+        document.getElementById('plane-angle-svg-desc').textContent = '曲がり角を通る平行な補助線で、角xは錯角の50度と35度に分かれる。xは85度。';
+        document.getElementById('plane-angle-status').textContent = '④ x＝50＋35＝85°。';
+        play.setAttribute('aria-expanded', 'true');
+        document.getElementById('plane-angle-svg').classList.remove('plane-angle-drawing');
+    };
+    if (topicReducedMotion()) { split(); reveal(); }
+    else {
+        document.getElementById('plane-angle-svg').classList.add('plane-angle-drawing');
+        planeAngleSequence.after(600, split);
+        planeAngleSequence.after(1000, reveal);
+    }
+}
+document.addEventListener('DOMContentLoaded', () => {
+    const screen = document.getElementById('u6-plane-screen');
+    new MutationObserver(() => {
+        if (!screen.classList.contains('active')) resetPlaneAngleExample();
     }).observe(screen, { attributes: true, attributeFilter: ['class'] });
 });

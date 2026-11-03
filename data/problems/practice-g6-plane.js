@@ -809,4 +809,79 @@ const PRACTICE_G6_PLANE = [
     </svg>`,
   },
 },
+
+{
+  id: 'g6_plane_016',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '平行線と角度', pattern: '補助線で角を分解',
+  difficulty: 2, answerType: 'number', answerUnit: '度',
+  title: '平行線にはさまれた折れ角',
+  text: '下の図のように、2本の平行な直線ℓ、mの間で道が折れ曲がっています。\n曲がり角xは何度ですか。',
+  answer: 85,
+  hint: '曲がり角を通り、ℓ・mに平行な補助線を引くと、角xは2つの角に分かれる。',
+  solution: `【ポイント】
+曲がり角を通り、ℓ・mに平行な補助線を引くと、角xは2つの角に分かれる。
+
+【解説】
+① 曲がり角を通り、ℓ、mと平行な補助線を引く。角xは補助線によって2つの角に分かれる。
+② 上側の角は、ℓと補助線が平行なので、50°の錯角として50°になる。
+③ 下側の角は、mと補助線が平行なので、35°の錯角として35°になる。
+④ x ＝ 50°＋35°＝85°
+
+【広げてみよう】
+平行線を増やして知っている角に分解するこの考え方は、Z字型・N字型のどんな折れ線にも使える。平面図形の角度問題のほとんどで登場する。
+
+【確認】
+補助線で分けた2つの角を足すと、50°＋35°＝85°。もとの折れ角と一致する。
+
+答え：85°`,
+  tags: ['平面図形', '角度', '平行線', '錯角'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 220 170" width="100%" style="max-width:260px;display:block;margin:0 auto" role="img" aria-label="平行な2直線ℓ、mの間で折れ曲がる角xの図">
+      <line x1="10" y1="30" x2="210" y2="30" stroke="#1a1a2e" stroke-width="2"/>
+      <line x1="10" y1="140" x2="210" y2="140" stroke="#1a1a2e" stroke-width="2"/>
+      <polyline points="60,30 130,85 70,140" fill="none" stroke="#1565C0" stroke-width="3"/>
+      <text x="64" y="24" font-size="13" fill="#1a1a2e">ℓ</text>
+      <text x="64" y="156" font-size="13" fill="#1a1a2e">m</text>
+      <text x="30" y="46" font-size="12" fill="#555">50°</text>
+      <text x="32" y="132" font-size="12" fill="#555">35°</text>
+      <text x="134" y="82" font-size="14" fill="#E53935" font-weight="bold">x</text>
+    </svg>`,
+  },
+},
+
+{
+  id: 'g6_plane_017',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '多角形の内角・外角', pattern: '内角の和の公式',
+  difficulty: 2, answerType: 'number', answerUnit: '度',
+  title: '正八角形の内角',
+  text: '正八角形は、どの辺の長さも、どの内角の大きさも、それぞれ等しい図形です。\n正八角形の1つの内角の大きさを求めなさい。',
+  answer: 135,
+  hint: '多角形の内角の和 ＝（辺の数－2）×180°。正多角形は内角の和を辺の数で割ると1つ分の大きさになる。',
+  solution: `【ポイント】
+多角形の内角の和は、（辺の数－2）×180°で求められる。正多角形はすべての内角が等しいので、内角の和を辺の数で割ると1つの内角がわかる。
+
+【解説】
+① 正八角形は辺が8つあるので、内角の和は（8－2）×180＝1080°。
+② 正八角形はすべての内角が等しいので、1080°を8で割ると1つの内角がわかる。
+③ 1080÷8＝135°。
+
+【広げてみよう】
+「（辺の数－2）×180°」という内角の和の公式は、三角形（3－2＝1、180°）や四角形（4－2＝2、360°）でも同じしくみで成り立つ。多角形は、1つの頂点から対角線を引くと三角形に分けられることから導ける。
+
+【確認】
+多角形の外角の和はどんな多角形でも360°。正八角形の1つの外角は360÷8＝45°。内角と外角を足すと180°になるので、135＋45＝180°で一致する。
+
+答え：135°`,
+  tags: ['平面図形', '角度', '多角形', '正多角形'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 160 160" width="100%" style="max-width:220px;display:block;margin:0 auto" role="img" aria-label="正八角形の図、1つの内角に？マーク">
+      <polygon points="55.1,20 104.9,20 140,55.1 140,104.9 104.9,140 55.1,140 20,104.9 20,55.1" fill="#FFE0B2" stroke="#E65100" stroke-width="2"/>
+      <text x="123" y="48" font-size="14" fill="#E53935" font-weight="bold">？</text>
+    </svg>`,
+  },
+},
 ];

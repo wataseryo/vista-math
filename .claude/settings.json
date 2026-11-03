@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/Users/wataseryo/教育アプリ/*)",
+      "Read(/Users/wataseryo/ryo claude code/.company/research/*)",
+      "Edit(index.html)",
+      "Edit(landing.html)",
+      "Edit(js/*)",
+      "Edit(data/*)",
+      "Write(specs/*)",
+      "Write(sprints/*)",
+      "Write(js/*)",
+      "Write(data/*)",
+      "Edit(specs/*)",
+      "Edit(sprints/*)",
+      "Edit(TODO.md)",
+      "Write(TODO.md)",
+      "Bash(git add index.html)",
+      "Bash(git add landing.html)",
+      "Bash(git add js/*)",
+      "Bash(git add data/*)",
+      "Bash(git add specs/*)",
+      "Bash(git add sprints/*)",
+      "Bash(git add TODO.md)",
+      "Bash(git add CLAUDE.md)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(open index.html)"
+    ],
+    "deny": [
+      "Bash(git add .)",
+      "Bash(git add -A:*)"
+    ]
+  }
+}

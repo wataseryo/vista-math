@@ -493,8 +493,263 @@ function wireRotateVisual(prefix) {
     resetBtn.addEventListener('click', reset);
     return reset;
 }
+function wireSubtractVisual(prefix) {
+    const seqSub = createTopicSequence();
+    const part = document.getElementById(prefix + '-part');
+    const status = document.getElementById(prefix + '-status');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqSub.cancel();
+        part.classList.remove('highlight', 'removed');
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const highlight = () => { part.classList.add('highlight'); status.textContent = '① 欠けている部分を見つける。'; };
+        const remove = () => { part.classList.add('removed'); status.textContent = '② 全体から、その部分を引く。'; };
+        const done = () => { result.classList.add('visible'); status.textContent = '③ 残りの面積が求まった。'; };
+        if (topicReducedMotion()) { highlight(); remove(); done(); return; }
+        highlight();
+        seqSub.after(700, remove);
+        seqSub.after(1400, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
+function wireDiagonalVisual(prefix) {
+    const seqDi = createTopicSequence();
+    const dup = document.getElementById(prefix + '-dup');
+    const status = document.getElementById(prefix + '-status');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqDi.cancel();
+        dup.classList.remove('rotated');
+        dup.toggleAttribute('hidden', true);
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const show = () => { dup.toggleAttribute('hidden', false); status.textContent = '① 片方の三角形を重ねて用意する。'; };
+        const rotate = () => { dup.classList.add('rotated'); status.textContent = '② 交点を中心に180°回転させる。'; };
+        const done = () => { result.classList.add('visible'); status.textContent = '③ ぴったり重なった → 面積が等しい。'; };
+        if (topicReducedMotion()) { show(); rotate(); done(); return; }
+        show();
+        seqDi.after(600, rotate);
+        seqDi.after(1500, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
+function wireHeightRatioVisual(prefix) {
+    const seqHr = createTopicSequence();
+    const guide = document.getElementById(prefix + '-guide');
+    const status = document.getElementById(prefix + '-status');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqHr.cancel();
+        guide.toggleAttribute('hidden', true);
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const show = () => { guide.toggleAttribute('hidden', false); status.textContent = '① 2つの三角形は、同じ高さを共有している。'; };
+        const done = () => { result.classList.add('visible'); status.textContent = '② 底辺の比がそのまま面積の比になる。'; };
+        if (topicReducedMotion()) { show(); done(); return; }
+        show();
+        seqHr.after(900, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
+function wireComposeVisual(prefix) {
+    const seqCo = createTopicSequence();
+    const partA = document.getElementById(prefix + '-a');
+    const partB = document.getElementById(prefix + '-b');
+    const status = document.getElementById(prefix + '-status');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqCo.cancel();
+        partA.classList.remove('on');
+        partB.classList.remove('on');
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const a = () => { partA.classList.add('on'); status.textContent = '① まず三角形の部分。'; };
+        const b = () => { partB.classList.add('on'); status.textContent = '② 次に台形の部分。'; };
+        const done = () => { result.classList.add('visible'); status.textContent = '③ 2つを足して全体の面積。'; };
+        if (topicReducedMotion()) { a(); b(); done(); return; }
+        a();
+        seqCo.after(700, b);
+        seqCo.after(1400, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
+function wireSqueezeVisual(prefix) {
+    const seqSq = createTopicSequence();
+    const shape = document.getElementById(prefix + '-para');
+    const labelBefore = document.getElementById(prefix + '-label-before');
+    const labelAfter = document.getElementById(prefix + '-label-after');
+    const status = document.getElementById(prefix + '-status');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqSq.cancel();
+        shape.classList.remove('squeezed');
+        labelBefore.toggleAttribute('hidden', false);
+        labelAfter.toggleAttribute('hidden', true);
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const squeeze = () => { shape.classList.add('squeezed'); labelBefore.toggleAttribute('hidden', true); labelAfter.toggleAttribute('hidden', false); status.textContent = '① 底辺を変えずに、高さだけを低くする。'; };
+        const done = () => { result.classList.add('visible'); status.textContent = '② 三角形と同じ面積になった。'; };
+        if (topicReducedMotion()) { squeeze(); done(); return; }
+        squeeze();
+        seqSq.after(900, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
+function wireSplitVisual(prefix) {
+    const seqSp = createTopicSequence();
+    const line = document.getElementById(prefix + '-cevian');
+    const half1 = document.getElementById(prefix + '-half1');
+    const half2 = document.getElementById(prefix + '-half2');
+    const status = document.getElementById(prefix + '-status');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqSp.cancel();
+        line.toggleAttribute('hidden', true);
+        half1.classList.remove('on');
+        half2.classList.remove('on');
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const split = () => { line.toggleAttribute('hidden', false); status.textContent = '① 底辺の真ん中から頂点へ線を引いて2つに分ける。'; };
+        const highlight = () => { half1.classList.add('on'); half2.classList.add('on'); status.textContent = '② どちらもBと同じ底辺・同じ高さ。'; };
+        const done = () => { result.classList.add('visible'); status.textContent = '③ 2つ分で面積も2倍。'; };
+        if (topicReducedMotion()) { split(); highlight(); done(); return; }
+        split();
+        seqSp.after(700, highlight);
+        seqSp.after(1400, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
+function wireSequentialReveal(prefix, total, doneStatus) {
+    const seqRv = createTopicSequence();
+    const cells = Array.from({ length: total }, (_, i) => document.getElementById(prefix + '-cell-' + i));
+    const counter = document.getElementById(prefix + '-count');
+    const status = document.getElementById(prefix + '-status');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqRv.cancel();
+        cells.forEach(c => c.classList.remove('shown'));
+        counter.textContent = '0 / ' + total;
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        if (topicReducedMotion()) {
+            cells.forEach(c => c.classList.add('shown'));
+            counter.textContent = total + ' / ' + total;
+            result.classList.add('visible');
+            status.textContent = doneStatus;
+            return;
+        }
+        cells.forEach((c, i) => {
+            seqRv.after(150 * (i + 1), () => { c.classList.add('shown'); counter.textContent = (i + 1) + ' / ' + total; });
+        });
+        seqRv.after(150 * total + 500, () => { result.classList.add('visible'); status.textContent = doneStatus; });
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
+function wireAngleRevealVisual(prefix) {
+    const seqAn = createTopicSequence();
+    const guide = document.getElementById(prefix + '-guide');
+    const labels = document.getElementById(prefix + '-labels');
+    const status = document.getElementById(prefix + '-status');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqAn.cancel();
+        guide.toggleAttribute('hidden', true);
+        labels.toggleAttribute('hidden', true);
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const show = () => { guide.toggleAttribute('hidden', false); status.textContent = '① 曲がり角を通る平行な補助線を引く。'; };
+        const split = () => { labels.toggleAttribute('hidden', false); status.textContent = '② 錯角で50°と35°に分かれる。'; };
+        const done = () => { result.classList.add('visible'); status.textContent = '③ 50＋35＝85°。'; };
+        if (topicReducedMotion()) { show(); split(); done(); return; }
+        show();
+        seqAn.after(600, split);
+        seqAn.after(1300, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
 const PLANE_EXPAND_VISUALS = {
-    'parallelogram-cut': {
+    'parallelogram-cut': d => ({
         html: `<div class="plane-expand-stage">
             <svg viewBox="0 0 360 210" style="width:100%;max-width:320px;display:block" role="img" aria-labelledby="pe-pc-title pe-pc-desc">
                 <title id="pe-pc-title">平行四辺形を切り貼りして長方形にする図</title>
@@ -504,8 +759,8 @@ const PLANE_EXPAND_VISUALS = {
                 <g id="pe-pc-cutline" hidden><line x1="100" y1="40" x2="100" y2="160" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 5"/></g>
                 <g id="pe-pc-rect" hidden fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 5"><polygon points="100,160 300,160 300,40 100,40"/></g>
                 <g font-size="13" fill="#666">
-                    <text x="180" y="186" text-anchor="middle">底辺12cm</text>
-                    <text x="318" y="104" text-anchor="middle" transform="rotate(-90 318 104)">高さ7cm</text>
+                    <text x="180" y="186" text-anchor="middle">底辺${d.base}cm</text>
+                    <text x="318" y="104" text-anchor="middle" transform="rotate(-90 318 104)">高さ${d.height}cm</text>
                 </g>
             </svg>
             <div class="plane-expand-actions">
@@ -513,22 +768,22 @@ const PLANE_EXPAND_VISUALS = {
                 <button type="button" class="plane-anim-btn reset" id="pe-pc-reset">もう一度</button>
             </div>
             <div class="plane-expand-status" id="pe-pc-status" role="status" aria-live="polite">まだ切っていない。両端が斜めのままだと、公式がそのまま使えるか分かりにくい。</div>
-            <div class="formula-reveal" id="pe-pc-result">長方形になった → 12×7＝84cm²</div>
+            <div class="formula-reveal" id="pe-pc-result">長方形になった → ${d.base}×${d.height}＝${d.area}cm²</div>
         </div>`,
         wire: () => wireCutVisual('pe-pc'),
-    },
-    'triangle-rotate': {
+    }),
+    'triangle-rotate': d => ({
         html: `<div class="plane-expand-stage">
             <svg viewBox="0 0 340 210" style="width:100%;max-width:320px;display:block" role="img" aria-labelledby="pe-tr-title pe-tr-desc">
                 <title id="pe-tr-title">三角形をもう1つ回転させて平行四辺形にする図</title>
-                <desc id="pe-tr-desc">同じ三角形を180度回転させて組み合わせると、底辺10cm・高さ8cmの平行四辺形になる。</desc>
+                <desc id="pe-tr-desc">同じ三角形を180度回転させて組み合わせると、底辺と高さが同じ平行四辺形になる。</desc>
                 <polygon points="120,160 280,160 200,40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
                 <g id="pe-tr-dup" class="plane-expand-dup" hidden style="transform-origin:160px 100px" fill="#FFE0B2" stroke="#E65100" stroke-width="2" stroke-dasharray="5 4"><polygon points="120,160 280,160 200,40"/></g>
                 <circle id="pe-tr-pivot" cx="160" cy="100" r="3" fill="#7c3aed" hidden/>
                 <g id="pe-tr-para" hidden fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 5"><polygon points="280,160 200,40 40,40 120,160"/></g>
                 <g font-size="13" fill="#666">
-                    <text x="200" y="186" text-anchor="middle">底辺10cm</text>
-                    <text x="300" y="100" text-anchor="middle" transform="rotate(-90 300 100)">高さ8cm</text>
+                    <text x="200" y="186" text-anchor="middle">底辺${d.base}cm</text>
+                    <text x="300" y="100" text-anchor="middle" transform="rotate(-90 300 100)">高さ${d.height}cm</text>
                 </g>
             </svg>
             <div class="plane-expand-actions">
@@ -536,23 +791,23 @@ const PLANE_EXPAND_VISUALS = {
                 <button type="button" class="plane-anim-btn reset" id="pe-tr-reset">もう一度</button>
             </div>
             <div class="plane-expand-status" id="pe-tr-status" role="status" aria-live="polite">三角形1つだけだと、なぜ÷2なのか見えにくい。</div>
-            <div class="formula-reveal" id="pe-tr-result">平行四辺形になった → 10×8＝80cm²（半分で40cm²）</div>
+            <div class="formula-reveal" id="pe-tr-result">平行四辺形になった → ${d.base}×${d.height}＝${d.base * d.height}cm²（半分で${d.area}cm²）</div>
         </div>`,
         wire: () => wireRotateVisual('pe-tr'),
-    },
-    'trapezoid-rotate': {
+    }),
+    'trapezoid-rotate': d => ({
         html: `<div class="plane-expand-stage">
             <svg viewBox="0 0 400 210" style="width:100%;max-width:320px;display:block" role="img" aria-labelledby="pe-zr-title pe-zr-desc">
                 <title id="pe-zr-title">台形をもう1つ回転させて平行四辺形にする図</title>
-                <desc id="pe-zr-desc">同じ台形を180度回転させて組み合わせると、底辺が上底と下底の和、高さ6cmの平行四辺形になる。</desc>
+                <desc id="pe-zr-desc">同じ台形を180度回転させて組み合わせると、底辺が上底と下底の和、高さが同じ平行四辺形になる。</desc>
                 <polygon points="170,160 350,160 310,40 210,40" fill="#FFB74D" stroke="#E65100" stroke-width="2"/>
                 <g id="pe-zr-dup" class="plane-expand-dup" hidden style="transform-origin:190px 100px" fill="#90CAF9" stroke="#1565C0" stroke-width="2" stroke-dasharray="5 4"><polygon points="170,160 350,160 310,40 210,40"/></g>
                 <circle id="pe-zr-pivot" cx="190" cy="100" r="3" fill="#7c3aed" hidden/>
                 <g id="pe-zr-para" hidden fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 5"><polygon points="350,160 310,40 30,40 70,160"/></g>
                 <g font-size="12" fill="#666">
-                    <text x="260" y="34" text-anchor="middle">上底5cm</text>
-                    <text x="260" y="186" text-anchor="middle">下底9cm</text>
-                    <text x="372" y="100" text-anchor="middle" transform="rotate(-90 372 100)">高さ6cm</text>
+                    <text x="260" y="34" text-anchor="middle">上底${d.upper}cm</text>
+                    <text x="260" y="186" text-anchor="middle">下底${d.lower}cm</text>
+                    <text x="372" y="100" text-anchor="middle" transform="rotate(-90 372 100)">高さ${d.height}cm</text>
                 </g>
             </svg>
             <div class="plane-expand-actions">
@@ -560,15 +815,244 @@ const PLANE_EXPAND_VISUALS = {
                 <button type="button" class="plane-anim-btn reset" id="pe-zr-reset">もう一度</button>
             </div>
             <div class="plane-expand-status" id="pe-zr-status" role="status" aria-live="polite">台形1つだけだと、三角形の公式とのつながりが見えにくい。</div>
-            <div class="formula-reveal" id="pe-zr-result">平行四辺形になった → (5＋9)×6＝84cm²（半分で42cm²）</div>
+            <div class="formula-reveal" id="pe-zr-result">平行四辺形になった → (${d.upper}＋${d.lower})×${d.height}＝${(d.upper + d.lower) * d.height}cm²（半分で${d.area}cm²）</div>
         </div>`,
         wire: () => wireRotateVisual('pe-zr'),
+    }),
+    'subtract-triangle': d => ({
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 300 235" style="width:100%;max-width:260px;display:block" role="img" aria-labelledby="pe-s6-title pe-s6-desc">
+                <title id="pe-s6-title">長方形から三角形の部分を取り除く図</title>
+                <desc id="pe-s6-desc">長方形全体から、角の三角形を取り除くと残りの面積になる。</desc>
+                <polygon points="80,115 80,35 208,35 208,195 144,195" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+                <polygon id="pe-s6-part" class="plane-expand-part" points="80,195 144,195 80,115" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-s6-play">取り除いてみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-s6-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-s6-status" role="status" aria-live="polite">今は長方形全体に見える。どこが三角形の部分か分かりにくい。</div>
+            <div class="formula-reveal" id="pe-s6-result">${d.resultText}</div>
+        </div>`,
+        wire: () => wireSubtractVisual('pe-s6'),
+    }),
+    'subtract-rect': d => ({
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 300 220" style="width:100%;max-width:260px;display:block" role="img" aria-labelledby="pe-s7-title pe-s7-desc">
+                <title id="pe-s7-title">長方形から角の長方形を取り除くL字型の図</title>
+                <desc id="pe-s7-desc">大きい長方形から、角の小さい長方形を取り除くとL字型になる。</desc>
+                <polygon points="60,40 156,40 156,88 220,88 220,168 60,168" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+                <rect id="pe-s7-part" class="plane-expand-part" x="156" y="40" width="64" height="48" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-s7-play">取り除いてみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-s7-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-s7-status" role="status" aria-live="polite">今は大きい長方形に見える。どこが切り取られた部分か分かりにくい。</div>
+            <div class="formula-reveal" id="pe-s7-result">${d.resultText}</div>
+        </div>`,
+        wire: () => wireSubtractVisual('pe-s7'),
+    }),
+    'diagonal-rotate': d => ({
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 320 210" style="width:100%;max-width:300px;display:block" role="img" aria-labelledby="pe-dg-title pe-dg-desc">
+                <title id="pe-dg-title">対角線で分けた三角形を回転して重ねる図</title>
+                <desc id="pe-dg-desc">三角形ABDを対角線の中点を軸に180度回転させると、三角形CBDにぴったり重なる。</desc>
+                <polygon points="100,72 60,168 220,168 260,72" fill="none" stroke="#555" stroke-width="1.5"/>
+                <polygon points="220,168 260,72 60,168" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+                <polygon points="100,72 60,168 260,72" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
+                <g id="pe-dg-dup" class="plane-expand-dup" hidden style="transform-origin:160px 120px" fill="#FFE082" stroke="#F57F17" stroke-width="2" stroke-dasharray="5 4"><polygon points="100,72 60,168 260,72"/></g>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-dg-play">回転してみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-dg-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-dg-status" role="status" aria-live="polite">三角形ABDと三角形CBDの面積が等しいかは、見ただけでは分かりにくい。</div>
+            <div class="formula-reveal" id="pe-dg-result">ぴったり重なった → 三角形ABD＝三角形CBD＝${d.halfArea}cm²</div>
+        </div>`,
+        wire: () => wireDiagonalVisual('pe-dg'),
+    }),
+    'diagonal-quarter': d => ({
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 320 220" style="width:100%;max-width:300px;display:block" role="img" aria-labelledby="pe-dq-title pe-dq-desc">
+                <title id="pe-dq-title">対角線2本で分けた三角形を回転して重ねる図</title>
+                <desc id="pe-dq-desc">三角形OABを交点Oを軸に180度回転させると、三角形OCDにぴったり重なる。</desc>
+                <polygon points="160,104 60,168 100,40" fill="#E0E0E0" stroke="#9E9E9E" stroke-width="1.5"/>
+                <polygon points="160,104 260,40 220,168" fill="#E0E0E0" stroke="#9E9E9E" stroke-width="1.5"/>
+                <polygon points="160,104 220,168 60,168" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+                <polygon points="160,104 100,40 260,40" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
+                <g id="pe-dq-dup" class="plane-expand-dup" hidden style="transform-origin:160px 104px" fill="#FFE082" stroke="#F57F17" stroke-width="2" stroke-dasharray="5 4"><polygon points="160,104 100,40 260,40"/></g>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-dq-play">回転してみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-dq-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-dq-status" role="status" aria-live="polite">4つの三角形の面積が等しいかは、見ただけでは分かりにくい。</div>
+            <div class="formula-reveal" id="pe-dq-result">ぴったり重なった → OAB＝OCD、2つで全体の${d.pairPercent}%</div>
+        </div>`,
+        wire: () => wireDiagonalVisual('pe-dq'),
+    }),
+    'same-height-ratio': d => ({
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 290 225" style="width:100%;max-width:280px;display:block" role="img" aria-labelledby="pe-hr-title pe-hr-desc">
+                <title id="pe-hr-title">補助線で分けた2つの三角形が高さを共有する図</title>
+                <desc id="pe-hr-desc">底辺を3:1に分けた2つの三角形は、同じ高さを共有している。</desc>
+                <polygon points="40,168 184,168 184,40" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
+                <polygon points="184,168 232,168 184,40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+                <line id="pe-hr-guide" hidden x1="184" y1="40" x2="184" y2="168" stroke="#7c3aed" stroke-width="3"/>
+                <text x="112" y="186" font-size="13" fill="#F57F17" text-anchor="middle" font-weight="bold">3</text>
+                <text x="208" y="186" font-size="13" fill="#1565C0" text-anchor="middle" font-weight="bold">1</text>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-hr-play">確かめてみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-hr-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-hr-status" role="status" aria-live="polite">底辺の比は3:1。でも面積の比が同じかどうかは、見ただけでは分かりにくい。</div>
+            <div class="formula-reveal" id="pe-hr-result">高さが共通 → 面積の比も3:1 → 大きい方は${d.bigArea}cm²</div>
+        </div>`,
+        wire: () => wireHeightRatioVisual('pe-hr'),
+    }),
+    'compose-add': d => ({
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 400 225" style="width:100%;max-width:320px;display:block" role="img" aria-labelledby="pe-co-title pe-co-desc">
+                <title id="pe-co-title">三角形と台形に分けて面積を足す図</title>
+                <desc id="pe-co-desc">複合図形を三角形と台形に分けて、それぞれの面積を足す。</desc>
+                <polygon id="pe-co-a" class="plane-expand-emphasis" points="40,180 236,180 236,54" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+                <polygon id="pe-co-b" class="plane-expand-emphasis" points="236,54 278,54 334,180 236,180" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-co-play">分けてみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-co-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-co-status" role="status" aria-live="polite">三角形と台形、それぞれの面積は分かるけど、どう組み合わさっているか見えにくい。</div>
+            <div class="formula-reveal" id="pe-co-result">${d.resultText}</div>
+        </div>`,
+        wire: () => wireComposeVisual('pe-co'),
+    }),
+    'inverse-proportion': d => ({
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 400 220" style="width:100%;max-width:340px;display:block" role="img" aria-labelledby="pe-ip-title pe-ip-desc">
+                <title id="pe-ip-title">平行四辺形の高さを縮めて三角形と同じ面積にする図</title>
+                <desc id="pe-ip-desc">底辺を変えずに平行四辺形の高さを半分にすると、三角形と同じ面積になる。</desc>
+                <polygon points="40,160 160,160 100,70" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+                <text x="100" y="135" font-size="13" fill="#1a1a2e" text-anchor="middle" font-weight="bold">${d.target}cm²</text>
+                <polygon id="pe-ip-para" class="plane-expand-squeeze" style="transform-origin:280px 160px" points="220,160 340,160 360,70 240,70" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
+                <text id="pe-ip-label-before" x="280" y="200" font-size="13" fill="#555" text-anchor="middle">8×6＝${d.highlightBase * 6}cm²</text>
+                <text id="pe-ip-label-after" x="280" y="200" font-size="13" fill="#1B5E20" text-anchor="middle" font-weight="bold" hidden>${d.highlightBase}×${d.highlightHeight}＝${d.target}cm²</text>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-ip-play">高さを縮めてみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-ip-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-ip-status" role="status" aria-live="polite">平行四辺形の高さがいくつなら、三角形と同じ面積になるか見えにくい。</div>
+            <div class="formula-reveal" id="pe-ip-result">高さ${d.highlightHeight}cmにすると${d.target}cm²になる → 三角形と同じ</div>
+        </div>`,
+        wire: () => wireSqueezeVisual('pe-ip'),
+    }),
+    'base-ratio-split': d => ({
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 300 170" style="width:100%;max-width:280px;display:block" role="img" aria-labelledby="pe-bs-title pe-bs-desc">
+                <title id="pe-bs-title">三角形Aを2つに分けて三角形Bと見比べる図</title>
+                <desc id="pe-bs-desc">底辺が2倍の三角形Aは、底辺の真ん中から頂点に線を引くと、三角形Bと同じ三角形2つに分かれる。</desc>
+                <polygon points="40,130 100,130 70,40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+                <polygon id="pe-bs-half1" class="plane-expand-emphasis" points="140,130 200,130 200,40" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
+                <polygon id="pe-bs-half2" class="plane-expand-emphasis" points="200,130 260,130 200,40" fill="#FFCCBC" stroke="#D84315" stroke-width="2"/>
+                <line id="pe-bs-cevian" hidden x1="200" y1="40" x2="200" y2="130" stroke="#7c3aed" stroke-width="2.5" stroke-dasharray="6 5"/>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-bs-play">分けてみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-bs-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-bs-status" role="status" aria-live="polite">三角形Aと三角形Bの面積が、本当に2倍の関係か見えにくい。</div>
+            <div class="formula-reveal" id="pe-bs-result">Aの半分＝Bと同じ → ${d.areaB}×2＝${d.areaA}cm²</div>
+        </div>`,
+        wire: () => wireSplitVisual('pe-bs'),
+    }),
+    'similarity-tiles': d => {
+        const cells = Array.from({ length: 9 }, (_, i) => {
+            const col = i % 3, row = Math.floor(i / 3);
+            const x = 120 + col * 40, y = 20 + row * 40;
+            return `<rect id="pe-st-cell-${i}" class="plane-expand-tile" x="${x + 2}" y="${y + 2}" width="36" height="36" fill="#90CAF9" stroke="#1565C0" stroke-width="1.5"/>`;
+        }).join('');
+        return {
+            html: `<div class="plane-expand-stage">
+                <svg viewBox="0 0 280 170" style="width:100%;max-width:260px;display:block" role="img" aria-labelledby="pe-st-title pe-st-desc">
+                    <title id="pe-st-title">小さい正方形を並べて大きい正方形を作る図</title>
+                    <desc id="pe-st-desc">小さい正方形を縦3個横3個、合計9個並べると大きい正方形になる。</desc>
+                    <rect x="40" y="100" width="40" height="40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+                    <text x="60" y="124" font-size="11" fill="#1a1a2e" text-anchor="middle" font-weight="bold">${d.smallArea}cm²</text>
+                    <rect x="120" y="20" width="120" height="120" fill="none" stroke="#F57F17" stroke-width="2" stroke-dasharray="5 4"/>
+                    ${cells}
+                    <text id="pe-st-count" x="180" y="156" font-size="13" fill="#555" text-anchor="middle" font-weight="bold">0 / 9</text>
+                </svg>
+                <div class="plane-expand-actions">
+                    <button type="button" class="plane-anim-btn play" id="pe-st-play">並べてみる</button>
+                    <button type="button" class="plane-anim-btn reset" id="pe-st-reset">もう一度</button>
+                </div>
+                <div class="plane-expand-status" id="pe-st-status" role="status" aria-live="polite">大きい正方形が、小さい正方形の何個分かは見ただけでは分かりにくい。</div>
+                <div class="formula-reveal" id="pe-st-result">9個分 → ${d.smallArea}×9＝${d.bigArea}cm²</div>
+            </div>`,
+            wire: () => wireSequentialReveal('pe-st', 9, '9個分で大きい正方形になった。'),
+        };
+    },
+    'angle-reveal': d => ({
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 220 170" style="width:100%;max-width:260px;display:block" role="img" aria-labelledby="pe-an-title pe-an-desc">
+                <title id="pe-an-title">平行線にはさまれた折れ角に補助線を引く図</title>
+                <desc id="pe-an-desc">曲がり角を通る平行な補助線を引くと、角は錯角の50度と35度に分かれる。</desc>
+                <line x1="10" y1="30" x2="210" y2="30" stroke="#1a1a2e" stroke-width="2"/>
+                <line x1="10" y1="140" x2="210" y2="140" stroke="#1a1a2e" stroke-width="2"/>
+                <polyline points="60,30 130,85 70,140" fill="none" stroke="#1565C0" stroke-width="3"/>
+                <line id="pe-an-guide" hidden x1="70" y1="85" x2="190" y2="85" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 5"/>
+                <g id="pe-an-labels" hidden font-size="13" font-weight="bold">
+                    <text x="150" y="80" fill="#1565C0">50°</text>
+                    <text x="150" y="100" fill="#E65100">35°</text>
+                </g>
+                <text x="30" y="46" font-size="12" fill="#555">${d.angle1}°</text>
+                <text x="32" y="132" font-size="12" fill="#555">${d.angle2}°</text>
+                <text x="134" y="82" font-size="14" fill="#E53935" font-weight="bold">x</text>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-an-play">補助線を引いてみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-an-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-an-status" role="status" aria-live="polite">補助線がないと、角xに使える角が見つからない。</div>
+            <div class="formula-reveal" id="pe-an-result">補助線で分かれた ${d.angle1}°＋${d.angle2}°＝${d.total}°</div>
+        </div>`,
+        wire: () => wireAngleRevealVisual('pe-an'),
+    }),
+    'exterior-angle-circle': d => {
+        const pts = [[100,30],[149.5,50.5],[170,100],[149.5,149.5],[100,170],[50.5,149.5],[30,100],[50.5,50.5],[100,30]];
+        const wedges = pts.slice(0, -1).map((p, i) => {
+            const next = pts[i + 1];
+            const colors = i % 2 === 0 ? ['#90CAF9', '#1565C0'] : ['#FFE0B2', '#E65100'];
+            return `<path id="pe-we-cell-${i}" class="plane-expand-tile" d="M100,100 L${p[0]},${p[1]} A70,70 0 0 1 ${next[0]},${next[1]} Z" fill="${colors[0]}" stroke="${colors[1]}" stroke-width="1"/>`;
+        }).join('');
+        return {
+            html: `<div class="plane-expand-stage">
+                <svg viewBox="0 0 200 200" style="width:100%;max-width:240px;display:block" role="img" aria-labelledby="pe-we-title pe-we-desc">
+                    <title id="pe-we-title">正八角形の外角8個で1周する図</title>
+                    <desc id="pe-we-desc">45度の外角を8個並べると、ちょうど360度の1周になる。</desc>
+                    <circle cx="100" cy="100" r="70" fill="none" stroke="#ccc" stroke-dasharray="3 4"/>
+                    ${wedges}
+                    <text id="pe-we-count" x="100" y="105" font-size="15" fill="#1a1a2e" text-anchor="middle" font-weight="bold">0 / ${d.sides}</text>
+                </svg>
+                <div class="plane-expand-actions">
+                    <button type="button" class="plane-anim-btn play" id="pe-we-play">並べてみる</button>
+                    <button type="button" class="plane-anim-btn reset" id="pe-we-reset">もう一度</button>
+                </div>
+                <div class="plane-expand-status" id="pe-we-status" role="status" aria-live="polite">外角1つが${d.exterior}°なのは分かるけど、${d.sides}個でちょうど1周するかは見えにくい。</div>
+                <div class="formula-reveal" id="pe-we-result">${d.sides}個分 → ${d.sides}×${d.exterior}＝360°（内角は180－${d.exterior}＝${d.interior}°）</div>
+            </div>`,
+            wire: () => wireSequentialReveal('pe-we', d.sides, 'ぐるっと1周した。'),
+        };
     },
 };
 function wirePlaneExpandVisual(p) {
     if (activeExpandVisualReset) { activeExpandVisualReset(); activeExpandVisualReset = null; }
-    const visual = PLANE_EXPAND_VISUALS[p.expandVisual];
-    if (!visual) return;
+    const factory = PLANE_EXPAND_VISUALS[p.expandVisual];
+    if (!factory) return;
+    const visual = factory(p.expandVisualData || {});
     let target = null;
     document.querySelectorAll('#prac-steps-card .prac-step').forEach(stepEl => {
         const nameEl = stepEl.querySelector('.prac-step-name');

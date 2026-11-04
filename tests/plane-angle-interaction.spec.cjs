@@ -93,7 +93,7 @@ test('all existing plane problems retain rendering and grading, including angle 
         await expect(page.locator('#prac-result-box')).toContainText('正解');
     }
     await page.evaluate(() => pracOpenProb('g6_plane_016'));
-    await expect(page.locator('#prac-detail-body svg')).toBeVisible();
+    await expect(page.locator('#prac-detail-body .problem-diagram svg')).toBeVisible();
     await page.locator('#prac-ans-input').fill('84');
     await page.locator('.prac-check-btn').click();
     await expect(page.locator('#prac-ans-input')).toHaveClass(/wrong/);

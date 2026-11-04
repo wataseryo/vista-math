@@ -1029,8 +1029,18 @@
         .plane-expand-piece.cut { fill:#FFE0B2; stroke:#E65100; }
         .plane-expand-piece.moved { transform: translate(200px,0); }
         .plane-expand-dup.rotated { transform: rotate(180deg); }
+        .plane-expand-part { transition: fill .3s, stroke .3s, opacity .6s; }
+        .plane-expand-part.highlight { fill:#FFE0B2; stroke:#E65100; stroke-dasharray:5 4; }
+        .plane-expand-part.removed { opacity:0; }
+        .plane-expand-emphasis { transition: filter .3s, stroke-width .3s; }
+        .plane-expand-emphasis.on { filter:saturate(1.7) brightness(1.05); stroke-width:3.5; }
+        .plane-expand-squeeze { transform-box:view-box; transition:transform .8s cubic-bezier(.4,0,.2,1); }
+        .plane-expand-squeeze.squeezed { transform:scaleY(.5); }
+        .plane-expand-tile { opacity:0; transform:scale(.5); transform-box:fill-box; transform-origin:center; transition:opacity .25s, transform .25s; }
+        .plane-expand-tile.shown { opacity:1; transform:scale(1); }
         @media (prefers-reduced-motion: reduce) {
-            .plane-expand-piece, .plane-expand-dup { transition:none !important; }
+            .plane-expand-piece, .plane-expand-dup, .plane-expand-part,
+            .plane-expand-squeeze, .plane-expand-tile { transition:none !important; }
         }
         .plane-expand-actions { display:flex; gap:8px; }
         .plane-expand-status { font-size:.82rem; color:#666; min-height:1.3em; text-align:center; }

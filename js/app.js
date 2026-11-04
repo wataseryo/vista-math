@@ -582,7 +582,7 @@ function wireHeightRatioVisual(prefix) {
     resetBtn.addEventListener('click', reset);
     return reset;
 }
-function wireComposeVisual(prefix) {
+function wireComposeVisual(prefix, labelA, labelB) {
     const seqCo = createTopicSequence();
     const partA = document.getElementById(prefix + '-a');
     const partB = document.getElementById(prefix + '-b');
@@ -602,8 +602,8 @@ function wireComposeVisual(prefix) {
     function playFn() {
         reset();
         play.disabled = true;
-        const a = () => { partA.classList.add('on'); status.textContent = '① まず三角形の部分。'; };
-        const b = () => { partB.classList.add('on'); status.textContent = '② 次に台形の部分。'; };
+        const a = () => { partA.classList.add('on'); status.textContent = `① まず${labelA || '1つめ'}の部分。`; };
+        const b = () => { partB.classList.add('on'); status.textContent = `② 次に${labelB || '2つめ'}の部分。`; };
         const done = () => { result.classList.add('visible'); status.textContent = '③ 2つを足して全体の面積。'; };
         if (topicReducedMotion()) { a(); b(); done(); return; }
         a();
@@ -927,7 +927,24 @@ const PLANE_EXPAND_VISUALS = {
             <div class="plane-expand-status" id="pe-co-status" role="status" aria-live="polite">三角形と台形、それぞれの面積は分かるけど、どう組み合わさっているか見えにくい。</div>
             <div class="formula-reveal" id="pe-co-result">${d.resultText}</div>
         </div>`,
-        wire: () => wireComposeVisual('pe-co'),
+        wire: () => wireComposeVisual('pe-co', '三角形', '台形'),
+    }),
+    'compose-triangles': d => ({
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 280 200" style="width:100%;max-width:260px;display:block" role="img" aria-labelledby="pe-ct-title pe-ct-desc">
+                <title id="pe-ct-title">三角形2つに分けて面積を足す図</title>
+                <desc id="pe-ct-desc">複合図形を三角形2つに分けて、それぞれの面積を足す。</desc>
+                <polygon id="pe-co-a" class="plane-expand-emphasis" points="40,150 160,150 160,78" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+                <polygon id="pe-co-b" class="plane-expand-emphasis" points="160,150 208,150 160,78" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-co-play">分けてみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-co-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-co-status" role="status" aria-live="polite">2つの三角形がどう組み合わさっているか見えにくい。</div>
+            <div class="formula-reveal" id="pe-co-result">${d.resultText}</div>
+        </div>`,
+        wire: () => wireComposeVisual('pe-co', '三角形1', '三角形2'),
     }),
     'inverse-proportion': d => ({
         html: `<div class="plane-expand-stage">

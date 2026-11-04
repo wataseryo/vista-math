@@ -223,6 +223,7 @@ function stdPracGoBack() {
    PRACTICE SCREEN
 ════════════════════════════════════════ */
 const pracState = { currentCatId: null, currentProbId: null };
+let activeExpandVisualReset = null;
 
 function renderPractice() {
     const label = appState.grade + '年生';
@@ -329,6 +330,7 @@ function pracOpenProb(probId) {
             </div>
         </div>` : ''}
     `;
+    wirePlaneExpandVisual(p);
     const nextBtn = document.getElementById('prac-next-prob-btn');
     if (nextBtn) {
         if (probs.length > 1) {
@@ -419,6 +421,162 @@ function renderSolutionSteps(solution) {
                 <div class="prac-step-text">${escapeHtml(s.body).replace(/\n/g, '<br>')}</div>
             </div>
         </div>`).join('');
+}
+
+// 【広げてみよう】に添える切り貼り/回転デモ。問題の answer・解説文には触れない。
+function wireCutVisual(prefix) {
+    const seqCut = createTopicSequence();
+    const piece = document.getElementById(prefix + '-piece');
+    const cutline = document.getElementById(prefix + '-cutline');
+    const rect = document.getElementById(prefix + '-rect');
+    const status = document.getElementById(prefix + '-status');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqCut.cancel();
+        piece.classList.remove('cut', 'moved');
+        cutline.toggleAttribute('hidden', true);
+        rect.toggleAttribute('hidden', true);
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const cut = () => { cutline.toggleAttribute('hidden', false); piece.classList.add('cut'); status.textContent = '① 切り取る線に沿って、はみ出した三角形を切り出す。'; };
+        const move = () => { piece.classList.add('moved'); status.textContent = '② 切った三角形を反対側へ動かす。'; };
+        const done = () => { rect.toggleAttribute('hidden', false); result.classList.add('visible'); status.textContent = '③ ぴったりはまって長方形になった。'; };
+        if (topicReducedMotion()) { cut(); move(); done(); return; }
+        cut();
+        seqCut.after(700, move);
+        seqCut.after(1500, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
+function wireRotateVisual(prefix) {
+    const seqRot = createTopicSequence();
+    const dup = document.getElementById(prefix + '-dup');
+    const pivot = document.getElementById(prefix + '-pivot');
+    const para = document.getElementById(prefix + '-para');
+    const status = document.getElementById(prefix + '-status');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqRot.cancel();
+        dup.classList.remove('rotated');
+        dup.toggleAttribute('hidden', true);
+        pivot.toggleAttribute('hidden', true);
+        para.toggleAttribute('hidden', true);
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const show = () => { dup.toggleAttribute('hidden', false); pivot.toggleAttribute('hidden', false); status.textContent = '① 同じ形をもう1つ重ねて用意する。'; };
+        const rotate = () => { dup.classList.add('rotated'); status.textContent = '② 印をつけた点を中心に180°回転させる。'; };
+        const done = () => { para.toggleAttribute('hidden', false); result.classList.add('visible'); status.textContent = '③ ぴったりはまって平行四辺形になった。'; };
+        if (topicReducedMotion()) { show(); rotate(); done(); return; }
+        show();
+        seqRot.after(500, rotate);
+        seqRot.after(1400, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
+const PLANE_EXPAND_VISUALS = {
+    'parallelogram-cut': {
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 360 210" style="width:100%;max-width:320px;display:block" role="img" aria-labelledby="pe-pc-title pe-pc-desc">
+                <title id="pe-pc-title">平行四辺形を切り貼りして長方形にする図</title>
+                <desc id="pe-pc-desc">左端の三角形を切り取り右へ動かすと、底辺×高さの長方形になる。</desc>
+                <polygon points="100,160 260,160 300,40 100,40" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+                <g id="pe-pc-piece" class="plane-expand-piece" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"><polygon points="60,160 100,40 100,160"/></g>
+                <g id="pe-pc-cutline" hidden><line x1="100" y1="40" x2="100" y2="160" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 5"/></g>
+                <g id="pe-pc-rect" hidden fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 5"><polygon points="100,160 300,160 300,40 100,40"/></g>
+                <g font-size="13" fill="#666">
+                    <text x="180" y="186" text-anchor="middle">底辺12cm</text>
+                    <text x="318" y="104" text-anchor="middle" transform="rotate(-90 318 104)">高さ7cm</text>
+                </g>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-pc-play">切ってみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-pc-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-pc-status" role="status" aria-live="polite">まだ切っていない。両端が斜めのままだと、公式がそのまま使えるか分かりにくい。</div>
+            <div class="formula-reveal" id="pe-pc-result">長方形になった → 12×7＝84cm²</div>
+        </div>`,
+        wire: () => wireCutVisual('pe-pc'),
+    },
+    'triangle-rotate': {
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 340 210" style="width:100%;max-width:320px;display:block" role="img" aria-labelledby="pe-tr-title pe-tr-desc">
+                <title id="pe-tr-title">三角形をもう1つ回転させて平行四辺形にする図</title>
+                <desc id="pe-tr-desc">同じ三角形を180度回転させて組み合わせると、底辺10cm・高さ8cmの平行四辺形になる。</desc>
+                <polygon points="120,160 280,160 200,40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+                <g id="pe-tr-dup" class="plane-expand-dup" hidden style="transform-origin:160px 100px" fill="#FFE0B2" stroke="#E65100" stroke-width="2" stroke-dasharray="5 4"><polygon points="120,160 280,160 200,40"/></g>
+                <circle id="pe-tr-pivot" cx="160" cy="100" r="3" fill="#7c3aed" hidden/>
+                <g id="pe-tr-para" hidden fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 5"><polygon points="280,160 200,40 40,40 120,160"/></g>
+                <g font-size="13" fill="#666">
+                    <text x="200" y="186" text-anchor="middle">底辺10cm</text>
+                    <text x="300" y="100" text-anchor="middle" transform="rotate(-90 300 100)">高さ8cm</text>
+                </g>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-tr-play">回転してみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-tr-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-tr-status" role="status" aria-live="polite">三角形1つだけだと、なぜ÷2なのか見えにくい。</div>
+            <div class="formula-reveal" id="pe-tr-result">平行四辺形になった → 10×8＝80cm²（半分で40cm²）</div>
+        </div>`,
+        wire: () => wireRotateVisual('pe-tr'),
+    },
+    'trapezoid-rotate': {
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 400 210" style="width:100%;max-width:320px;display:block" role="img" aria-labelledby="pe-zr-title pe-zr-desc">
+                <title id="pe-zr-title">台形をもう1つ回転させて平行四辺形にする図</title>
+                <desc id="pe-zr-desc">同じ台形を180度回転させて組み合わせると、底辺が上底と下底の和、高さ6cmの平行四辺形になる。</desc>
+                <polygon points="170,160 350,160 310,40 210,40" fill="#FFB74D" stroke="#E65100" stroke-width="2"/>
+                <g id="pe-zr-dup" class="plane-expand-dup" hidden style="transform-origin:190px 100px" fill="#90CAF9" stroke="#1565C0" stroke-width="2" stroke-dasharray="5 4"><polygon points="170,160 350,160 310,40 210,40"/></g>
+                <circle id="pe-zr-pivot" cx="190" cy="100" r="3" fill="#7c3aed" hidden/>
+                <g id="pe-zr-para" hidden fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 5"><polygon points="350,160 310,40 30,40 70,160"/></g>
+                <g font-size="12" fill="#666">
+                    <text x="260" y="34" text-anchor="middle">上底5cm</text>
+                    <text x="260" y="186" text-anchor="middle">下底9cm</text>
+                    <text x="372" y="100" text-anchor="middle" transform="rotate(-90 372 100)">高さ6cm</text>
+                </g>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-zr-play">回転してみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-zr-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-zr-status" role="status" aria-live="polite">台形1つだけだと、三角形の公式とのつながりが見えにくい。</div>
+            <div class="formula-reveal" id="pe-zr-result">平行四辺形になった → (5＋9)×6＝84cm²（半分で42cm²）</div>
+        </div>`,
+        wire: () => wireRotateVisual('pe-zr'),
+    },
+};
+function wirePlaneExpandVisual(p) {
+    if (activeExpandVisualReset) { activeExpandVisualReset(); activeExpandVisualReset = null; }
+    const visual = PLANE_EXPAND_VISUALS[p.expandVisual];
+    if (!visual) return;
+    let target = null;
+    document.querySelectorAll('#prac-steps-card .prac-step').forEach(stepEl => {
+        const nameEl = stepEl.querySelector('.prac-step-name');
+        if (nameEl && nameEl.textContent.trim() === '広げてみよう') target = stepEl.querySelector('.prac-step-bd');
+    });
+    if (!target) return;
+    target.insertAdjacentHTML('beforeend', visual.html);
+    activeExpandVisualReset = visual.wire();
 }
 
 function pracGoToTopic(unitId) {

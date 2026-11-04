@@ -1018,6 +1018,23 @@
         }
         .formula-reveal.visible { opacity:1; }
 
+        /* ── 解説の【広げてみよう】用：切り貼り/回転デモ ── */
+        .plane-expand-stage {
+            margin-top:10px; padding:14px; background:#fafafa; border:1px solid #eee;
+            border-radius:12px; display:flex; flex-direction:column; align-items:center; gap:10px;
+        }
+        .plane-expand-piece, .plane-expand-dup { transform-box: view-box; }
+        .plane-expand-piece { transition: fill .3s, stroke .3s, transform .7s cubic-bezier(.4,0,.2,1); }
+        .plane-expand-dup { transition: transform .8s cubic-bezier(.4,0,.2,1); }
+        .plane-expand-piece.cut { fill:#FFE0B2; stroke:#E65100; }
+        .plane-expand-piece.moved { transform: translate(200px,0); }
+        .plane-expand-dup.rotated { transform: rotate(180deg); }
+        @media (prefers-reduced-motion: reduce) {
+            .plane-expand-piece, .plane-expand-dup { transition:none !important; }
+        }
+        .plane-expand-actions { display:flex; gap:8px; }
+        .plane-expand-status { font-size:.82rem; color:#666; min-height:1.3em; text-align:center; }
+
         /* ── 予測カード（予測→確認フロー） ── */
         .plane-predict-card {
             display:flex; align-items:flex-start; gap:10px;

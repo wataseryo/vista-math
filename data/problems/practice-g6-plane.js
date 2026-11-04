@@ -169,6 +169,7 @@ const PRACTICE_G6_PLANE = [
 底辺12cm×高さ7cm＝84cm²。
 
 答え：84cm²`,
+  expandVisual: 'parallelogram-cut',
   tags: ['平面図形', '平行四辺形'],
   diagram: {
     kind: 'svg',
@@ -210,6 +211,7 @@ const PRACTICE_G6_PLANE = [
 10×8＝80(組み合わせた平行四辺形の面積)、80÷2＝40で一致する。
 
 答え：40cm²`,
+  expandVisual: 'triangle-rotate',
   tags: ['平面図形', '三角形'],
   diagram: {
     kind: 'svg',
@@ -251,6 +253,7 @@ const PRACTICE_G6_PLANE = [
 (5＋9)×6＝84(組み合わせた平行四辺形の面積)、84÷2＝42で一致する。
 
 答え：42cm²`,
+  expandVisual: 'trapezoid-rotate',
   tags: ['平面図形', '台形'],
   diagram: {
     kind: 'svg',

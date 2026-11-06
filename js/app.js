@@ -782,6 +782,30 @@ function wireAngleRevealVisual(prefix) {
     resetBtn.addEventListener('click', reset);
     return reset;
 }
+function wireFormulaSlotVisual(prefix, derivations) {
+    const chips = document.querySelectorAll('#' + prefix + '-eq .plane-expand-chip');
+    const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
+    const initialStatus = status.textContent;
+    let timers = [];
+    function reset() {
+        timers.forEach(clearTimeout); timers = [];
+        chips.forEach(c => c.classList.remove('target'));
+        stepsEl.innerHTML = '';
+        status.textContent = initialStatus;
+    }
+    chips.forEach(chip => chip.addEventListener('click', () => {
+        timers.forEach(clearTimeout); timers = [];
+        chips.forEach(c => c.classList.toggle('target', c === chip));
+        status.textContent = 'タップした文字を求める式へ、1行ずつ組み替えていく。';
+        const lines = derivations[chip.dataset.key];
+        stepsEl.innerHTML = lines.map(line => `<div class="plane-expand-step${line.type ? ' ' + line.type : ''}">${line.text}</div>`).join('');
+        const lineEls = stepsEl.querySelectorAll('.plane-expand-step');
+        if (topicReducedMotion()) { lineEls.forEach(el => el.classList.add('shown')); return; }
+        lineEls.forEach((el, i) => { timers.push(setTimeout(() => el.classList.add('shown'), 450 * i)); });
+    }));
+    return reset;
+}
 const PLANE_EXPAND_VISUALS = {
     'parallelogram-cut': d => ({
         html: `<div class="plane-expand-stage">
@@ -853,6 +877,119 @@ const PLANE_EXPAND_VISUALS = {
         </div>`,
         wire: () => wireRotateVisual('pe-zr'),
     }),
+    'triangle-formula-slot': d => {
+        const derivations = {
+            height: [
+                { text: '底辺 × 高さ ÷ 2 ＝ 面積' },
+                { text: '底辺 × 高さ ＝ 面積 × 2' },
+                { text: '高さ ＝ 面積 × 2 ÷ 底辺', type: 'formula' },
+                { text: `高さ ＝ ${d.area} × 2 ÷ ${d.base}` },
+                { text: `高さ ＝ ${d.area * 2} ÷ ${d.base} ＝ ${d.height}`, type: 'final' },
+            ],
+            base: [
+                { text: '底辺 × 高さ ÷ 2 ＝ 面積' },
+                { text: '底辺 × 高さ ＝ 面積 × 2' },
+                { text: '底辺 ＝ 面積 × 2 ÷ 高さ', type: 'formula' },
+                { text: `底辺 ＝ ${d.area} × 2 ÷ ${d.height}` },
+                { text: `底辺 ＝ ${d.area * 2} ÷ ${d.height} ＝ ${d.base}`, type: 'final' },
+            ],
+            area: [
+                { text: '面積 ＝ 底辺 × 高さ ÷ 2', type: 'formula' },
+                { text: `面積 ＝ ${d.base} × ${d.height} ÷ 2` },
+                { text: `面積 ＝ ${d.base * d.height} ÷ 2 ＝ ${d.area}`, type: 'final' },
+            ],
+        };
+        return {
+            html: `<div class="plane-expand-stage">
+                <div class="plane-expand-eq" id="pe-fs-tri-eq">
+                    <span class="plane-expand-chip area" data-key="area">面積</span>
+                    <span class="plane-expand-eq-op">＝</span>
+                    <span class="plane-expand-chip base" data-key="base">底辺</span>
+                    <span class="plane-expand-eq-op">×</span>
+                    <span class="plane-expand-chip height" data-key="height">高さ</span>
+                    <span class="plane-expand-eq-op">÷2</span>
+                </div>
+                <div class="plane-expand-status" id="pe-fs-tri-status" role="status" aria-live="polite">知りたい文字をタップしてみよう。</div>
+                <div class="plane-expand-steps" id="pe-fs-tri-steps"></div>
+            </div>`,
+            wire: () => wireFormulaSlotVisual('pe-fs-tri', derivations),
+        };
+    },
+    'parallelogram-formula-slot': d => {
+        const derivations = {
+            height: [
+                { text: '底辺 × 高さ ＝ 面積' },
+                { text: '高さ ＝ 面積 ÷ 底辺', type: 'formula' },
+                { text: `高さ ＝ ${d.area} ÷ ${d.base}` },
+                { text: `高さ ＝ ${d.area} ÷ ${d.base} ＝ ${d.height}`, type: 'final' },
+            ],
+            base: [
+                { text: '底辺 × 高さ ＝ 面積' },
+                { text: '底辺 ＝ 面積 ÷ 高さ', type: 'formula' },
+                { text: `底辺 ＝ ${d.area} ÷ ${d.height}` },
+                { text: `底辺 ＝ ${d.area} ÷ ${d.height} ＝ ${d.base}`, type: 'final' },
+            ],
+            area: [
+                { text: '面積 ＝ 底辺 × 高さ', type: 'formula' },
+                { text: `面積 ＝ ${d.base} × ${d.height}` },
+                { text: `面積 ＝ ${d.base} × ${d.height} ＝ ${d.area}`, type: 'final' },
+            ],
+        };
+        return {
+            html: `<div class="plane-expand-stage">
+                <div class="plane-expand-eq" id="pe-fs-para-eq">
+                    <span class="plane-expand-chip area" data-key="area">面積</span>
+                    <span class="plane-expand-eq-op">＝</span>
+                    <span class="plane-expand-chip base" data-key="base">底辺</span>
+                    <span class="plane-expand-eq-op">×</span>
+                    <span class="plane-expand-chip height" data-key="height">高さ</span>
+                </div>
+                <div class="plane-expand-status" id="pe-fs-para-status" role="status" aria-live="polite">知りたい文字をタップしてみよう。</div>
+                <div class="plane-expand-steps" id="pe-fs-para-steps"></div>
+            </div>`,
+            wire: () => wireFormulaSlotVisual('pe-fs-para', derivations),
+        };
+    },
+    'trapezoid-formula-slot': d => {
+        const sum = d.upper + d.lower;
+        const derivations = {
+            sum: [
+                { text: '(上底＋下底) × 高さ ÷ 2 ＝ 面積' },
+                { text: '(上底＋下底) × 高さ ＝ 面積 × 2' },
+                { text: '(上底＋下底) ＝ 面積 × 2 ÷ 高さ', type: 'formula' },
+                { text: `(上底＋下底) ＝ ${d.area} × 2 ÷ ${d.height}` },
+                { text: `(上底＋下底) ＝ ${d.area * 2} ÷ ${d.height} ＝ ${sum}` },
+                { text: `下底 ＝ ${sum} － 上底 ＝ ${sum} － ${d.upper} ＝ ${d.lower}`, type: 'final' },
+            ],
+            height: [
+                { text: '(上底＋下底) × 高さ ÷ 2 ＝ 面積' },
+                { text: '(上底＋下底) × 高さ ＝ 面積 × 2' },
+                { text: '高さ ＝ 面積 × 2 ÷ (上底＋下底)', type: 'formula' },
+                { text: `高さ ＝ ${d.area} × 2 ÷ ${sum}` },
+                { text: `高さ ＝ ${d.area * 2} ÷ ${sum} ＝ ${d.height}`, type: 'final' },
+            ],
+            area: [
+                { text: '面積 ＝ (上底＋下底) × 高さ ÷ 2', type: 'formula' },
+                { text: `面積 ＝ ${sum} × ${d.height} ÷ 2` },
+                { text: `面積 ＝ ${sum * d.height} ÷ 2 ＝ ${d.area}`, type: 'final' },
+            ],
+        };
+        return {
+            html: `<div class="plane-expand-stage">
+                <div class="plane-expand-eq" id="pe-fs-trap-eq">
+                    <span class="plane-expand-chip area" data-key="area">面積</span>
+                    <span class="plane-expand-eq-op">＝</span>
+                    <span class="plane-expand-chip base" data-key="sum">上底＋下底</span>
+                    <span class="plane-expand-eq-op">×</span>
+                    <span class="plane-expand-chip height" data-key="height">高さ</span>
+                    <span class="plane-expand-eq-op">÷2</span>
+                </div>
+                <div class="plane-expand-status" id="pe-fs-trap-status" role="status" aria-live="polite">知りたい文字をタップしてみよう。</div>
+                <div class="plane-expand-steps" id="pe-fs-trap-steps"></div>
+            </div>`,
+            wire: () => wireFormulaSlotVisual('pe-fs-trap', derivations),
+        };
+    },
     'subtract-triangle': d => ({
         html: `<div class="plane-expand-stage">
             <svg viewBox="0 0 300 235" style="width:100%;max-width:260px;display:block" role="img" aria-labelledby="pe-s6-title pe-s6-desc">

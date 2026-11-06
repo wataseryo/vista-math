@@ -1042,10 +1042,29 @@
         .plane-expand-merge.merged { fill:#A5D6A7; stroke:#2E7D32; }
         .plane-expand-divider { transition: opacity .5s; }
         .plane-expand-divider.fade-out { opacity:0; }
+        .plane-expand-eq { display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:center; font-size:1.05rem; }
+        .plane-expand-chip { display:inline-flex; align-items:center; padding:6px 12px; border-radius:8px; cursor:pointer; font-weight:bold; border:2px solid transparent; transition:all .2s; }
+        .plane-expand-chip.area { background:#A5D6A7; color:#1B5E20; }
+        .plane-expand-chip.base { background:#90CAF9; color:#1565C0; }
+        .plane-expand-chip.height { background:#FFE0B2; color:#E65100; }
+        .plane-expand-chip.target { border-color:#7c3aed; box-shadow:0 0 0 2px #ede9fe; }
+        .plane-expand-eq-op { color:#9ca3af; font-weight:bold; }
+        .plane-expand-steps { display:flex; flex-direction:column; gap:6px; width:100%; max-width:320px; margin-top:4px; }
+        .plane-expand-step {
+            font-family:'SF Mono','JetBrains Mono',monospace; font-size:.92rem; text-align:center; padding:7px 10px;
+            background:#f3f4f6; border-radius:8px; opacity:0; transform:translateY(5px); transition:opacity .3s, transform .3s;
+        }
+        .plane-expand-step.shown { opacity:1; transform:translateY(0); }
+        .plane-expand-step.final { background:#E8F5E9; border-left:4px solid #2E7D32; color:#1B5E20; font-weight:bold; }
+        .plane-expand-step.formula { background:#ede9fe; border:2px solid #7c3aed; color:#7c3aed; font-weight:bold; }
+        .plane-expand-step.formula.shown { animation:pe-pulse-formula .5s ease-out; }
+        @keyframes pe-pulse-formula { 0%{ transform:scale(1); } 45%{ transform:scale(1.045); } 100%{ transform:scale(1); } }
         @media (prefers-reduced-motion: reduce) {
             .plane-expand-piece, .plane-expand-dup, .plane-expand-part,
             .plane-expand-squeeze, .plane-expand-tile,
-            .plane-expand-merge, .plane-expand-divider { transition:none !important; }
+            .plane-expand-merge, .plane-expand-divider,
+            .plane-expand-step { transition:none !important; }
+            .plane-expand-step.formula.shown { animation:none !important; }
         }
         .plane-expand-actions { display:flex; gap:8px; }
         .plane-expand-status { font-size:.82rem; color:#666; min-height:1.3em; text-align:center; }

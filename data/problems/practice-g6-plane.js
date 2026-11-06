@@ -348,7 +348,7 @@ const PRACTICE_G6_PLANE = [
 9×8÷2＝36cm²で、もとの面積と一致する。
 
 答え：8cm`,
-  expandVisual: 'triangle-rotate',
+  expandVisual: 'triangle-formula-slot',
   expandVisualData: { base: 9, height: 8, area: 36 },
   tags: ['平面図形', '三角形', '逆算'],
   diagram: {
@@ -392,7 +392,7 @@ const PRACTICE_G6_PLANE = [
 12×5＝60cm²で、もとの面積と一致する。
 
 答え：5cm`,
-  expandVisual: 'parallelogram-cut',
+  expandVisual: 'parallelogram-formula-slot',
   expandVisualData: { base: 12, height: 5, area: 60 },
   tags: ['平面図形', '平行四辺形', '逆算'],
   diagram: {
@@ -549,7 +549,7 @@ L字型は、欠けた角を補って大きい長方形に戻してから引く�
 (4＋12)×6÷2＝96÷2＝48cm²で、もとの面積と一致する。
 
 答え：12cm`,
-  expandVisual: 'trapezoid-rotate',
+  expandVisual: 'trapezoid-formula-slot',
   expandVisualData: { upper: 4, lower: 12, height: 6, area: 48 },
   tags: ['平面図形', '台形', '逆算'],
   diagram: {

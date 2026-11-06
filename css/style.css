@@ -1038,9 +1038,14 @@
         .plane-expand-squeeze.squeezed { transform:scaleY(.5); }
         .plane-expand-tile { opacity:0; transform:scale(.5); transform-box:fill-box; transform-origin:center; transition:opacity .25s, transform .25s; }
         .plane-expand-tile.shown { opacity:1; transform:scale(1); }
+        .plane-expand-merge { transition: fill .5s, stroke .5s; }
+        .plane-expand-merge.merged { fill:#A5D6A7; stroke:#2E7D32; }
+        .plane-expand-divider { transition: opacity .5s; }
+        .plane-expand-divider.fade-out { opacity:0; }
         @media (prefers-reduced-motion: reduce) {
             .plane-expand-piece, .plane-expand-dup, .plane-expand-part,
-            .plane-expand-squeeze, .plane-expand-tile { transition:none !important; }
+            .plane-expand-squeeze, .plane-expand-tile,
+            .plane-expand-merge, .plane-expand-divider { transition:none !important; }
         }
         .plane-expand-actions { display:flex; gap:8px; }
         .plane-expand-status { font-size:.82rem; color:#666; min-height:1.3em; text-align:center; }

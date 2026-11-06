@@ -304,7 +304,7 @@ function pracOpenProb(probId) {
     document.getElementById('prac-prob-view').style.display   = 'none';
     document.getElementById('prac-detail-view').style.display = 'flex';
     document.getElementById('prac-detail-cat-label').textContent = cat ? cat.title : '';
-    document.getElementById('prac-screen-title').textContent  = p.title;
+    document.getElementById('prac-screen-title').textContent  = (currentIdx >= 0 ? `問${currentIdx + 1} ` : '') + p.title;
 
     const topicScreen = VistaCatalog.problemTopic(p, appState.grade);
     const body = document.getElementById('prac-detail-body');
@@ -609,6 +609,40 @@ function wireComposeVisual(prefix, labelA, labelB) {
         a();
         seqCo.after(700, b);
         seqCo.after(1400, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
+function wireMergeVisual(prefix) {
+    const seqMg = createTopicSequence();
+    const partA = document.getElementById(prefix + '-a');
+    const partB = document.getElementById(prefix + '-b');
+    const divider = document.getElementById(prefix + '-divider');
+    const status = document.getElementById(prefix + '-status');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqMg.cancel();
+        partA.classList.remove('merged');
+        partB.classList.remove('merged');
+        divider.classList.remove('fade-out');
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const show = () => { status.textContent = '① 内側の線が、2つの三角形の境目。'; };
+        const merge = () => { partA.classList.add('merged'); partB.classList.add('merged'); divider.classList.add('fade-out'); status.textContent = '② 境目を消すと、頂点を共有する1つの三角形に見える。'; };
+        const done = () => { result.classList.add('visible'); status.textContent = '③ 底辺を合わせて1回で計算できる。'; };
+        if (topicReducedMotion()) { show(); merge(); done(); return; }
+        show();
+        seqMg.after(700, merge);
+        seqMg.after(1500, done);
     }
     play.addEventListener('click', playFn);
     resetBtn.addEventListener('click', reset);
@@ -929,22 +963,23 @@ const PLANE_EXPAND_VISUALS = {
         </div>`,
         wire: () => wireComposeVisual('pe-co', '三角形', '台形'),
     }),
-    'compose-triangles': d => ({
+    'merge-triangles': d => ({
         html: `<div class="plane-expand-stage">
-            <svg viewBox="0 0 280 200" style="width:100%;max-width:260px;display:block" role="img" aria-labelledby="pe-ct-title pe-ct-desc">
-                <title id="pe-ct-title">三角形2つに分けて面積を足す図</title>
-                <desc id="pe-ct-desc">複合図形を三角形2つに分けて、それぞれの面積を足す。</desc>
-                <polygon id="pe-co-a" class="plane-expand-emphasis" points="40,150 160,150 160,78" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
-                <polygon id="pe-co-b" class="plane-expand-emphasis" points="160,150 208,150 160,78" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+            <svg viewBox="0 0 280 200" style="width:100%;max-width:260px;display:block" role="img" aria-labelledby="pe-mt-title pe-mt-desc">
+                <title id="pe-mt-title">2つの三角形が1つの三角形になる図</title>
+                <desc id="pe-mt-desc">同じ頂点を共有し底辺が一直線に並ぶ2つの三角形は、底辺を合わせた1つの三角形として見られる。</desc>
+                <polygon id="pe-mt-a" class="plane-expand-merge" points="40,150 160,150 160,78" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+                <polygon id="pe-mt-b" class="plane-expand-merge" points="160,150 208,150 160,78" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+                <line id="pe-mt-divider" class="plane-expand-divider" x1="160" y1="150" x2="160" y2="78" stroke="#7c3aed" stroke-width="2.5" stroke-dasharray="6 5"/>
             </svg>
             <div class="plane-expand-actions">
-                <button type="button" class="plane-anim-btn play" id="pe-co-play">分けてみる</button>
-                <button type="button" class="plane-anim-btn reset" id="pe-co-reset">もう一度</button>
+                <button type="button" class="plane-anim-btn play" id="pe-mt-play">境目を消してみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-mt-reset">もう一度</button>
             </div>
-            <div class="plane-expand-status" id="pe-co-status" role="status" aria-live="polite">2つの三角形がどう組み合わさっているか見えにくい。</div>
-            <div class="formula-reveal" id="pe-co-result">${d.resultText}</div>
+            <div class="plane-expand-status" id="pe-mt-status" role="status" aria-live="polite">2つの三角形に分けて見えるが、本当に分ける必要があるかは分かりにくい。</div>
+            <div class="formula-reveal" id="pe-mt-result">1つの三角形として → ${d.base1}＋${d.base2}＝${d.base1 + d.base2}cm、${d.base1 + d.base2}×${d.height}÷2＝${d.area}cm²</div>
         </div>`,
-        wire: () => wireComposeVisual('pe-co', '三角形1', '三角形2'),
+        wire: () => wireMergeVisual('pe-mt'),
     }),
     'inverse-proportion': d => ({
         html: `<div class="plane-expand-stage">

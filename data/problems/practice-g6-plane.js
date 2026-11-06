@@ -158,14 +158,14 @@ const PRACTICE_G6_PLANE = [
 ③ 合計は30＋12＝42cm²。
 
 【広げてみよう】
-形に分けるとき、境目をどこで区切るかは1通りではないことが多い。どの分け方でも、それぞれの面積の公式がそのまま使える区切り方を選べば同じ答えになる。
+この2つの三角形は、同じ頂点を共有していて、底辺が一直線に並んでいる。だから、分けずに底辺を10＋4＝14cmとした1つの三角形と見ることもできる。14×6÷2＝42cm²で、分けて計算したときと同じ答えになる。
 
 【確認】
 42－12＝30cm²で、三角形1の面積と一致する。
 
 答え：42cm²`,
-  expandVisual: 'compose-triangles',
-  expandVisualData: { resultText: '合計 → 30＋12＝42cm²' },
+  expandVisual: 'merge-triangles',
+  expandVisualData: { base1: 10, base2: 4, height: 6, area: 42 },
   tags: ['平面図形', '複合図形', '分割'],
   topicUnitId: 'u6-plane',
   diagram: {

@@ -86,7 +86,7 @@ test('all existing plane problems retain rendering and grading, including angle 
     await page.evaluate(() => { showScreen('practice'); pracOpenCat('pc-plane'); });
     for (const problem of problems) {
         await page.evaluate(id => pracOpenProb(id), problem.id);
-        await expect(page.locator('#prac-screen-title')).toHaveText(problem.title);
+        await expect(page.locator('#prac-screen-title')).toContainText(problem.title);
         await expect(page.locator('#prac-detail-body .prac-detail-q')).not.toBeEmpty();
         await page.locator('#prac-ans-input').fill(String(problem.answer));
         await page.locator('.prac-check-btn').click();

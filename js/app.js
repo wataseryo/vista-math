@@ -708,11 +708,8 @@ function wireSqueezeVisual(prefix, d) {
     resetBtn.addEventListener('click', reset);
     return reset;
 }
-function wireSplitVisual(prefix) {
-    const seqSp = createTopicSequence();
-    const line = document.getElementById(prefix + '-cevian');
-    const half1 = document.getElementById(prefix + '-half1');
-    const half2 = document.getElementById(prefix + '-half2');
+function wireScaleVisual(prefix) {
+    const seqTs = createTopicSequence();
     const status = document.getElementById(prefix + '-status');
     const stepsEl = document.getElementById(prefix + '-steps');
     const result = document.getElementById(prefix + '-result');
@@ -720,10 +717,7 @@ function wireSplitVisual(prefix) {
     const resetBtn = document.getElementById(prefix + '-reset');
     const initialStatus = status.textContent;
     function reset() {
-        seqSp.cancel();
-        line.toggleAttribute('hidden', true);
-        half1.classList.remove('on');
-        half2.classList.remove('on');
+        seqTs.cancel();
         result.classList.remove('visible');
         status.textContent = initialStatus;
         clearExpandSteps(stepsEl);
@@ -732,13 +726,13 @@ function wireSplitVisual(prefix) {
     function playFn() {
         reset();
         play.disabled = true;
-        const split = () => { line.toggleAttribute('hidden', false); appendExpandStep(stepsEl, '① 底辺の真ん中から頂点へ線を引いて2つに分ける。'); };
-        const highlight = () => { half1.classList.add('on'); half2.classList.add('on'); appendExpandStep(stepsEl, '② どちらもBと同じ底辺・同じ高さ。'); };
-        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, '③ 2つ分で面積も2倍。'); };
-        if (topicReducedMotion()) { split(); highlight(); done(); return; }
-        split();
-        seqSp.after(700, highlight);
-        seqSp.after(1400, done);
+        const step1 = () => { appendExpandStep(stepsEl, '① 三角形Bの面積＝a×h÷2'); };
+        const step2 = () => { appendExpandStep(stepsEl, '② 三角形Aの面積＝2a×h÷2\n＝2×(a×h÷2)'); };
+        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, '③ だから、面積はBのちょうど2倍になる。'); };
+        if (topicReducedMotion()) { step1(); step2(); done(); return; }
+        step1();
+        seqTs.after(700, step2);
+        seqTs.after(1500, done);
     }
     play.addEventListener('click', playFn);
     resetBtn.addEventListener('click', reset);
@@ -1197,25 +1191,31 @@ const PLANE_EXPAND_VISUALS = {
         </div>`,
         wire: () => wireSqueezeVisual('pe-ip', d),
     }),
-    'base-ratio-split': d => ({
+    'triangle-base-scale': d => ({
         html: `<div class="plane-expand-stage">
-            <svg viewBox="0 0 300 170" style="width:100%;max-width:280px;display:block" role="img" aria-labelledby="pe-bs-title pe-bs-desc">
-                <title id="pe-bs-title">三角形Aを2つに分けて三角形Bと見比べる図</title>
-                <desc id="pe-bs-desc">底辺が2倍の三角形Aは、底辺の真ん中から頂点に線を引くと、三角形Bと同じ三角形2つに分かれる。</desc>
+            <svg viewBox="0 0 300 170" style="width:100%;max-width:300px;display:block" role="img" aria-labelledby="pe-ts-title pe-ts-desc">
+                <title id="pe-ts-title">底辺aの三角形Bと底辺2aの三角形A、高さは同じhの図</title>
+                <desc id="pe-ts-desc">三角形Aの底辺は三角形Bの底辺の2倍で、高さhはどちらも同じ。</desc>
+                <text x="70" y="20" font-size="12" fill="#555" text-anchor="middle">三角形B</text>
                 <polygon points="40,130 100,130 70,40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
-                <polygon id="pe-bs-half1" class="plane-expand-emphasis" points="140,130 200,130 200,40" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
-                <polygon id="pe-bs-half2" class="plane-expand-emphasis" points="200,130 260,130 200,40" fill="#FFCCBC" stroke="#D84315" stroke-width="2"/>
-                <line id="pe-bs-cevian" hidden x1="200" y1="40" x2="200" y2="130" stroke="#7c3aed" stroke-width="2.5" stroke-dasharray="6 5"/>
+                <text x="70" y="148" font-size="13" fill="#1565C0" text-anchor="middle" font-weight="bold">底辺a</text>
+                <text x="30" y="90" font-size="14" fill="#E53935" text-anchor="middle" font-weight="bold">h</text>
+                <text x="200" y="20" font-size="12" fill="#555" text-anchor="middle">三角形A</text>
+                <polygon points="140,130 260,130 200,40" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
+                <text x="200" y="148" font-size="13" fill="#F57F17" text-anchor="middle" font-weight="bold">底辺2a</text>
+                <text x="250" y="90" font-size="14" fill="#E53935" text-anchor="middle" font-weight="bold">h</text>
+                <line x1="70" y1="40" x2="200" y2="40" stroke="#E53935" stroke-width="1.5" stroke-dasharray="3"/>
+                <text x="135" y="32" font-size="10" fill="#E53935" text-anchor="middle">高さは同じ</text>
             </svg>
             <div class="plane-expand-actions">
-                <button type="button" class="plane-anim-btn play" id="pe-bs-play">分けてみる</button>
-                <button type="button" class="plane-anim-btn reset" id="pe-bs-reset">もう一度</button>
+                <button type="button" class="plane-anim-btn play" id="pe-ts-play">式で確かめる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-ts-reset">もう一度</button>
             </div>
-            <div class="plane-expand-status" id="pe-bs-status" role="status" aria-live="polite">三角形Aと三角形Bの面積が、本当に2倍の関係か見えにくい。</div>
-            <div class="plane-expand-steps" id="pe-bs-steps"></div>
-            <div class="formula-reveal" id="pe-bs-result">Aの半分＝Bと同じ → ${d.areaB}×2＝${d.areaA}cm²</div>
+            <div class="plane-expand-status" id="pe-ts-status" role="status" aria-live="polite">底辺が2倍でも、面積が本当に2倍になるかは式で確かめないと分からない。</div>
+            <div class="plane-expand-steps" id="pe-ts-steps"></div>
+            <div class="formula-reveal" id="pe-ts-result">底辺をm倍・高さをn倍にすると、面積はm×n倍\n同じ倍率(m＝n)なら、面積はその2乗倍になる</div>
         </div>`,
-        wire: () => wireSplitVisual('pe-bs'),
+        wire: () => wireScaleVisual('pe-ts'),
     }),
     'similarity-tiles': d => {
         const cells = Array.from({ length: 9 }, (_, i) => {

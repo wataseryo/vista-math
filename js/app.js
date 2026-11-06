@@ -562,7 +562,7 @@ function wireDiagonalVisual(prefix) {
     resetBtn.addEventListener('click', reset);
     return reset;
 }
-function wireHeightRatioVisual(prefix) {
+function wireHeightRatioVisual(prefix, d) {
     const seqHr = createTopicSequence();
     const guide = document.getElementById(prefix + '-guide');
     const status = document.getElementById(prefix + '-status');
@@ -583,10 +583,12 @@ function wireHeightRatioVisual(prefix) {
         reset();
         play.disabled = true;
         const show = () => { guide.toggleAttribute('hidden', false); appendExpandStep(stepsEl, '① 2つの三角形は、同じ高さを共有している。'); };
-        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, '② 底辺の比がそのまま面積の比になる。'); };
-        if (topicReducedMotion()) { show(); done(); return; }
+        const compute = () => { appendExpandStep(stepsEl, `② 大きい方 ${d.baseBig}×${d.height}÷2＝${d.bigArea}cm²、小さい方 ${d.baseSmall}×${d.height}÷2＝${d.smallArea}cm²。`); };
+        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, `③ 面積の比${d.bigArea}:${d.smallArea}は、底辺の比${d.baseBig}:${d.baseSmall}とぴったり同じ(どちらも3:1)。`); };
+        if (topicReducedMotion()) { show(); compute(); done(); return; }
         show();
-        seqHr.after(900, done);
+        seqHr.after(700, compute);
+        seqHr.after(1600, done);
     }
     play.addEventListener('click', playFn);
     resetBtn.addEventListener('click', reset);
@@ -1108,8 +1110,8 @@ const PLANE_EXPAND_VISUALS = {
                 <polygon points="40,168 184,168 184,40" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
                 <polygon points="184,168 232,168 184,40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
                 <line id="pe-hr-guide" hidden x1="184" y1="40" x2="184" y2="168" stroke="#7c3aed" stroke-width="3"/>
-                <text x="112" y="186" font-size="13" fill="#F57F17" text-anchor="middle" font-weight="bold">3</text>
-                <text x="208" y="186" font-size="13" fill="#1565C0" text-anchor="middle" font-weight="bold">1</text>
+                <text x="112" y="186" font-size="13" fill="#F57F17" text-anchor="middle" font-weight="bold">${d.baseBig}cm(比3)</text>
+                <text x="208" y="186" font-size="13" fill="#1565C0" text-anchor="middle" font-weight="bold">${d.baseSmall}cm(比1)</text>
             </svg>
             <div class="plane-expand-actions">
                 <button type="button" class="plane-anim-btn play" id="pe-hr-play">確かめてみる</button>
@@ -1117,9 +1119,9 @@ const PLANE_EXPAND_VISUALS = {
             </div>
             <div class="plane-expand-status" id="pe-hr-status" role="status" aria-live="polite">底辺の比は3:1。でも面積の比が同じかどうかは、見ただけでは分かりにくい。</div>
             <div class="plane-expand-steps" id="pe-hr-steps"></div>
-            <div class="formula-reveal" id="pe-hr-result">高さが共通 → 面積の比も3:1 → 大きい方は${d.bigArea}cm²</div>
+            <div class="formula-reveal" id="pe-hr-result">${d.baseBig}×${d.height}÷2＝${d.bigArea}cm²、${d.baseSmall}×${d.height}÷2＝${d.smallArea}cm² → 面積の比${d.bigArea}:${d.smallArea}は底辺の比と同じ3:1</div>
         </div>`,
-        wire: () => wireHeightRatioVisual('pe-hr'),
+        wire: () => wireHeightRatioVisual('pe-hr', d),
     }),
     'compose-add': d => ({
         html: `<div class="plane-expand-stage">

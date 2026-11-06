@@ -658,7 +658,7 @@ L字型は、欠けた角を補って大きい長方形に戻してから引く�
 
 答え：36cm²`,
   expandVisual: 'same-height-ratio',
-  expandVisualData: { total: 48, bigArea: 36, smallArea: 12 },
+  expandVisualData: { baseBig: 9, baseSmall: 3, height: 8, bigArea: 36, smallArea: 12 },
   expandAdvice: '底辺の比が出てきたら、まず「高さは同じかな」を確認するくせをつけよう！',
   tags: ['平面図形', '補助線', '面積比'],
   diagram: {

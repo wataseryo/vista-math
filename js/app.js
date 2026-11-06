@@ -565,6 +565,7 @@ function wireDiagonalVisual(prefix) {
 function wireHeightRatioVisual(prefix, d) {
     const seqHr = createTopicSequence();
     const guide = document.getElementById(prefix + '-guide');
+    const guideLabel = document.getElementById(prefix + '-guide-label');
     const status = document.getElementById(prefix + '-status');
     const stepsEl = document.getElementById(prefix + '-steps');
     const result = document.getElementById(prefix + '-result');
@@ -574,6 +575,7 @@ function wireHeightRatioVisual(prefix, d) {
     function reset() {
         seqHr.cancel();
         guide.toggleAttribute('hidden', true);
+        guideLabel.toggleAttribute('hidden', true);
         result.classList.remove('visible');
         status.textContent = initialStatus;
         clearExpandSteps(stepsEl);
@@ -582,13 +584,15 @@ function wireHeightRatioVisual(prefix, d) {
     function playFn() {
         reset();
         play.disabled = true;
-        const show = () => { guide.toggleAttribute('hidden', false); appendExpandStep(stepsEl, '① 2つの三角形は、同じ高さを共有している。'); };
-        const compute = () => { appendExpandStep(stepsEl, `② 大きい方 ${d.baseBig}×${d.height}÷2＝${d.bigArea}cm²、小さい方 ${d.baseSmall}×${d.height}÷2＝${d.smallArea}cm²。`); };
-        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, `③ 面積の比${d.bigArea}:${d.smallArea}は、底辺の比${d.baseBig}:${d.baseSmall}とぴったり同じ(どちらも3:1)。`); };
-        if (topicReducedMotion()) { show(); compute(); done(); return; }
+        const show = () => { guide.toggleAttribute('hidden', false); guideLabel.toggleAttribute('hidden', false); appendExpandStep(stepsEl, `① 高さは、大きい方も小さい方も${d.height}cmで同じ。`); };
+        const baseRatio = () => { appendExpandStep(stepsEl, `② 底辺は、大きい方${d.baseBig}cm・小さい方${d.baseSmall}cmで、比は${d.baseBig}:${d.baseSmall}＝3:1。`); };
+        const areaRatio = () => { appendExpandStep(stepsEl, `③ 面積は、大きい方${d.baseBig}×${d.height}÷2＝${d.bigArea}cm²・小さい方${d.baseSmall}×${d.height}÷2＝${d.smallArea}cm²で、比は${d.bigArea}:${d.smallArea}＝3:1。`); };
+        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, '④ 高さが同じだから、底辺の比がそのまま面積の比になった。'); };
+        if (topicReducedMotion()) { show(); baseRatio(); areaRatio(); done(); return; }
         show();
-        seqHr.after(700, compute);
-        seqHr.after(1600, done);
+        seqHr.after(700, baseRatio);
+        seqHr.after(1400, areaRatio);
+        seqHr.after(2300, done);
     }
     play.addEventListener('click', playFn);
     resetBtn.addEventListener('click', reset);
@@ -664,7 +668,7 @@ function wireMergeVisual(prefix) {
     resetBtn.addEventListener('click', reset);
     return reset;
 }
-function wireSqueezeVisual(prefix) {
+function wireSqueezeVisual(prefix, d) {
     const seqSq = createTopicSequence();
     const shape = document.getElementById(prefix + '-para');
     const labelBefore = document.getElementById(prefix + '-label-before');
@@ -688,8 +692,8 @@ function wireSqueezeVisual(prefix) {
     function playFn() {
         reset();
         play.disabled = true;
-        const squeeze = () => { shape.classList.add('squeezed'); labelBefore.toggleAttribute('hidden', true); labelAfter.toggleAttribute('hidden', false); appendExpandStep(stepsEl, '① 底辺を変えずに、高さだけを低くする。'); };
-        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, '② 三角形と同じ面積になった。'); };
+        const squeeze = () => { shape.classList.add('squeezed'); labelBefore.toggleAttribute('hidden', true); labelAfter.toggleAttribute('hidden', false); appendExpandStep(stepsEl, `① 三角形の公式には÷2が付くので、底辺${d.highlightBase}cmを変えずに、高さを${d.triangleHeight}cmの半分の${d.highlightHeight}cmまで低くする。`); };
+        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, `② 高さ${d.highlightHeight}cmで、三角形と同じ${d.target}cm²になった。`); };
         if (topicReducedMotion()) { squeeze(); done(); return; }
         squeeze();
         seqSq.after(900, done);
@@ -1110,8 +1114,9 @@ const PLANE_EXPAND_VISUALS = {
                 <polygon points="40,168 184,168 184,40" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
                 <polygon points="184,168 232,168 184,40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
                 <line id="pe-hr-guide" hidden x1="184" y1="40" x2="184" y2="168" stroke="#7c3aed" stroke-width="3"/>
-                <text x="112" y="186" font-size="13" fill="#F57F17" text-anchor="middle" font-weight="bold">${d.baseBig}cm(比3)</text>
-                <text x="208" y="186" font-size="13" fill="#1565C0" text-anchor="middle" font-weight="bold">${d.baseSmall}cm(比1)</text>
+                <text id="pe-hr-guide-label" hidden x="196" y="104" font-size="13" fill="#7c3aed" font-weight="bold">高さ${d.height}cm(共通)</text>
+                <text x="112" y="186" font-size="13" fill="#F57F17" text-anchor="middle" font-weight="bold">底辺${d.baseBig}cm(比3)</text>
+                <text x="208" y="186" font-size="13" fill="#1565C0" text-anchor="middle" font-weight="bold">底辺${d.baseSmall}cm(比1)</text>
             </svg>
             <div class="plane-expand-actions">
                 <button type="button" class="plane-anim-btn play" id="pe-hr-play">確かめてみる</button>
@@ -1119,7 +1124,7 @@ const PLANE_EXPAND_VISUALS = {
             </div>
             <div class="plane-expand-status" id="pe-hr-status" role="status" aria-live="polite">底辺の比は3:1。でも面積の比が同じかどうかは、見ただけでは分かりにくい。</div>
             <div class="plane-expand-steps" id="pe-hr-steps"></div>
-            <div class="formula-reveal" id="pe-hr-result">${d.baseBig}×${d.height}÷2＝${d.bigArea}cm²、${d.baseSmall}×${d.height}÷2＝${d.smallArea}cm² → 面積の比${d.bigArea}:${d.smallArea}は底辺の比と同じ3:1</div>
+            <div class="formula-reveal" id="pe-hr-result">高さ${d.height}cmが同じ → 底辺の比${d.baseBig}:${d.baseSmall}＝3:1 → 面積の比${d.bigArea}:${d.smallArea}＝3:1</div>
         </div>`,
         wire: () => wireHeightRatioVisual('pe-hr', d),
     }),
@@ -1166,10 +1171,10 @@ const PLANE_EXPAND_VISUALS = {
                 <title id="pe-ip-title">平行四辺形の高さを縮めて三角形と同じ面積にする図</title>
                 <desc id="pe-ip-desc">底辺を変えずに平行四辺形の高さを半分にすると、三角形と同じ面積になる。</desc>
                 <polygon points="40,160 160,160 100,70" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
-                <text x="100" y="135" font-size="13" fill="#1a1a2e" text-anchor="middle" font-weight="bold">${d.target}cm²</text>
+                <text x="100" y="135" font-size="13" fill="#1a1a2e" text-anchor="middle" font-weight="bold">△ 底辺${d.highlightBase}×高さ${d.triangleHeight}÷2＝${d.target}cm²</text>
                 <polygon id="pe-ip-para" class="plane-expand-squeeze" style="transform-origin:280px 160px" points="220,160 340,160 360,70 240,70" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
-                <text id="pe-ip-label-before" x="280" y="200" font-size="13" fill="#555" text-anchor="middle">8×6＝${d.highlightBase * 6}cm²</text>
-                <text id="pe-ip-label-after" x="280" y="200" font-size="13" fill="#1B5E20" text-anchor="middle" font-weight="bold" hidden>${d.highlightBase}×${d.highlightHeight}＝${d.target}cm²</text>
+                <text id="pe-ip-label-before" x="280" y="200" font-size="13" fill="#555" text-anchor="middle">▱ 底辺${d.highlightBase}×高さ${d.triangleHeight}＝${d.highlightBase * d.triangleHeight}cm²</text>
+                <text id="pe-ip-label-after" x="280" y="200" font-size="13" fill="#1B5E20" text-anchor="middle" font-weight="bold" hidden>▱ 底辺${d.highlightBase}×高さ${d.highlightHeight}＝${d.target}cm²</text>
             </svg>
             <div class="plane-expand-actions">
                 <button type="button" class="plane-anim-btn play" id="pe-ip-play">高さを縮めてみる</button>
@@ -1177,9 +1182,9 @@ const PLANE_EXPAND_VISUALS = {
             </div>
             <div class="plane-expand-status" id="pe-ip-status" role="status" aria-live="polite">平行四辺形の高さがいくつなら、三角形と同じ面積になるか見えにくい。</div>
             <div class="plane-expand-steps" id="pe-ip-steps"></div>
-            <div class="formula-reveal" id="pe-ip-result">高さ${d.highlightHeight}cmにすると${d.target}cm²になる → 三角形と同じ</div>
+            <div class="formula-reveal" id="pe-ip-result">高さ${d.triangleHeight}÷2＝${d.highlightHeight}cm → 平行四辺形の高さ${d.highlightHeight}cmで、三角形と同じ${d.target}cm²になる</div>
         </div>`,
-        wire: () => wireSqueezeVisual('pe-ip'),
+        wire: () => wireSqueezeVisual('pe-ip', d),
     }),
     'base-ratio-split': d => ({
         html: `<div class="plane-expand-stage">

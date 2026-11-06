@@ -756,14 +756,14 @@ L字型は、欠けた角を補って大きい長方形に戻してから引く�
 ③ 高さ＝24÷8＝3cm。
 
 【広げてみよう】
-底辺を固定すると、面積は高さに比例して決まる。底辺8cmで面積24cm²にする高さは3cmだけでなく、底辺を変えれば(例えば底辺4cmなら高さ6cm、底辺6cmなら高さ4cm)、底辺×高さが24になる組み合わせがいろいろ作れる。
+三角形の面積の公式には÷2が付くけど、平行四辺形の面積の公式には付かない。だから、底辺が同じで面積も同じにしたいなら、÷2の分だけ平行四辺形の高さは三角形の高さのちょうど半分でいい(6÷2＝3cm)。
 
 【確認】
 8×3＝24cm²で、三角形の面積と一致する。
 
 答え：3cm`,
   expandVisual: 'inverse-proportion',
-  expandVisualData: { target: 24, highlightBase: 8, highlightHeight: 3 },
+  expandVisualData: { target: 24, highlightBase: 8, highlightHeight: 3, triangleHeight: 6 },
   expandAdvice: '面積が同じという条件が出てきたら、「底辺と高さ、どちらかが分かれば残りも求まる」と思い出そう！',
   tags: ['平面図形', '等積変形'],
   diagram: {

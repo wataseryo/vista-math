@@ -1293,6 +1293,9 @@ function wirePlaneExpandVisual(p) {
     if (!target) return;
     target.insertAdjacentHTML('beforeend', visual.html);
     activeExpandVisualReset = visual.wire();
+    if (p.expandAdvice) {
+        target.insertAdjacentHTML('beforeend', `<div class="plane-expand-advice">${escapeHtml(p.expandAdvice)}</div>`);
+    }
 }
 
 function pracGoToTopic(unitId) {

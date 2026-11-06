@@ -408,6 +408,23 @@ function parseSolutionToSteps(solution) {
     return steps;
 }
 
+// 行まるごとが《...》で囲まれた式は、地の文から独立した色付きブロックで表示する。
+// (VISTA/docs/content-authoring.md の「解説文中の数式」参照)
+function renderStepBody(body) {
+    const lines = body.split('\n');
+    const pieces = lines.map(line => {
+        const m = line.match(/^《(.+)》$/);
+        return m
+            ? { block: true, html: `<div class="calc-block">${escapeHtml(m[1])}</div>` }
+            : { block: false, html: escapeHtml(line) };
+    });
+    let out = '';
+    pieces.forEach((p, i) => {
+        if (i > 0 && !pieces[i - 1].block && !p.block) out += '<br>';
+        out += p.html;
+    });
+    return out;
+}
 function renderSolutionSteps(solution) {
     const steps = parseSolutionToSteps(solution);
     if (steps.length === 0) return `<div style="color:#888;font-size:.85rem">解説を準備中です。</div>`;
@@ -418,7 +435,7 @@ function renderSolutionSteps(solution) {
                 <div class="prac-step-name">${escapeHtml(s.title)}</div>
             </div>` : ''}
             <div class="prac-step-bd">
-                <div class="prac-step-text">${escapeHtml(s.body).replace(/\n/g, '<br>')}</div>
+                <div class="prac-step-text">${renderStepBody(s.body)}</div>
             </div>
         </div>`).join('');
 }

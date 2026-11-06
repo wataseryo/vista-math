@@ -430,6 +430,7 @@ function wireCutVisual(prefix) {
     const cutline = document.getElementById(prefix + '-cutline');
     const rect = document.getElementById(prefix + '-rect');
     const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
     const result = document.getElementById(prefix + '-result');
     const play = document.getElementById(prefix + '-play');
     const resetBtn = document.getElementById(prefix + '-reset');
@@ -441,14 +442,15 @@ function wireCutVisual(prefix) {
         rect.toggleAttribute('hidden', true);
         result.classList.remove('visible');
         status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
         play.disabled = false;
     }
     function playFn() {
         reset();
         play.disabled = true;
-        const cut = () => { cutline.toggleAttribute('hidden', false); piece.classList.add('cut'); status.textContent = '① 切り取る線に沿って、はみ出した三角形を切り出す。'; };
-        const move = () => { piece.classList.add('moved'); status.textContent = '② 切った三角形を反対側へ動かす。'; };
-        const done = () => { rect.toggleAttribute('hidden', false); result.classList.add('visible'); status.textContent = '③ ぴったりはまって長方形になった。'; };
+        const cut = () => { cutline.toggleAttribute('hidden', false); piece.classList.add('cut'); appendExpandStep(stepsEl, '① 切り取る線に沿って、はみ出した三角形を切り出す。'); };
+        const move = () => { piece.classList.add('moved'); appendExpandStep(stepsEl, '② 切った三角形を反対側へ動かす。'); };
+        const done = () => { rect.toggleAttribute('hidden', false); result.classList.add('visible'); appendExpandStep(stepsEl, '③ ぴったりはまって長方形になった。'); };
         if (topicReducedMotion()) { cut(); move(); done(); return; }
         cut();
         seqCut.after(700, move);
@@ -464,6 +466,7 @@ function wireRotateVisual(prefix) {
     const pivot = document.getElementById(prefix + '-pivot');
     const para = document.getElementById(prefix + '-para');
     const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
     const result = document.getElementById(prefix + '-result');
     const play = document.getElementById(prefix + '-play');
     const resetBtn = document.getElementById(prefix + '-reset');
@@ -476,14 +479,15 @@ function wireRotateVisual(prefix) {
         para.toggleAttribute('hidden', true);
         result.classList.remove('visible');
         status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
         play.disabled = false;
     }
     function playFn() {
         reset();
         play.disabled = true;
-        const show = () => { dup.toggleAttribute('hidden', false); pivot.toggleAttribute('hidden', false); status.textContent = '① 同じ形をもう1つ重ねて用意する。'; };
-        const rotate = () => { dup.classList.add('rotated'); status.textContent = '② 印をつけた点を中心に180°回転させる。'; };
-        const done = () => { para.toggleAttribute('hidden', false); result.classList.add('visible'); status.textContent = '③ ぴったりはまって平行四辺形になった。'; };
+        const show = () => { dup.toggleAttribute('hidden', false); pivot.toggleAttribute('hidden', false); appendExpandStep(stepsEl, '① 同じ形をもう1つ重ねて用意する。'); };
+        const rotate = () => { dup.classList.add('rotated'); appendExpandStep(stepsEl, '② 印をつけた点を中心に180°回転させる。'); };
+        const done = () => { para.toggleAttribute('hidden', false); result.classList.add('visible'); appendExpandStep(stepsEl, '③ ぴったりはまって平行四辺形になった。'); };
         if (topicReducedMotion()) { show(); rotate(); done(); return; }
         show();
         seqRot.after(500, rotate);
@@ -497,6 +501,7 @@ function wireSubtractVisual(prefix) {
     const seqSub = createTopicSequence();
     const part = document.getElementById(prefix + '-part');
     const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
     const result = document.getElementById(prefix + '-result');
     const play = document.getElementById(prefix + '-play');
     const resetBtn = document.getElementById(prefix + '-reset');
@@ -506,14 +511,15 @@ function wireSubtractVisual(prefix) {
         part.classList.remove('highlight', 'removed');
         result.classList.remove('visible');
         status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
         play.disabled = false;
     }
     function playFn() {
         reset();
         play.disabled = true;
-        const highlight = () => { part.classList.add('highlight'); status.textContent = '① 欠けている部分を見つける。'; };
-        const remove = () => { part.classList.add('removed'); status.textContent = '② 全体から、その部分を引く。'; };
-        const done = () => { result.classList.add('visible'); status.textContent = '③ 残りの面積が求まった。'; };
+        const highlight = () => { part.classList.add('highlight'); appendExpandStep(stepsEl, '① 欠けている部分を見つける。'); };
+        const remove = () => { part.classList.add('removed'); appendExpandStep(stepsEl, '② 全体から、その部分を引く。'); };
+        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, '③ 残りの面積が求まった。'); };
         if (topicReducedMotion()) { highlight(); remove(); done(); return; }
         highlight();
         seqSub.after(700, remove);
@@ -527,6 +533,7 @@ function wireDiagonalVisual(prefix) {
     const seqDi = createTopicSequence();
     const dup = document.getElementById(prefix + '-dup');
     const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
     const result = document.getElementById(prefix + '-result');
     const play = document.getElementById(prefix + '-play');
     const resetBtn = document.getElementById(prefix + '-reset');
@@ -537,14 +544,15 @@ function wireDiagonalVisual(prefix) {
         dup.toggleAttribute('hidden', true);
         result.classList.remove('visible');
         status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
         play.disabled = false;
     }
     function playFn() {
         reset();
         play.disabled = true;
-        const show = () => { dup.toggleAttribute('hidden', false); status.textContent = '① 片方の三角形を重ねて用意する。'; };
-        const rotate = () => { dup.classList.add('rotated'); status.textContent = '② 交点を中心に180°回転させる。'; };
-        const done = () => { result.classList.add('visible'); status.textContent = '③ ぴったり重なった → 面積が等しい。'; };
+        const show = () => { dup.toggleAttribute('hidden', false); appendExpandStep(stepsEl, '① 片方の三角形を重ねて用意する。'); };
+        const rotate = () => { dup.classList.add('rotated'); appendExpandStep(stepsEl, '② 交点を中心に180°回転させる。'); };
+        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, '③ ぴったり重なった → 面積が等しい。'); };
         if (topicReducedMotion()) { show(); rotate(); done(); return; }
         show();
         seqDi.after(600, rotate);
@@ -558,6 +566,7 @@ function wireHeightRatioVisual(prefix) {
     const seqHr = createTopicSequence();
     const guide = document.getElementById(prefix + '-guide');
     const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
     const result = document.getElementById(prefix + '-result');
     const play = document.getElementById(prefix + '-play');
     const resetBtn = document.getElementById(prefix + '-reset');
@@ -567,13 +576,14 @@ function wireHeightRatioVisual(prefix) {
         guide.toggleAttribute('hidden', true);
         result.classList.remove('visible');
         status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
         play.disabled = false;
     }
     function playFn() {
         reset();
         play.disabled = true;
-        const show = () => { guide.toggleAttribute('hidden', false); status.textContent = '① 2つの三角形は、同じ高さを共有している。'; };
-        const done = () => { result.classList.add('visible'); status.textContent = '② 底辺の比がそのまま面積の比になる。'; };
+        const show = () => { guide.toggleAttribute('hidden', false); appendExpandStep(stepsEl, '① 2つの三角形は、同じ高さを共有している。'); };
+        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, '② 底辺の比がそのまま面積の比になる。'); };
         if (topicReducedMotion()) { show(); done(); return; }
         show();
         seqHr.after(900, done);
@@ -587,6 +597,7 @@ function wireComposeVisual(prefix, labelA, labelB) {
     const partA = document.getElementById(prefix + '-a');
     const partB = document.getElementById(prefix + '-b');
     const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
     const result = document.getElementById(prefix + '-result');
     const play = document.getElementById(prefix + '-play');
     const resetBtn = document.getElementById(prefix + '-reset');
@@ -597,14 +608,15 @@ function wireComposeVisual(prefix, labelA, labelB) {
         partB.classList.remove('on');
         result.classList.remove('visible');
         status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
         play.disabled = false;
     }
     function playFn() {
         reset();
         play.disabled = true;
-        const a = () => { partA.classList.add('on'); status.textContent = `① まず${labelA || '1つめ'}の部分。`; };
-        const b = () => { partB.classList.add('on'); status.textContent = `② 次に${labelB || '2つめ'}の部分。`; };
-        const done = () => { result.classList.add('visible'); status.textContent = '③ 2つを足して全体の面積。'; };
+        const a = () => { partA.classList.add('on'); appendExpandStep(stepsEl, `① まず${labelA || '1つめ'}の部分。`); };
+        const b = () => { partB.classList.add('on'); appendExpandStep(stepsEl, `② 次に${labelB || '2つめ'}の部分。`); };
+        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, '③ 2つを足して全体の面積。'); };
         if (topicReducedMotion()) { a(); b(); done(); return; }
         a();
         seqCo.after(700, b);
@@ -620,6 +632,7 @@ function wireMergeVisual(prefix) {
     const partB = document.getElementById(prefix + '-b');
     const divider = document.getElementById(prefix + '-divider');
     const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
     const result = document.getElementById(prefix + '-result');
     const play = document.getElementById(prefix + '-play');
     const resetBtn = document.getElementById(prefix + '-reset');
@@ -631,14 +644,15 @@ function wireMergeVisual(prefix) {
         divider.classList.remove('fade-out');
         result.classList.remove('visible');
         status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
         play.disabled = false;
     }
     function playFn() {
         reset();
         play.disabled = true;
-        const show = () => { status.textContent = '① 内側の線が、2つの三角形の境目。'; };
-        const merge = () => { partA.classList.add('merged'); partB.classList.add('merged'); divider.classList.add('fade-out'); status.textContent = '② 境目を消すと、頂点を共有する1つの三角形に見える。'; };
-        const done = () => { result.classList.add('visible'); status.textContent = '③ 底辺を合わせて1回で計算できる。'; };
+        const show = () => { appendExpandStep(stepsEl, '① 内側の線が、2つの三角形の境目。'); };
+        const merge = () => { partA.classList.add('merged'); partB.classList.add('merged'); divider.classList.add('fade-out'); appendExpandStep(stepsEl, '② 境目を消すと、頂点を共有する1つの三角形に見える。'); };
+        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, '③ 底辺を合わせて1回で計算できる。'); };
         if (topicReducedMotion()) { show(); merge(); done(); return; }
         show();
         seqMg.after(700, merge);
@@ -654,6 +668,7 @@ function wireSqueezeVisual(prefix) {
     const labelBefore = document.getElementById(prefix + '-label-before');
     const labelAfter = document.getElementById(prefix + '-label-after');
     const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
     const result = document.getElementById(prefix + '-result');
     const play = document.getElementById(prefix + '-play');
     const resetBtn = document.getElementById(prefix + '-reset');
@@ -665,13 +680,14 @@ function wireSqueezeVisual(prefix) {
         labelAfter.toggleAttribute('hidden', true);
         result.classList.remove('visible');
         status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
         play.disabled = false;
     }
     function playFn() {
         reset();
         play.disabled = true;
-        const squeeze = () => { shape.classList.add('squeezed'); labelBefore.toggleAttribute('hidden', true); labelAfter.toggleAttribute('hidden', false); status.textContent = '① 底辺を変えずに、高さだけを低くする。'; };
-        const done = () => { result.classList.add('visible'); status.textContent = '② 三角形と同じ面積になった。'; };
+        const squeeze = () => { shape.classList.add('squeezed'); labelBefore.toggleAttribute('hidden', true); labelAfter.toggleAttribute('hidden', false); appendExpandStep(stepsEl, '① 底辺を変えずに、高さだけを低くする。'); };
+        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, '② 三角形と同じ面積になった。'); };
         if (topicReducedMotion()) { squeeze(); done(); return; }
         squeeze();
         seqSq.after(900, done);
@@ -686,6 +702,7 @@ function wireSplitVisual(prefix) {
     const half1 = document.getElementById(prefix + '-half1');
     const half2 = document.getElementById(prefix + '-half2');
     const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
     const result = document.getElementById(prefix + '-result');
     const play = document.getElementById(prefix + '-play');
     const resetBtn = document.getElementById(prefix + '-reset');
@@ -697,14 +714,15 @@ function wireSplitVisual(prefix) {
         half2.classList.remove('on');
         result.classList.remove('visible');
         status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
         play.disabled = false;
     }
     function playFn() {
         reset();
         play.disabled = true;
-        const split = () => { line.toggleAttribute('hidden', false); status.textContent = '① 底辺の真ん中から頂点へ線を引いて2つに分ける。'; };
-        const highlight = () => { half1.classList.add('on'); half2.classList.add('on'); status.textContent = '② どちらもBと同じ底辺・同じ高さ。'; };
-        const done = () => { result.classList.add('visible'); status.textContent = '③ 2つ分で面積も2倍。'; };
+        const split = () => { line.toggleAttribute('hidden', false); appendExpandStep(stepsEl, '① 底辺の真ん中から頂点へ線を引いて2つに分ける。'); };
+        const highlight = () => { half1.classList.add('on'); half2.classList.add('on'); appendExpandStep(stepsEl, '② どちらもBと同じ底辺・同じ高さ。'); };
+        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, '③ 2つ分で面積も2倍。'); };
         if (topicReducedMotion()) { split(); highlight(); done(); return; }
         split();
         seqSp.after(700, highlight);
@@ -755,6 +773,7 @@ function wireAngleRevealVisual(prefix) {
     const guide = document.getElementById(prefix + '-guide');
     const labels = document.getElementById(prefix + '-labels');
     const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
     const result = document.getElementById(prefix + '-result');
     const play = document.getElementById(prefix + '-play');
     const resetBtn = document.getElementById(prefix + '-reset');
@@ -765,14 +784,15 @@ function wireAngleRevealVisual(prefix) {
         labels.toggleAttribute('hidden', true);
         result.classList.remove('visible');
         status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
         play.disabled = false;
     }
     function playFn() {
         reset();
         play.disabled = true;
-        const show = () => { guide.toggleAttribute('hidden', false); status.textContent = '① 曲がり角を通る平行な補助線を引く。'; };
-        const split = () => { labels.toggleAttribute('hidden', false); status.textContent = '② 錯角で50°と35°に分かれる。'; };
-        const done = () => { result.classList.add('visible'); status.textContent = '③ 50＋35＝85°。'; };
+        const show = () => { guide.toggleAttribute('hidden', false); appendExpandStep(stepsEl, '① 曲がり角を通る平行な補助線を引く。'); };
+        const split = () => { labels.toggleAttribute('hidden', false); appendExpandStep(stepsEl, '② 錯角で50°と35°に分かれる。'); };
+        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, '③ 50＋35＝85°。'); };
         if (topicReducedMotion()) { show(); split(); done(); return; }
         show();
         seqAn.after(600, split);
@@ -782,6 +802,16 @@ function wireAngleRevealVisual(prefix) {
     resetBtn.addEventListener('click', reset);
     return reset;
 }
+// ①②③を1行ずつ追加して残す(前の行を上書きしない)。
+function appendExpandStep(stepsEl, text) {
+    const div = document.createElement('div');
+    div.className = 'plane-expand-step';
+    div.textContent = text;
+    stepsEl.appendChild(div);
+    requestAnimationFrame(() => div.classList.add('shown'));
+    return div;
+}
+function clearExpandSteps(stepsEl) { stepsEl.innerHTML = ''; }
 function wireFormulaSlotVisual(prefix, derivations) {
     const chips = document.querySelectorAll('#' + prefix + '-eq .plane-expand-chip');
     const status = document.getElementById(prefix + '-status');
@@ -826,6 +856,7 @@ const PLANE_EXPAND_VISUALS = {
                 <button type="button" class="plane-anim-btn reset" id="pe-pc-reset">もう一度</button>
             </div>
             <div class="plane-expand-status" id="pe-pc-status" role="status" aria-live="polite">まだ切っていない。両端が斜めのままだと、公式がそのまま使えるか分かりにくい。</div>
+            <div class="plane-expand-steps" id="pe-pc-steps"></div>
             <div class="formula-reveal" id="pe-pc-result">長方形になった → ${d.base}×${d.height}＝${d.area}cm²</div>
         </div>`,
         wire: () => wireCutVisual('pe-pc'),
@@ -849,6 +880,7 @@ const PLANE_EXPAND_VISUALS = {
                 <button type="button" class="plane-anim-btn reset" id="pe-tr-reset">もう一度</button>
             </div>
             <div class="plane-expand-status" id="pe-tr-status" role="status" aria-live="polite">三角形1つだけだと、なぜ÷2なのか見えにくい。</div>
+            <div class="plane-expand-steps" id="pe-tr-steps"></div>
             <div class="formula-reveal" id="pe-tr-result">平行四辺形になった → ${d.base}×${d.height}＝${d.base * d.height}cm²（半分で${d.area}cm²）</div>
         </div>`,
         wire: () => wireRotateVisual('pe-tr'),
@@ -873,6 +905,7 @@ const PLANE_EXPAND_VISUALS = {
                 <button type="button" class="plane-anim-btn reset" id="pe-zr-reset">もう一度</button>
             </div>
             <div class="plane-expand-status" id="pe-zr-status" role="status" aria-live="polite">台形1つだけだと、三角形の公式とのつながりが見えにくい。</div>
+            <div class="plane-expand-steps" id="pe-zr-steps"></div>
             <div class="formula-reveal" id="pe-zr-result">平行四辺形になった → (${d.upper}＋${d.lower})×${d.height}＝${(d.upper + d.lower) * d.height}cm²（半分で${d.area}cm²）</div>
         </div>`,
         wire: () => wireRotateVisual('pe-zr'),
@@ -1003,6 +1036,7 @@ const PLANE_EXPAND_VISUALS = {
                 <button type="button" class="plane-anim-btn reset" id="pe-s6-reset">もう一度</button>
             </div>
             <div class="plane-expand-status" id="pe-s6-status" role="status" aria-live="polite">今は長方形全体に見える。どこが三角形の部分か分かりにくい。</div>
+            <div class="plane-expand-steps" id="pe-s6-steps"></div>
             <div class="formula-reveal" id="pe-s6-result">${d.resultText}</div>
         </div>`,
         wire: () => wireSubtractVisual('pe-s6'),
@@ -1020,6 +1054,7 @@ const PLANE_EXPAND_VISUALS = {
                 <button type="button" class="plane-anim-btn reset" id="pe-s7-reset">もう一度</button>
             </div>
             <div class="plane-expand-status" id="pe-s7-status" role="status" aria-live="polite">今は大きい長方形に見える。どこが切り取られた部分か分かりにくい。</div>
+            <div class="plane-expand-steps" id="pe-s7-steps"></div>
             <div class="formula-reveal" id="pe-s7-result">${d.resultText}</div>
         </div>`,
         wire: () => wireSubtractVisual('pe-s7'),
@@ -1039,6 +1074,7 @@ const PLANE_EXPAND_VISUALS = {
                 <button type="button" class="plane-anim-btn reset" id="pe-dg-reset">もう一度</button>
             </div>
             <div class="plane-expand-status" id="pe-dg-status" role="status" aria-live="polite">三角形ABDと三角形CBDの面積が等しいかは、見ただけでは分かりにくい。</div>
+            <div class="plane-expand-steps" id="pe-dg-steps"></div>
             <div class="formula-reveal" id="pe-dg-result">ぴったり重なった → 三角形ABD＝三角形CBD＝${d.halfArea}cm²</div>
         </div>`,
         wire: () => wireDiagonalVisual('pe-dg'),
@@ -1059,6 +1095,7 @@ const PLANE_EXPAND_VISUALS = {
                 <button type="button" class="plane-anim-btn reset" id="pe-dq-reset">もう一度</button>
             </div>
             <div class="plane-expand-status" id="pe-dq-status" role="status" aria-live="polite">4つの三角形の面積が等しいかは、見ただけでは分かりにくい。</div>
+            <div class="plane-expand-steps" id="pe-dq-steps"></div>
             <div class="formula-reveal" id="pe-dq-result">ぴったり重なった → OAB＝OCD、2つで全体の${d.pairPercent}%</div>
         </div>`,
         wire: () => wireDiagonalVisual('pe-dq'),
@@ -1079,6 +1116,7 @@ const PLANE_EXPAND_VISUALS = {
                 <button type="button" class="plane-anim-btn reset" id="pe-hr-reset">もう一度</button>
             </div>
             <div class="plane-expand-status" id="pe-hr-status" role="status" aria-live="polite">底辺の比は3:1。でも面積の比が同じかどうかは、見ただけでは分かりにくい。</div>
+            <div class="plane-expand-steps" id="pe-hr-steps"></div>
             <div class="formula-reveal" id="pe-hr-result">高さが共通 → 面積の比も3:1 → 大きい方は${d.bigArea}cm²</div>
         </div>`,
         wire: () => wireHeightRatioVisual('pe-hr'),
@@ -1096,6 +1134,7 @@ const PLANE_EXPAND_VISUALS = {
                 <button type="button" class="plane-anim-btn reset" id="pe-co-reset">もう一度</button>
             </div>
             <div class="plane-expand-status" id="pe-co-status" role="status" aria-live="polite">三角形と台形、それぞれの面積は分かるけど、どう組み合わさっているか見えにくい。</div>
+            <div class="plane-expand-steps" id="pe-co-steps"></div>
             <div class="formula-reveal" id="pe-co-result">${d.resultText}</div>
         </div>`,
         wire: () => wireComposeVisual('pe-co', '三角形', '台形'),
@@ -1114,6 +1153,7 @@ const PLANE_EXPAND_VISUALS = {
                 <button type="button" class="plane-anim-btn reset" id="pe-mt-reset">もう一度</button>
             </div>
             <div class="plane-expand-status" id="pe-mt-status" role="status" aria-live="polite">2つの三角形に分けて見えるが、本当に分ける必要があるかは分かりにくい。</div>
+            <div class="plane-expand-steps" id="pe-mt-steps"></div>
             <div class="formula-reveal" id="pe-mt-result">1つの三角形として → ${d.base1}＋${d.base2}＝${d.base1 + d.base2}cm、${d.base1 + d.base2}×${d.height}÷2＝${d.area}cm²</div>
         </div>`,
         wire: () => wireMergeVisual('pe-mt'),
@@ -1134,6 +1174,7 @@ const PLANE_EXPAND_VISUALS = {
                 <button type="button" class="plane-anim-btn reset" id="pe-ip-reset">もう一度</button>
             </div>
             <div class="plane-expand-status" id="pe-ip-status" role="status" aria-live="polite">平行四辺形の高さがいくつなら、三角形と同じ面積になるか見えにくい。</div>
+            <div class="plane-expand-steps" id="pe-ip-steps"></div>
             <div class="formula-reveal" id="pe-ip-result">高さ${d.highlightHeight}cmにすると${d.target}cm²になる → 三角形と同じ</div>
         </div>`,
         wire: () => wireSqueezeVisual('pe-ip'),
@@ -1153,6 +1194,7 @@ const PLANE_EXPAND_VISUALS = {
                 <button type="button" class="plane-anim-btn reset" id="pe-bs-reset">もう一度</button>
             </div>
             <div class="plane-expand-status" id="pe-bs-status" role="status" aria-live="polite">三角形Aと三角形Bの面積が、本当に2倍の関係か見えにくい。</div>
+            <div class="plane-expand-steps" id="pe-bs-steps"></div>
             <div class="formula-reveal" id="pe-bs-result">Aの半分＝Bと同じ → ${d.areaB}×2＝${d.areaA}cm²</div>
         </div>`,
         wire: () => wireSplitVisual('pe-bs'),
@@ -1206,6 +1248,7 @@ const PLANE_EXPAND_VISUALS = {
                 <button type="button" class="plane-anim-btn reset" id="pe-an-reset">もう一度</button>
             </div>
             <div class="plane-expand-status" id="pe-an-status" role="status" aria-live="polite">補助線がないと、角xに使える角が見つからない。</div>
+            <div class="plane-expand-steps" id="pe-an-steps"></div>
             <div class="formula-reveal" id="pe-an-result">補助線で分かれた ${d.angle1}°＋${d.angle2}°＝${d.total}°</div>
         </div>`,
         wire: () => wireAngleRevealVisual('pe-an'),

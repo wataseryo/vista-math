@@ -585,8 +585,8 @@ function wireHeightRatioVisual(prefix, d) {
         reset();
         play.disabled = true;
         const show = () => { guide.toggleAttribute('hidden', false); guideLabel.toggleAttribute('hidden', false); appendExpandStep(stepsEl, `① 高さは、大きい方も小さい方も${d.height}cmで同じ。`); };
-        const baseRatio = () => { appendExpandStep(stepsEl, `② 底辺は、大きい方${d.baseBig}cm・小さい方${d.baseSmall}cmで、比は${d.baseBig}:${d.baseSmall}＝3:1。`); };
-        const areaRatio = () => { appendExpandStep(stepsEl, `③ 面積は、大きい方${d.baseBig}×${d.height}÷2＝${d.bigArea}cm²・小さい方${d.baseSmall}×${d.height}÷2＝${d.smallArea}cm²で、比は${d.bigArea}:${d.smallArea}＝3:1。`); };
+        const baseRatio = () => { appendExpandStep(stepsEl, `② 底辺は、大きい方${d.baseBig}cm・小さい方${d.baseSmall}cm。\n比は${d.baseBig}:${d.baseSmall}＝3:1。`); };
+        const areaRatio = () => { appendExpandStep(stepsEl, `③ 面積は、大きい方${d.baseBig}×${d.height}÷2＝${d.bigArea}cm²、\n小さい方${d.baseSmall}×${d.height}÷2＝${d.smallArea}cm²。\n比は${d.bigArea}:${d.smallArea}＝3:1。`); };
         const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, '④ 高さが同じだから、底辺の比がそのまま面積の比になった。'); };
         if (topicReducedMotion()) { show(); baseRatio(); areaRatio(); done(); return; }
         show();
@@ -620,9 +620,11 @@ function wireComposeVisual(prefix, labelA, labelB) {
     function playFn() {
         reset();
         play.disabled = true;
-        const a = () => { partA.classList.add('on'); appendExpandStep(stepsEl, `① まず${labelA || '1つめ'}の部分。`); };
-        const b = () => { partB.classList.add('on'); appendExpandStep(stepsEl, `② 次に${labelB || '2つめ'}の部分。`); };
-        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, '③ 2つを足して全体の面積。'); };
+        const focusA = () => { partA.classList.add('on'); partB.classList.remove('on'); };
+        const focusB = () => { partB.classList.add('on'); partA.classList.remove('on'); };
+        const a = () => { partA.classList.add('on'); appendExpandStep(stepsEl, `① まず${labelA || '1つめ'}の部分。(タップすると図で確認できる)`, focusA); };
+        const b = () => { partB.classList.add('on'); appendExpandStep(stepsEl, `② 次に${labelB || '2つめ'}の部分。(タップすると図で確認できる)`, focusB); };
+        const done = () => { partA.classList.add('on'); partB.classList.add('on'); result.classList.add('visible'); appendExpandStep(stepsEl, '③ 2つを足して全体の面積。'); };
         if (topicReducedMotion()) { a(); b(); done(); return; }
         a();
         seqCo.after(700, b);
@@ -671,8 +673,9 @@ function wireMergeVisual(prefix) {
 function wireSqueezeVisual(prefix, d) {
     const seqSq = createTopicSequence();
     const shape = document.getElementById(prefix + '-para');
-    const labelBefore = document.getElementById(prefix + '-label-before');
-    const labelAfter = document.getElementById(prefix + '-label-after');
+    const label = document.getElementById(prefix + '-label');
+    const labelBefore = `▱ 底辺${d.highlightBase}×高さ${d.triangleHeight}＝${d.highlightBase * d.triangleHeight}cm²`;
+    const labelAfter = `▱ 底辺${d.highlightBase}×高さ${d.highlightHeight}＝${d.target}cm²`;
     const status = document.getElementById(prefix + '-status');
     const stepsEl = document.getElementById(prefix + '-steps');
     const result = document.getElementById(prefix + '-result');
@@ -682,8 +685,7 @@ function wireSqueezeVisual(prefix, d) {
     function reset() {
         seqSq.cancel();
         shape.classList.remove('squeezed');
-        labelBefore.toggleAttribute('hidden', false);
-        labelAfter.toggleAttribute('hidden', true);
+        label.textContent = labelBefore;
         result.classList.remove('visible');
         status.textContent = initialStatus;
         clearExpandSteps(stepsEl);
@@ -692,7 +694,11 @@ function wireSqueezeVisual(prefix, d) {
     function playFn() {
         reset();
         play.disabled = true;
-        const squeeze = () => { shape.classList.add('squeezed'); labelBefore.toggleAttribute('hidden', true); labelAfter.toggleAttribute('hidden', false); appendExpandStep(stepsEl, `① 三角形の公式には÷2が付くので、底辺${d.highlightBase}cmを変えずに、高さを${d.triangleHeight}cmの半分の${d.highlightHeight}cmまで低くする。`); };
+        const squeeze = () => {
+            shape.classList.add('squeezed');
+            label.textContent = labelAfter;
+            appendExpandStep(stepsEl, `① 三角形の面積＝底辺×高さ÷2\n平行四辺形の面積＝底辺×高さ\n平行四辺形の公式には÷2が付かないよね?\nだから底辺${d.highlightBase}cmを変えずに、高さを${d.triangleHeight}cmの半分の${d.highlightHeight}cmまで低くする。`);
+        };
         const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, `② 高さ${d.highlightHeight}cmで、三角形と同じ${d.target}cm²になった。`); };
         if (topicReducedMotion()) { squeeze(); done(); return; }
         squeeze();
@@ -809,10 +815,16 @@ function wireAngleRevealVisual(prefix) {
     return reset;
 }
 // ①②③を1行ずつ追加して残す(前の行を上書きしない)。
-function appendExpandStep(stepsEl, text) {
+function appendExpandStep(stepsEl, text, onClick) {
     const div = document.createElement('div');
-    div.className = 'plane-expand-step';
+    div.className = 'plane-expand-step' + (onClick ? ' clickable' : '');
     div.textContent = text;
+    if (onClick) {
+        div.setAttribute('role', 'button');
+        div.setAttribute('tabindex', '0');
+        div.addEventListener('click', onClick);
+        div.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } });
+    }
     stepsEl.appendChild(div);
     requestAnimationFrame(() => div.classList.add('shown'));
     return div;
@@ -1124,7 +1136,7 @@ const PLANE_EXPAND_VISUALS = {
             </div>
             <div class="plane-expand-status" id="pe-hr-status" role="status" aria-live="polite">底辺の比は3:1。でも面積の比が同じかどうかは、見ただけでは分かりにくい。</div>
             <div class="plane-expand-steps" id="pe-hr-steps"></div>
-            <div class="formula-reveal" id="pe-hr-result">高さ${d.height}cmが同じ → 底辺の比${d.baseBig}:${d.baseSmall}＝3:1 → 面積の比${d.bigArea}:${d.smallArea}＝3:1</div>
+            <div class="formula-reveal" id="pe-hr-result">高さ${d.height}cmが同じ\n底辺の比${d.baseBig}:${d.baseSmall}＝3:1\n面積の比${d.bigArea}:${d.smallArea}＝3:1</div>
         </div>`,
         wire: () => wireHeightRatioVisual('pe-hr', d),
     }),
@@ -1173,8 +1185,7 @@ const PLANE_EXPAND_VISUALS = {
                 <polygon points="40,160 160,160 100,70" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
                 <text x="100" y="135" font-size="13" fill="#1a1a2e" text-anchor="middle" font-weight="bold">△ 底辺${d.highlightBase}×高さ${d.triangleHeight}÷2＝${d.target}cm²</text>
                 <polygon id="pe-ip-para" class="plane-expand-squeeze" style="transform-origin:280px 160px" points="220,160 340,160 360,70 240,70" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
-                <text id="pe-ip-label-before" x="280" y="200" font-size="13" fill="#555" text-anchor="middle">▱ 底辺${d.highlightBase}×高さ${d.triangleHeight}＝${d.highlightBase * d.triangleHeight}cm²</text>
-                <text id="pe-ip-label-after" x="280" y="200" font-size="13" fill="#1B5E20" text-anchor="middle" font-weight="bold" hidden>▱ 底辺${d.highlightBase}×高さ${d.highlightHeight}＝${d.target}cm²</text>
+                <text id="pe-ip-label" x="280" y="200" font-size="13" fill="#555" text-anchor="middle">▱ 底辺${d.highlightBase}×高さ${d.triangleHeight}＝${d.highlightBase * d.triangleHeight}cm²</text>
             </svg>
             <div class="plane-expand-actions">
                 <button type="button" class="plane-anim-btn play" id="pe-ip-play">高さを縮めてみる</button>
@@ -1182,7 +1193,7 @@ const PLANE_EXPAND_VISUALS = {
             </div>
             <div class="plane-expand-status" id="pe-ip-status" role="status" aria-live="polite">平行四辺形の高さがいくつなら、三角形と同じ面積になるか見えにくい。</div>
             <div class="plane-expand-steps" id="pe-ip-steps"></div>
-            <div class="formula-reveal" id="pe-ip-result">高さ${d.triangleHeight}÷2＝${d.highlightHeight}cm → 平行四辺形の高さ${d.highlightHeight}cmで、三角形と同じ${d.target}cm²になる</div>
+            <div class="formula-reveal" id="pe-ip-result">高さ${d.triangleHeight}÷2＝${d.highlightHeight}cm\n平行四辺形の高さ${d.highlightHeight}cmで、三角形と同じ${d.target}cm²になる</div>
         </div>`,
         wire: () => wireSqueezeVisual('pe-ip', d),
     }),

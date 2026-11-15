@@ -514,6 +514,43 @@ function wireRotateVisual(prefix) {
     resetBtn.addEventListener('click', reset);
     return reset;
 }
+function wireCongruenceMatchVisual(prefix) {
+    const seqRot = createTopicSequence();
+    const dup = document.getElementById(prefix + '-dup');
+    const pivot = document.getElementById(prefix + '-pivot');
+    const target = document.getElementById(prefix + '-target');
+    const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqRot.cancel();
+        dup.classList.remove('rotated');
+        dup.toggleAttribute('hidden', true);
+        pivot.toggleAttribute('hidden', true);
+        target.toggleAttribute('hidden', true);
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const show = () => { dup.toggleAttribute('hidden', false); pivot.toggleAttribute('hidden', false); appendExpandStep(stepsEl, '① 同じ形の三角形をもう1つ重ねて用意する。'); };
+        const rotate = () => { dup.classList.add('rotated'); appendExpandStep(stepsEl, '② 対応する点(A→D、B→E、C→F)を考えながら180°回転させる。'); };
+        const done = () => { target.toggleAttribute('hidden', false); result.classList.add('visible'); appendExpandStep(stepsEl, '③ ぴったり重なった。向きが変わっても、対応する角はそれぞれ等しい。'); };
+        if (topicReducedMotion()) { show(); rotate(); done(); return; }
+        show();
+        seqRot.after(500, rotate);
+        seqRot.after(1400, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
 function wireSubtractVisual(prefix) {
     const seqSub = createTopicSequence();
     const part = document.getElementById(prefix + '-part');
@@ -913,6 +950,30 @@ const PLANE_EXPAND_VISUALS = {
             <div class="formula-reveal" id="pe-tr-result">平行四辺形になった → ${d.base}×${d.height}＝${d.base * d.height}cm²（半分で${d.area}cm²）</div>
         </div>`,
         wire: () => wireRotateVisual('pe-tr'),
+    }),
+    'congruence-match': d => ({
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 360 230" style="width:100%;max-width:320px;display:block" role="img" aria-labelledby="pe-cm-title pe-cm-desc">
+                <title id="pe-cm-title">三角形ABCを180度回転させて三角形DEFに重ねる図</title>
+                <desc id="pe-cm-desc">三角形ABCを点(180,130)を中心に180度回転させると、向きの違う三角形DEFにぴったり重なる。</desc>
+                <polygon points="81,52 40,140 160,140" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+                <g id="pe-cm-dup" class="plane-expand-dup" hidden style="transform-origin:180px 130px" fill="#FFE0B2" stroke="#E65100" stroke-width="2" stroke-dasharray="5 4"><polygon points="81,52 40,140 160,140"/></g>
+                <circle id="pe-cm-pivot" cx="180" cy="130" r="3" fill="#7c3aed" hidden/>
+                <g id="pe-cm-target" hidden fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 5"><polygon points="279,208 320,120 200,120"/></g>
+                <g font-size="13" fill="#1a1a2e">
+                    <text x="75" y="40">A</text><text x="18" y="150">B</text><text x="166" y="150">C</text>
+                    <text x="283" y="226">D</text><text x="330" y="112">E</text><text x="180" y="112">F</text>
+                </g>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-cm-play">回転してみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-cm-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-cm-status" role="status" aria-live="polite">△ABCと△DEFは向きが違って見えるが、合同かどうかは重ねてみないと分からない。</div>
+            <div class="plane-expand-steps" id="pe-cm-steps"></div>
+            <div class="formula-reveal" id="pe-cm-result">△ABCを180°回転すると△DEFに重なる → 角D＝角A＝${d.angleD}°</div>
+        </div>`,
+        wire: () => wireCongruenceMatchVisual('pe-cm'),
     }),
     'trapezoid-rotate': d => ({
         html: `<div class="plane-expand-stage">

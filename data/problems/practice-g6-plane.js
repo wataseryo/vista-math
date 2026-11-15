@@ -1073,4 +1073,55 @@ m×n倍になる。底辺と高さを同じ倍率で変えると、面積はそ�
     </svg>`,
   },
 },
+
+{
+  id: 'g6_plane_018',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '合同・対応点', pattern: '対応順の読み取り',
+  difficulty: 2, answerType: 'number', answerUnit: '度',
+  title: '合同な三角形の対応する角',
+  text: '下の図で、三角形ABCと三角形DEFは合同です(△ABC≡△DEF)。\n角B＝65°、角C＝48°、角E＝65°のとき、角Dの大きさを求めなさい。',
+  answer: 67,
+  hint: '△ABC≡△DEFという記号は、A↔D、B↔E、C↔Fの対応順を表す。図の見た目の位置ではなく、記号の順番で対応する角を探す。',
+  solution: `【ポイント】
+合同を表す記号の対応順(△ABC≡△DEFならA↔D、B↔E、C↔F)で、対応する角を読み取る。
+
+【解説】
+① 三角形の内角の和は180°なので、三角形ABCで、
+《角A＝180－65－48＝67°》
+② △ABC≡△DEFの対応順はA↔D、B↔E、C↔Fなので、角Dは角Aと対応する。
+③ 合同な図形は対応する角がそれぞれ等しいので、
+《角D＝角A＝67°》
+
+【広げてみよう】
+図の中でDEFがABCと違う向き(回転した向き)で描かれていても、対応順さえ正しく読めれば角は求められる。この「見た目の位置ではなく記号の順番で対応点を追う」考え方は、合同だけでなく相似や、立体図形の見取図・展開図で対応する頂点を探すときにも同じように使える。
+
+【確認】
+角E＝65°は角Bと対応しており、問題文の角B＝65°と一致する。同様に角F＝角C＝48°。対応する角を合計すると、
+《角D＋角E＋角F＝67＋65＋48＝180°》
+三角形DEFの内角の和も180°になり、矛盾しない。
+
+答え：67°`,
+  expandVisual: 'congruence-match',
+  expandVisualData: { angleA: 67, angleB: 65, angleC: 48, angleD: 67, angleE: 65, angleF: 48 },
+  expandAdvice: '合同の記号の対応順さえ正しく読めれば、図の向きが変わっていても対応する角や辺を自分で見つけられるようにしよう！',
+  tags: ['平面図形', '合同', '対応点', '角度'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 360 230" width="100%" style="max-width:300px;display:block;margin:0 auto" role="img" aria-label="三角形ABCと、向きの違う三角形DEF。角B65度、角C48度、角E65度、角D は？">
+      <polygon points="81,52 40,140 160,140" fill="none" stroke="#1a1a2e" stroke-width="2"/>
+      <polygon points="279,208 320,120 200,120" fill="none" stroke="#1a1a2e" stroke-width="2"/>
+      <text x="75" y="40" font-size="13" fill="#1a1a2e">A</text>
+      <text x="18" y="150" font-size="13" fill="#1a1a2e">B</text>
+      <text x="166" y="150" font-size="13" fill="#1a1a2e">C</text>
+      <text x="283" y="226" font-size="13" fill="#1a1a2e">D</text>
+      <text x="330" y="112" font-size="13" fill="#1a1a2e">E</text>
+      <text x="180" y="112" font-size="13" fill="#1a1a2e">F</text>
+      <text x="50" y="128" font-size="12" fill="#555">65°</text>
+      <text x="128" y="128" font-size="12" fill="#555">48°</text>
+      <text x="296" y="133" font-size="12" fill="#555">65°</text>
+      <text x="268" y="193" font-size="14" fill="#E53935" font-weight="bold">？</text>
+    </svg>`,
+  },
+},
 ];

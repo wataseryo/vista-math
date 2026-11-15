@@ -1349,6 +1349,32 @@ const PLANE_EXPAND_VISUALS = {
         </div>`,
         wire: () => wireAngleRevealVisual('pe-an'),
     }),
+    'circle-radius-reveal': d => {
+        const pts = [[100,30],[158.9,62.1],[163.6,129.1],[109.9,169.3],[47.0,145.8],[32.9,80.1],[80.4,32.8],[100,30]];
+        const wedges = pts.slice(0, -1).map((p, i) => {
+            const next = pts[i + 1];
+            const colors = i === 6 ? ['#E1BEE7', '#7B1FA2'] : i % 2 === 0 ? ['#90CAF9', '#1565C0'] : ['#FFE0B2', '#E65100'];
+            return `<path id="pe-cr-cell-${i}" class="plane-expand-tile" d="M100,100 L${p[0]},${p[1]} A70,70 0 0 1 ${next[0]},${next[1]} Z" fill="${colors[0]}" stroke="${colors[1]}" stroke-width="1"/>`;
+        }).join('');
+        return {
+            html: `<div class="plane-expand-stage">
+                <svg viewBox="0 0 200 200" style="width:100%;max-width:240px;display:block" role="img" aria-labelledby="pe-cr-title pe-cr-desc">
+                    <title id="pe-cr-title">半径の長さを円周に沿って6個と少し並べる図</title>
+                    <desc id="pe-cr-desc">半径の長さの弧を並べると約6.28個で一周。</desc>
+                    <circle cx="100" cy="100" r="70" fill="none" stroke="#ccc" stroke-dasharray="3 4"/>
+                    ${wedges}
+                    <text id="pe-cr-count" x="100" y="105" font-size="15" fill="#1a1a2e" text-anchor="middle" font-weight="bold">0 / 7</text>
+                </svg>
+                <div class="plane-expand-actions">
+                    <button type="button" class="plane-anim-btn play" id="pe-cr-play">並べてみる</button>
+                    <button type="button" class="plane-anim-btn reset" id="pe-cr-reset">もう一度</button>
+                </div>
+                <div class="plane-expand-status" id="pe-cr-status" role="status" aria-live="polite">半径の長さが円周の上に何個分並ぶかは見ただけでは分かりにくい。</div>
+                <div class="formula-reveal" id="pe-cr-result">半径×2×3.14＝円周 → ${d.radius}×2×3.14＝${d.circumference}cm（半径はおよそ6.28個分、最後の紫は端数）</div>
+            </div>`,
+            wire: () => wireSequentialReveal('pe-cr', 7, 'ぴったり1周した。半径の長さが円周に約6.28個分並ぶ。'),
+        };
+    },
     'exterior-angle-circle': d => {
         const pts = [[100,30],[149.5,50.5],[170,100],[149.5,149.5],[100,170],[50.5,149.5],[30,100],[50.5,50.5],[100,30]];
         const wedges = pts.slice(0, -1).map((p, i) => {

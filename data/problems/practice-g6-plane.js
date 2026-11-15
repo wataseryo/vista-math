@@ -1124,4 +1124,47 @@ m×n倍になる。底辺と高さを同じ倍率で変えると、面積はそ�
     </svg>`,
   },
 },
+
+{
+  id: 'g6_plane_019',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '円の性質', pattern: '円周から半径を逆算',
+  difficulty: 2, answerType: 'number', answerUnit: 'cm',
+  title: '円周の長さから半径を求める',
+  text: '円周の長さが62.8cmの円があります。\nこの円の半径は何cmですか。円周率は3.14とします。',
+  answer: 10,
+  hint: '円周＝直径×3.14。まず直径を求めてから、半径は直径の半分であることを使う。',
+  solution: `【ポイント】
+円周の公式(円周＝直径×3.14)を逆向きに使って、直径→半径の順に求める。
+
+【解説】
+① 円周＝直径×3.14なので、直径は、
+《直径＝62.8÷3.14＝20cm》
+② 半径は直径の半分なので、
+《半径＝20÷2＝10cm》
+
+【広げてみよう】
+「直径×3.14」の公式は、求めたいものが直径でも半径でも、÷3.14や÷2を組み合わせれば逆向きに使える。おうぎ形の弧の長さや、円の面積の逆算でも同じように「公式を逆から使う」考え方が使える。
+
+【確認】
+半径10cmから円周を計算すると、
+《10×2×3.14＝62.8cm》
+問題文の円周62.8cmと一致する。
+
+答え：10cm`,
+  expandVisual: 'circle-radius-reveal',
+  expandVisualData: { circumference: 62.8, diameter: 20, radius: 10 },
+  expandAdvice: '直径や半径を求める問題が出ても、円周の公式を逆向きに使えば自分で求められるようにしよう！',
+  tags: ['平面図形', '円', '円周', '逆算'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 200 200" width="100%" style="max-width:220px;display:block;margin:0 auto" role="img" aria-label="円周62.8cmの円。中心から円周までの半径は？">
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#1a1a2e" stroke-width="2"/>
+      <circle cx="100" cy="100" r="2.5" fill="#1a1a2e"/>
+      <line x1="100" y1="100" x2="170" y2="100" stroke="#1565C0" stroke-width="2"/>
+      <text x="118" y="95" font-size="14" fill="#E53935" font-weight="bold">？</text>
+      <text x="55" y="24" font-size="12" fill="#555">円周62.8cm</text>
+    </svg>`,
+  },
+},
 ];

@@ -11,7 +11,9 @@
 
 - [x] 類題(反復練習) Sprint 1: 対応表、解答後の任意誘導、三角形面積の類題2問とSVG、構造検証・テストを実装。
 - [x] Claude独立レビューと実ブラウザ再検証完了（Codex環境はHTTP listen・Chrome起動が拒否されたが、Claude環境では成功。新規10件+既存回帰58件、全件pass。詳細は `sprints/practice-repetition-sprint1/sprint-1-eval.md`）。
-- 次のスプリント: `g6_plane_004`・`g6_plane_005`の類題セット（別途仕様化）。
+- [x] 類題(反復練習) Sprint 2: `g6_plane_004`・`g6_plane_005`（面積から高さの逆算、三角形・平行四辺形）に類題2問ずつ追加。対応表に2グループ追加（js/app.js等のコード変更は不要と事前検証通り確認）。
+- [x] Claude独立レビューと実ブラウザ再検証完了（新規26件+既存回帰74件、全件pass。Sprint1セットとの非干渉も確認。詳細は `sprints/practice-repetition-sprint2/sprint-1-eval.md`）。
+- 残タスク: 平面図形の問19〜21ユーザーレビュー（後日）。平面図形残り22タイプの着手（`docs/curriculum-implementation-plan.md`0.4節のロードマップ参照）。P-07のもう1つの根拠問題`g6_plane_008`のセット追加は別途判断。
 
 ## 現在のフォーカス：Phase 0（2026年9月）
 

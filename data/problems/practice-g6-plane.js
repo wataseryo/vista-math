@@ -1302,4 +1302,201 @@ m×n倍になる。底辺と高さを同じ倍率で変えると、面積はそ�
     </svg>`,
   },
 }
+,
+
+{
+  id: 'g6_plane_004_v01',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '三角形の面積', pattern: '辺の逆算',
+  difficulty: 2, answerType: 'number', answerUnit: 'cm',
+  title: '三角形の高さを求める（類題1）',
+  text: '面積が42cm²の三角形があります。底辺が7cmのとき、高さは何cmですか？',
+  answer: 12,
+  hint: '面積 ＝ 底辺 × 高さ ÷ 2 を高さについて解く\n高さ ＝ 面積 × 2 ÷ 底辺',
+  solution: `【ポイント】
+面積の公式を逆向きに使うと、面積と底辺から高さを求められる。
+
+【解説】
+① 三角形の面積は、底辺×高さ÷2。
+② 面積42cm²、底辺7cmなので、
+《高さ×7÷2＝42》
+という式になる。
+《③ 高さ＝42×2÷7＝12cm》
+
+【広げてみよう】
+「底辺×高さ÷2＝面積」の公式は、どの文字について求めたいかを変えても使える。面積と底辺が分かれば高さを、面積と高さが分かれば底辺を、同じしくみで逆算できる。
+
+【確認】
+《7×12÷2＝42cm²》
+もとの面積と一致する。
+
+答え：12cm`,
+  expandVisual: 'triangle-formula-slot',
+  expandVisualData: { base: 7, height: 12, area: 42 },
+  expandAdvice: '次に何かの値を求める問題で詰まったら、まず公式を書き出して「どこが？なのか」を整理してみよう！',
+  tags: ['平面図形', '三角形', '逆算'],
+  diagram: {
+    kind: 'svg',
+    // 縮尺14px/cm。底辺・高さに合わせて頂点・寸法線・viewBoxを再計算。高さは未知表示。
+    markup: `<svg viewBox="0 0 228 258" width="100%" style="max-width:228px;display:block;margin:0 auto" role="img" aria-label="底辺7cm、面積42cm²、高さは未知、頂点が上の三角形">
+      <polygon points="40,208 138,208 89,40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+      <text x="89" y="154.24" font-size="12" fill="#1a1a2e" text-anchor="middle" font-weight="bold">面積42cm²</text>
+      <line x1="40" y1="222" x2="138" y2="222" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="216" x2="40" y2="228" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="138" y1="216" x2="138" y2="228" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="89" y="242" font-size="12" fill="#1565C0" text-anchor="middle">底辺 7cm</text>
+      <line x1="154" y1="40" x2="154" y2="208" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="148" y1="40" x2="160" y2="40" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="148" y1="208" x2="160" y2="208" stroke="#E53935" stroke-width="1.5"/>
+      <text x="172" y="124" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 172 124)">高さ ？</text>
+      </svg>`,
+  },
+},
+
+{
+  id: 'g6_plane_004_v02',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '三角形の面積', pattern: '辺の逆算',
+  difficulty: 2, answerType: 'number', answerUnit: 'cm',
+  title: '三角形の高さを求める（類題2・向きを変えた問題）',
+  text: '下の図のように、頂点が下を向いている三角形があります。面積が72cm²、底辺が16cmのとき、高さは何cmですか？',
+  answer: 9,
+  hint: '面積 ＝ 底辺 × 高さ ÷ 2 を高さについて解く(向きが変わっても公式は同じ)\n高さ ＝ 面積 × 2 ÷ 底辺',
+  solution: `【ポイント】
+三角形の向きが変わっても、面積の公式(底辺×高さ÷2)を逆向きに使う考え方は同じ。
+
+【解説】
+① 図の向きが変わっていても、底辺とそれに垂直な高さの組を見つければよい。底辺は16cm。
+② 面積72cm²、底辺16cmなので、
+《高さ×16÷2＝72》
+という式になる。
+《③ 高さ＝72×2÷16＝9cm》
+
+【広げてみよう】
+「底辺×高さ÷2＝面積」の公式は、三角形をどの向きに置いても変わらない。向きに惑わされず、底辺とそれに垂直な高さの組を見つけることが大切。
+
+【確認】
+《16×9÷2＝72cm²》
+もとの面積と一致する。
+
+答え：9cm`,
+  expandVisual: 'triangle-formula-slot',
+  expandVisualData: { base: 16, height: 9, area: 72 },
+  expandAdvice: '次に何かの値を求める問題で詰まったら、まず公式を書き出して「どこが？なのか」を整理してみよう！',
+  tags: ['平面図形', '三角形', '逆算', '向き'],
+  diagram: {
+    kind: 'svg',
+    // 縮尺14px/cm。底辺・高さに合わせて頂点・寸法線・viewBoxを再計算。高さは未知表示。
+    markup: `<svg viewBox="0 0 354 208" width="100%" style="max-width:354px;display:block;margin:0 auto" role="img" aria-label="底辺16cm、面積72cm²、高さは未知、頂点が下の三角形">
+      <polygon points="40,56 264,56 152,182" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+      <text x="152" y="101.36" font-size="12" fill="#1a1a2e" text-anchor="middle" font-weight="bold">面積72cm²</text>
+      <line x1="40" y1="42" x2="264" y2="42" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="36" x2="40" y2="48" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="264" y1="36" x2="264" y2="48" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="152" y="32" font-size="12" fill="#1565C0" text-anchor="middle">底辺 16cm</text>
+      <line x1="280" y1="56" x2="280" y2="182" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="274" y1="56" x2="286" y2="56" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="274" y1="182" x2="286" y2="182" stroke="#E53935" stroke-width="1.5"/>
+      <text x="298" y="119" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 298 119)">高さ ？</text>
+      </svg>`,
+  },
+},
+
+{
+  id: 'g6_plane_005_v01',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '平行四辺形の面積', pattern: '辺の逆算',
+  difficulty: 2, answerType: 'number', answerUnit: 'cm',
+  title: '平行四辺形の高さを求める（類題1）',
+  text: '面積が90cm²の平行四辺形があります。底辺が15cmのとき、高さは何cmですか？',
+  answer: 6,
+  hint: '面積 ＝ 底辺 × 高さ を高さについて解く\n高さ ＝ 面積 ÷ 底辺',
+  solution: `【ポイント】
+面積の公式を逆向きに使うと、面積と底辺から高さを求められる。
+
+【解説】
+① 平行四辺形の面積は、底辺×高さ。
+② 面積90cm²、底辺15cmなので、
+《高さ×15＝90》
+という式になる。
+《③ 高さ＝90÷15＝6cm》
+
+【広げてみよう】
+「底辺×高さ＝面積」の公式は、底辺・高さ・面積のうち2つが分かれば残り1つを求められる。三角形の公式(÷2が付く)も同じ考え方で逆算できる。
+
+【確認】
+《15×6＝90cm²》
+もとの面積と一致する。
+
+答え：6cm`,
+  expandVisual: 'parallelogram-formula-slot',
+  expandVisualData: { base: 15, height: 6, area: 90 },
+  expandAdvice: '底辺や高さを求める問題が出たら、公式のどの文字を求めればいいか、自分で整理するくせをつけよう！',
+  tags: ['平面図形', '平行四辺形', '逆算'],
+  diagram: {
+    kind: 'svg',
+    // 縮尺14px/cm。底辺・高さに合わせて頂点・寸法線・viewBoxを再計算。高さは未知表示。
+    markup: `<svg viewBox="0 0 368 174" width="100%" style="max-width:368px;display:block;margin:0 auto" role="img" aria-label="底辺15cm、面積90cm²、高さは未知、右肩上がりの平行四辺形">
+      <polygon points="68,40 278,40 250,124 40,124" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+      <text x="159" y="86" font-size="12" fill="#1a1a2e" text-anchor="middle" font-weight="bold">面積90cm²</text>
+      <line x1="40" y1="138" x2="250" y2="138" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="132" x2="40" y2="144" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="250" y1="132" x2="250" y2="144" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="145" y="158" font-size="12" fill="#1565C0" text-anchor="middle">底辺 15cm</text>
+      <line x1="294" y1="40" x2="294" y2="124" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="288" y1="40" x2="300" y2="40" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="288" y1="124" x2="300" y2="124" stroke="#E53935" stroke-width="1.5"/>
+      <text x="312" y="82" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 312 82)">高さ ？</text>
+      </svg>`,
+  },
+},
+
+{
+  id: 'g6_plane_005_v02',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '平行四辺形の面積', pattern: '辺の逆算',
+  difficulty: 2, answerType: 'number', answerUnit: 'cm',
+  title: '平行四辺形の高さを求める（類題2・向きを変えた問題）',
+  text: '下の図のように、傾きの向きが逆になっている平行四辺形があります。面積が96cm²、底辺が8cmのとき、高さは何cmですか？',
+  answer: 12,
+  hint: '面積 ＝ 底辺 × 高さ を高さについて解く(傾きの向きが変わっても公式は同じ)\n高さ ＝ 面積 ÷ 底辺',
+  solution: `【ポイント】
+平行四辺形の傾きの向きが変わっても、面積の公式(底辺×高さ)を逆向きに使う考え方は同じ。
+
+【解説】
+① 図の傾きの向きが変わっていても、底辺とそれに垂直な高さの組を見つければよい。底辺は8cm。
+② 面積96cm²、底辺8cmなので、
+《高さ×8＝96》
+という式になる。
+《③ 高さ＝96÷8＝12cm》
+
+【広げてみよう】
+「底辺×高さ＝面積」の公式は、平行四辺形がどちら向きに傾いていても変わらない。傾きに惑わされず、底辺とそれに垂直な高さの組を見つけることが大切。
+
+【確認】
+《8×12＝96cm²》
+もとの面積と一致する。
+
+答え：12cm`,
+  expandVisual: 'parallelogram-formula-slot',
+  expandVisualData: { base: 8, height: 12, area: 96 },
+  expandAdvice: '底辺や高さを求める問題が出たら、公式のどの文字を求めればいいか、自分で整理するくせをつけよう！',
+  tags: ['平面図形', '平行四辺形', '逆算', '向き'],
+  diagram: {
+    kind: 'svg',
+    // 縮尺14px/cm。底辺・高さに合わせて頂点・寸法線・viewBoxを再計算。高さは未知表示。
+    markup: `<svg viewBox="0 0 270 258" width="100%" style="max-width:270px;display:block;margin:0 auto" role="img" aria-label="底辺8cm、面積96cm²、高さは未知、左肩上がりの平行四辺形">
+      <polygon points="40,40 152,40 180,208 68,208" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+      <text x="110" y="128" font-size="12" fill="#1a1a2e" text-anchor="middle" font-weight="bold">面積96cm²</text>
+      <line x1="68" y1="222" x2="180" y2="222" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="68" y1="216" x2="68" y2="228" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="180" y1="216" x2="180" y2="228" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="124" y="242" font-size="12" fill="#1565C0" text-anchor="middle">底辺 8cm</text>
+      <line x1="196" y1="40" x2="196" y2="208" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="190" y1="40" x2="202" y2="40" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="190" y1="208" x2="202" y2="208" stroke="#E53935" stroke-width="1.5"/>
+      <text x="214" y="124" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 214 124)">高さ ？</text>
+      </svg>`,
+  },
+}
 ];

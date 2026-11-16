@@ -13,7 +13,7 @@ function fixture(t) {
  t.after(()=>fs.rmSync(dir,{recursive:true,force:true}));return dir;
 }
 function edit(dir,file,fn){const p=path.join(dir,file);fs.writeFileSync(p,fn(fs.readFileSync(p,'utf8')));}
-test('all current 226 problems pass structural validation',()=>{const r=validate(root);assert.equal(r.count,226);assert.deepEqual(r.errors,[]);});
+test('all current 230 problems pass structural validation',()=>{const r=validate(root);assert.equal(r.count,230);assert.deepEqual(r.errors,[]);});
 test('missing script is rejected with file diagnostics',t=>{const d=fixture(t);edit(d,'index.html',s=>s.replace('<script src="data/problems/practice-g6-plane.js"></script>',''));assert(validate(d).errors.some(e=>e.includes('practice-g6-plane.js')&&e.includes('script loading')));});
 test('unaggregated source is rejected',t=>{const d=fixture(t);edit(d,'data/problems.js',s=>s.replace('...PRACTICE_G6_PLANE,',''));assert(validate(d).errors.some(e=>e.includes('practice-g6-plane.js')&&e.includes('aggregation')));});
 for(const [name,from,to,reason] of [
@@ -59,3 +59,21 @@ for (const duplicateId of [false,true]) test(`variant duplicate group ${duplicat
 });
 test('variant optional curriculum types may be omitted',t=>{const d=fixture(t);edit(d,'data/practice-variant-groups.js',s=>s.replace("curriculumTypeIds: ['P-06'],",''));assert.deepEqual(validate(d).errors,[]);});
 for (const value of ['null','[null]']) test(`malformed variant table ${value} is diagnosed`,t=>{const d=fixture(t);edit(d,'data/practice-variant-groups.js',()=>`const PRACTICE_VARIANT_GROUPS = ${value};`);assert(validate(d).errors.some(e=>e.includes('data/practice-variant-groups.js')));});
+
+// Sprint 2: target each new group, then every pair of the three groups.
+for (const id of ['g6_plane_004', 'g6_plane_005']) {
+ test(`variant ${id} unknown member fixture fails`,t=>{
+  const d=fixture(t);edit(d,'data/practice-variant-groups.js',s=>s.replace(`'${id}_v02'`,"'missing-sprint2-member'"));
+  assert(validate(d).errors.some(e=>e.includes('data/practice-variant-groups.js')&&e.includes('unknown problemId')&&e.includes('missing-sprint2-member')));
+ });
+ test(`variant ${id} duplicate member fixture fails`,t=>{
+  const d=fixture(t);edit(d,'data/practice-variant-groups.js',s=>s.replace(`'${id}_v02'`,`'${id}_v01'`));
+  assert(validate(d).errors.some(e=>e.includes('duplicate problemId in group')));
+ });
+}
+for (const [owner, target] of [['g6_plane_002','g6_plane_004'],['g6_plane_002','g6_plane_005'],['g6_plane_004','g6_plane_005']]) {
+ test(`variant membership collision ${owner} into ${target} fails`,t=>{
+  const d=fixture(t);edit(d,'data/practice-variant-groups.js',s=>s.replace(`'${target}_v02'`,`'${owner}_v01'`));
+  assert(validate(d).errors.some(e=>e.includes('data/practice-variant-groups.js')&&e.includes('already belongs')&&e.includes(`${owner}_v01`)));
+ });
+}

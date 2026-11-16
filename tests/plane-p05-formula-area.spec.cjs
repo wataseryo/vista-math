@@ -8,10 +8,10 @@ async function open(page, id, category = '平面図形') {
  await page.locator('#home-screen .course-card.exam').click();
  await page.locator('#exam-mode-screen .exam-mode-card.prac').click();
  const cat = page.locator('#prac-cat-grid .prac-cat-card').filter({ hasText: category });
- if (category === '平面図形') await expect(cat).toContainText('36問');
+ if (category === '平面図形') await expect(cat).toContainText('38問');
  await cat.click();
  const cards = page.locator('#prac-prob-list-body .prac-prob-card');
- if (category === '平面図形') await expect(cards).toHaveCount(36);
+ if (category === '平面図形') await expect(cards).toHaveCount(38);
  await page.locator(`#prac-prob-list-body .prac-prob-card[onclick="pracOpenProb('${id}')"]`).click();
  await expect(page.locator('#prac-detail-view')).toBeVisible();
 }
@@ -110,7 +110,7 @@ test('existing triangle formula, ratio grading and variant guidance remain intac
  await expect(nav).toBeHidden();
 });
 
-test('content validation reports 236 problems with zero errors', () => {
+test('content validation reports 238 problems with zero errors', () => {
  const output = execFileSync(process.execPath, ['scripts/validate-content.cjs'], { cwd: path.resolve(__dirname, '..'), encoding: 'utf8' });
- expect(output).toContain('236 problems; 0 errors');
+ expect(output).toContain('238 problems; 0 errors');
 });

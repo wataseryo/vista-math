@@ -1784,5 +1784,102 @@ AB＝ACの二等辺三角形では、底辺BCに対する2つの角(角Bと角C)
       <text x="142" y="220" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 142 220)" stroke="white" stroke-width="3" paint-order="stroke">対角線 16cm</text>
     </svg>`,
   },
+},
+
+/* ── P-11 相似の発見(直角着目型) ── */
+{
+  id: 'g6_plane_027',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '相似の発見', pattern: '直角三角形の高さ(ミミ相似)',
+  difficulty: 3, answerType: 'number', answerUnit: 'cm',
+  title: '直角三角形の高さと相似',
+  text: '直角三角形ABC(角C＝90°)があります。頂点Cから辺AB(斜辺)に垂線を引き、ABとの交点をHとします。AH＝9cm、BH＝16cmのとき、CHの長さを求めなさい。',
+  answer: 12,
+  hint: '垂線CHによって三角形ABCは三角形ACHと三角形CBHに分かれる。この2つは相似になる(角Aと角BCHが等しい)。AH：CH＝CH：BHの比例式が作れる。',
+  solution: `【ポイント】
+ある角とたして90°になる角を、その角の余角という。同じ角の余角どうしは、いつも同じ大きさになる。
+
+【解説】
+① 垂線CHによって、三角形ABCは三角形ACHと三角形CBHの2つの直角三角形に分かれる。角AHC、角CHBはどちらも90°。
+② 三角形ABCは角Cが90°なので、角A＋角B＝90°。また、CHは角Cを角ACHと角BCHに分けているので、角ACH＋角BCH＝90°。
+③ 角Aと角BCHは、どちらも角ACHの余角なので、同じ大きさ。同じように、角Bと角ACHも角BCHの余角どうしなので、同じ大きさ。
+④ 角A＝角BCHで、どちらの三角形も直角をもつので、三角形ACHと三角形CBHは相似である(2つとも三角形ABCとも相似)。対応する辺の比から、
+《AH：CH＝CH：BH》
+⑤ 9：CH＝CH：16にあてはめる。比例式では、外側どうしの積と内側どうしの積が等しくなるので、
+《CH×CH＝9×16＝144》
+⑥ 2回かけて144になる数を探すと、12×12＝144なので、
+《CH＝12cm》
+
+【広げてみよう】
+この「直角三角形の高さが作る3つの相似」はとてもよく出てくる形で、CHだけでなく、辺AC・BCを求める問題にも同じしくみが使える。AH：AC＝AC：ABの比例式からAC×AC＝9×25＝225、AC＝15cm。BH：BC＝BC：ABの比例式からBC×BC＝16×25＝400、BC＝20cmになる。直角三角形の中に垂線が引かれているのを見たら、まず「3つの相似な直角三角形」を探す習慣をつけるとよい。
+
+【確認】
+《AC＝15cm、BC＝20cmとすると、AC×BC÷2＝15×20÷2＝150cm²》
+《AB×CH÷2＝(9＋16)×12÷2＝25×12÷2＝150cm²》
+三角形ABCの面積を、直角をはさむ2辺(AC・BC)から求めても、底辺ABと高さCHから求めても、どちらも150cm²で一致する。
+
+答え：12cm`,
+  expandVisual: 'triangle-altitude-similarity',
+  expandVisualData: { ah: 9, bh: 16, ch: 12 },
+  expandAdvice: '直角三角形の中に垂線が見えたら、「3つの相似な直角三角形」が隠れていないか、まず角の対応を探せるようにしよう！',
+  tags: ['平面図形', '相似', '直角三角形'],
+  diagram: { kind: 'svg', markup: `<svg viewBox="0 0 280 170" width="100%" style="max-width:280px;display:block;margin:0 auto" role="img" aria-label="直角三角形ABC。斜辺AB上のHに垂線CHを引き、AHは9cm、BHは16cm、CHは不明">
+    <polygon points="40,140 240,140 112,44" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+    <line x1="112" y1="44" x2="112" y2="140" stroke="#E53935" stroke-width="1.5"/>
+    <path d="M104,140 L104,132 L112,132 M107.2,50.4 L113.6,55.2 L118.4,48.8" fill="none" stroke="#555" stroke-width="1.3"/>
+    <g font-size="12" fill="#1a1a2e"><text x="26" y="144">A</text><text x="246" y="144">B</text><text x="108" y="35">C</text><text x="108" y="155">H</text></g>
+    <text x="74" y="167" font-size="12" text-anchor="middle" fill="#1565C0">AH 9cm</text><text x="181" y="167" font-size="12" text-anchor="middle" fill="#E53935">BH 16cm</text>
+    <text x="120" y="100" font-size="16" fill="#E53935">？</text>
+  </svg>` },
+},
+
+{
+  id: 'g6_plane_028',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '相似の発見', pattern: '直角三角形の重なり(イカ相似)',
+  difficulty: 4, answerType: 'number', answerUnit: 'cm',
+  title: '正方形の中にできる直角三角形の相似',
+  text: '1辺9cmの正方形ABCDがあります。辺AB上に点P、辺BC上に点Qをとり、PDとPQが垂直に交わるようにします。AP＝6cmのとき、BQの長さを求めなさい。',
+  answer: 2,
+  hint: '三角形APDと三角形BQPは、どちらも直角三角形で、角ADPと角BPQが等しくなる(余角の関係)。AP：BQ＝AD：BPの比例式が作れる。',
+  solution: `【ポイント】
+点Pを通る一直線上に3つの角が並んでいるとき、その3つの角の和は180°になる。この性質と「同じ角の余角は等しい」を組み合わせると、離れて見える2つの直角三角形の間にも、同じ角を見つけられる。
+
+【解説】
+① 直角三角形APDと直角三角形BQPに注目する。角Aと角Bは、どちらも正方形の角なので90°。
+② 点Pでは、点A・P・Bが一直線上にあるので、角APD＋角DPQ＋角QPBを足すと180°になる。角DPQは90°(PDとPQが垂直)なので、
+《角APD＋角QPB＝180－90＝90°》
+③ 一方、三角形APDは角Aが90°の直角三角形なので、
+《角APD＋角ADP＝90°》
+②と③はどちらも「角APDに何かを足すと90°になる」という形なので、
+《角QPB＝角ADP》
+④ 同じように考えると、角APDと角BQPも同じ大きさになる。だから三角形APDと三角形BQPは相似である。対応する辺の比から、
+《AP：BQ＝AD：BP》
+⑤ AP＝6cm、AD(正方形の1辺)＝9cm、BP＝9－6＝3cmなので、
+《6：BQ＝9：3》
+⑥ 比例式の性質(外側どうしの積＝内側どうしの積)より、6×3＝9×BQなので、
+《BQ＝6×3÷9＝2cm》
+
+【広げてみよう】
+この問題のように、2つの直角三角形が直角の頂点を共有せず、離れた場所にあるように見えても、「一直線上の角の和は180°」「同じ角の余角は等しい」を手がかりにすると、隠れた相似を見つけられることがある。平行線がなくても相似が作れる点が、ピラミッド型・クロス型(平行線を使う相似)との大きな違いである。
+
+【確認】
+《AP÷BQ＝6÷2＝3》
+《AD÷BP＝9÷3＝3》
+相似な三角形の対応する辺の比は、どちらを計算しても同じ値(3)になるはずなので、この一致によりBQ＝2cmが正しいことが確認できる。
+
+答え：2cm`,
+  expandVisual: 'square-perpendicular-similarity',
+  expandVisualData: { ap: 6, bp: 3, ad: 9, bq: 2 },
+  expandAdvice: '直角三角形どうしが離れて見えても、一直線上の角の和(180°)や余角の関係を使えば、隠れた相似を見つけられることを意識しよう！',
+  tags: ['平面図形', '相似', '直角三角形', '正方形'],
+  diagram: { kind: 'svg', markup: `<svg viewBox="0 0 260 230" width="100%" style="max-width:260px;display:block;margin:0 auto" role="img" aria-label="1辺9cmの正方形ABCD。辺AB上のPはAPが6cm、BPが3cm。PDとPQは垂直で、辺BC上のQまでのBQは不明">
+    <polygon points="40,40 200,40 200,200 40,200" fill="none" stroke="#1a1a2e" stroke-width="2"/>
+    <path d="M146.667,40 L40,200 M146.667,40 L200,75.556" fill="none" stroke="#555" stroke-width="2"/>
+    <path d="M142.229,46.656 L148.885,51.094 L153.323,44.438" fill="none" stroke="#555" stroke-width="1.3"/>
+    <g font-size="12" fill="#1a1a2e"><text x="26" y="40">A</text><text x="206" y="38">B</text><text x="206" y="211">C</text><text x="26" y="211">D</text><text x="143" y="36">P</text><text x="209" y="83">Q</text></g>
+    <text x="90" y="22" font-size="12" text-anchor="middle" fill="#1565C0">AP 6cm</text><text x="176" y="22" font-size="12" text-anchor="middle" fill="#E53935">BP 3cm</text>
+    <text x="13" y="125" font-size="12" fill="#E53935">9cm</text><text x="211" y="62" font-size="16" fill="#E53935">？</text>
+  </svg>` },
 }
 ];

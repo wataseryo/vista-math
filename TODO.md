@@ -17,7 +17,9 @@
 - [x] Claude独立レビューと実ブラウザ再検証完了（新規10件+既存回帰84件、全件pass。テストのfavicon誤検出を1件発見・修正。`coverage-final.md`/`.json`のP-05行・集計も更新済み。詳細は `sprints/plane-p05-area-formula/sprint-1-eval.md`）。
 - [x] 平面図形 P-29（三角形・四角形の性質と対角線）部→有化: 性質単体問題3問(`g6_plane_024〜026`)を追加。`js/app.js`・`css/style.css`は変更不要（既存`diagonal-quarter`を1問のみ無改修で流用、残り2問は解説文のみで新規ビジュアル機構は追加せず）。
 - [x] Claude独立レビューと実ブラウザ再検証完了（新規12件+既存回帰96件、全件pass。詳細は `sprints/plane-p29-triangle-quad-properties/sprint-1-eval.md`）。
-- 残タスク: 平面図形の問19〜21ユーザーレビュー（後日）。平面図形残り22タイプの次スプリント（P-11残り→P-09→P-31→P-16、`docs/curriculum-implementation-plan.md`0.4節参照）。P-07のもう1つの根拠問題`g6_plane_008`のセット追加は別途判断。
+- [x] 平面図形 P-11直角着目型: ミミ相似・イカ相似の2問(`g6_plane_027〜028`)と4ステップの相似発見ビジュアルを実装。P-11は「部」を維持（平行線型の発見問題は別スプリントに残す、ユーザー確認済み）。
+- [x] Claude独立レビューと実ブラウザ再検証完了（新規8件+既存回帰104件、全件pass。新規テスト自体のバグ2件(`page.clock`モックの相性問題、期待文字列の誤り)を発見・修正。実装コードは無修正。詳細は `sprints/plane-p11-similarity-discovery/sprint-1-eval.md`）。
+- 残タスク: 平面図形の問19〜21ユーザーレビュー（後日）。平面図形残り22タイプの次スプリント（P-09→P-31+P-10の2問目→P-16、`docs/curriculum-implementation-plan.md`0.4節参照）。平行線型(ピラミッド・クロス型)相似発見問題の新規追加は別スプリントとして要計画。P-07のもう1つの根拠問題`g6_plane_008`のセット追加は別途判断。
 
 ## 現在のフォーカス：Phase 0（2026年9月）
 

@@ -942,6 +942,110 @@ function wireAngleRevealVisual(prefix) {
     resetBtn.addEventListener('click', reset);
     return reset;
 }
+function wireTriangleAltitudeSimilarityVisual(prefix, d) {
+    const seqAs = createTopicSequence();
+    const triAch = document.getElementById(prefix + '-tri-ach');
+    const triCbh = document.getElementById(prefix + '-tri-cbh');
+    const arcA = document.getElementById(prefix + '-arc-a');
+    const arcBch = document.getElementById(prefix + '-arc-bch');
+    const arcB = document.getElementById(prefix + '-arc-b');
+    const arcAch = document.getElementById(prefix + '-arc-ach');
+    const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqAs.cancel();
+        [triAch, triCbh].forEach(el => { el.style.opacity = 0; });
+        [arcA, arcBch, arcB, arcAch].forEach(el => el.toggleAttribute('hidden', true));
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const step1 = () => {
+            triAch.style.opacity = 1; triCbh.style.opacity = 1;
+            appendExpandStep(stepsEl, '① 垂線CHによって、三角形ABCは三角形ACHと三角形CBHの2つの直角三角形に分かれる。');
+        };
+        const step2 = () => {
+            arcA.toggleAttribute('hidden', false); arcBch.toggleAttribute('hidden', false);
+            appendExpandStep(stepsEl, '② 角Cが90°なので角A＋角B＝90°。CHが角Cを分けているので角ACH＋角BCH＝90°。角Aと角BCHは、どちらも角ACHの余角(たして90°になる角)なので同じ大きさ。');
+        };
+        const step3 = () => {
+            arcB.toggleAttribute('hidden', false); arcAch.toggleAttribute('hidden', false);
+            appendExpandStep(stepsEl, '③ 同じように、角Bと角ACHも同じ大きさ。だから三角形ACHと三角形CBHは相似(どちらも三角形ABCとも相似)。');
+        };
+        const done = () => {
+            result.classList.add('visible');
+            appendExpandStep(stepsEl, `④ 対応する辺の比から、AH：CH＝CH：BH。${d.ah}：CH＝CH：${d.bh}なので、CH×CH＝${d.ah}×${d.bh}＝${d.ah * d.bh}、CH＝${d.ch}cm。`);
+        };
+        if (topicReducedMotion()) { step1(); step2(); step3(); done(); return; }
+        step1();
+        seqAs.after(700, step2);
+        seqAs.after(1500, step3);
+        seqAs.after(2300, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
+function wireSquarePerpendicularSimilarityVisual(prefix, d) {
+    const seqPs = createTopicSequence();
+    const triApd = document.getElementById(prefix + '-tri-apd');
+    const triBqp = document.getElementById(prefix + '-tri-bqp');
+    const arcAdp = document.getElementById(prefix + '-arc-adp');
+    const arcBpq = document.getElementById(prefix + '-arc-bpq');
+    const arcApd = document.getElementById(prefix + '-arc-apd');
+    const arcBqp = document.getElementById(prefix + '-arc-bqp');
+    const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqPs.cancel();
+        [triApd, triBqp].forEach(el => { el.style.opacity = 0; });
+        [arcAdp, arcBpq, arcApd, arcBqp].forEach(el => el.toggleAttribute('hidden', true));
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const step1 = () => {
+            triApd.style.opacity = 1; triBqp.style.opacity = 1;
+            appendExpandStep(stepsEl, '① 直角三角形APDと直角三角形BQPに注目する。角Aと角Bはどちらも正方形の角なので90°。');
+        };
+        const step2 = () => {
+            arcAdp.toggleAttribute('hidden', false); arcBpq.toggleAttribute('hidden', false);
+            appendExpandStep(stepsEl, '② 点Pでは一直線上に角APD＋90°(角DPQ)＋角QPBが並ぶので、角APD＋角QPBも90°。三角形APDでも角APD＋角ADPが90°。だから角QPBと角ADPは同じ大きさ。');
+        };
+        const step3 = () => {
+            arcApd.toggleAttribute('hidden', false); arcBqp.toggleAttribute('hidden', false);
+            appendExpandStep(stepsEl, '③ 同じように、角APDと角BQPも同じ大きさ。だから三角形APDと三角形BQPは相似。');
+        };
+        const done = () => {
+            result.classList.add('visible');
+            appendExpandStep(stepsEl, `④ 対応する辺の比から、AP：BQ＝AD：BP。${d.ap}：BQ＝${d.ad}：${d.bp}なので、BQ＝${d.ap}×${d.bp}÷${d.ad}＝${d.bq}cm。`);
+        };
+        if (topicReducedMotion()) { step1(); step2(); step3(); done(); return; }
+        step1();
+        seqPs.after(700, step2);
+        seqPs.after(1500, step3);
+        seqPs.after(2300, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
 // ①②③を1行ずつ追加して残す(前の行を上書きしない)。
 function appendExpandStep(stepsEl, text, onClick) {
     const div = document.createElement('div');
@@ -1597,6 +1701,72 @@ const PLANE_EXPAND_VISUALS = {
             wire: () => wireSequentialReveal('pe-we', d.sides, 'ぐるっと1周した。'),
         };
     },
+    'triangle-altitude-similarity': d => ({
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 280 170" style="width:100%;max-width:280px;display:block" role="img" aria-labelledby="pe-as-title pe-as-desc">
+                <title id="pe-as-title">直角三角形ABCの頂点Cから斜辺ABに垂線CHを引いた図</title>
+                <desc id="pe-as-desc">AH${d.ah}cm、BH${d.bh}cmのとき、CHの長さを相似から求める。</desc>
+                <polygon points="40,140 240,140 110,30" fill="#ECEFF1" stroke="#999" stroke-width="2"/>
+                <polygon id="pe-as-tri-ach" class="plane-expand-part" style="opacity:0" points="40,140 110,140 110,30" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+                <polygon id="pe-as-tri-cbh" class="plane-expand-part" style="opacity:0" points="110,140 240,140 110,30" fill="#FFE0B2" stroke="#E65100" stroke-width="2"/>
+                <path d="M103,140 L103,133 L110,133" fill="none" stroke="#555" stroke-width="1.3"/>
+                <text x="75" y="156" font-size="12" fill="#1565C0" text-anchor="middle" font-weight="bold">AH ${d.ah}cm</text>
+                <text x="175" y="156" font-size="12" fill="#E65100" text-anchor="middle" font-weight="bold">BH ${d.bh}cm</text>
+                <text x="26" y="150" font-size="12" fill="#1a1a2e">A</text>
+                <text x="246" y="150" font-size="12" fill="#1a1a2e">B</text>
+                <text x="110" y="156" font-size="12" fill="#1a1a2e" text-anchor="middle">H</text>
+                <text x="108" y="22" font-size="12" fill="#1a1a2e">C</text>
+                <text x="118" y="95" font-size="13" fill="#E53935" font-weight="bold">？</text>
+                <g id="pe-as-arc-a" hidden><path d="M62,140 A22,22 0 0 0 51.81,121.44" fill="none" stroke="#F57F17" stroke-width="2.5"/></g>
+                <g id="pe-as-arc-bch" hidden><path d="M110,52 A22,22 0 0 0 126.79,44.21" fill="none" stroke="#F57F17" stroke-width="2.5"/></g>
+                <g id="pe-as-arc-b" hidden><path d="M218,140 A22,22 0 0 1 223.21,125.79" fill="none" stroke="#7c3aed" stroke-width="2.5"/></g>
+                <g id="pe-as-arc-ach" hidden><path d="M98.19,48.56 A22,22 0 0 0 110,52" fill="none" stroke="#7c3aed" stroke-width="2.5"/></g>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-as-play">相似を見つけてみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-as-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-as-status" role="status" aria-live="polite">直角三角形が2つ重なって見えるが、どの角が同じかは見ただけでは分かりにくい。</div>
+            <div class="plane-expand-steps" id="pe-as-steps"></div>
+            <div class="formula-reveal" id="pe-as-result">AH：CH＝CH：BH → ${d.ah}：CH＝CH：${d.bh} → CH×CH＝${d.ah}×${d.bh}＝${d.ah * d.bh} → CH＝${d.ch}cm(${d.ch}×${d.ch}＝${d.ah * d.bh}だから)</div>
+        </div>`,
+        wire: () => wireTriangleAltitudeSimilarityVisual('pe-as', d),
+    }),
+    'square-perpendicular-similarity': d => ({
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 260 220" style="width:100%;max-width:260px;display:block" role="img" aria-labelledby="pe-ps-title pe-ps-desc">
+                <title id="pe-ps-title">正方形ABCDの辺AB上の点P、辺BC上の点Qを、PD・PQが垂直に交わるように結んだ図</title>
+                <desc id="pe-ps-desc">AP${d.ap}cm、BP${d.bp}cmのとき、BQの長さを相似から求める。</desc>
+                <polygon points="40,40 200,40 200,200 40,200" fill="none" stroke="#1a1a2e" stroke-width="2"/>
+                <polygon id="pe-ps-tri-apd" class="plane-expand-part" style="opacity:0" points="40,40 147,40 40,200" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+                <polygon id="pe-ps-tri-bqp" class="plane-expand-part" style="opacity:0" points="200,40 200,76 147,40" fill="#FFE0B2" stroke="#E65100" stroke-width="2"/>
+                <line x1="147" y1="40" x2="40" y2="200" stroke="#555" stroke-width="2"/>
+                <line x1="147" y1="40" x2="200" y2="76" stroke="#555" stroke-width="2"/>
+                <path d="M142.55,46.65 L149.17,51.15 L153.62,44.50" fill="none" stroke="#555" stroke-width="1.3"/>
+                <text x="26" y="34" font-size="12" fill="#1a1a2e">A</text>
+                <text x="206" y="34" font-size="12" fill="#1a1a2e">B</text>
+                <text x="206" y="212" font-size="12" fill="#1a1a2e">C</text>
+                <text x="26" y="212" font-size="12" fill="#1a1a2e">D</text>
+                <text x="147" y="30" font-size="12" fill="#1a1a2e" text-anchor="middle">P</text>
+                <text x="210" y="80" font-size="12" fill="#1a1a2e">Q</text>
+                <text x="90" y="30" font-size="11" fill="#1565C0" text-anchor="middle" font-weight="bold">AP ${d.ap}cm</text>
+                <text x="173" y="30" font-size="11" fill="#E65100" text-anchor="middle" font-weight="bold">BP ${d.bp}cm</text>
+                <text x="212" y="62" font-size="13" fill="#E53935" font-weight="bold">？</text>
+                <g id="pe-ps-arc-adp" hidden><path d="M40,178 A22,22 0 0 1 52.23,181.71" fill="none" stroke="#F57F17" stroke-width="2.5"/></g>
+                <g id="pe-ps-arc-bpq" hidden><path d="M169,40 A22,22 0 0 1 165.2,52.36" fill="none" stroke="#F57F17" stroke-width="2.5"/></g>
+                <g id="pe-ps-arc-apd" hidden><path d="M125,40 A22,22 0 0 0 134.77,58.29" fill="none" stroke="#7c3aed" stroke-width="2.5"/></g>
+                <g id="pe-ps-arc-bqp" hidden><path d="M200,58 A18,18 0 0 0 185.11,65.88" fill="none" stroke="#7c3aed" stroke-width="2.5"/></g>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-ps-play">相似を見つけてみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-ps-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-ps-status" role="status" aria-live="polite">2つの直角三角形は離れているように見えて、同じ角がどこかは見えにくい。</div>
+            <div class="plane-expand-steps" id="pe-ps-steps"></div>
+            <div class="formula-reveal" id="pe-ps-result">AP：BQ＝AD：BP → ${d.ap}：BQ＝${d.ad}：${d.bp} → BQ＝${d.ap}×${d.bp}÷${d.ad}＝${d.bq}cm</div>
+        </div>`,
+        wire: () => wireSquarePerpendicularSimilarityVisual('pe-ps', d),
+    }),
 };
 function wirePlaneExpandVisual(p) {
     if (activeExpandVisualReset) { activeExpandVisualReset(); activeExpandVisualReset = null; }

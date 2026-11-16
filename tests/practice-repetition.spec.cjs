@@ -5,7 +5,7 @@ async function open(page, id='g6_plane_002', category='平面図形') {
  await page.locator('#home-screen .course-card.exam').click();
  await page.locator('#exam-mode-screen .exam-mode-card.prac').click();
  await page.locator('#prac-cat-grid .prac-cat-card').filter({hasText:category}).click();
- if(category==='平面図形') await expect(page.locator('#prac-prob-list-body .prac-prob-card')).toHaveCount(36);
+ if(category==='平面図形') await expect(page.locator('#prac-prob-list-body .prac-prob-card')).toHaveCount(38);
  await page.evaluate(id=>window.pracOpenProb(id),id);
  await expect(page.locator('#prac-detail-view')).toBeVisible();
  await expect(page.locator('#prac-variant-nav')).toBeHidden();
@@ -180,8 +180,8 @@ test('three sets stay isolated through list switches, history and grading',async
 });
 test('all four additions retain flat list order and numbering; unrelated inverse-free problem has no guidance',async({page})=>{
  await page.goto('/');await page.locator('#grade-screen .grade-card.g6').click();await page.locator('#home-screen .course-card.exam').click();await page.locator('#exam-mode-screen .exam-mode-card.prac').click();
- const category=page.locator('#prac-cat-grid .prac-cat-card').filter({hasText:'平面図形'});await expect(category).toContainText('36問');await category.click();
- const cards=page.locator('#prac-prob-list-body .prac-prob-card');await expect(cards).toHaveCount(36);
+ const category=page.locator('#prac-cat-grid .prac-cat-card').filter({hasText:'平面図形'});await expect(category).toContainText('38問');await category.click();
+ const cards=page.locator('#prac-prob-list-body .prac-prob-card');await expect(cards).toHaveCount(38);
  for(const [i,v] of inverseSets.flatMap(s=>s.variants).entries()) {
   const card=cards.nth(26+i);await expect(card.locator('.prac-prob-num')).toHaveText(`問${27+i}`);
   await expect(card).toHaveAttribute('onclick',`pracOpenProb('${v.id}')`);

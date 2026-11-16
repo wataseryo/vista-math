@@ -15,7 +15,9 @@
 - [x] Claude独立レビューと実ブラウザ再検証完了（新規26件+既存回帰74件、全件pass。Sprint1セットとの非干渉も確認。詳細は `sprints/practice-repetition-sprint2/sprint-1-eval.md`）。
 - [x] 平面図形 P-05（正方形・長方形・ひし形の面積）部→有化: 公式単体問題3問(`g6_plane_021〜023`)を追加。`js/app.js`に`square/rectangle/rhombus-formula-slot`の3ビジュアルを新規実装（既存`triangle-formula-slot`等と同じ機構）。
 - [x] Claude独立レビューと実ブラウザ再検証完了（新規10件+既存回帰84件、全件pass。テストのfavicon誤検出を1件発見・修正。`coverage-final.md`/`.json`のP-05行・集計も更新済み。詳細は `sprints/plane-p05-area-formula/sprint-1-eval.md`）。
-- 残タスク: 平面図形の問19〜21ユーザーレビュー（後日）。平面図形残り22タイプの次スプリント（P-29→P-11残り→P-09→P-31→P-16、`docs/curriculum-implementation-plan.md`0.4節参照）。P-07のもう1つの根拠問題`g6_plane_008`のセット追加は別途判断。
+- [x] 平面図形 P-29（三角形・四角形の性質と対角線）部→有化: 性質単体問題3問(`g6_plane_024〜026`)を追加。`js/app.js`・`css/style.css`は変更不要（既存`diagonal-quarter`を1問のみ無改修で流用、残り2問は解説文のみで新規ビジュアル機構は追加せず）。
+- [x] Claude独立レビューと実ブラウザ再検証完了（新規12件+既存回帰96件、全件pass。詳細は `sprints/plane-p29-triangle-quad-properties/sprint-1-eval.md`）。
+- 残タスク: 平面図形の問19〜21ユーザーレビュー（後日）。平面図形残り22タイプの次スプリント（P-11残り→P-09→P-31→P-16、`docs/curriculum-implementation-plan.md`0.4節参照）。P-07のもう1つの根拠問題`g6_plane_008`のセット追加は別途判断。
 
 ## 現在のフォーカス：Phase 0（2026年9月）
 
@@ -190,3 +192,11 @@
 
 - [ ] 複数生徒・端末間同期を始める前に認証とサーバー保存を設計する（今回の静的基盤とは別工程）。
 - [ ] 旧解説書式75件を問題追加/改修時に段階的に統一し、数学的な独立確認を行う。
+
+## 2026-11-16 / P-29 三角形・四角形の性質と対角線
+
+- [x] 確定仕様どおり新規3問（g6_plane_024〜026）とSVGを追加。既存問題・共有ビジュアル実装は変更なし。
+- [x] 件数アサーション更新、構造検証236問・0エラー、Nodeテスト68件成功。
+- [x] desktop/mobile向け新規Playwrightシナリオ追加。
+- [x] 実ブラウザで新規シナリオ・既存回帰を完走（Claude環境、新規12件+既存回帰96件、全件pass）。
+- [x] Claude独立レビューとcoverage-final.md/json更新完了。コミット済み。

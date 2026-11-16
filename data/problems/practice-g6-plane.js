@@ -1652,5 +1652,137 @@ m×n倍になる。底辺と高さを同じ倍率で変えると、面積はそ�
       <text x="296" y="110" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 296 110)">対角線 10cm</text>
     </svg>`,
   },
+},
+
+/* ── P-29 三角形・四角形の性質と対角線 ── */
+{
+  id: 'g6_plane_024',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '二等辺三角形の性質', pattern: '底角が等しい',
+  difficulty: 1, answerType: 'number', answerUnit: '度',
+  title: '二等辺三角形の角の性質',
+  text: '二等辺三角形ABCがあります。AB＝ACで、角Bの大きさは63°です。\n角Aの大きさを求めなさい。',
+  answer: 54,
+  hint: 'AB＝ACの二等辺三角形では、底角(角Bと角C)の大きさが等しい。三角形の内角の和は180°。',
+  solution: `【ポイント】
+AB＝ACの二等辺三角形では、底辺BCに対する2つの角(角Bと角C)の大きさが等しい。
+
+【解説】
+① AB＝ACなので、角Bと角Cは底角であり、大きさが等しい。
+② 角Bは63°なので、角Cも63°になる。
+③ 三角形の内角の和は180°なので、角Aは、
+《角A＝180－63－63＝54°》
+
+【広げてみよう】
+二等辺三角形を、頂角Aから底辺BCへ垂直に引いた線で折ると、角Bと角Cがぴったり重なる。これは三角形ABCが、その折り目の線を軸とした線対称の図形になっているから。正三角形も、3つの角がすべて等しい二等辺三角形の特別な場合と考えられる。
+
+【確認】
+《54＋63＋63＝180°》
+三角形の内角の和と一致する。
+
+答え：54°`,
+  tags: ['平面図形', '三角形', '二等辺三角形', '角度'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 240 200" width="100%" style="max-width:240px;display:block;margin:0 auto" role="img" aria-label="ABとACが等しい二等辺三角形ABC。角Bは63度、角Aを求める">
+      <polygon points="120,30 40,170 200,170" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+      <g stroke="#1565C0" stroke-width="2"><line x1="74" y1="97" x2="86" y2="103"/><line x1="154" y1="103" x2="166" y2="97"/></g>
+      <g font-size="14" fill="#333" text-anchor="middle"><text x="120" y="20">A</text><text x="29" y="185">B</text><text x="211" y="185">C</text></g>
+      <text x="64" y="156" font-size="14" fill="#1565C0">63°</text>
+      <text x="120" y="69" font-size="18" fill="#E53935" text-anchor="middle">？</text>
+    </svg>`,
+  },
+},
+
+{
+  id: 'g6_plane_025',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '対角線の性質', pattern: '互いの中点で交わる',
+  difficulty: 2, answerType: 'number', answerUnit: 'cm',
+  title: '平行四辺形の対角線の交点',
+  text: '平行四辺形ABCDの対角線ACとBDは、点Oで交わります。平行四辺形の対角線は、それぞれの中点で交わる性質があります。\n対角線ACの長さが18cm、対角線BDの長さが12cmのとき、OAの長さとODの長さの和を求めなさい。',
+  answer: 15,
+  hint: '対角線はそれぞれの中点で交わるので、OAは対角線ACの半分、ODは対角線BDの半分になる。',
+  solution: `【ポイント】
+平行四辺形の対角線は、それぞれの中点で交わる。
+
+【解説】
+① 点OはACの中点なので、OAはACの半分の長さになる。
+《② OA＝18÷2＝9cm》
+③ 点OはBDの中点でもあるので、ODはBDの半分の長さになる。
+《④ OD＝12÷2＝6cm》
+⑤ OAとODの長さの和は、
+《⑥ 9＋6＝15cm》
+
+【広げてみよう】
+対角線が互いの中点で交わるという性質は、平行四辺形だけでなく、長方形・ひし形・正方形でも成り立つ(これらはすべて平行四辺形の仲間だから)。ただし、対角線の長さそのものが等しくなる(OA＝OB＝OC＝OD)のは、長方形・正方形のように対角線の長さが等しい図形に限られる。
+
+【確認】
+《OA＋OC＝9＋9＝18cm》
+対角線ACの長さと一致する。
+《OB＋OD＝6＋6＝12cm》
+対角線BDの長さとも一致する。
+
+答え：15cm`,
+  tags: ['平面図形', '四角形', '対角線', '平行四辺形'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 320 210" width="100%" style="max-width:320px;display:block;margin:0 auto" role="img" aria-label="平行四辺形ABCD。対角線ACは18cm、BDは12cmで、中点Oで交わる">
+      <polygon points="52,51 88,141 268,159 232,69" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+      <line x1="52" y1="51" x2="268" y2="159" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <line x1="88" y1="141" x2="232" y2="69" stroke="#E53935" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <circle cx="160" cy="105" r="3" fill="#333"/>
+      <g font-size="14" fill="#333" text-anchor="middle"><text x="42" y="45">A</text><text x="76" y="153">B</text><text x="280" y="172">C</text><text x="243" y="65">D</text><text x="160" y="126">O</text></g>
+      <text x="108" y="69" font-size="12" fill="#1565C0" text-anchor="middle" transform="rotate(26.565 108 69)" stroke="white" stroke-width="3" paint-order="stroke">対角線AC 18cm</text>
+      <text x="204" y="100" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-26.565 204 100)" stroke="white" stroke-width="3" paint-order="stroke">対角線BD 12cm</text>
+    </svg>`,
+  },
+},
+
+{
+  id: 'g6_plane_026',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '対角線の性質', pattern: '垂直に中点で交わる',
+  difficulty: 2, answerType: 'number', answerUnit: 'cm²',
+  title: '正方形の対角線と三角形の面積',
+  text: '正方形ABCDがあります。2本の対角線AC、BDは、点Oで垂直に交わり、それぞれの中点で交わります。対角線の長さは16cmです。\n三角形OABの面積を求めなさい。',
+  answer: 32,
+  hint: '対角線はそれぞれの中点で交わるので、OA、OBはどちらも対角線の半分の長さになる。角AOBは直角。',
+  solution: `【ポイント】
+正方形の対角線は、それぞれの中点で垂直に交わる。この2つの性質を使うと、対角線で区切られた三角形の面積を求められる。
+
+【解説】
+① 対角線の長さは16cmで、点Oはその中点なので、
+《OA＝OB＝16÷2＝8cm》
+② 2本の対角線は垂直に交わるので、角AOBは直角になる。
+③ 三角形OABは、OAとOBを直角をはさむ2辺とする直角三角形とみなせるので、面積は、
+《8×8÷2＝32cm²》
+
+【広げてみよう】
+同じように考えると、三角形OBC、OCD、ODAもすべてOA＝OB＝OC＝OD＝8cmの直角二等辺三角形になり、4つとも合同で面積が等しい。正方形全体の面積は32×4＝128cm²で、ひし形の面積公式(対角線×対角線÷2)を正方形(対角線が等しいひし形の仲間)に当てはめた16×16÷2＝128cm²とも一致する。
+
+【確認】
+《32×4＝128cm²》
+正方形全体の面積と一致する。
+
+答え：32cm²`,
+  expandVisual: 'diagonal-quarter',
+  expandVisualData: { pairPercent: 50 },
+  expandAdvice: '対角線の交点を見つけたら、「中点で交わるか」「垂直に交わるか」の2つの性質を両方使えないか考えられるようにしよう！',
+  tags: ['平面図形', '四角形', '対角線', '正方形'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 320 320" width="100%" style="max-width:320px;display:block;margin:0 auto" role="img" aria-label="正方形ABCDの対角線は16cm。中点Oで垂直に交わり、三角形OABを強調">
+      <polygon points="160,40 280,160 160,280 40,160" fill="#CE93D8" stroke="#6A1B9A" stroke-width="2"/>
+      <polygon points="160,160 160,40 280,160" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1"/>
+      <text x="205" y="123" font-size="18" fill="#E53935" text-anchor="middle">？</text>
+      <line x1="160" y1="40" x2="160" y2="280" stroke="#E53935" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <line x1="40" y1="160" x2="280" y2="160" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <path d="M160 150 H170 V160" fill="none" stroke="#6A1B9A" stroke-width="1.5"/>
+      <circle cx="160" cy="160" r="3" fill="#6A1B9A"/>
+      <g font-size="14" fill="#333" text-anchor="middle"><text x="160" y="28">A</text><text x="295" y="165">B</text><text x="160" y="300">C</text><text x="25" y="165">D</text><text x="146" y="180">O</text></g>
+      <text x="142" y="220" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 142 220)" stroke="white" stroke-width="3" paint-order="stroke">対角線 16cm</text>
+    </svg>`,
+  },
 }
 ];

@@ -1,0 +1,43 @@
+✔ all current 236 problems pass structural validation (47.6885ms)
+✔ missing script is rejected with file diagnostics (14.319958ms)
+✔ unaggregated source is rejected (19.002875ms)
+✔ duplicate ID fixture fails (22.51925ms)
+✔ invalid grade fixture fails (18.967708ms)
+✔ invalid answer fixture fails (19.607666ms)
+✔ unknown category fixture fails (19.5635ms)
+✔ unknown unit fixture fails (18.923458ms)
+✔ missing solution fixture fails (17.965458ms)
+✔ catalog uses actual data and explicit salt topic (8.291791ms)
+✔ variant unknown member fixture fails (19.188667ms)
+✔ variant category mismatch fixture fails (21.433708ms)
+✔ variant grade mismatch fixture fails (17.628833ms)
+✔ variant course mismatch fixture fails (18.764583ms)
+✔ variant duplicate member fixture fails (18.850625ms)
+✔ variant malformed types fixture fails (17.427667ms)
+✔ variant malformed members fixture fails (17.808792ms)
+✔ variant short group fixture fails (16.571375ms)
+✔ variant missing title fixture fails (18.189583ms)
+✔ variant invalid grade fixture fails (17.320125ms)
+✔ variant invalid course fixture fails (16.092375ms)
+✔ variant unknown category fixture fails (17.797625ms)
+✔ variant unknown chapter fixture fails (17.326375ms)
+✔ variant duplicate group membership fails (18.799875ms)
+✔ variant duplicate group ID fails (17.208625ms)
+✔ variant optional curriculum types may be omitted (17.4275ms)
+✔ malformed variant table null is diagnosed (18.011542ms)
+✔ malformed variant table [null] is diagnosed (17.310667ms)
+✔ variant g6_plane_004 unknown member fixture fails (18.925792ms)
+✔ variant g6_plane_004 duplicate member fixture fails (20.338375ms)
+✔ variant g6_plane_005 unknown member fixture fails (16.566584ms)
+✔ variant g6_plane_005 duplicate member fixture fails (16.455542ms)
+✔ variant membership collision g6_plane_002 into g6_plane_004 fails (18.238292ms)
+✔ variant membership collision g6_plane_002 into g6_plane_005 fails (16.993792ms)
+✔ variant membership collision g6_plane_004 into g6_plane_005 fails (18.31525ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 755.804833

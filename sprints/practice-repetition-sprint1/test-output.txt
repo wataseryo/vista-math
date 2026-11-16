@@ -1,0 +1,236 @@
+
+$ node --test tests/catalog.test.cjs
+✔ malformed variant table null is diagnosed (36.908ms)
+✔ malformed variant table [null] is diagnosed (32.164959ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1680.602416
+
+$ npm test
+✔ corrupted snapshot field types remain exportable and recoverable (1.586875ms)
+✔ incomplete version 1 snapshots are reported and preserved while valid fields survive (19.40475ms)
+ℹ tests 61
+ℹ suites 0
+ℹ pass 61
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1954.062417
+
+$ npx playwright test tests/practice-repetition.spec.cjs
+Running 10 tests using 1 worker
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49427] exception while trying to kill process: Error: kill EPERM
+      - [pid=49427] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49430] exception while trying to kill process: Error: kill EPERM
+      - [pid=49430] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49432] exception while trying to kill process: Error: kill EPERM
+      - [pid=49432] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49437] exception while trying to kill process: Error: kill EPERM
+      - [pid=49437] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49441] exception while trying to kill process: Error: kill EPERM
+      - [pid=49441] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49446] exception while trying to kill process: Error: kill EPERM
+      - [pid=49446] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49451] exception while trying to kill process: Error: kill EPERM
+      - [pid=49451] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49453] exception while trying to kill process: Error: kill EPERM
+      - [pid=49453] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49459] exception while trying to kill process: Error: kill EPERM
+      - [pid=49459] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49463] exception while trying to kill process: Error: kill EPERM
+      - [pid=49463] <process did exit: exitCode=null, signal=SIGABRT>
+  10 failed
+
+$ npx playwright test
+Running 58 tests using 1 worker
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49556] exception while trying to kill process: Error: kill EPERM
+      - [pid=49556] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49560] exception while trying to kill process: Error: kill EPERM
+      - [pid=49560] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49562] exception while trying to kill process: Error: kill EPERM
+      - [pid=49562] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49566] exception while trying to kill process: Error: kill EPERM
+      - [pid=49566] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49568] exception while trying to kill process: Error: kill EPERM
+      - [pid=49568] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49571] exception while trying to kill process: Error: kill EPERM
+      - [pid=49571] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49574] exception while trying to kill process: Error: kill EPERM
+      - [pid=49574] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49577] exception while trying to kill process: Error: kill EPERM
+      - [pid=49577] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49580] exception while trying to kill process: Error: kill EPERM
+      - [pid=49580] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49584] exception while trying to kill process: Error: kill EPERM
+      - [pid=49584] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49586] exception while trying to kill process: Error: kill EPERM
+      - [pid=49586] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49590] exception while trying to kill process: Error: kill EPERM
+      - [pid=49590] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49593] exception while trying to kill process: Error: kill EPERM
+      - [pid=49593] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49595] exception while trying to kill process: Error: kill EPERM
+      - [pid=49595] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49598] exception while trying to kill process: Error: kill EPERM
+      - [pid=49598] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49601] exception while trying to kill process: Error: kill EPERM
+      - [pid=49601] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49603] exception while trying to kill process: Error: kill EPERM
+      - [pid=49603] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49606] exception while trying to kill process: Error: kill EPERM
+      - [pid=49606] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49608] exception while trying to kill process: Error: kill EPERM
+      - [pid=49608] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49617] exception while trying to kill process: Error: kill EPERM
+      - [pid=49617] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49627] exception while trying to kill process: Error: kill EPERM
+      - [pid=49627] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+    [pid=49640] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=49640] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49651] exception while trying to kill process: Error: kill EPERM
+      - [pid=49651] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49662] exception while trying to kill process: Error: kill EPERM
+      - [pid=49662] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49668] exception while trying to kill process: Error: kill EPERM
+      - [pid=49668] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49675] exception while trying to kill process: Error: kill EPERM
+      - [pid=49675] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49677] exception while trying to kill process: Error: kill EPERM
+      - [pid=49677] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49681] exception while trying to kill process: Error: kill EPERM
+      - [pid=49681] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49683] exception while trying to kill process: Error: kill EPERM
+      - [pid=49683] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49689] exception while trying to kill process: Error: kill EPERM
+      - [pid=49689] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49695] exception while trying to kill process: Error: kill EPERM
+      - [pid=49695] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49717] exception while trying to kill process: Error: kill EPERM
+      - [pid=49717] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49722] exception while trying to kill process: Error: kill EPERM
+      - [pid=49722] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49732] exception while trying to kill process: Error: kill EPERM
+      - [pid=49732] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49738] exception while trying to kill process: Error: kill EPERM
+      - [pid=49738] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49740] exception while trying to kill process: Error: kill EPERM
+      - [pid=49740] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49742] exception while trying to kill process: Error: kill EPERM
+      - [pid=49742] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49744] exception while trying to kill process: Error: kill EPERM
+      - [pid=49744] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49746] exception while trying to kill process: Error: kill EPERM
+      - [pid=49746] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49748] exception while trying to kill process: Error: kill EPERM
+      - [pid=49748] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49750] exception while trying to kill process: Error: kill EPERM
+      - [pid=49750] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49752] exception while trying to kill process: Error: kill EPERM
+      - [pid=49752] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49754] exception while trying to kill process: Error: kill EPERM
+      - [pid=49754] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49756] exception while trying to kill process: Error: kill EPERM
+      - [pid=49756] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49758] exception while trying to kill process: Error: kill EPERM
+      - [pid=49758] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49761] exception while trying to kill process: Error: kill EPERM
+      - [pid=49761] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49767] exception while trying to kill process: Error: kill EPERM
+      - [pid=49767] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+    [pid=49775] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=49775] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49777] exception while trying to kill process: Error: kill EPERM
+      - [pid=49777] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49779] exception while trying to kill process: Error: kill EPERM
+      - [pid=49779] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49781] exception while trying to kill process: Error: kill EPERM
+      - [pid=49781] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49783] exception while trying to kill process: Error: kill EPERM
+      - [pid=49783] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49785] exception while trying to kill process: Error: kill EPERM
+      - [pid=49785] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49787] exception while trying to kill process: Error: kill EPERM
+      - [pid=49787] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49794] exception while trying to kill process: Error: kill EPERM
+      - [pid=49794] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+    [pid=49815] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=49815] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49822] exception while trying to kill process: Error: kill EPERM
+      - [pid=49822] <process did exit: exitCode=null, signal=SIGABRT>
+    Error: browserType.launch: Target page, context or browser has been closed
+      - [pid=49824] exception while trying to kill process: Error: kill EPERM
+      - [pid=49824] <process did exit: exitCode=null, signal=SIGABRT>
+  58 failed

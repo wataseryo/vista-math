@@ -287,6 +287,52 @@ function pracOpenCat(catId) {
     }
 }
 
+// probId が属する対応表グループと、その中での位置を返す。属さなければ null。
+function pracFindVariantGroupIndex(probId) {
+    for (const g of PRACTICE_VARIANT_GROUPS) {
+        const idx = g.problemIds.indexOf(probId);
+        if (idx !== -1) return { group: g, idx };
+    }
+    return null;
+}
+
+// 演習一覧・問題詳細タイトルと同じ基準(catId・grade・course で絞った配列の位置)で「問N」の N を算出する。
+// 既存の pracOpenProb 内のインライン計算と同じロジック（既存コードはそのまま、ここでは新規ヘルパーとして切り出す）。
+function pracProblemNumberInCat(probId) {
+    const p = PRACTICE_PROBLEMS.find(x => x.id === probId);
+    if (!p) return null;
+    const probs = PRACTICE_PROBLEMS.filter(q => q.catId === p.catId && q.grade === p.grade && q.course === p.course);
+    const idx = probs.findIndex(q => q.id === probId);
+    return idx >= 0 ? idx + 1 : null;
+}
+
+// variantInfo を案内欄のHTMLに変換する。
+function pracVariantNavInfo(probId) {
+    return pracFindVariantGroupIndex(probId);
+}
+function renderVariantNavHtml(info) {
+    if (!info) return '';
+    const { group, idx } = info;
+    const nextId = group.problemIds[idx + 1];
+    if (nextId) {
+        const nextP = PRACTICE_PROBLEMS.find(x => x.id === nextId);
+        const num = pracProblemNumberInCat(nextId);
+        const isBase = nextId === group.problemIds[0];
+        const suffix = isBase ? '' : '〈数値を変えた問題〉';
+        return `
+            <div class="prac-variant-nav-label">同じ考え方でもう1問</div>
+            <div class="prac-variant-nav-title">問${num} ${escapeHtml(nextP.title)}${suffix}</div>
+            <button class="prac-variant-nav-btn" onclick="pracOpenNextVariant('${nextId}')">この問題へ →</button>`;
+    }
+    return `<div class="prac-variant-nav-label">このセットの最後の問題です。</div>
+            <div class="prac-variant-nav-sub">「← 問題一覧」から他の問題も解いてみよう。</div>`;
+}
+
+// クリックハンドラ。既存の履歴ラッパー済み window.pracOpenProb を呼ぶだけ。navigation.js には触れない。
+function pracOpenNextVariant(nextId) {
+    window.pracOpenProb(nextId);
+}
+
 function pracOpenProb(probId) {
     const p   = PRACTICE_PROBLEMS.find(x => x.id === probId);
     if (!p || p.grade !== appState.grade || p.course !== 'exam') return;
@@ -300,6 +346,7 @@ function pracOpenProb(probId) {
     const unit   = units.find(u => u.id === unitId);
     const probs  = PRACTICE_PROBLEMS.filter(q => q.catId === pracState.currentCatId && q.grade === appState.grade && q.course === 'exam');
     const currentIdx = probs.findIndex(q => q.id === probId);
+    const variantInfo = pracVariantNavInfo(probId);
 
     document.getElementById('prac-prob-view').style.display   = 'none';
     document.getElementById('prac-detail-view').style.display = 'flex';
@@ -317,6 +364,7 @@ function pracOpenProb(probId) {
             <button class="prac-check-btn" onclick="pracCheckAnswer()">答え合わせ</button>
         </div>
         <div id="prac-result-box" style="display:none;background:#E8F5E9;border-radius:10px;padding:12px;margin-bottom:14px;font-weight:bold;font-size:.9rem"></div>
+        <div id="prac-variant-nav" class="prac-variant-nav" style="display:none">${renderVariantNavHtml(variantInfo)}</div>
         <div id="prac-steps-card" class="prac-steps-card">
             <div class="prac-steps-hd">
                 <div class="prac-steps-title">📝 ステップ解説</div>
@@ -378,6 +426,8 @@ function pracCheckAnswer() {
         recordAnswer(`g${appState.grade}_exam_${pracState.currentCatId}`, false);
         resetStreak();
     }
+    const nav = document.getElementById('prac-variant-nav');
+    if (nav && nav.innerHTML.trim()) nav.style.display = 'block';
     const stepsCard = document.getElementById('prac-steps-card');
     if (stepsCard) stepsCard.style.display = 'block';
 }
@@ -2185,6 +2235,8 @@ function pracRetry() {
     if (inp) { inp.value = ''; inp.className = 'prac-ans-input'; inp.focus(); }
     const rb = document.getElementById('prac-result-box');
     if (rb) rb.style.display = 'none';
+    const nav = document.getElementById('prac-variant-nav');
+    if (nav) nav.style.display = 'none';
 }
 function chRetry() {
     chState.answered = false;

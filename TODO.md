@@ -1,11 +1,17 @@
 # VISTA TODO
 
-最終更新: 2026-09-21
+最終更新: 2026-11-16
 
 > ⚠️ 9月末ベータ版リリース計画は現実的でないと判断し、フェーズ別ロードマップに切り替え。
 > 事業戦略の詳細は `.company/pm/projects/vista-strategy.md` を参照。
 
 ---
+
+## 2026-11-16 Sprint完了
+
+- [x] 類題(反復練習) Sprint 1: 対応表、解答後の任意誘導、三角形面積の類題2問とSVG、構造検証・テストを実装。
+- [x] Claude独立レビューと実ブラウザ再検証完了（Codex環境はHTTP listen・Chrome起動が拒否されたが、Claude環境では成功。新規10件+既存回帰58件、全件pass。詳細は `sprints/practice-repetition-sprint1/sprint-1-eval.md`）。
+- 次のスプリント: `g6_plane_004`・`g6_plane_005`の類題セット（別途仕様化）。
 
 ## 現在のフォーカス：Phase 0（2026年9月）
 

@@ -1114,3 +1114,10 @@
 @keyframes plane-angle-line { from { clip-path:inset(0 100% 0 0); } to { clip-path:inset(0 0 0 0); } }
 @media (max-width:480px) { .plane-angle-comparison-grid { grid-template-columns:1fr; } }
 @media (prefers-reduced-motion:reduce) { .plane-angle-drawing .plane-angle-guide-line { animation:none; } }
+
+/* 解答後の任意の反復練習案内 */
+.prac-variant-nav { border: 1px solid #C5CAE9; border-left: 4px solid var(--exam-primary); background: #F5F5FF; border-radius: 10px; padding: 14px; margin-bottom: 14px; overflow-wrap: anywhere; }
+.prac-variant-nav-label { color: var(--exam-primary); font-weight: bold; margin-bottom: 8px; }
+.prac-variant-nav-title, .prac-variant-nav-sub { font-size: .9rem; line-height: 1.6; }
+.prac-variant-nav-btn { margin-top: 10px; padding: 10px 16px; max-width: 100%; border: 0; border-radius: 8px; background: var(--exam-primary); color: white; font: inherit; font-weight: bold; cursor: pointer; }
+.prac-variant-nav-btn:focus-visible { outline: 3px solid #7986CB; outline-offset: 3px; }

@@ -1,0 +1,2 @@
+Existing24 entries: original source prefix before closing array matches byte-for-byte.
+js/navigation.js: git diff empty; SHA256 3d310473d61149501ead2a07ea0ef451d781811530065f3adb80249ab3b21847

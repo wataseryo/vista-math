@@ -27,18 +27,47 @@ function validate(root = path.resolve(__dirname, '..')) {
     catch (e) { fail(file, '', e.message); }
   }
   let data;
-  try { data = vm.runInContext('({PRACTICE_PROBLEMS,CHALLENGES,CATEGORIES,PRACTICE_CATS,EXAM_UNITS_G5,EXAM_UNITS_G6,STANDARD_CHAPTERS_G5,STANDARD_CHAPTERS_G6})', context); }
+  try { data = vm.runInContext('({PRACTICE_VARIANT_GROUPS,PRACTICE_PROBLEMS,CHALLENGES,CATEGORIES,PRACTICE_CATS,EXAM_UNITS_G5,EXAM_UNITS_G6,STANDARD_CHAPTERS_G5,STANDARD_CHAPTERS_G6})', context); }
   catch (e) { fail('data/problems.js', '', e.message); return {errors, warnings, count: 0}; }
   const screens = new Set([...html.matchAll(/id=["']([^"']+)-screen["']/g)].map(m => m[1]));
   for (const [name, list] of Object.entries(data).filter(([name]) => !['PRACTICE_PROBLEMS','CHALLENGES'].includes(name))) {
     const ids = new Set();
+    if (!Array.isArray(list)) { fail(name === 'PRACTICE_VARIANT_GROUPS' ? 'data/practice-variant-groups.js' : 'data/categories.js', '', `${name} must be an array`); continue; }
     for (const item of list) {
-      if (typeof item.id !== 'string' || !item.id || ids.has(item.id)) fail('data/categories.js',item.id,`missing or duplicate ID in ${name}`);
+      if (!item || typeof item !== 'object') { fail('data/practice-variant-groups.js', '', `invalid entry in ${name}`); continue; }
+      if (typeof item.id !== 'string' || !item.id || ids.has(item.id)) fail(name === 'PRACTICE_VARIANT_GROUPS' ? 'data/practice-variant-groups.js' : 'data/categories.js',item.id,`missing or duplicate ID in ${name}`);
       ids.add(item.id);
     }
   }
   const cats = new Set(data.CATEGORIES.map(x => x.id));
   const pcats = new Set(data.PRACTICE_CATS.map(x => x.id));
+  const variantOwner = new Map();
+  for (const g of Array.isArray(data.PRACTICE_VARIANT_GROUPS) ? data.PRACTICE_VARIANT_GROUPS : []) {
+    const file = 'data/practice-variant-groups.js';
+    if (!g || typeof g !== 'object') continue; // diagnosed by the ID pass above
+    const check = (ok, reason) => { if (!ok) fail(file, g.id, reason); };
+    check(typeof g.title === 'string' && g.title.trim().length > 0, 'missing title');
+    check([5, 6].includes(g.grade), 'invalid grade');
+    check(['std', 'exam'].includes(g.course), 'invalid course');
+    if (g.course === 'exam') check(pcats.has(g.catId), 'unknown catId');
+    if (g.course === 'std') check((g.grade === 5 ? data.STANDARD_CHAPTERS_G5 : data.STANDARD_CHAPTERS_G6).some(c => c.id === g.chapterId), 'unknown chapterId');
+    check(g.curriculumTypeIds === undefined || (Array.isArray(g.curriculumTypeIds) && g.curriculumTypeIds.every(t => typeof t === 'string' && /^[A-Z]-\d{2}$/.test(t))), 'invalid curriculumTypeIds format');
+    check(Array.isArray(g.problemIds) && g.problemIds.length >= 2, 'problemIds must contain at least 2 entries');
+    const seenInGroup = new Set();
+    for (const pid of Array.isArray(g.problemIds) ? g.problemIds : []) {
+      check(!seenInGroup.has(pid), `duplicate problemId in group: ${pid}`); seenInGroup.add(pid);
+      const p = data.PRACTICE_PROBLEMS.find(x => x.id === pid);
+      check(!!p, `unknown problemId: ${pid}`);
+      if (p) {
+        check(p.grade === g.grade, `problemId ${pid} grade mismatch with group`);
+        check(p.course === g.course, `problemId ${pid} course mismatch with group`);
+        if (g.course === 'exam') check(p.catId === g.catId, `problemId ${pid} catId mismatch with group`);
+        if (g.course === 'std') check(p.chapterId === g.chapterId, `problemId ${pid} chapterId mismatch with group`);
+        if (variantOwner.has(pid)) check(false, `problemId ${pid} already belongs to group ${variantOwner.get(pid)}`);
+        else variantOwner.set(pid, g.id);
+      }
+    }
+  }
   const seen = new Set();
   const origin = p => { for (const [name, file] of sources) { if (vm.runInContext(`${name}.some(p=>p.id===${JSON.stringify(p.id)})`, context)) return file; } return 'data/problems.js'; };
   for (const [kind, list] of [['practice',data.PRACTICE_PROBLEMS], ['challenge',data.CHALLENGES]]) {

@@ -1210,4 +1210,96 @@ m×n倍になる。底辺と高さを同じ倍率で変えると、面積はそ�
     </svg>`,
   },
 },
+
+{
+  id: 'g6_plane_002_v01',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '三角形の面積', pattern: '公式適用',
+  difficulty: 1, answerType: 'number', answerUnit: 'cm²',
+  title: '三角形の面積（類題1）',
+  text: '底辺14cm、高さ9cmの三角形の面積を求めなさい。',
+  answer: 63,
+  hint: '三角形の面積 ＝ 底辺 × 高さ ÷ 2',
+  solution: `【ポイント】
+三角形の面積は、底辺×高さ÷2で求められる。
+
+【解説】
+① 底辺は14cm、高さは9cm。
+② 三角形の面積は、底辺×高さ÷2なので、14×9÷2を計算する。
+《③ 14×9÷2＝63cm²》
+
+【広げてみよう】
+同じ三角形をもう1つ180°回転させて組み合わせると、底辺・高さが同じ平行四辺形になる。三角形の面積が÷2になるのは、平行四辺形をちょうど半分に分けた形だから。
+
+【確認】
+《14×9＝126(組み合わせた平行四辺形の面積)、126÷2＝63》
+もとの三角形の面積と一致する。
+
+答え：63cm²`,
+  expandVisual: 'triangle-rotate',
+  expandVisualData: { base: 14, height: 9, area: 63 },
+  expandAdvice: '次は三角形を見たときに、「2つ合わせたら平行四辺形になるな」とイメージできるようにしよう！',
+  tags: ['平面図形', '三角形'],
+  diagram: {
+    kind: 'svg',
+    // 縮尺14px/cm。底辺14×高さ9に合わせて頂点・寸法線・viewBoxを算定。
+    markup: `<svg viewBox="0 0 326 216" width="100%" style="max-width:326px;display:block;margin:0 auto" role="img" aria-label="底辺14cm、高さ9cm、頂点が上の三角形">
+      <polygon points="40,166 236,166 138,40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+      <line x1="40" y1="180" x2="236" y2="180" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="174" x2="40" y2="186" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="236" y1="174" x2="236" y2="186" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="138" y="200" font-size="12" fill="#1565C0" text-anchor="middle">底辺 14cm</text>
+      <line x1="252" y1="40" x2="252" y2="166" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="246" y1="40" x2="258" y2="40" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="246" y1="166" x2="258" y2="166" stroke="#E53935" stroke-width="1.5"/>
+      <text x="270" y="103" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 270 103)">高さ 9cm</text>
+    </svg>`,
+  },
+},
+
+{
+  id: 'g6_plane_002_v02',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '三角形の面積', pattern: '公式適用',
+  difficulty: 1, answerType: 'number', answerUnit: 'cm²',
+  title: '三角形の面積（類題2・向きを変えた問題）',
+  text: '下の図のように、頂点が下を向いている、底辺11cm、高さ8cmの三角形の面積を求めなさい。',
+  answer: 44,
+  hint: '三角形の面積 ＝ 底辺 × 高さ ÷ 2(向きが変わっても公式は同じ)',
+  solution: `【ポイント】
+三角形の面積は、向きがどうであっても底辺×高さ÷2で求められる。
+
+【解説】
+① 底辺は11cm、高さは8cm。図の向きが変わっていても、底辺と、それに垂直な高さの組を見つければよい。
+② 三角形の面積は、底辺×高さ÷2なので、11×8÷2を計算する。
+《③ 11×8÷2＝44cm²》
+
+【広げてみよう】
+三角形をどの向きに置いても、面積の公式(底辺×高さ÷2)は変わらない。向きに惑わされず、底辺とそれに垂直な高さの組を見つけることが大切。
+
+【確認】
+《11×8＝88(組み合わせた平行四辺形の面積)、88÷2＝44》
+もとの三角形の面積と一致する。
+
+答え：44cm²`,
+  expandVisual: 'triangle-rotate',
+  expandVisualData: { base: 11, height: 8, area: 44 },
+  expandAdvice: '次は三角形を見たときに、「2つ合わせたら平行四辺形になるな」とイメージできるようにしよう！',
+  tags: ['平面図形', '三角形', '向き'],
+  diagram: {
+    kind: 'svg',
+    // 縮尺14px/cm。底辺11×高さ8に合わせて頂点・寸法線・viewBoxを算定。
+    markup: `<svg viewBox="0 0 284 194" width="100%" style="max-width:284px;display:block;margin:0 auto" role="img" aria-label="底辺11cm、高さ8cm、頂点が下の三角形">
+      <polygon points="40,56 194,56 117,168" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+      <line x1="40" y1="42" x2="194" y2="42" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="40" y1="36" x2="40" y2="48" stroke="#1565C0" stroke-width="1.5"/>
+      <line x1="194" y1="36" x2="194" y2="48" stroke="#1565C0" stroke-width="1.5"/>
+      <text x="117" y="32" font-size="12" fill="#1565C0" text-anchor="middle">底辺 11cm</text>
+      <line x1="210" y1="56" x2="210" y2="168" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="204" y1="56" x2="216" y2="56" stroke="#E53935" stroke-width="1.5"/>
+      <line x1="204" y1="168" x2="216" y2="168" stroke="#E53935" stroke-width="1.5"/>
+      <text x="228" y="112" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 228 112)">高さ 8cm</text>
+    </svg>`,
+  },
+}
 ];

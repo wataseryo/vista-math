@@ -1058,6 +1058,7 @@
         .plane-expand-chip.base { background:#90CAF9; color:#1565C0; }
         .plane-expand-chip.height { background:#FFE0B2; color:#E65100; }
         .plane-expand-chip.target { border-color:#7c3aed; box-shadow:0 0 0 2px #ede9fe; }
+        .plane-expand-chip-static { display:inline-flex; align-items:center; padding:6px 12px; border-radius:8px; font-weight:bold; border:2px solid transparent; background:#ECEFF1; color:#455A64; cursor:default; }
         .plane-expand-eq-op { color:#9ca3af; font-weight:bold; }
         .plane-expand-steps { display:flex; flex-direction:column; gap:8px; width:100%; max-width:460px; margin-top:4px; }
         .plane-expand-step {

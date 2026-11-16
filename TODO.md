@@ -13,7 +13,9 @@
 - [x] Claude独立レビューと実ブラウザ再検証完了（Codex環境はHTTP listen・Chrome起動が拒否されたが、Claude環境では成功。新規10件+既存回帰58件、全件pass。詳細は `sprints/practice-repetition-sprint1/sprint-1-eval.md`）。
 - [x] 類題(反復練習) Sprint 2: `g6_plane_004`・`g6_plane_005`（面積から高さの逆算、三角形・平行四辺形）に類題2問ずつ追加。対応表に2グループ追加（js/app.js等のコード変更は不要と事前検証通り確認）。
 - [x] Claude独立レビューと実ブラウザ再検証完了（新規26件+既存回帰74件、全件pass。Sprint1セットとの非干渉も確認。詳細は `sprints/practice-repetition-sprint2/sprint-1-eval.md`）。
-- 残タスク: 平面図形の問19〜21ユーザーレビュー（後日）。平面図形残り22タイプの着手（`docs/curriculum-implementation-plan.md`0.4節のロードマップ参照）。P-07のもう1つの根拠問題`g6_plane_008`のセット追加は別途判断。
+- [x] 平面図形 P-05（正方形・長方形・ひし形の面積）部→有化: 公式単体問題3問(`g6_plane_021〜023`)を追加。`js/app.js`に`square/rectangle/rhombus-formula-slot`の3ビジュアルを新規実装（既存`triangle-formula-slot`等と同じ機構）。
+- [x] Claude独立レビューと実ブラウザ再検証完了（新規10件+既存回帰84件、全件pass。テストのfavicon誤検出を1件発見・修正。`coverage-final.md`/`.json`のP-05行・集計も更新済み。詳細は `sprints/plane-p05-area-formula/sprint-1-eval.md`）。
+- 残タスク: 平面図形の問19〜21ユーザーレビュー（後日）。平面図形残り22タイプの次スプリント（P-29→P-11残り→P-09→P-31→P-16、`docs/curriculum-implementation-plan.md`0.4節参照）。P-07のもう1つの根拠問題`g6_plane_008`のセット追加は別途判断。
 
 ## 現在のフォーカス：Phase 0（2026年9月）
 

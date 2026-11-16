@@ -1498,5 +1498,159 @@ m×n倍になる。底辺と高さを同じ倍率で変えると、面積はそ�
       <text x="214" y="124" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 214 124)">高さ ？</text>
       </svg>`,
   },
+},
+
+/* ── P-05 正方形・長方形・ひし形の面積（公式単体） ── */
+{
+  id: 'g6_plane_021',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '正方形の面積', pattern: '公式適用',
+  difficulty: 1, answerType: 'number', answerUnit: 'cm²',
+  title: '正方形の面積（基本）',
+  text: '1辺が9cmの正方形があります。面積を求めなさい。',
+  answer: 81,
+  hint: '正方形の面積 ＝ 1辺 × 1辺',
+  solution: `【ポイント】
+正方形の面積は、1辺×1辺で求められる。
+
+【解説】
+① 正方形は4つの辺の長さがすべて等しい四角形で、1辺の長さは9cm。
+② 正方形の面積は、1辺×1辺なので、9×9を計算する。
+《③ 9×9＝81cm²》
+
+【広げてみよう】
+正方形は、たてとよこの長さが等しい長方形と見ることもできる。長方形の面積の公式「たて×よこ」に、たてとよこの両方に9cmを当てはめても、9×9＝81cm²になり、同じ答えになる。
+
+【確認】
+《81÷9＝9》
+もとの1辺の長さと一致する。
+
+答え：81cm²`,
+  expandVisual: 'square-formula-slot',
+  expandVisualData: { side: 9, area: 81 },
+  expandAdvice: '正方形を見たら「たて・よこが同じ長さの長方形」と考えて、長方形の公式とのつながりを意識できるようにしよう！',
+  tags: ['平面図形', '正方形'],
+  diagram: {
+    kind: 'svg',
+    // 14px/cm: 9×14=126px、左右余白47px・上下の寸法表示余白から220×210。
+    markup: `<svg viewBox="0 0 220 210" width="100%" style="max-width:220px;display:block;margin:0 auto" role="img" aria-label="4辺が等しく、1辺9cmの正方形">
+      <polygon points="47,40 173,40 173,166 47,166" fill="#CE93D8" stroke="#6A1B9A" stroke-width="2"/>
+      <g stroke="#6A1B9A" stroke-width="2">
+        <line x1="110" y1="36" x2="110" y2="44"/>
+        <line x1="169" y1="103" x2="177" y2="103"/>
+        <line x1="110" y1="162" x2="110" y2="170"/>
+        <line x1="43" y1="103" x2="51" y2="103"/>
+      </g>
+      <g stroke="#1565C0" stroke-width="1.5">
+        <line x1="47" y1="180" x2="173" y2="180"/>
+        <line x1="47" y1="174" x2="47" y2="186"/>
+        <line x1="173" y1="174" x2="173" y2="186"/>
+      </g>
+      <text x="110" y="200" font-size="12" fill="#1565C0" text-anchor="middle">1辺 9cm</text>
+    </svg>`,
+  },
+},
+
+{
+  id: 'g6_plane_022',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '長方形の面積', pattern: '公式適用',
+  difficulty: 1, answerType: 'number', answerUnit: 'cm²',
+  title: '長方形の面積（基本）',
+  text: 'たて6cm、よこ11cmの長方形があります。面積を求めなさい。',
+  answer: 66,
+  hint: '長方形の面積 ＝ たて × よこ',
+  solution: `【ポイント】
+長方形の面積は、たて×よこで求められる。
+
+【解説】
+① たては6cm、よこは11cm。
+② 長方形の面積は、たて×よこなので、6×11を計算する。
+《③ 6×11＝66cm²》
+
+【広げてみよう】
+長方形は、1辺1cmの正方形(面積1cm²)を、たてに6個・よこに11個すき間なく並べた形と考えられる。たて×よこの計算は、この1cm²の正方形が全部でいくつ並ぶかを求めていることと同じ。
+
+【確認】
+《66÷6＝11》
+もとのよこの長さと一致する。
+
+答え：66cm²`,
+  expandVisual: 'rectangle-formula-slot',
+  expandVisualData: { vertical: 6, horizontal: 11, area: 66 },
+  expandAdvice: '面積の公式はいつも「2つの長さの積」であることを意識して、たてとよこを求める逆算にも挑戦できるようにしよう！',
+  tags: ['平面図形', '長方形'],
+  diagram: {
+    kind: 'svg',
+    // 14px/cm: よこ11×14=154px、たて6×14=84px。寸法表示余白込み280×170。
+    markup: `<svg viewBox="0 0 280 170" width="100%" style="max-width:280px;display:block;margin:0 auto" role="img" aria-label="たて6cm、よこ11cmの長方形">
+      <polygon points="50,40 204,40 204,124 50,124" fill="#FFF59D" stroke="#F9A825" stroke-width="2"/>
+      <g stroke="#1565C0" stroke-width="1.5">
+        <line x1="50" y1="138" x2="204" y2="138"/>
+        <line x1="50" y1="132" x2="50" y2="144"/>
+        <line x1="204" y1="132" x2="204" y2="144"/>
+      </g>
+      <text x="127" y="158" font-size="12" fill="#1565C0" text-anchor="middle">よこ 11cm</text>
+      <g stroke="#E53935" stroke-width="1.5">
+        <line x1="220" y1="40" x2="220" y2="124"/>
+        <line x1="214" y1="40" x2="226" y2="40"/>
+        <line x1="214" y1="124" x2="226" y2="124"/>
+      </g>
+      <text x="242" y="82" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 242 82)">たて 6cm</text>
+    </svg>`,
+  },
+},
+
+{
+  id: 'g6_plane_023',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: 'ひし形の面積', pattern: '公式適用',
+  difficulty: 2, answerType: 'number', answerUnit: 'cm²',
+  title: 'ひし形の面積（基本）',
+  text: '対角線の長さが14cmと10cmのひし形があります。面積を求めなさい。',
+  answer: 70,
+  hint: 'ひし形の面積 ＝ 対角線1 × 対角線2 ÷ 2',
+  solution: `【ポイント】
+ひし形の面積は、対角線×対角線÷2で求められる。
+
+【解説】
+① ひし形の2本の対角線は、それぞれ14cmと10cm。
+② ひし形の面積は、対角線×対角線÷2なので、14×10÷2を計算する。
+《③ 14×10÷2＝140÷2＝70cm²》
+
+【広げてみよう】
+ひし形の2本の対角線は、たがいに直角に交わり、それぞれを2等分する。この2本の対角線を使って、ひし形をちょうど囲む「たて10cm×よこ14cmの長方形」を考えると、ひし形の面積はその長方形のちょうど半分になっている。だから、対角線×対角線÷2という÷2の付いた公式になる。
+
+【確認】
+《14×10＝140(ひし形を囲む長方形の面積)、140÷2＝70》
+もとのひし形の面積と一致する。
+
+答え：70cm²`,
+  expandVisual: 'rhombus-formula-slot',
+  expandVisualData: { diag1: 14, diag2: 10, area: 70 },
+  expandAdvice: 'ひし形を見たら、2本の対角線が直角に交わって作る長方形の半分として面積をとらえられるようにしよう！',
+  tags: ['平面図形', 'ひし形'],
+  diagram: {
+    kind: 'svg',
+    // 14px/cm: 対角線196px×140px、中心(160,110)。寸法表示余白込み320×220。
+    markup: `<svg viewBox="0 0 320 220" width="100%" style="max-width:320px;display:block;margin:0 auto" role="img" aria-label="対角線14cmと10cmが直角に交わり、それぞれを2等分するひし形">
+      <polygon points="160,40 258,110 160,180 62,110" fill="#80CBC4" stroke="#00695C" stroke-width="2"/>
+      <line x1="62" y1="110" x2="258" y2="110" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <line x1="160" y1="40" x2="160" y2="180" stroke="#E53935" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <path d="M160 102 H168 V110" fill="none" stroke="#00695C" stroke-width="1.5"/>
+      <g stroke="#1565C0" stroke-width="1.5">
+        <line x1="62" y1="194" x2="258" y2="194"/>
+        <line x1="62" y1="188" x2="62" y2="200"/>
+        <line x1="258" y1="188" x2="258" y2="200"/>
+      </g>
+      <text x="160" y="214" font-size="12" fill="#1565C0" text-anchor="middle">対角線 14cm</text>
+      <g stroke="#E53935" stroke-width="1.5">
+        <line x1="274" y1="40" x2="274" y2="180"/>
+        <line x1="268" y1="40" x2="280" y2="40"/>
+        <line x1="268" y1="180" x2="280" y2="180"/>
+      </g>
+      <text x="296" y="110" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 296 110)">対角線 10cm</text>
+    </svg>`,
+  },
 }
 ];

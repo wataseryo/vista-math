@@ -1193,6 +1193,102 @@ const PLANE_EXPAND_VISUALS = {
             wire: () => wireFormulaSlotVisual('pe-fs-trap', derivations),
         };
     },
+    'square-formula-slot': d => {
+        const derivations = {
+            area: [
+                { text: '面積 ＝ 1辺 × 1辺', type: 'formula' },
+                { text: `面積 ＝ ${d.side} × ${d.side}` },
+                { text: `面積 ＝ ${d.side * d.side}`, type: 'final' },
+            ],
+        };
+        return {
+            html: `<div class="plane-expand-stage">
+                <div class="plane-expand-eq" id="pe-fs-square-eq">
+                    <span class="plane-expand-chip area" data-key="area">面積</span>
+                    <span class="plane-expand-eq-op">＝</span>
+                    <span class="plane-expand-chip-static">1辺</span>
+                    <span class="plane-expand-eq-op">×</span>
+                    <span class="plane-expand-chip-static">1辺</span>
+                </div>
+                <div class="plane-expand-status" id="pe-fs-square-status" role="status" aria-live="polite">知りたい文字をタップしてみよう。</div>
+                <div class="plane-expand-steps" id="pe-fs-square-steps"></div>
+            </div>`,
+            wire: () => wireFormulaSlotVisual('pe-fs-square', derivations),
+        };
+    },
+    'rectangle-formula-slot': d => {
+        const derivations = {
+            vertical: [
+                { text: 'たて × よこ ＝ 面積' },
+                { text: 'たて ＝ 面積 ÷ よこ', type: 'formula' },
+                { text: `たて ＝ ${d.area} ÷ ${d.horizontal}` },
+                { text: `たて ＝ ${d.area} ÷ ${d.horizontal} ＝ ${d.vertical}`, type: 'final' },
+            ],
+            horizontal: [
+                { text: 'たて × よこ ＝ 面積' },
+                { text: 'よこ ＝ 面積 ÷ たて', type: 'formula' },
+                { text: `よこ ＝ ${d.area} ÷ ${d.vertical}` },
+                { text: `よこ ＝ ${d.area} ÷ ${d.vertical} ＝ ${d.horizontal}`, type: 'final' },
+            ],
+            area: [
+                { text: '面積 ＝ たて × よこ', type: 'formula' },
+                { text: `面積 ＝ ${d.vertical} × ${d.horizontal}` },
+                { text: `面積 ＝ ${d.vertical} × ${d.horizontal} ＝ ${d.area}`, type: 'final' },
+            ],
+        };
+        return {
+            html: `<div class="plane-expand-stage">
+                <div class="plane-expand-eq" id="pe-fs-rect-eq">
+                    <span class="plane-expand-chip area" data-key="area">面積</span>
+                    <span class="plane-expand-eq-op">＝</span>
+                    <span class="plane-expand-chip base" data-key="vertical">たて</span>
+                    <span class="plane-expand-eq-op">×</span>
+                    <span class="plane-expand-chip height" data-key="horizontal">よこ</span>
+                </div>
+                <div class="plane-expand-status" id="pe-fs-rect-status" role="status" aria-live="polite">知りたい文字をタップしてみよう。</div>
+                <div class="plane-expand-steps" id="pe-fs-rect-steps"></div>
+            </div>`,
+            wire: () => wireFormulaSlotVisual('pe-fs-rect', derivations),
+        };
+    },
+    'rhombus-formula-slot': d => {
+        const derivations = {
+            diag1: [
+                { text: '対角線1 × 対角線2 ÷ 2 ＝ 面積' },
+                { text: '対角線1 × 対角線2 ＝ 面積 × 2' },
+                { text: '対角線1 ＝ 面積 × 2 ÷ 対角線2', type: 'formula' },
+                { text: `対角線1 ＝ ${d.area} × 2 ÷ ${d.diag2}` },
+                { text: `対角線1 ＝ ${d.area * 2} ÷ ${d.diag2} ＝ ${d.diag1}`, type: 'final' },
+            ],
+            diag2: [
+                { text: '対角線1 × 対角線2 ÷ 2 ＝ 面積' },
+                { text: '対角線1 × 対角線2 ＝ 面積 × 2' },
+                { text: '対角線2 ＝ 面積 × 2 ÷ 対角線1', type: 'formula' },
+                { text: `対角線2 ＝ ${d.area} × 2 ÷ ${d.diag1}` },
+                { text: `対角線2 ＝ ${d.area * 2} ÷ ${d.diag1} ＝ ${d.diag2}`, type: 'final' },
+            ],
+            area: [
+                { text: '面積 ＝ 対角線1 × 対角線2 ÷ 2', type: 'formula' },
+                { text: `面積 ＝ ${d.diag1} × ${d.diag2} ÷ 2` },
+                { text: `面積 ＝ ${d.diag1 * d.diag2} ÷ 2 ＝ ${d.area}`, type: 'final' },
+            ],
+        };
+        return {
+            html: `<div class="plane-expand-stage">
+                <div class="plane-expand-eq" id="pe-fs-rhombus-eq">
+                    <span class="plane-expand-chip area" data-key="area">面積</span>
+                    <span class="plane-expand-eq-op">＝</span>
+                    <span class="plane-expand-chip base" data-key="diag1">対角線1</span>
+                    <span class="plane-expand-eq-op">×</span>
+                    <span class="plane-expand-chip height" data-key="diag2">対角線2</span>
+                    <span class="plane-expand-eq-op">÷2</span>
+                </div>
+                <div class="plane-expand-status" id="pe-fs-rhombus-status" role="status" aria-live="polite">知りたい文字をタップしてみよう。</div>
+                <div class="plane-expand-steps" id="pe-fs-rhombus-steps"></div>
+            </div>`,
+            wire: () => wireFormulaSlotVisual('pe-fs-rhombus', derivations),
+        };
+    },
     'subtract-triangle': d => ({
         html: `<div class="plane-expand-stage">
             <svg viewBox="0 0 300 235" style="width:100%;max-width:260px;display:block" role="img" aria-labelledby="pe-s6-title pe-s6-desc">

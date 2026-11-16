@@ -1167,4 +1167,47 @@ m×n倍になる。底辺と高さを同じ倍率で変えると、面積はそ�
     </svg>`,
   },
 },
+
+{
+  id: 'g6_plane_020',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '縮図・拡大図', pattern: '縮尺と単位換算',
+  difficulty: 2, answerType: 'number', answerUnit: 'km',
+  title: '縮尺と実際の距離',
+  text: '縮尺1/25000の地図があります。\n地図上で2つの地点の間の長さを測ったら4cmでした。実際の距離は何kmですか。',
+  answer: 1,
+  hint: '縮尺1/25000は「地図上の長さ×25000＝実際の長さ」という意味。単位はcmのまま計算してから、最後にkmへ変換する。',
+  solution: `【ポイント】
+縮尺1/25000は、地図上の長さを25000倍すると実際の長さになるという意味。
+
+【解説】
+① 地図上の長さは4cmなので、実際の長さは、
+《4×25000＝100000cm》
+② 100000cmを単位変換すると、
+《100000cm＝1000m＝1km》
+
+【広げてみよう】
+「地図上の長さ×縮尺の分母＝実際の長さ」という考え方は、どんな縮尺(1/1000や1/50000など)でも同じように使える。単位をそろえてから最後にcm→m→kmと変換する順番を覚えておくと、速さの単位換算(時速⇄分速⇄秒速)など他の単位変換でも迷わない。
+
+【確認】
+実際の距離1kmを地図の縮尺に戻すと、
+《1km＝100000cm、100000÷25000＝4cm》
+問題文の地図上の長さ4cmと一致する。
+
+答え：1km`,
+  expandVisual: 'scale-drawing-reveal',
+  expandVisualData: { mapLength: 4, scaleDenominator: 25000, actualCm: 100000, actualM: 1000, actualKm: 1 },
+  expandAdvice: '縮尺の問題が出たら、まず地図上の長さ×縮尺の分母で実際の長さ(cm)を求め、そこから単位変換できるようにしよう！',
+  tags: ['平面図形', '縮図', '拡大図', '縮尺', '単位変換'],
+  diagram: {
+    kind: 'svg',
+    markup: `<svg viewBox="0 0 220 150" width="100%" style="max-width:260px;display:block;margin:0 auto" role="img" aria-label="縮尺1/25000の地図、地図上の長さ4cm、実際の距離は？">
+      <text x="10" y="22" font-size="12" fill="#555">縮尺 1/25000 の地図</text>
+      <line x1="20" y1="70" x2="90" y2="70" stroke="#1565C0" stroke-width="4"/>
+      <text x="28" y="92" font-size="13" fill="#1565C0" font-weight="bold">4cm</text>
+      <text x="115" y="55" font-size="12" fill="#555">実際の距離</text>
+      <text x="150" y="80" font-size="15" fill="#E53935" font-weight="bold">？km</text>
+    </svg>`,
+  },
+},
 ];

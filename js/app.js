@@ -792,6 +792,36 @@ function wireScaleVisual(prefix) {
     resetBtn.addEventListener('click', reset);
     return reset;
 }
+function wireScaleSlotVisual(prefix, d) {
+    const seqTs = createTopicSequence();
+    const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqTs.cancel();
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const step1 = () => { appendExpandStep(stepsEl, `① 縮尺1/${d.scaleDenominator}なので、地図上の長さを${d.scaleDenominator}倍すると実際の長さになる。`); };
+        const step2 = () => { appendExpandStep(stepsEl, `② ${d.mapLength}×${d.scaleDenominator}＝${d.actualCm}cm`); };
+        const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, `③ ${d.actualCm}cm＝${d.actualM}m＝${d.actualKm}km`); };
+        if (topicReducedMotion()) { step1(); step2(); done(); return; }
+        step1();
+        seqTs.after(700, step2);
+        seqTs.after(1500, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
 function wireSequentialReveal(prefix, total, doneStatus) {
     const seqRv = createTopicSequence();
     const cells = Array.from({ length: total }, (_, i) => document.getElementById(prefix + '-cell-' + i));
@@ -1294,6 +1324,26 @@ const PLANE_EXPAND_VISUALS = {
             <div class="formula-reveal" id="pe-ts-result">底辺をm倍・高さをn倍にすると、面積はm×n倍\n同じ倍率(m＝n)なら、面積はその2乗倍になる</div>
         </div>`,
         wire: () => wireScaleVisual('pe-ts'),
+    }),
+    'scale-drawing-reveal': d => ({
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 260 110" style="width:100%;max-width:280px;display:block" role="img" aria-labelledby="pe-sd-title pe-sd-desc">
+                <title id="pe-sd-title">地図上の${d.mapLength}cmが実際には何kmになるかを表す図</title>
+                <desc id="pe-sd-desc">縮尺1/${d.scaleDenominator}の地図で、地図上の${d.mapLength}cmを${d.scaleDenominator}倍すると実際の距離になる。</desc>
+                <line x1="20" y1="50" x2="80" y2="50" stroke="#1565C0" stroke-width="4"/>
+                <text x="30" y="72" font-size="12" fill="#1565C0">地図上${d.mapLength}cm</text>
+                <line x1="110" y1="50" x2="250" y2="50" stroke="#E65100" stroke-width="4" stroke-dasharray="8 5"/>
+                <text x="130" y="30" font-size="12" fill="#E65100">実際の距離</text>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-sd-play">たしかめてみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-sd-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-sd-status" role="status" aria-live="polite">地図上の${d.mapLength}cmが実際にどれくらいの長さになるかは、縮尺の分母をかけてみないと分からない。</div>
+            <div class="plane-expand-steps" id="pe-sd-steps"></div>
+            <div class="formula-reveal" id="pe-sd-result">${d.mapLength}cm×${d.scaleDenominator}＝${d.actualCm}cm＝${d.actualKm}km</div>
+        </div>`,
+        wire: () => wireScaleSlotVisual('pe-sd', d),
     }),
     'similarity-tiles': d => {
         const cells = Array.from({ length: 9 }, (_, i) => {

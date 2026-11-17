@@ -812,6 +812,57 @@ function wireSqueezeVisual(prefix, d) {
     resetBtn.addEventListener('click', reset);
     return reset;
 }
+function wireEqualHeightSlideVisual(prefix, d) {
+    const seqSl = createTopicSequence();
+    const tri = document.getElementById(prefix + '-tri');
+    const pLabel = document.getElementById(prefix + '-p-label');
+    const target2 = document.getElementById(prefix + '-target-p2');
+    const target3 = document.getElementById(prefix + '-target-p3');
+    const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqSl.cancel();
+        tri.style.transform = '';
+        pLabel.setAttribute('x', 150);
+        target2.toggleAttribute('hidden', true);
+        target3.toggleAttribute('hidden', true);
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const step1 = () => {
+            tri.style.transform = 'skewX(-38.66deg)';
+            pLabel.setAttribute('x', 230);
+            target2.toggleAttribute('hidden', false);
+            appendExpandStep(stepsEl, `① 点PをP₂の位置に動かしても、底辺AB(${d.base}cm)と高さ(${d.height}cm)は変わらない。`);
+        };
+        const step2 = () => {
+            tri.style.transform = 'skewX(-57.99deg)';
+            pLabel.setAttribute('x', 310);
+            target3.toggleAttribute('hidden', false);
+            appendExpandStep(stepsEl, `② さらにP₃まで動かしても、やっぱりABと高さは変わらない。`);
+        };
+        const done = () => {
+            result.classList.add('visible');
+            appendExpandStep(stepsEl, `③ 底辺と高さがどちらも変わらないので、三角形ABPの面積はPの位置に関係なくいつも${d.area}cm²になる。`);
+        };
+        if (topicReducedMotion()) { step1(); step2(); done(); return; }
+        step1();
+        seqSl.after(900, step2);
+        seqSl.after(1800, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
 function wireScaleVisual(prefix) {
     const seqTs = createTopicSequence();
     const status = document.getElementById(prefix + '-status');
@@ -1548,6 +1599,38 @@ const PLANE_EXPAND_VISUALS = {
             <div class="formula-reveal" id="pe-ip-result">高さ${d.triangleHeight}÷2＝${d.highlightHeight}cm\n平行四辺形の高さ${d.highlightHeight}cmで、三角形と同じ${d.target}cm²になる</div>
         </div>`,
         wire: () => wireSqueezeVisual('pe-ip', d),
+    }),
+    'equal-height-slide': d => ({
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 380 190" style="width:100%;max-width:360px;display:block" role="img" aria-labelledby="pe-sl-title pe-sl-desc">
+                <title id="pe-sl-title">2本の平行な直線の間で点Pが動いても、三角形ABPの面積が変わらないことを示す図</title>
+                <desc id="pe-sl-desc">直線ℓ上のA・Bは固定されたまま、直線m上の点Pを動かしても、底辺ABと高さ${d.height}cmは変わらないため、面積はいつも${d.area}cm²になる。</desc>
+                <line x1="40" y1="50" x2="340" y2="50" stroke="#bbb" stroke-width="1.5" stroke-dasharray="4 4"/>
+                <line x1="40" y1="150" x2="340" y2="150" stroke="#bbb" stroke-width="1.5" stroke-dasharray="4 4"/>
+                <text x="348" y="54" font-size="12" fill="#888">直線m</text>
+                <text x="348" y="154" font-size="12" fill="#888">直線ℓ</text>
+                <line x1="60" y1="50" x2="60" y2="150" stroke="#E53935" stroke-width="1.5"/>
+                <line x1="54" y1="50" x2="66" y2="50" stroke="#E53935" stroke-width="1.5"/>
+                <line x1="54" y1="150" x2="66" y2="150" stroke="#E53935" stroke-width="1.5"/>
+                <text x="40" y="100" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 40 100)">高さ${d.height}cm</text>
+                <line x1="130" y1="150" x2="230" y2="150" stroke="#1565C0" stroke-width="3"/>
+                <text x="180" y="168" font-size="12" fill="#1565C0" text-anchor="middle">AB ${d.base}cm</text>
+                <text x="118" y="164" font-size="12" fill="#1a1a2e">A</text>
+                <text x="234" y="164" font-size="12" fill="#1a1a2e">B</text>
+                <polygon id="pe-sl-tri" class="plane-expand-slide" style="transform-origin:130px 150px" points="130,150 230,150 150,50" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+                <text id="pe-sl-p-label" x="150" y="40" font-size="13" fill="#1a1a2e" text-anchor="middle" font-weight="bold">P</text>
+                <polygon id="pe-sl-target-p2" hidden points="130,150 230,150 230,50" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 5"/>
+                <polygon id="pe-sl-target-p3" hidden points="130,150 230,150 310,50" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 5"/>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-sl-play">点Pを動かしてみる</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-sl-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-sl-status" role="status" aria-live="polite">点Pの位置を変えると、三角形ABPの面積も変わりそうに見える。</div>
+            <div class="plane-expand-steps" id="pe-sl-steps"></div>
+            <div class="formula-reveal" id="pe-sl-result">どこにPがあっても、底辺${d.base}cm×高さ${d.height}cm÷2＝${d.area}cm²で変わらない</div>
+        </div>`,
+        wire: () => wireEqualHeightSlideVisual('pe-sl', d),
     }),
     'triangle-base-scale': d => ({
         html: `<div class="plane-expand-stage">

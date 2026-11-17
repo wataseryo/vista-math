@@ -1052,6 +1052,7 @@
         .plane-expand-merge.merged { fill:#A5D6A7; stroke:#2E7D32; }
         .plane-expand-divider { transition: opacity .5s; }
         .plane-expand-divider.fade-out { opacity:0; }
+        .plane-expand-slide { transform-box:view-box; transition:transform .8s cubic-bezier(.4,0,.2,1); }
         .plane-expand-eq { display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:center; font-size:1.05rem; }
         .plane-expand-chip { display:inline-flex; align-items:center; padding:6px 12px; border-radius:8px; cursor:pointer; font-weight:bold; border:2px solid transparent; transition:all .2s; }
         .plane-expand-chip.area { background:#A5D6A7; color:#1B5E20; }
@@ -1075,7 +1076,7 @@
         @keyframes pe-pulse-formula { 0%{ transform:scale(1); } 45%{ transform:scale(1.045); } 100%{ transform:scale(1); } }
         @media (prefers-reduced-motion: reduce) {
             .plane-expand-piece, .plane-expand-dup, .plane-expand-part,
-            .plane-expand-squeeze, .plane-expand-tile,
+            .plane-expand-squeeze, .plane-expand-tile, .plane-expand-slide,
             .plane-expand-merge, .plane-expand-divider,
             .plane-expand-step { transition:none !important; }
             .plane-expand-step.formula.shown { animation:none !important; }

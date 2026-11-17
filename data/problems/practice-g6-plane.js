@@ -1881,5 +1881,93 @@ AB＝ACの二等辺三角形では、底辺BCに対する2つの角(角Bと角C)
     <text x="90" y="22" font-size="12" text-anchor="middle" fill="#1565C0">AP 6cm</text><text x="176" y="22" font-size="12" text-anchor="middle" fill="#E53935">BP 3cm</text>
     <text x="13" y="125" font-size="12" fill="#E53935">9cm</text><text x="211" y="62" font-size="16" fill="#E53935">？</text>
   </svg>` },
+},
+
+/* ── P-09 等積変形と等しい高さ ── */
+{
+  id: 'g6_plane_029',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '等積変形', pattern: '等しい高さ(頂点のスライド)',
+  difficulty: 2, answerType: 'number', answerUnit: 'cm²',
+  title: '頂点を動かしても変わらない面積',
+  text: '下の図のように、平行な2本の直線ℓ、mがあります。直線ℓ上にA、Bの2点があり、AB＝10cmです。直線m上に点Pをとり、三角形ABPを作ります。直線ℓとmの間の長さは6cmです。\n点Pを直線m上のどこに動かしても、三角形ABPの面積は変わりません。三角形ABPの面積を求めなさい。',
+  answer: 30,
+  hint: '三角形の面積＝底辺×高さ÷2。点Pがどこにあっても、底辺ABの長さと、直線ℓとmの間のきょり(高さ)は変わらない。',
+  solution: `【ポイント】
+底辺が同じで高さも同じなら、頂点の位置がどこに動いても三角形の面積は変わらない。
+
+【解説】
+① 三角形ABPの底辺はAB。点Pをどこに動かしても、底辺の長さはAB＝10cmのまま変わらない。
+② 三角形ABPの高さは、頂点Pから底辺AB(直線ℓ)までの垂直な距離にあたる。点Pは直線m上にあり、直線ℓとmの間のきょりはどこでも6cmなので、高さも6cmのまま変わらない。
+《③ 面積＝10×6÷2＝30cm²》
+
+【広げてみよう】
+このように、底辺を固定したまま、頂点を底辺に平行な直線上でどこに動かしても面積が変わらない変形を「等積変形」という。見た目の三角形の形(とがり方)は大きく変わっても、底辺と高さが変わらなければ面積はいつも同じになる。
+
+【確認】
+《点Pを直線mの別の場所に動かしても、底辺AB＝10cm・高さ6cmは変わらないので、面積は常に10×6÷2＝30cm²になる》
+どの位置のPで計算しても、同じ答えになることが確認できる。
+
+答え：30cm²`,
+  expandVisual: 'equal-height-slide',
+  expandVisualData: { base: 10, height: 6, area: 30 },
+  expandAdvice: '頂点が動いても、底辺と高さが変わらなければ面積も変わらないことを、形が変わっても恐れずに使えるようにしよう！',
+  tags: ['平面図形', '三角形', '等積変形'],
+  diagram: { kind: 'svg', markup: `<svg viewBox="0 0 380 180" width="100%" style="max-width:380px;display:block;margin:0 auto" role="img" aria-label="平行な直線ℓとmの間は高さ6cm。底辺ABは10cmで固定し、頂点Pの候補P₁、P₂、P₃は直線m上にある">
+    <defs><marker id="p09-height-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10" fill="#E53935"/></marker></defs>
+    <path d="M58,40 H340 M58,124 H340" fill="none" stroke="#aaa" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <g font-size="12" fill="#777"><text x="345" y="44">m</text><text x="345" y="128">ℓ</text></g>
+    <polygon points="110,124 250,124 140,40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+    <path d="M110,124 L140,40 L250,124 M110,124 L230,40 L250,124 M110,124 L320,40 L250,124" fill="none" stroke="#7c3aed" stroke-opacity=".45" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <line x1="110" y1="124" x2="250" y2="124" stroke="#1565C0" stroke-width="3"/>
+    <line x1="65" y1="40" x2="65" y2="124" stroke="#E53935" marker-start="url(#p09-height-arrow)" marker-end="url(#p09-height-arrow)"/>
+    <text x="48" y="82" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 48 82)">高さ6cm</text>
+    <g font-size="12" fill="#1a1a2e" text-anchor="middle"><text x="140" y="30">P₁</text><text x="230" y="30">P₂</text><text x="320" y="30">P₃</text><text x="100" y="139">A</text><text x="260" y="139">B</text></g>
+    <text x="180" y="145" font-size="12" fill="#1565C0" text-anchor="middle">AB 10cm</text>
+    <text x="190" y="168" font-size="10" fill="#777" text-anchor="middle">※ 図のPの位置は一例です</text>
+  </svg>` },
+},
+
+{
+  id: 'g6_plane_030',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '等積変形', pattern: '形がちがっても等しい面積',
+  difficulty: 3, answerType: 'number', answerUnit: 'cm²',
+  title: '形がちがっても面積が同じ三角形',
+  text: '三角形ABCは、底辺BC＝9cm、高さ8cmの直角三角形です。\n三角形DEFは、三角形ABCと底辺の長さ・高さがどちらも同じです(底辺EF＝9cm、高さ8cm)。ただし、三角形DEFは二等辺三角形で、三角形ABCとは形がちがいます。\n三角形DEFの面積を求めなさい。',
+  answer: 36,
+  hint: '三角形の面積は底辺×高さ÷2で決まる。形(とがり方)がちがっても、底辺と高さがどちらも同じなら面積も同じになる。',
+  solution: `【ポイント】
+三角形の面積は底辺×高さ÷2で決まる。直角三角形か二等辺三角形かといった形のちがいは、面積の値そのものには関係しない。
+
+【解説】
+① 三角形ABCは、底辺BC＝9cm、高さ8cmの直角三角形。
+《② 三角形ABCの面積＝9×8÷2＝36cm²》
+③ 三角形DEFは、底辺EF＝9cm、高さ8cmで、三角形ABCと底辺・高さがどちらも同じ。
+④ 面積の公式(底辺×高さ÷2)に当てはめる数(9と8)が三角形ABCと全く同じなので、形がちがっていても、
+《⑤ 三角形DEFの面積＝9×8÷2＝36cm²》
+
+【広げてみよう】
+この問題のように、見た目の形(直角三角形か二等辺三角形か)がどんなにちがっても、「底辺の長さ」と「高さ」の2つの数値だけで面積が決まる。逆に言うと、面積の公式に出てくる数値以外(角の大きさなど)は、面積そのものには関係しない。
+
+【確認】
+《36÷9＝4(高さの半分)、4×2＝8》
+三角形DEFの高さがもとの8cmと一致することから、面積36cm²が正しいと確認できる。
+
+答え：36cm²`,
+  tags: ['平面図形', '三角形', '等積変形', '面積'],
+  diagram: { kind: 'svg', markup: `<svg viewBox="0 0 350 190" width="100%" style="max-width:350px;display:block;margin:0 auto" role="img" aria-label="底辺9cm、高さ8cmが共通の直角三角形ABCと二等辺三角形DEFを並べた図">
+    <path d="M28,32 H335 M28,144 H335" fill="none" stroke="#aaa" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <polygon points="48,32 48,144 174,144" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+    <polygon points="263,32 200,144 326,144" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
+    <path d="M48,134 H58 V144" fill="none" stroke="#555" stroke-width="1.3"/>
+    <line x1="263" y1="32" x2="263" y2="144" stroke="#E53935" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <path d="M263,134 H273 V144" fill="none" stroke="#E53935" stroke-width="1.3"/>
+    <line x1="29" y1="32" x2="29" y2="144" stroke="#E53935" stroke-width="1.5"/>
+    <path d="M24,32 H34 M24,144 H34" stroke="#E53935" stroke-width="1.5"/>
+    <text x="17" y="88" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 17 88)">高さ8cm</text>
+    <g font-size="12" fill="#1a1a2e" text-anchor="middle"><text x="48" y="22">A</text><text x="40" y="159">B</text><text x="179" y="159">C</text><text x="263" y="22">D</text><text x="197" y="159">E</text><text x="331" y="159">F</text></g>
+    <g font-size="12" fill="#1565C0" text-anchor="middle"><text x="111" y="165">BC 9cm</text><text x="263" y="165">EF 9cm</text></g>
+  </svg>` },
 }
 ];

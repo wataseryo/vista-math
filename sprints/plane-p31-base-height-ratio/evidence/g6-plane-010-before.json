@@ -1,0 +1,12 @@
+{
+  "html": "<div class=\"plane-expand-stage\">\n            <svg viewBox=\"0 0 290 225\" style=\"width:100%;max-width:280px;display:block\" role=\"img\" aria-labelledby=\"pe-hr-title pe-hr-desc\">\n                <title id=\"pe-hr-title\">補助線で分けた2つの三角形が高さを共有する図</title>\n                <desc id=\"pe-hr-desc\">底辺を3:1に分けた2つの三角形は、同じ高さを共有している。</desc>\n                <polygon points=\"40,168 184,168 184,40\" fill=\"#FFE082\" stroke=\"#F57F17\" stroke-width=\"2\"/>\n                <polygon points=\"184,168 232,168 184,40\" fill=\"#90CAF9\" stroke=\"#1565C0\" stroke-width=\"2\"/>\n                <line id=\"pe-hr-guide\" hidden x1=\"184\" y1=\"40\" x2=\"184\" y2=\"168\" stroke=\"#7c3aed\" stroke-width=\"3\"/>\n                <text id=\"pe-hr-guide-label\" hidden x=\"196\" y=\"104\" font-size=\"13\" fill=\"#7c3aed\" font-weight=\"bold\">高さ8cm(共通)</text>\n                <text x=\"112\" y=\"186\" font-size=\"13\" fill=\"#F57F17\" text-anchor=\"middle\" font-weight=\"bold\">底辺9cm(比3)</text>\n                <text x=\"208\" y=\"186\" font-size=\"13\" fill=\"#1565C0\" text-anchor=\"middle\" font-weight=\"bold\">底辺3cm(比1)</text>\n            </svg>\n            <div class=\"plane-expand-actions\">\n                <button type=\"button\" class=\"plane-anim-btn play\" id=\"pe-hr-play\">確かめてみる</button>\n                <button type=\"button\" class=\"plane-anim-btn reset\" id=\"pe-hr-reset\">もう一度</button>\n            </div>\n            <div class=\"plane-expand-status\" id=\"pe-hr-status\" role=\"status\" aria-live=\"polite\">底辺の比は3:1。でも面積の比が同じかどうかは、見ただけでは分かりにくい。</div>\n            <div class=\"plane-expand-steps\" id=\"pe-hr-steps\"></div>\n            <div class=\"formula-reveal\" id=\"pe-hr-result\">高さ8cmが同じ\n底辺の比9:3＝3:1\n面積の比36:12＝3:1</div>\n        </div>",
+  "desc": "底辺を3:1に分けた2つの三角形は、同じ高さを共有している。",
+  "initialStatus": "底辺の比は3:1。でも面積の比が同じかどうかは、見ただけでは分かりにくい。",
+  "steps": [
+    "① 高さは、大きい方も小さい方も8cmで同じ。",
+    "② 底辺は、大きい方9cm・小さい方3cm。\n比は9:3＝3:1。",
+    "③ 面積は、大きい方9×8÷2＝36cm²、\n小さい方3×8÷2＝12cm²。\n比は36:12＝3:1。",
+    "④ 高さが同じだから、底辺の比がそのまま面積の比になった。"
+  ],
+  "result": "高さ8cmが同じ\n底辺の比9:3＝3:1\n面積の比36:12＝3:1"
+}

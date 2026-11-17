@@ -1,0 +1,130 @@
+Listing tests:
+  [desktop] › calc-topic-interaction.spec.cjs:8:1 › pair discovery permits retry, reset, keyboard input and ephemeral feedback
+  [desktop] › calc-topic-interaction.spec.cjs:36:1 › comparison appears normal then clever, supports replay and retains exercise route
+  [desktop] › calc-topic-interaction.spec.cjs:61:1 › reduced motion shows complete discovery and comparison immediately
+  [desktop] › learning-extras.spec.cjs:3:1 › water practice retains generated question, answer and grade-specific score on refresh
+  [desktop] › learning-extras.spec.cjs:8:1 › salt confirmation and challenge state survive browser roundtrip and refresh
+  [desktop] › learning-extras.spec.cjs:13:1 › valid backup restores persistent records through file chooser and reload
+  [desktop] › learning-extras.spec.cjs:16:1 › problem scroll and layout remain usable after detour
+  [desktop] › learning-extras.spec.cjs:22:1 › water slider labels match restored values
+  [desktop] › navigation.spec.cjs:24:9 › learning routes › problem input survives topic detour and explicit return without grading
+  [desktop] › navigation.spec.cjs:40:9 › learning routes › graded result and opened solution survive detour and refresh without duplicate grading
+  [desktop] › navigation.spec.cjs:65:9 › learning routes › browser back and forward restore category, detail and unsent answer
+  [desktop] › navigation.spec.cjs:81:9 › learning routes › report returns to recommended review rather than course selection
+  [desktop] › navigation.spec.cjs:90:9 › learning routes › answered trial and next trial survive refresh with no duplicate attempts
+  [desktop] › navigation.spec.cjs:113:9 › learning routes › unknown stored screen and malformed session recover to safe selection
+  [desktop] › plane-angle-interaction.spec.cjs:9:1 › angle discovery, reset and keyboard controls leave learning records unchanged
+  [desktop] › plane-angle-interaction.spec.cjs:37:1 › reset and navigation cancel pending stages and returning starts a fresh example
+  [desktop] › plane-angle-interaction.spec.cjs:55:1 › reduced motion reveals every stage synchronously and layout fits viewport
+  [desktop] › plane-angle-interaction.spec.cjs:75:1 › all existing plane problems retain rendering and grading, including angle answer 85
+  [desktop] › plane-angle-interaction.spec.cjs:104:1 › four existing plane trials keep the practice route
+  [desktop] › plane-p05-formula-area.spec.cjs:54:24 › g6_plane_021: scaled SVG, grading, formula directions and viewport
+  [desktop] › plane-p05-formula-area.spec.cjs:54:24 › g6_plane_022: scaled SVG, grading, formula directions and viewport
+  [desktop] › plane-p05-formula-area.spec.cjs:54:24 › g6_plane_023: scaled SVG, grading, formula directions and viewport
+  [desktop] › plane-p05-formula-area.spec.cjs:96:1 › existing triangle formula, ratio grading and variant guidance remain intact
+  [desktop] › plane-p05-formula-area.spec.cjs:113:1 › content validation reports 242 problems with zero errors
+  [desktop] › plane-p09-equal-area-transformation.spec.cjs:36:1 › vertex slide: question 39, grading, stages, fixed base, reset and cancellation
+  [desktop] › plane-p09-equal-area-transformation.spec.cjs:95:1 › different shapes: question 40, diagram, grading and text-only expansion
+  [desktop] › plane-p09-equal-area-transformation.spec.cjs:113:1 › reduced motion completes every step immediately with no transition
+  [desktop] › plane-p09-equal-area-transformation.spec.cjs:124:1 › inverse-proportion and other visuals, variants and another category remain intact
+  [desktop] › plane-p09-equal-area-transformation.spec.cjs:155:1 › content validation reports 242 problems with zero errors
+  [desktop] › plane-p11-similarity-discovery.spec.cjs:40:24 › g6_plane_027: diagram, grading, four stages, cancellation and replay
+  [desktop] › plane-p11-similarity-discovery.spec.cjs:40:24 › g6_plane_028: diagram, grading, four stages, cancellation and replay
+  [desktop] › plane-p11-similarity-discovery.spec.cjs:99:1 › existing visuals, variants and another category remain independent
+  [desktop] › plane-p11-similarity-discovery.spec.cjs:118:1 › content validation reports 242 problems with zero errors
+  [desktop] › plane-p29-triangle-quad-properties.spec.cjs:49:24 › g6_plane_024: diagram, answer, expansion and viewport
+  [desktop] › plane-p29-triangle-quad-properties.spec.cjs:49:24 › g6_plane_025: diagram, answer, expansion and viewport
+  [desktop] › plane-p29-triangle-quad-properties.spec.cjs:49:24 › g6_plane_026: diagram, answer, expansion and viewport
+  [desktop] › plane-p29-triangle-quad-properties.spec.cjs:80:1 › shared diagonal-quarter remains independent across existing and new problems
+  [desktop] › plane-p29-triangle-quad-properties.spec.cjs:93:1 › existing diagonal, formula slots, ratio and variant guidance remain usable
+  [desktop] › plane-p29-triangle-quad-properties.spec.cjs:114:1 › content validation reports 242 problems with zero errors
+  [desktop] › plane-p31-base-height-ratio.spec.cjs:46:1 › P-31 question 41: ratios, grading, four stages, reset and cancellation
+  [desktop] › plane-p31-base-height-ratio.spec.cjs:92:1 › P-10 question 42: 3:2 grading and correct dynamic ratios, reset
+  [desktop] › plane-p31-base-height-ratio.spec.cjs:119:1 › g6_plane_010: every displayed string exactly matches pre-implementation snapshot
+  [desktop] › plane-p31-base-height-ratio.spec.cjs:141:1 › g6_plane_013: unchanged scale visual stages and result
+  [desktop] › plane-p31-base-height-ratio.spec.cjs:157:1 › other visuals, existing variant destination and another category remain intact
+  [desktop] › plane-p31-base-height-ratio.spec.cjs:175:1 › reduced motion completes all four P-31 stages immediately
+  [desktop] › plane-p31-base-height-ratio.spec.cjs:190:1 › content validation reports 242 problems with zero errors
+  [desktop] › practice-repetition.spec.cjs:23:1 › base to both variants, dynamic numbering, diagrams and final guidance
+  [desktop] › practice-repetition.spec.cjs:49:1 › wrong answer and reveal share guidance; retry hides it until next grading
+  [desktop] › practice-repetition.spec.cjs:57:1 › back forward and refresh restore results and guidance without duplicate records
+  [desktop] › practice-repetition.spec.cjs:69:1 › unrelated plane problem keeps guidance hidden and list-order next button unchanged
+  [desktop] › practice-repetition.spec.cjs:74:1 › unrelated ratio category retains grading without variant guidance
+  [desktop] › practice-repetition.spec.cjs:103:2 › g6_plane_004: both variants have scaled diagrams, isolated navigation and final guidance
+  [desktop] › practice-repetition.spec.cjs:132:2 › g6_plane_004: incorrect and correct answers show identical guidance
+  [desktop] › practice-repetition.spec.cjs:139:2 › g6_plane_004: back forward reload restore both variants without duplicate records
+  [desktop] › practice-repetition.spec.cjs:103:2 › g6_plane_005: both variants have scaled diagrams, isolated navigation and final guidance
+  [desktop] › practice-repetition.spec.cjs:132:2 › g6_plane_005: incorrect and correct answers show identical guidance
+  [desktop] › practice-repetition.spec.cjs:139:2 › g6_plane_005: back forward reload restore both variants without duplicate records
+  [desktop] › practice-repetition.spec.cjs:156:1 › three sets stay isolated through list switches, history and grading
+  [desktop] › practice-repetition.spec.cjs:181:1 › all four additions retain flat list order and numbering; unrelated inverse-free problem has no guidance
+  [desktop] › storage-ui.spec.cjs:3:1 › corrupt records warn, preserve original, and leave valid records usable
+  [desktop] › storage-ui.spec.cjs:9:1 › blocked storage warns and keeps current session records
+  [desktop] › storage-ui.spec.cjs:14:1 › backup download contains records; cancellation and malformed import change nothing
+  [desktop] › storage-ui.spec.cjs:22:1 › grade switch isolates recommendations and challenge-only report is truthful
+  [desktop] › storage-ui.spec.cjs:27:1 › every enabled topic and available problem can be rendered without runtime errors
+  [mobile] › calc-topic-interaction.spec.cjs:8:1 › pair discovery permits retry, reset, keyboard input and ephemeral feedback
+  [mobile] › calc-topic-interaction.spec.cjs:36:1 › comparison appears normal then clever, supports replay and retains exercise route
+  [mobile] › calc-topic-interaction.spec.cjs:61:1 › reduced motion shows complete discovery and comparison immediately
+  [mobile] › learning-extras.spec.cjs:3:1 › water practice retains generated question, answer and grade-specific score on refresh
+  [mobile] › learning-extras.spec.cjs:8:1 › salt confirmation and challenge state survive browser roundtrip and refresh
+  [mobile] › learning-extras.spec.cjs:13:1 › valid backup restores persistent records through file chooser and reload
+  [mobile] › learning-extras.spec.cjs:16:1 › problem scroll and layout remain usable after detour
+  [mobile] › learning-extras.spec.cjs:22:1 › water slider labels match restored values
+  [mobile] › navigation.spec.cjs:24:9 › learning routes › problem input survives topic detour and explicit return without grading
+  [mobile] › navigation.spec.cjs:40:9 › learning routes › graded result and opened solution survive detour and refresh without duplicate grading
+  [mobile] › navigation.spec.cjs:65:9 › learning routes › browser back and forward restore category, detail and unsent answer
+  [mobile] › navigation.spec.cjs:81:9 › learning routes › report returns to recommended review rather than course selection
+  [mobile] › navigation.spec.cjs:90:9 › learning routes › answered trial and next trial survive refresh with no duplicate attempts
+  [mobile] › navigation.spec.cjs:113:9 › learning routes › unknown stored screen and malformed session recover to safe selection
+  [mobile] › plane-angle-interaction.spec.cjs:9:1 › angle discovery, reset and keyboard controls leave learning records unchanged
+  [mobile] › plane-angle-interaction.spec.cjs:37:1 › reset and navigation cancel pending stages and returning starts a fresh example
+  [mobile] › plane-angle-interaction.spec.cjs:55:1 › reduced motion reveals every stage synchronously and layout fits viewport
+  [mobile] › plane-angle-interaction.spec.cjs:75:1 › all existing plane problems retain rendering and grading, including angle answer 85
+  [mobile] › plane-angle-interaction.spec.cjs:104:1 › four existing plane trials keep the practice route
+  [mobile] › plane-p05-formula-area.spec.cjs:54:24 › g6_plane_021: scaled SVG, grading, formula directions and viewport
+  [mobile] › plane-p05-formula-area.spec.cjs:54:24 › g6_plane_022: scaled SVG, grading, formula directions and viewport
+  [mobile] › plane-p05-formula-area.spec.cjs:54:24 › g6_plane_023: scaled SVG, grading, formula directions and viewport
+  [mobile] › plane-p05-formula-area.spec.cjs:96:1 › existing triangle formula, ratio grading and variant guidance remain intact
+  [mobile] › plane-p05-formula-area.spec.cjs:113:1 › content validation reports 242 problems with zero errors
+  [mobile] › plane-p09-equal-area-transformation.spec.cjs:36:1 › vertex slide: question 39, grading, stages, fixed base, reset and cancellation
+  [mobile] › plane-p09-equal-area-transformation.spec.cjs:95:1 › different shapes: question 40, diagram, grading and text-only expansion
+  [mobile] › plane-p09-equal-area-transformation.spec.cjs:113:1 › reduced motion completes every step immediately with no transition
+  [mobile] › plane-p09-equal-area-transformation.spec.cjs:124:1 › inverse-proportion and other visuals, variants and another category remain intact
+  [mobile] › plane-p09-equal-area-transformation.spec.cjs:155:1 › content validation reports 242 problems with zero errors
+  [mobile] › plane-p11-similarity-discovery.spec.cjs:40:24 › g6_plane_027: diagram, grading, four stages, cancellation and replay
+  [mobile] › plane-p11-similarity-discovery.spec.cjs:40:24 › g6_plane_028: diagram, grading, four stages, cancellation and replay
+  [mobile] › plane-p11-similarity-discovery.spec.cjs:99:1 › existing visuals, variants and another category remain independent
+  [mobile] › plane-p11-similarity-discovery.spec.cjs:118:1 › content validation reports 242 problems with zero errors
+  [mobile] › plane-p29-triangle-quad-properties.spec.cjs:49:24 › g6_plane_024: diagram, answer, expansion and viewport
+  [mobile] › plane-p29-triangle-quad-properties.spec.cjs:49:24 › g6_plane_025: diagram, answer, expansion and viewport
+  [mobile] › plane-p29-triangle-quad-properties.spec.cjs:49:24 › g6_plane_026: diagram, answer, expansion and viewport
+  [mobile] › plane-p29-triangle-quad-properties.spec.cjs:80:1 › shared diagonal-quarter remains independent across existing and new problems
+  [mobile] › plane-p29-triangle-quad-properties.spec.cjs:93:1 › existing diagonal, formula slots, ratio and variant guidance remain usable
+  [mobile] › plane-p29-triangle-quad-properties.spec.cjs:114:1 › content validation reports 242 problems with zero errors
+  [mobile] › plane-p31-base-height-ratio.spec.cjs:46:1 › P-31 question 41: ratios, grading, four stages, reset and cancellation
+  [mobile] › plane-p31-base-height-ratio.spec.cjs:92:1 › P-10 question 42: 3:2 grading and correct dynamic ratios, reset
+  [mobile] › plane-p31-base-height-ratio.spec.cjs:119:1 › g6_plane_010: every displayed string exactly matches pre-implementation snapshot
+  [mobile] › plane-p31-base-height-ratio.spec.cjs:141:1 › g6_plane_013: unchanged scale visual stages and result
+  [mobile] › plane-p31-base-height-ratio.spec.cjs:157:1 › other visuals, existing variant destination and another category remain intact
+  [mobile] › plane-p31-base-height-ratio.spec.cjs:175:1 › reduced motion completes all four P-31 stages immediately
+  [mobile] › plane-p31-base-height-ratio.spec.cjs:190:1 › content validation reports 242 problems with zero errors
+  [mobile] › practice-repetition.spec.cjs:23:1 › base to both variants, dynamic numbering, diagrams and final guidance
+  [mobile] › practice-repetition.spec.cjs:49:1 › wrong answer and reveal share guidance; retry hides it until next grading
+  [mobile] › practice-repetition.spec.cjs:57:1 › back forward and refresh restore results and guidance without duplicate records
+  [mobile] › practice-repetition.spec.cjs:69:1 › unrelated plane problem keeps guidance hidden and list-order next button unchanged
+  [mobile] › practice-repetition.spec.cjs:74:1 › unrelated ratio category retains grading without variant guidance
+  [mobile] › practice-repetition.spec.cjs:103:2 › g6_plane_004: both variants have scaled diagrams, isolated navigation and final guidance
+  [mobile] › practice-repetition.spec.cjs:132:2 › g6_plane_004: incorrect and correct answers show identical guidance
+  [mobile] › practice-repetition.spec.cjs:139:2 › g6_plane_004: back forward reload restore both variants without duplicate records
+  [mobile] › practice-repetition.spec.cjs:103:2 › g6_plane_005: both variants have scaled diagrams, isolated navigation and final guidance
+  [mobile] › practice-repetition.spec.cjs:132:2 › g6_plane_005: incorrect and correct answers show identical guidance
+  [mobile] › practice-repetition.spec.cjs:139:2 › g6_plane_005: back forward reload restore both variants without duplicate records
+  [mobile] › practice-repetition.spec.cjs:156:1 › three sets stay isolated through list switches, history and grading
+  [mobile] › practice-repetition.spec.cjs:181:1 › all four additions retain flat list order and numbering; unrelated inverse-free problem has no guidance
+  [mobile] › storage-ui.spec.cjs:3:1 › corrupt records warn, preserve original, and leave valid records usable
+  [mobile] › storage-ui.spec.cjs:9:1 › blocked storage warns and keeps current session records
+  [mobile] › storage-ui.spec.cjs:14:1 › backup download contains records; cancellation and malformed import change nothing
+  [mobile] › storage-ui.spec.cjs:22:1 › grade switch isolates recommendations and challenge-only report is truthful
+  [mobile] › storage-ui.spec.cjs:27:1 › every enabled topic and available problem can be rendered without runtime errors
+Total: 128 tests in 11 files

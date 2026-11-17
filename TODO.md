@@ -27,6 +27,13 @@
 - [x] Claude独立レビューと実ブラウザ再検証完了（新規10件+既存回帰114件、全件pass。底辺固定の設計を目視でも確認。`coverage-final.md`/`.json`のP-09行・集計も更新済み。詳細は `sprints/plane-p09-equal-area-transformation/sprint-1-eval.md`）。
 - 残タスク: 平面図形の問19〜21ユーザーレビュー（後日）。平面図形残り22タイプの次スプリント（P-31+P-10の2問目→P-16、`docs/curriculum-implementation-plan.md`0.4節参照）。平行線型(ピラミッド・クロス型)相似発見問題の新規追加は別スプリントとして要計画。P-07のもう1つの根拠問題`g6_plane_008`のセット追加は別途判断。
 
+## 2026-11-17 P-31 + P-10の2問目 Sprint完了（最新）
+
+- [x] P-31（同じ底辺の高さ比と面積比・一般形）無→有化: 底辺比×高さ比の積を問う新規問題`g6_plane_031`を追加。新規ビジュアル`base-height-ratio-product`・新規駆動関数`wireBaseHeightRatioVisual`を実装。
+- [x] P-10（同じ高さの底辺比と面積比）完了基準条件2充足: 分割比3:2に変えた2問目`g6_plane_032`を追加（`g6_plane_010`と同じ`lessonUnit:'補助線'`）。既存`same-height-ratio`/`wireHeightRatioVisual`の決め打ち「3:1」4箇所を`simplifyRatio`ヘルパーで動的化する非破壊修正を実施。
+- [x] Claude独立レビューと実ブラウザ再検証完了（新規14件+既存回帰128件、全件pass。`g6_plane_010`の表示文言が実装前後で1文字も変わらないことをDOM取得・目視両方で確認。`coverage-final.md`/`.json`のP-31行・P-10行・集計も更新済み。詳細は `sprints/plane-p31-base-height-ratio/sprint-1-eval.md`）。
+- 残タスク: 平面図形の問19〜21ユーザーレビュー（後日）。平面図形残り22タイプの最後のスプリント（P-16、`docs/curriculum-implementation-plan.md`0.4節参照）。平行線型(ピラミッド・クロス型)相似発見問題の新規追加は別スプリントとして要計画。P-07のもう1つの根拠問題`g6_plane_008`のセット追加は別途判断。
+
 ## 現在のフォーカス：Phase 0（2026年9月）
 
 | タスク | 状態 |

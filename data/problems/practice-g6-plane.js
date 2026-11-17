@@ -1970,4 +1970,98 @@ AB＝ACの二等辺三角形では、底辺BCに対する2つの角(角Bと角C)
     <g font-size="12" fill="#1565C0" text-anchor="middle"><text x="111" y="165">BC 9cm</text><text x="263" y="165">EF 9cm</text></g>
   </svg>` },
 }
+,
+/* ── P-31 底辺比×高さ比の一般形 + P-10の2問目 ── */
+{
+  id: 'g6_plane_031',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '面積比', pattern: '底辺比×高さ比の一般形',
+  difficulty: 3, answerType: 'number', answerUnit: 'cm²',
+  title: '底辺も高さもちがう三角形の面積比',
+  text: '三角形Aと三角形Bがあります。三角形Aの底辺と三角形Bの底辺の比は3:2、三角形Aの高さと三角形Bの高さの比は4:3です。\n三角形Bの面積が18cm²のとき、三角形Aの面積を求めなさい。',
+  answer: 36,
+  hint: '面積の比＝底辺の比×高さの比。3:2と4:3を、それぞれの項どうしで掛け合わせてから簡単にしよう。',
+  solution: `【ポイント】
+三角形の面積の比は、「底辺の比×高さの比」で求められる。底辺も高さも両方ちがう三角形どうしでも、このかけ算のルールはいつも成り立つ。
+
+【解説】
+① 三角形Aと三角形Bの底辺の比は3:2。
+② 三角形Aと三角形Bの高さの比は4:3。
+③ 面積の比は、底辺の比と高さの比を、それぞれの項どうしでかけ合わせて求める。
+《(3×4):(2×3)＝12:6》
+12:6を簡単にすると、
+《12:6＝2:1》
+④ 三角形Bの面積は18cm²なので、三角形Aの面積は、この比にあてはめて
+《18×2＝36cm²》
+
+【広げてみよう】
+三角形Bの底辺をb、高さをhとすると、三角形Bの面積は「b×h÷2」。三角形Aの底辺は(3/2)×b、高さは(4/3)×hなので、三角形Aの面積は
+《(3/2×b)×(4/3×h)÷2＝(3/2×4/3)×(b×h÷2)＝2×(b×h÷2)》
+底辺の比と高さの比をかけ合わせた数が、そのまま面積の比になることが分かる。
+もし底辺の比が1:1(底辺が同じ)なら、面積の比は高さの比そのままになる。これは「高さが同じなら面積の比は底辺の比」というルールのちょうど逆の形にあたる。
+
+【確認】
+三角形Bの底辺を6cm・高さを6cmだと仮定すると、面積は
+《6×6÷2＝18cm²》
+問題文の面積18cm²と一致する。このとき三角形Aの底辺は6×3/2＝9cm、高さは6×4/3＝8cmなので、三角形Aの面積は
+《9×8÷2＝36cm²》
+比を使った答え36cm²と一致する。
+
+答え：36cm²`,
+  expandVisual: 'base-height-ratio-product',
+  expandVisualData: { baseRatioA: 3, baseRatioB: 2, heightRatioA: 4, heightRatioB: 3, areaRatioA: 2, areaRatioB: 1, knownArea: 18, targetArea: 36 },
+  expandAdvice: '底辺比と高さ比の両方が出てきたら、あわてずにそれぞれの比をかけ合わせて面積比を作ろう！',
+  tags: ['平面図形', '面積比', '三角形'],
+  diagram: { type: 'svg', markup: `<svg viewBox="0 0 300 180" width="100%" style="max-width:300px;display:block;margin:0 auto" role="img" aria-label="三角形Aと三角形Bの底辺の比3:2、高さの比4:3。三角形Bの面積は18cm²、三角形Aの面積は不明">
+    <g font-size="12" fill="#555" text-anchor="middle"><text x="150" y="16">底辺の比 3:2</text><text x="150" y="34">高さの比 4:3</text><text x="70" y="172">三角形B</text><text x="225" y="172">三角形A</text></g>
+    <polygon points="25,150 115,150 70,70" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+    <polygon points="160,150 290,150 225,45" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
+    <g font-size="14" fill="#1a1a2e" font-weight="bold" text-anchor="middle"><text x="70" y="130">18cm²</text><text x="225" y="122">？</text></g>
+  </svg>` },
+},
+{
+  id: 'g6_plane_032',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '補助線', pattern: '底辺の比と面積比',
+  difficulty: 3, answerType: 'number', answerUnit: 'cm²',
+  title: '補助線で分けた三角形の面積(その2)',
+  text: '底辺25cm・高さ6cmの三角形の中に、頂点から底辺に補助線を引いて2つに分けました。\n補助線が底辺を3:2に分けるとき、小さい三角形の面積を求めなさい。',
+  answer: 30,
+  hint: '底辺の比 ＝ 3:2 → 面積の比も 3:2\n全体の面積 ＝ 25 × 6 ÷ 2 ＝ 75cm²\n小さい方 ＝ 75 × 2/5',
+  solution: `【ポイント】
+高さが同じ三角形どうしは、面積の比が底辺の比と同じになる。
+
+【解説】
+《① 全体の三角形の面積は25×6÷2＝75cm²》
+② 補助線が底辺を3:2に分けるので、2つの三角形の面積の比も3:2(どちらも頂点から底辺までの高さが同じだから)。
+③ 全体を3＋2＝5等分した2つ分なので、
+《小さい三角形の面積＝75×2/5＝30cm²》
+
+【広げてみよう】
+これは、さっき見た「補助線で分けた三角形の面積」(分割比3:1の問題)と同じ考え方だが、分割比を3:2に変えても結果は同じルールで求められる。分割比がどんな整数の比になっても、高さが共通である限り、底辺の比がそのまま面積の比になる。
+
+【確認】
+《大きい三角形は75×3/5＝45cm²》
+《30＋45＝75cm²》
+全体と一致する。
+
+答え：30cm²`,
+  expandVisual: 'same-height-ratio',
+  expandVisualData: { baseBig: 15, baseSmall: 10, height: 6, bigArea: 45, smallArea: 30 },
+  expandAdvice: '分割比がどんな数字でも、高さが共通なら底辺の比がそのまま面積の比になることを確認しよう！',
+  tags: ['平面図形', '補助線', '面積比'],
+  diagram: { type: 'svg', markup: `<svg viewBox="0 0 290 225" width="100%" style="max-width:300px;display:block;margin:0 auto" role="img" aria-label="底辺25cm・高さ6cmの三角形を、頂点からの補助線で底辺を3:2に分けた図">
+    <polygon points="30,168 156,168 156,117.6" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
+    <polygon points="156,168 240,168 156,117.6" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+    <line x1="156" y1="117.6" x2="156" y2="168" stroke="#555" stroke-width="1.5" stroke-dasharray="4"/>
+    <text x="93" y="186" font-size="13" fill="#F57F17" text-anchor="middle" font-weight="bold">3</text>
+    <text x="198" y="186" font-size="13" fill="#1565C0" text-anchor="middle" font-weight="bold">2</text>
+    <line x1="30" y1="200" x2="240" y2="200" stroke="#1565C0" stroke-width="1.5"/>
+    <path d="M30,194 V206 M240,194 V206" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="135" y="216" font-size="12" fill="#1565C0" text-anchor="middle">底辺 25cm</text>
+    <line x1="252" y1="117.6" x2="252" y2="168" stroke="#E53935" stroke-width="1.5"/>
+    <path d="M246,117.6 H258 M246,168 H258" stroke="#E53935" stroke-width="1.5"/>
+    <text x="270" y="142.8" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 270 142.8)">高さ 6cm</text>
+  </svg>` },
+}
 ];

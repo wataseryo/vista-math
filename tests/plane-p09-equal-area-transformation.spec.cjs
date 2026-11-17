@@ -8,9 +8,9 @@ async function open(page, id, category = '平面図形') {
  await page.locator('#home-screen .course-card.exam').click();
  await page.locator('#exam-mode-screen .exam-mode-card.prac').click();
  const cat = page.locator('#prac-cat-grid .prac-cat-card').filter({ hasText: category });
- if (category === '平面図形') await expect(cat).toContainText('40問');
+ if (category === '平面図形') await expect(cat).toContainText('42問');
  await cat.click();
- if (category === '平面図形') await expect(page.locator('#prac-prob-list-body .prac-prob-card')).toHaveCount(40);
+ if (category === '平面図形') await expect(page.locator('#prac-prob-list-body .prac-prob-card')).toHaveCount(42);
  await page.locator(`#prac-prob-list-body .prac-prob-card[onclick="pracOpenProb('${id}')"]`).click();
  await expect(page.locator('#prac-detail-view')).toBeVisible();
 }
@@ -152,7 +152,7 @@ test('inverse-proportion and other visuals, variants and another category remain
  expect(errors).toEqual([]);
 });
 
-test('content validation reports 240 problems with zero errors', () => {
+test('content validation reports 242 problems with zero errors', () => {
  const output = execFileSync(process.execPath, ['scripts/validate-content.cjs'], { cwd: path.resolve(__dirname, '..'), encoding: 'utf8' });
- expect(output).toContain('240 problems; 0 errors');
+ expect(output).toContain('242 problems; 0 errors');
 });

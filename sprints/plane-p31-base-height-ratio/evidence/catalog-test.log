@@ -1,0 +1,43 @@
+✔ all current 242 problems pass structural validation (40.954708ms)
+✔ missing script is rejected with file diagnostics (14.974917ms)
+✔ unaggregated source is rejected (18.899166ms)
+✔ duplicate ID fixture fails (22.024958ms)
+✔ invalid grade fixture fails (19.687334ms)
+✔ invalid answer fixture fails (20.478084ms)
+✔ unknown category fixture fails (19.616084ms)
+✔ unknown unit fixture fails (19.980917ms)
+✔ missing solution fixture fails (18.80475ms)
+✔ catalog uses actual data and explicit salt topic (7.466834ms)
+✔ variant unknown member fixture fails (19.606958ms)
+✔ variant category mismatch fixture fails (21.757209ms)
+✔ variant grade mismatch fixture fails (19.561375ms)
+✔ variant course mismatch fixture fails (19.302209ms)
+✔ variant duplicate member fixture fails (18.131125ms)
+✔ variant malformed types fixture fails (18.403416ms)
+✔ variant malformed members fixture fails (20.265375ms)
+✔ variant short group fixture fails (17.452708ms)
+✔ variant missing title fixture fails (18.120458ms)
+✔ variant invalid grade fixture fails (18.606208ms)
+✔ variant invalid course fixture fails (16.856833ms)
+✔ variant unknown category fixture fails (17.712042ms)
+✔ variant unknown chapter fixture fails (18.524208ms)
+✔ variant duplicate group membership fails (20.545625ms)
+✔ variant duplicate group ID fails (19.171792ms)
+✔ variant optional curriculum types may be omitted (18.425917ms)
+✔ malformed variant table null is diagnosed (19.333583ms)
+✔ malformed variant table [null] is diagnosed (17.834833ms)
+✔ variant g6_plane_004 unknown member fixture fails (20.680334ms)
+✔ variant g6_plane_004 duplicate member fixture fails (19.632125ms)
+✔ variant g6_plane_005 unknown member fixture fails (18.253083ms)
+✔ variant g6_plane_005 duplicate member fixture fails (17.864459ms)
+✔ variant membership collision g6_plane_002 into g6_plane_004 fails (17.228584ms)
+✔ variant membership collision g6_plane_002 into g6_plane_005 fails (18.092041ms)
+✔ variant membership collision g6_plane_004 into g6_plane_005 fails (19.325958ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 771.11625

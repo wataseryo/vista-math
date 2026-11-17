@@ -1,0 +1,11 @@
+
+Running 2 tests using 1 worker
+
+(node:84542) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [desktop] › tests/plane-p31-base-height-ratio.spec.cjs:190:1 › content validation reports 242 problems with zero errors (239ms)
+(node:84544) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [mobile] › tests/plane-p31-base-height-ratio.spec.cjs:190:1 › content validation reports 242 problems with zero errors (174ms)
+
+  2 passed (1.8s)

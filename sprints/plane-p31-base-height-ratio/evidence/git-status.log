@@ -1,0 +1,12 @@
+ M TODO.md
+ M data/problems/practice-g6-plane.js
+ M js/app.js
+ M tests/catalog.test.cjs
+ M tests/plane-p05-formula-area.spec.cjs
+ M tests/plane-p09-equal-area-transformation.spec.cjs
+ M tests/plane-p11-similarity-discovery.spec.cjs
+ M tests/plane-p29-triangle-quad-properties.spec.cjs
+ M tests/practice-repetition.spec.cjs
+?? specs/2026-11-17-plane-p31-base-height-ratio.md
+?? sprints/plane-p31-base-height-ratio/
+?? tests/plane-p31-base-height-ratio.spec.cjs

@@ -666,7 +666,18 @@ function wireDiagonalVisual(prefix) {
     resetBtn.addEventListener('click', reset);
     return reset;
 }
+// 2数の比を最大公約数で約分する。例: simplifyRatio(9,3) => [3,1]
+function simplifyRatio(a, b) {
+    function gcdPair(x, y) {
+        x = Math.abs(x); y = Math.abs(y);
+        while (y) { [x, y] = [y, x % y]; }
+        return x || 1;
+    }
+    const g = gcdPair(a, b);
+    return [a / g, b / g];
+}
 function wireHeightRatioVisual(prefix, d) {
+    const [ratioBig, ratioSmall] = simplifyRatio(d.baseBig, d.baseSmall);
     const seqHr = createTopicSequence();
     const guide = document.getElementById(prefix + '-guide');
     const guideLabel = document.getElementById(prefix + '-guide-label');
@@ -689,8 +700,8 @@ function wireHeightRatioVisual(prefix, d) {
         reset();
         play.disabled = true;
         const show = () => { guide.toggleAttribute('hidden', false); guideLabel.toggleAttribute('hidden', false); appendExpandStep(stepsEl, `① 高さは、大きい方も小さい方も${d.height}cmで同じ。`); };
-        const baseRatio = () => { appendExpandStep(stepsEl, `② 底辺は、大きい方${d.baseBig}cm・小さい方${d.baseSmall}cm。\n比は${d.baseBig}:${d.baseSmall}＝3:1。`); };
-        const areaRatio = () => { appendExpandStep(stepsEl, `③ 面積は、大きい方${d.baseBig}×${d.height}÷2＝${d.bigArea}cm²、\n小さい方${d.baseSmall}×${d.height}÷2＝${d.smallArea}cm²。\n比は${d.bigArea}:${d.smallArea}＝3:1。`); };
+        const baseRatio = () => { appendExpandStep(stepsEl, `② 底辺は、大きい方${d.baseBig}cm・小さい方${d.baseSmall}cm。\n比は${d.baseBig}:${d.baseSmall}＝${ratioBig}:${ratioSmall}。`); };
+        const areaRatio = () => { appendExpandStep(stepsEl, `③ 面積は、大きい方${d.baseBig}×${d.height}÷2＝${d.bigArea}cm²、\n小さい方${d.baseSmall}×${d.height}÷2＝${d.smallArea}cm²。\n比は${d.bigArea}:${d.smallArea}＝${ratioBig}:${ratioSmall}。`); };
         const done = () => { result.classList.add('visible'); appendExpandStep(stepsEl, '④ 高さが同じだから、底辺の比がそのまま面積の比になった。'); };
         if (topicReducedMotion()) { show(); baseRatio(); areaRatio(); done(); return; }
         show();
@@ -888,6 +899,51 @@ function wireScaleVisual(prefix) {
         step1();
         seqTs.after(700, step2);
         seqTs.after(1500, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
+function wireBaseHeightRatioVisual(prefix, d) {
+    const seqBr = createTopicSequence();
+    const baseLabel = document.getElementById(prefix + '-base-label');
+    const heightLine = document.getElementById(prefix + '-height-line');
+    const heightLabel = document.getElementById(prefix + '-height-label');
+    const aArea = document.getElementById(prefix + '-a-area');
+    const initialAreaText = aArea.textContent;
+    const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqBr.cancel();
+        baseLabel.toggleAttribute('hidden', true);
+        heightLine.toggleAttribute('hidden', true);
+        heightLabel.toggleAttribute('hidden', true);
+        aArea.textContent = initialAreaText;
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const showBase = () => { baseLabel.toggleAttribute('hidden', false); appendExpandStep(stepsEl, `① 三角形Aと三角形Bの底辺の比は${d.baseRatioA}:${d.baseRatioB}。`); };
+        const showHeight = () => { heightLine.toggleAttribute('hidden', false); heightLabel.toggleAttribute('hidden', false); appendExpandStep(stepsEl, `② 三角形Aと三角形Bの高さの比は${d.heightRatioA}:${d.heightRatioB}。`); };
+        const multiply = () => { appendExpandStep(stepsEl, `③ 面積の比は、底辺の比×高さの比で求める。\n(${d.baseRatioA}×${d.heightRatioA}):(${d.baseRatioB}×${d.heightRatioB})＝${d.baseRatioA * d.heightRatioA}:${d.baseRatioB * d.heightRatioB}＝${d.areaRatioA}:${d.areaRatioB}。`); };
+        const done = () => {
+            aArea.textContent = `${d.targetArea}cm²`;
+            result.classList.add('visible');
+            appendExpandStep(stepsEl, `④ 三角形Bの面積${d.knownArea}cm²を${d.areaRatioA}:${d.areaRatioB}の比にあてはめると、三角形Aの面積は${d.targetArea}cm²。`);
+        };
+        if (topicReducedMotion()) { showBase(); showHeight(); multiply(); done(); return; }
+        showBase();
+        seqBr.after(800, showHeight);
+        seqBr.after(1600, multiply);
+        seqBr.after(2500, done);
     }
     play.addEventListener('click', playFn);
     resetBtn.addEventListener('click', reset);
@@ -1521,28 +1577,31 @@ const PLANE_EXPAND_VISUALS = {
         </div>`,
         wire: () => wireDiagonalVisual('pe-dq'),
     }),
-    'same-height-ratio': d => ({
+    'same-height-ratio': d => {
+        const [ratioBig, ratioSmall] = simplifyRatio(d.baseBig, d.baseSmall);
+        return {
         html: `<div class="plane-expand-stage">
             <svg viewBox="0 0 290 225" style="width:100%;max-width:280px;display:block" role="img" aria-labelledby="pe-hr-title pe-hr-desc">
                 <title id="pe-hr-title">補助線で分けた2つの三角形が高さを共有する図</title>
-                <desc id="pe-hr-desc">底辺を3:1に分けた2つの三角形は、同じ高さを共有している。</desc>
+                <desc id="pe-hr-desc">底辺を${ratioBig}:${ratioSmall}に分けた2つの三角形は、同じ高さを共有している。</desc>
                 <polygon points="40,168 184,168 184,40" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
                 <polygon points="184,168 232,168 184,40" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
                 <line id="pe-hr-guide" hidden x1="184" y1="40" x2="184" y2="168" stroke="#7c3aed" stroke-width="3"/>
                 <text id="pe-hr-guide-label" hidden x="196" y="104" font-size="13" fill="#7c3aed" font-weight="bold">高さ${d.height}cm(共通)</text>
-                <text x="112" y="186" font-size="13" fill="#F57F17" text-anchor="middle" font-weight="bold">底辺${d.baseBig}cm(比3)</text>
-                <text x="208" y="186" font-size="13" fill="#1565C0" text-anchor="middle" font-weight="bold">底辺${d.baseSmall}cm(比1)</text>
+                <text x="112" y="186" font-size="13" fill="#F57F17" text-anchor="middle" font-weight="bold">底辺${d.baseBig}cm(比${ratioBig})</text>
+                <text x="208" y="186" font-size="13" fill="#1565C0" text-anchor="middle" font-weight="bold">底辺${d.baseSmall}cm(比${ratioSmall})</text>
             </svg>
             <div class="plane-expand-actions">
                 <button type="button" class="plane-anim-btn play" id="pe-hr-play">確かめてみる</button>
                 <button type="button" class="plane-anim-btn reset" id="pe-hr-reset">もう一度</button>
             </div>
-            <div class="plane-expand-status" id="pe-hr-status" role="status" aria-live="polite">底辺の比は3:1。でも面積の比が同じかどうかは、見ただけでは分かりにくい。</div>
+            <div class="plane-expand-status" id="pe-hr-status" role="status" aria-live="polite">底辺の比は${ratioBig}:${ratioSmall}。でも面積の比が同じかどうかは、見ただけでは分かりにくい。</div>
             <div class="plane-expand-steps" id="pe-hr-steps"></div>
-            <div class="formula-reveal" id="pe-hr-result">高さ${d.height}cmが同じ\n底辺の比${d.baseBig}:${d.baseSmall}＝3:1\n面積の比${d.bigArea}:${d.smallArea}＝3:1</div>
+            <div class="formula-reveal" id="pe-hr-result">高さ${d.height}cmが同じ\n底辺の比${d.baseBig}:${d.baseSmall}＝${ratioBig}:${ratioSmall}\n面積の比${d.bigArea}:${d.smallArea}＝${ratioBig}:${ratioSmall}</div>
         </div>`,
         wire: () => wireHeightRatioVisual('pe-hr', d),
-    }),
+        };
+    },
     'compose-add': d => ({
         html: `<div class="plane-expand-stage">
             <svg viewBox="0 0 400 225" style="width:100%;max-width:320px;display:block" role="img" aria-labelledby="pe-co-title pe-co-desc">
@@ -1657,6 +1716,32 @@ const PLANE_EXPAND_VISUALS = {
             <div class="formula-reveal" id="pe-ts-result">底辺をm倍・高さをn倍にすると、面積はm×n倍\n同じ倍率(m＝n)なら、面積はその2乗倍になる</div>
         </div>`,
         wire: () => wireScaleVisual('pe-ts'),
+    }),
+    'base-height-ratio-product': d => ({
+        html: `<div class="plane-expand-stage">
+            <svg viewBox="0 0 320 190" style="width:100%;max-width:320px;display:block" role="img" aria-labelledby="pe-br-title pe-br-desc">
+                <title id="pe-br-title">底辺も高さもちがう三角形Aと三角形Bの面積比を求める図</title>
+                <desc id="pe-br-desc">三角形Aと三角形Bは底辺の比が${d.baseRatioA}:${d.baseRatioB}、高さの比が${d.heightRatioA}:${d.heightRatioB}。面積の比は底辺の比×高さの比で求める。</desc>
+                <text x="70" y="20" font-size="12" fill="#555" text-anchor="middle">三角形B</text>
+                <polygon points="30,150 130,150 70,50" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+                <text id="pe-br-b-area" x="70" y="115" font-size="13" fill="#1a1a2e" text-anchor="middle" font-weight="bold">${d.knownArea}cm²</text>
+                <text x="70" y="168" font-size="12" fill="#1565C0" text-anchor="middle">底辺</text>
+                <text x="230" y="20" font-size="12" fill="#555" text-anchor="middle">三角形A</text>
+                <polygon points="170,150 290,150 230,40" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
+                <text id="pe-br-a-area" x="230" y="112" font-size="14" fill="#1a1a2e" text-anchor="middle" font-weight="bold">？</text>
+                <text id="pe-br-base-label" hidden x="150" y="180" font-size="12" fill="#F57F17" text-anchor="middle" font-weight="bold">底辺の比 ${d.baseRatioA}:${d.baseRatioB}</text>
+                <line id="pe-br-height-line" hidden x1="70" y1="50" x2="230" y2="40" stroke="#E53935" stroke-width="1.5" stroke-dasharray="3"/>
+                <text id="pe-br-height-label" hidden x="150" y="34" font-size="11" fill="#E53935" text-anchor="middle">高さの比 ${d.heightRatioA}:${d.heightRatioB}</text>
+            </svg>
+            <div class="plane-expand-actions">
+                <button type="button" class="plane-anim-btn play" id="pe-br-play">面積の比を求める</button>
+                <button type="button" class="plane-anim-btn reset" id="pe-br-reset">もう一度</button>
+            </div>
+            <div class="plane-expand-status" id="pe-br-status" role="status" aria-live="polite">底辺も高さもちがう2つの三角形。面積の比はどうなるだろう?</div>
+            <div class="plane-expand-steps" id="pe-br-steps"></div>
+            <div class="formula-reveal" id="pe-br-result">底辺の比${d.baseRatioA}:${d.baseRatioB}×高さの比${d.heightRatioA}:${d.heightRatioB}＝面積の比${d.areaRatioA}:${d.areaRatioB}\n${d.knownArea}×${d.areaRatioA}÷${d.areaRatioB}＝${d.targetArea}cm²</div>
+        </div>`,
+        wire: () => wireBaseHeightRatioVisual('pe-br', d),
     }),
     'scale-drawing-reveal': d => ({
         html: `<div class="plane-expand-stage">

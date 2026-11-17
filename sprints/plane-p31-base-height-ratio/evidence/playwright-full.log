@@ -1,0 +1,43 @@
+
+Running 128 tests using 1 worker
+
+(node:84495) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘    1 [desktop] › tests/calc-topic-interaction.spec.cjs:8:1 › pair discovery permits retry, reset, keyboard input and ephemeral feedback (1ms)
+Testing stopped early after 1 maximum allowed failures.
+
+
+  1) [desktop] › tests/calc-topic-interaction.spec.cjs:8:1 › pair discovery permits retry, reset, keyboard input and ephemeral feedback 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/var/folders/xr/wttxd7zn1_z25gs8c_qlctb00000gn/T/playwright_chromiumdev_profile-M2ipEu --remote-debugging-pipe --no-startup-window
+    <launched> pid=84496
+    Call log:
+      - <launching> /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/var/folders/xr/wttxd7zn1_z25gs8c_qlctb00000gn/T/playwright_chromiumdev_profile-M2ipEu --remote-debugging-pipe --no-startup-window
+      - <launched> pid=84496
+      - [pid=84496] <gracefully close start>
+      - [pid=84496] <kill>
+      - [pid=84496] <will force kill>
+      - [pid=84496] exception while trying to kill process: Error: kill EPERM
+      - [pid=84496] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=84496] starting temporary directories cleanup
+      - [pid=84496] finished temporary directories cleanup
+      - [pid=84496] <gracefully close end>
+
+
+    Error Context: test-results/calc-topic-interaction-pai-0d168-nput-and-ephemeral-feedback-desktop/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/calc-topic-interaction-pai-0d168-nput-and-ephemeral-feedback-desktop/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/calc-topic-interaction-pai-0d168-nput-and-ephemeral-feedback-desktop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [desktop] › tests/calc-topic-interaction.spec.cjs:8:1 › pair discovery permits retry, reset, keyboard input and ephemeral feedback 
+  127 did not run
+  1 error was not a part of any test, see above for details

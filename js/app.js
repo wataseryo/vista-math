@@ -1015,6 +1015,51 @@ function wireSequentialReveal(prefix, total, doneStatus) {
     resetBtn.addEventListener('click', reset);
     return reset;
 }
+function wireSectorFractionVisual(prefix, d) {
+    const [ratioA, ratioB] = simplifyRatio(d.centerAngle, 360);
+    const seqSf = createTopicSequence();
+    const fractionLabel = document.getElementById(prefix + '-fraction-label');
+    const wholeLabel = document.getElementById(prefix + '-whole-label');
+    const targetText = document.getElementById(prefix + '-target');
+    const initialTargetText = targetText.textContent;
+    const status = document.getElementById(prefix + '-status');
+    const stepsEl = document.getElementById(prefix + '-steps');
+    const result = document.getElementById(prefix + '-result');
+    const play = document.getElementById(prefix + '-play');
+    const resetBtn = document.getElementById(prefix + '-reset');
+    const initialStatus = status.textContent;
+    function reset() {
+        seqSf.cancel();
+        fractionLabel.toggleAttribute('hidden', true);
+        wholeLabel.toggleAttribute('hidden', true);
+        targetText.textContent = initialTargetText;
+        result.classList.remove('visible');
+        status.textContent = initialStatus;
+        clearExpandSteps(stepsEl);
+        play.disabled = false;
+    }
+    function playFn() {
+        reset();
+        play.disabled = true;
+        const showFraction = () => { fractionLabel.toggleAttribute('hidden', false); appendExpandStep(stepsEl, `① 中心角${d.centerAngle}°は、360°の${ratioA}/${ratioB}。`); };
+        const showWhole = () => { wholeLabel.toggleAttribute('hidden', false); appendExpandStep(stepsEl, `② 円全体の${d.wholeLabel}は${d.wholeValue}${d.unit}。`); };
+        const compute = () => { appendExpandStep(stepsEl, `③ ${d.targetLabel}＝円全体の${d.wholeLabel}×${ratioA}/${ratioB}。\n${d.wholeValue}×${ratioA}/${ratioB}＝${d.targetValue}${d.unit}。`); };
+        const done = () => {
+            targetText.textContent = `${d.targetValue}${d.unit}`;
+            result.classList.add('visible');
+            appendExpandStep(stepsEl, `④ 中心角の割合をかけるだけで、${d.targetLabel}が求まった。`);
+        };
+        if (topicReducedMotion()) { showFraction(); showWhole(); compute(); done(); return; }
+        showFraction();
+        seqSf.after(800, showWhole);
+        seqSf.after(1600, compute);
+        seqSf.after(2500, done);
+    }
+    play.addEventListener('click', playFn);
+    resetBtn.addEventListener('click', reset);
+    return reset;
+}
+
 function wireAngleRevealVisual(prefix) {
     const seqAn = createTopicSequence();
     const guide = document.getElementById(prefix + '-guide');
@@ -1841,6 +1886,38 @@ const PLANE_EXPAND_VISUALS = {
                 <div class="formula-reveal" id="pe-cr-result">半径×2×3.14＝円周 → ${d.radius}×2×3.14＝${d.circumference}cm（半径はおよそ6.28個分、最後の紫は端数）</div>
             </div>`,
             wire: () => wireSequentialReveal('pe-cr', 7, 'ぴったり1周した。半径の長さが円周に約6.28個分並ぶ。'),
+        };
+    },
+    'sector-fraction-reveal': d => {
+        const [ratioA, ratioB] = simplifyRatio(d.centerAngle, 360);
+        const rad = d.centerAngle * Math.PI / 180;
+        const endX = (100 + 70 * Math.sin(rad)).toFixed(1);
+        const endY = (100 - 70 * Math.cos(rad)).toFixed(1);
+        const largeArc = d.centerAngle > 180 ? 1 : 0;
+        const midRad = (d.centerAngle / 2) * Math.PI / 180;
+        const labelX = (100 + 42 * Math.sin(midRad)).toFixed(1);
+        const labelY = (100 - 42 * Math.cos(midRad)).toFixed(1);
+        return {
+            html: `<div class="plane-expand-stage">
+                <svg viewBox="0 0 200 220" style="width:100%;max-width:240px;display:block" role="img" aria-labelledby="pe-sf-title pe-sf-desc">
+                    <title id="pe-sf-title">中心角${d.centerAngle}°のおうぎ形を示す図</title>
+                    <desc id="pe-sf-desc">半径${d.radius}cm・中心角${d.centerAngle}°のおうぎ形。中心角が360°の何分のいくつかを求めてから、円全体の${d.wholeLabel}にその割合をかけて${d.targetLabel}を求める。</desc>
+                    <circle cx="100" cy="100" r="70" fill="none" stroke="#ccc" stroke-dasharray="3 4"/>
+                    <path d="M100,100 L100,30 A70,70 0 ${largeArc} 1 ${endX},${endY} Z" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
+                    <text x="${labelX}" y="${labelY}" font-size="12" fill="#F57F17" text-anchor="middle" font-weight="bold">${d.centerAngle}°</text>
+                    <text id="pe-sf-target" x="100" y="104" font-size="13" fill="#1a1a2e" text-anchor="middle" font-weight="bold">？</text>
+                    <text id="pe-sf-fraction-label" hidden x="100" y="18" font-size="12" fill="#7c3aed" text-anchor="middle" font-weight="bold">360°の${ratioA}/${ratioB}</text>
+                    <text id="pe-sf-whole-label" hidden x="100" y="202" font-size="12" fill="#1565C0" text-anchor="middle">円全体の${d.wholeLabel}＝${d.wholeValue}${d.unit}</text>
+                </svg>
+                <div class="plane-expand-actions">
+                    <button type="button" class="plane-anim-btn play" id="pe-sf-play">${d.targetLabel}を求める</button>
+                    <button type="button" class="plane-anim-btn reset" id="pe-sf-reset">もう一度</button>
+                </div>
+                <div class="plane-expand-status" id="pe-sf-status" role="status" aria-live="polite">中心角${d.centerAngle}°のおうぎ形。${d.targetLabel}はどうやって求めるだろう?</div>
+                <div class="plane-expand-steps" id="pe-sf-steps"></div>
+                <div class="formula-reveal" id="pe-sf-result">中心角${d.centerAngle}°／360°＝${ratioA}/${ratioB}\n${d.wholeLabel}${d.wholeValue}${d.unit}×${ratioA}/${ratioB}＝${d.targetLabel}${d.targetValue}${d.unit}</div>
+            </div>`,
+            wire: () => wireSectorFractionVisual('pe-sf', d),
         };
     },
     'exterior-angle-circle': d => {

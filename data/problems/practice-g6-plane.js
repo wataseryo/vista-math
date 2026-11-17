@@ -2063,5 +2063,88 @@ AB＝ACの二等辺三角形では、底辺BCに対する2つの角(角Bと角C)
     <path d="M246,117.6 H258 M246,168 H258" stroke="#E53935" stroke-width="1.5"/>
     <text x="270" y="142.8" font-size="12" fill="#E53935" text-anchor="middle" transform="rotate(-90 270 142.8)">高さ 6cm</text>
   </svg>` },
+},
+/* ── P-16 おうぎ形の弧の長さ・面積 ── */
+{
+  id: 'g6_plane_033',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '円の性質', pattern: 'おうぎ形の弧の長さ(中心角から)',
+  difficulty: 2, answerType: 'number', answerUnit: 'cm',
+  title: '中心角からおうぎ形の弧の長さを求める',
+  text: '半径9cm、中心角120°のおうぎ形があります。\nこのおうぎ形の弧の長さは何cmですか。円周率は3.14とします。',
+  answer: 18.84,
+  hint: '中心角が360°の何分のいくつかを求めてから、円周(半径×2×3.14)にその割合をかける。円周全体と弧の長さを混同しないように注意する。',
+  solution: `【ポイント】
+おうぎ形の弧の長さは、円周の一部。中心角が360°の何分のいくつかを求め、円周にその割合をかけて求める。
+
+【解説】
+① 中心角は120°なので、360°の何分のいくつかを求めると、
+《120÷360＝1/3》
+② この円全体の円周は、
+《半径9cm×2×3.14＝56.52cm》
+③ 弧の長さは、円周の1/3なので、
+《56.52×1/3＝18.84cm》
+
+【広げてみよう】
+「円周」はこの円1周ぶんの長さ(56.52cm)で、「弧の長さ」はその一部(おうぎ形の曲線部分、18.84cm)。この2つを混同しないように、常に「円周の何分のいくつか」を意識する。中心角が360°(＝1)なら弧の長さは円周そのものになり、中心角が180°(半分)なら弧の長さも円周の半分になる。
+
+【確認】
+弧の長さ18.84cmを円全体の円周56.52cmと比べると、
+《18.84÷56.52＝1/3》
+中心角120°/360°＝1/3と一致する。
+
+答え：18.84cm`,
+  expandVisual: 'sector-fraction-reveal',
+  expandVisualData: { radius: 9, centerAngle: 120, wholeLabel: '円周', wholeValue: 56.52, targetLabel: '弧の長さ', targetValue: 18.84, unit: 'cm' },
+  expandAdvice: '円周全体と弧の長さを混同しないように、まず中心角が360°の何分のいくつかを求めるくせをつけよう！',
+  tags: ['平面図形', '円', 'おうぎ形', '弧の長さ'],
+  diagram: { type: 'svg', markup: `<svg viewBox="0 0 200 200" width="100%" style="max-width:240px;display:block;margin:0 auto" role="img" aria-label="半径9cm、中心角120°のおうぎ形。弧の長さは？">
+    <circle cx="100" cy="100" r="70" fill="none" stroke="#ccc" stroke-dasharray="3 4"/>
+    <path d="M100,100 L100,30 A70,70 0 0 1 160.6,135.0 Z" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
+    <text x="136.4" y="79" font-size="12" fill="#F57F17" text-anchor="middle" font-weight="bold">120°</text>
+    <text x="93" y="63" font-size="12" fill="#1a1a2e" text-anchor="end">9cm</text>
+    <text x="177" y="61" font-size="17" fill="#1a1a2e" text-anchor="middle" font-weight="bold">？</text>
+  </svg>` },
+},
+{
+  id: 'g6_plane_034',
+  catId: 'pc-plane', grade: 6, course: 'exam',
+  mainCategory: 'plane_geometry', lessonUnit: '円の性質', pattern: 'おうぎ形の面積(中心角から)',
+  difficulty: 2, answerType: 'number', answerUnit: 'cm²',
+  title: '中心角からおうぎ形の面積を求める',
+  text: '半径10cm、中心角90°のおうぎ形があります。\nこのおうぎ形の面積は何cm²ですか。円周率は3.14とします。',
+  answer: 78.5,
+  hint: '中心角が360°の何分のいくつかを求めてから、円の面積(半径×半径×3.14)にその割合をかける。',
+  solution: `【ポイント】
+おうぎ形の面積は、円の面積の一部。中心角が360°の何分のいくつかを求め、円の面積にその割合をかけて求める。
+
+【解説】
+① 中心角は90°なので、360°の何分のいくつかを求めると、
+《90÷360＝1/4》
+② この円全体の面積は、
+《半径10cm×10cm×3.14＝314cm²》
+③ おうぎ形の面積は、円の面積の1/4なので、
+《314×1/4＝78.5cm²》
+
+【広げてみよう】
+弧の長さを求めるときと同じように、中心角の割合(360°の何分のいくつか)を先に求めてから、円全体の量(面積や円周)にかけ合わせるという考え方は共通している。中心角が90°(1/4)・180°(1/2)・120°(1/3)のように、きれいな分数になる角度は特によく出題されるので覚えておくとよい。
+
+【確認】
+おうぎ形の面積78.5cm²を円全体の面積314cm²と比べると、
+《78.5÷314＝1/4》
+中心角90°/360°＝1/4と一致する。
+
+答え：78.5cm²`,
+  expandVisual: 'sector-fraction-reveal',
+  expandVisualData: { radius: 10, centerAngle: 90, wholeLabel: '面積', wholeValue: 314, targetLabel: 'おうぎ形の面積', targetValue: 78.5, unit: 'cm²' },
+  expandAdvice: '中心角が90°・180°・120°など、きれいな分数になる角度の感覚をつかんでおこう！',
+  tags: ['平面図形', '円', 'おうぎ形', '面積'],
+  diagram: { type: 'svg', markup: `<svg viewBox="0 0 200 200" width="100%" style="max-width:240px;display:block;margin:0 auto" role="img" aria-label="半径10cm、中心角90°のおうぎ形。面積は？">
+    <circle cx="100" cy="100" r="70" fill="none" stroke="#ccc" stroke-dasharray="3 4"/>
+    <path d="M100,100 L100,30 A70,70 0 0 1 170,100 Z" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
+    <text x="117" y="86" font-size="12" fill="#F57F17" text-anchor="middle" font-weight="bold">90°</text>
+    <text x="93" y="63" font-size="12" fill="#1a1a2e" text-anchor="end">10cm</text>
+    <text x="139" y="64" font-size="17" fill="#1a1a2e" text-anchor="middle" font-weight="bold">？</text>
+  </svg>` },
 }
 ];

@@ -1,0 +1,5 @@
+PASS: app.jsから仕様3章の2コードブロックのみを除去するとHEADと完全一致。全保護エントリ・関数・simplifyRatioは無変更。
+PASS: plane既存配列42問のソースはHEADと完全一致。全体242問の他データに差分なし。
+PASS: 新規2問のdiagram前フィールドは仕様4章と完全一致。
+PASS: 既存テスト差分は242→244、42問→44問、toHaveCount(42)→44のみ。
+PASS: 指定6ファイルのgit diffは空。
